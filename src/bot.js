@@ -22,7 +22,14 @@ class DrunkenBot {
         this.client.on('message', message => {
             if (message.content.startsWith(`${prefix}nades`)) {
                 let response = this.csgoNadeParser.parseMessage(message);
-                this.embedResponse(message, response);
+                if (response === null) 
+                {
+                    message.reply("Sorry, I don't have any videos for that.")
+                }
+                else
+                {
+                    this.embedResponse(message, response);
+                }
             }
         });
     }
@@ -40,10 +47,10 @@ class DrunkenBot {
 
         if (response.isHelp()) {
             embed.addField(response.helpName, response.helpValue);
-            embed.addField('Map is mandatory:', response.helpValue2);
-            embed.addField('You can add the type as well', response.helpValue3);
-            embed.addField('The side as well:', response.helpValue3);
-            embed.addField('Example', response.helpValue4);
+            embed.addField(response.helpName2, response.helpValue2);
+            embed.addField(response.helpName3, response.helpValue3);
+            embed.addField(response.helpName4, response.helpValue4);
+            embed.addField(response.helpName5, response.helpValue5);
         }
 
         message.channel.send(embed);

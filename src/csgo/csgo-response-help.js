@@ -2,10 +2,14 @@ class CsgoHelpResponse {
     constructor() {
         this.helpName = "Commands:";
         this.helpValue =  "Use commands starting with \"!nades\" to get more infos about grenade throws on that map. You can ";
-        this.helpValue2 = "\"!nades <map>\"";
-        this.helpValue2 = "\"!nades <map> <type>\"";
-        this.helpValue3 = "\"!nades <map> <type> <side>\"";
-        this.helpValue4 = "\"!nades mirage smoke ct\"";
+        this.helpName2 = 'Map is mandatory:';
+        this.helpName3 = 'You can add the type as well';
+        this.helpName4 = 'The side as well:';
+        this.helpName5 = 'Example';
+        this.helpValue2 = "\"!nades {map}\"";
+        this.helpValue3 = "\"!nades {map} [type]\"";
+        this.helpValue4 = "\"!nades {map} [type] [side]\"";
+        this.helpValue5 = "\"!nades mirage smoke ct\"";
     }
 
     isHelp() { 

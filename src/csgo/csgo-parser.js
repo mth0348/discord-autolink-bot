@@ -8,23 +8,44 @@ class CsgoNadeParser {
     }
 
     parseMessage(message) {
-        let options = { keys: [{ name: 'map', weight: 0.99 }] };
+        let options = { keys: [{ 
+            name: 'map', 
+            weight: 0.99
+        }] };
+
         let fuse = new Fuse(csgoList, options);
 
         if (message.content.length <= 7) {
             return this.getHelpResponse();
         }
-
         let searchTerm = message.content.substring(7);
-        let searchResult = fuse.search(searchTerm);
+        
+        let map = this.getMap(searchTerm);
+        let searchResult = fuse.search(map);
 
-        if (searchResult.length === 1 || true) {
-            let first = searchResult[0].item;
-            return new CsgoResponse(first.description, first.map, first.side, first.type, first.location, first.source);
+        if (searchResult.length === 0) {
+            return null;
         }
 
-        console.log(searchResult);
-        console.log(searchResult[0].item);
+        let first = searchResult[0].item;
+        return this.createItem(first);
+
+        if (searchResult.length === 1) {
+            let first = searchResult[0].item;
+            return this.createItem(first);
+        }
+    }
+
+    getMap(searchTerm) {
+        let i = searchTerm.indexOf(" ");
+        if (i < 0) {
+            return searchTerm;
+        }
+        return searchTerm.substring(0, i);
+    }
+
+    createItem(data) {
+        return new CsgoResponse(data.description, data.map, data.side, data.type, data.location, data.source);
     }
 
     getHelpResponse() {
