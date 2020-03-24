@@ -1,0 +1,26 @@
+{
+  "name": "discordautolinkbot",
+  "version": "1.0.0",
+  "description": "A discord bot which can output links based on input tags.",
+  "main": "index.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mth0348/discord-autolink-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Matthias Thomann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mth0348/discord-autolink-bot/issues"
+  },
+  "homepage": "https://github.com/mth0348/discord-autolink-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.0.2"
+  }
+}
