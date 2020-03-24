@@ -8,11 +8,46 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "Hold right-click then jump and release.",
-        "map": "mirage",
+        "description": "Do a shift-hold throw.",
+        "map": "inferno",
         "side": "t",
         "type": "molotov",
         "location": "ramp",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+    
+        {
+        "description": "Don't do a Lundr Teamflash",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "a long",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+    
+         {
+        "description": "This Smoke is usually useless if you get pushed from boiler",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "mid",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+    
+         {
+        "description": "Dömu tried to flash but it was useless as fuck",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "connector",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+          {
+        "description": "~~ yay ~~",
+        "map": "mirage",
+        "side": "t"
+        "type": "flash",
+        "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     }
 ]
