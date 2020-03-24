@@ -1,18 +1,13 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const DrunkenBot = require('./src/bot');
+const { token } = require('./config.json');
 
-client.once('ready', () => {
-	console.log('Ready!');
-});
+// main.
 
-client.login('NjkyMDM0MzkxNzM1NTMzNjI5.XnopaQ.Kgt-GRqF8d302x1g4YMc0GAniZw');
+new DrunkenBot(token);
 
-// register message handler.
-client.on('message', onMessage);
+// extensions.
 
-function onMessage(message) {
-	if (message.content === '!ping') {
-		// send back "Pong." to the channel the message was sent in
-		message.channel.send('Pong.');
-	}
-}
+String.prototype.toCamelCase = function() {
+    return this.substr(0, 1).toUpperCase() + this.substr(1);
+};
