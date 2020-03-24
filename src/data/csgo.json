@@ -45,7 +45,7 @@
           {
         "description": "~~ yay ~~",
         "map": "mirage",
-        "side": "t"
+        "side": "t",
         "type": "flash",
         "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
