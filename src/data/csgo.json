@@ -49,5 +49,21 @@
         "type": "flash",
         "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+          {
+        "description": "Mats likes the skins",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+         {
+        "description": "buybuybuybuybuy russki bleat",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "stop sign",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
     }
 ]
