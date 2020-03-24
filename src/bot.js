@@ -22,12 +22,9 @@ class DrunkenBot {
         this.client.on('message', message => {
             if (message.content.startsWith(`${prefix}nades`)) {
                 let response = this.csgoNadeParser.parseMessage(message);
-                if (response === null) 
-                {
-                    message.reply("Sorry, I don't have any videos for that.")
-                }
-                else
-                {
+                if (response === null) {
+                    message.reply("Sorry, doesn't look like anything to me.")
+                } else {
                     this.embedResponse(message, response);
                 }
             }
