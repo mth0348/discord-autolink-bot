@@ -1,7 +1,7 @@
 
 [
     {
-       "description": "",
+       "description": "Covers connector but not short",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
@@ -9,7 +9,14 @@
         "source": "https://youtu.be/wMDxgNhl9qI" 
     },
 
-
+ {
+       "description": "Covers short but not connector",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "top mid",
+        "source": "https://youtu.be/JSWmUxqZr20" 
+    },
     
     
     
