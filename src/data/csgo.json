@@ -14,7 +14,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid window b-short",
+        "location": "top mid window b short",
         "source": "https://youtu.be/JSWmUxqZr20" 
         },
     
@@ -31,7 +31,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "mid b-short",
+        "location": "mid b short",
         "source": "https://youtu.be/lr7G9VU5o6s" 
     }, 
     
@@ -150,6 +150,47 @@
         "type": "flash",
         "location": "a ramp",
         "source": "https://youtu.be/Rza_elU2lQk" 
+    },
+        {
+       "description": "Flash for A-Site from Palace",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "a site",
+        "source": "https://youtu.be/frZpU04ZKYc" 
+    },
+            {
+       "description": "Molotov for Ninja A from Stairs",
+        "map": "mirage",
+        "side": "ct",
+        "type": "molotov",
+        "location": "a site ninja",
+        "source": "https://youtu.be/0hqERDZn7kA" 
+    },
+                {
+       "description": "Molotov for Ninja A from Stairs",
+        "map": "mirage",
+        "side": "t",
+        "type": "molotov",
+        "location": "a site ninja",
+        "source": "https://youtu.be/0hqERDZn7kA" 
+    },
+                    {
+       "description": "Flash for B Apps from Car",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "b apps",
+        "source": "https://youtu.be/TbJOqULU87E" 
+    },
+    
+                   {
+       "description": "Molotov for A Underwood from Palace",
+        "map": "mirage",
+        "side": "t",
+        "type": "molotov",
+        "location": "a underwood",
+        "source": "https://youtu.be/Q7y8cKXeX4Q" 
     }
 ]
 
