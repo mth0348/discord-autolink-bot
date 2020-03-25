@@ -41,7 +41,7 @@ class CsgoNadeParser {
         }
         else if (results.length === 1) {
             let first = results[0];
-            message.channel.send(`I found this clip: ${first.source}.`)
+            message.channel.send(`I found this clip: ${first.description}, ${first.source}.`)
         }
         else {
             if (searchTerms.length === 1) {
