@@ -9,10 +9,22 @@
         "source": "https://youtu.be/wMDxgNhl9qI" 
     },
 
-//Following Data is Test Data
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     {
-        "description": "Do a jump throw.",
+        "description": "DUMMY.",
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
@@ -20,7 +32,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "Do a shift-hold throw.",
+        "description": "DUMMY.",
         "map": "inferno",
         "side": "t",
         "type": "molotov",
@@ -28,7 +40,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "Don't do a Lundr Teamflash",
+        "description": "DUMMY",
         "map": "inferno",
         "side": "t",
         "type": "flash",
@@ -36,7 +48,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "This Smoke is usually useless if you get pushed from boiler",
+        "description": "DUMMY",
         "map": "inferno",
         "side": "t",
         "type": "smoke",
@@ -44,7 +56,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "Dömu tried to flash but it was useless as fuck",
+        "description": "DUMMY",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
@@ -52,7 +64,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "~~ yay ~~",
+        "description": "DUMMY",
         "map": "mirage",
         "side": "t",
         "type": "flash",
@@ -60,7 +72,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "~~ yay2 ~~",
+        "description": "DUMMY",
         "map": "mirage",
         "side": "t",
         "type": "flash",
@@ -68,7 +80,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "Mats likes the skins",
+        "description": "DUMMY",
         "map": "train",
         "side": "t",
         "type": "smoke",
@@ -76,7 +88,7 @@
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
     {
-        "description": "buybuybuybuybuy russki bleat",
+        "description": "DUMMY",
         "map": "train",
         "side": "t",
         "type": "smoke",
