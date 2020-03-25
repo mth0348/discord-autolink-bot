@@ -7,16 +7,16 @@
         "type": "smoke",
         "location": "top mid window connector",
         "source": "https://youtu.be/wMDxgNhl9qI" 
-    },
+        },
 
- {
+    {
        "description": "Covers short but not connector",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "top mid window b-short",
         "source": "https://youtu.be/JSWmUxqZr20" 
-    },
+        },
     
    {
        "description": "Thrown from Top Mid",
@@ -76,7 +76,7 @@
         "type": "smoke",
         "location": "stairs",
         "source": "https://youtu.be/qRXanvKP8do" 
-    }
+        }
        {
        "description": "Thrown before T apps",
         "map": "mirage",
@@ -93,7 +93,7 @@
         "location": "b apps",
         "source": "https://youtu.be/63IB7bHteBo" 
     },
-      {
+        {
        "description": "Fast T Ramp smoke while running",
         "map": "mirage",
         "side": "ct",
