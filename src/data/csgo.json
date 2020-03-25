@@ -15,8 +15,7 @@
         "location": "ramp",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-    
-        {
+    {
         "description": "Don't do a Lundr Teamflash",
         "map": "inferno",
         "side": "t",
@@ -24,8 +23,7 @@
         "location": "a long",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-    
-         {
+    {
         "description": "This Smoke is usually useless if you get pushed from boiler",
         "map": "inferno",
         "side": "t",
@@ -33,8 +31,7 @@
         "location": "mid",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-    
-         {
+    {
         "description": "Dömu tried to flash but it was useless as fuck",
         "map": "mirage",
         "side": "ct",
@@ -42,7 +39,7 @@
         "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-          {
+    {
         "description": "~~ yay ~~",
         "map": "mirage",
         "side": "t",
@@ -50,7 +47,15 @@
         "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-          {
+    {
+        "description": "~~ yay2 ~~",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "stairs",
+        "source": "https://i.imgur.com/Hul4rNn.gif"
+    },
+    {
         "description": "Mats likes the skins",
         "map": "train",
         "side": "t",
@@ -58,7 +63,7 @@
         "location": "connector",
         "source": "https://i.imgur.com/Hul4rNn.gif"
     },
-         {
+    {
         "description": "buybuybuybuybuy russki bleat",
         "map": "train",
         "side": "t",

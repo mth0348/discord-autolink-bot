@@ -10,18 +10,14 @@ class DrunkenBot {
         this.client.login(config.token);
         console.log('AutoLinkBot initialized.');
         
-        this.createParsers();
         this.registerCallbacks();
-    }
-
-    createParsers() {
-        this.csgoNadeParser = new CsgoNadeParser(this.client);
     }
 
     registerCallbacks() {
         this.client.on('message', message => {
             if (message.content.startsWith(`${config.prefix}nades`)) {
-                this.csgoNadeParser.startWorkflow(message);
+                let csgoNadeParser = new CsgoNadeParser(this.client);
+                csgoNadeParser.startWorkflow(message);
             }
         });
     }

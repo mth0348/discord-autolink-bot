@@ -1,5 +1,6 @@
-const Discord = require('discord.js');
 const Fuse = require('fuse.js');
+
+const DiscordHelper = require('./../discord-helper.js');
 
 const CsgoResponse = require('./csgo-response.js');
 const CsgoHelpResponse = require('./csgo-response-help.js');
@@ -7,15 +8,17 @@ const csgoList = require('./../data/csgo.json');
 
 class CsgoNadeParser {
     constructor(client) {
-        this.mapOptions = { keys: ['map'] };
+        this.mapOptions = { keys: ['map'], threshold: 0.4 };
         this.typeOptions = { keys: ['type'] };
         this.sideOptions = { keys: ['side'], threshold: 0 };
         this.locationOptions = { keys: ['location'] };
+
+        this.discordHelper = new DiscordHelper();
     }
 
     startWorkflow(message) {
         if (message.content.length <= 7) {
-            this.embedResponse(message, this.getHelpResponse());
+            this.discordHelper.embedResponse(message, this.getHelpResponse());
             return null;
         }
 
@@ -38,7 +41,7 @@ class CsgoNadeParser {
         }
         else if (results.length === 1) {
             let first = results[0];
-            this.embedResponse(message, this.createItem(first));
+            this.discordHelper.embedResponse(message, this.createItem(first));
         }
         else {
             if (searchTerms.length === 1) {
@@ -91,35 +94,14 @@ class CsgoNadeParser {
                 message.channel.send(`There are ${results.length} clips for that. Enter one of the following:.`).then(m => {
                     for (let i = 0; i < results.length; i++) {
                         const r = results[i];
-                        message.channel.send(`!nades ${r.map} ${r.type} ${r.side} ${r.location}`);
+                        message.channel.send(`"!nades ${r.map} ${r.type} ${r.side} ${r.location}"`);
                     }
+                    return null;
                 }).catch((e) => { console.log(e); });
             }
         }
 
         return null;
-    }
-
-    embedResponse(message, response) {
-        const embed = new Discord.MessageEmbed()
-            .setColor('#ff9900')
-            .setTitle(response.getTitle())
-            .setAuthor(response.getAuthor(), response.getIcon())
-            .setDescription(response.getDescription())
-            .setThumbnail(response.getThumbnailUrl())
-            .setImage(response.source)
-            .setTimestamp()
-            .setFooter(response.getFooter(), 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128');
-
-        if (response.isHelp()) {
-            embed.addField(response.helpName, response.helpValue);
-            embed.addField(response.helpName2, response.helpValue2);
-            embed.addField(response.helpName3, response.helpValue3);
-            embed.addField(response.helpName4, response.helpValue4);
-            embed.addField(response.helpName5, response.helpValue5);
-        }
-
-        message.channel.send(embed);
     }
 
     populateResultWithSearch(results, searchTerms, index, searchOptions, isStrict) {
