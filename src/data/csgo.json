@@ -1,4 +1,16 @@
+//Original Data
 [
+    {
+       "description": "",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "top mid",
+        "source": "https://youtu.be/wMDxgNhl9qI" 
+    },
+
+//Testdata
+
     {
         "description": "Do a jump throw.",
         "map": "mirage",
