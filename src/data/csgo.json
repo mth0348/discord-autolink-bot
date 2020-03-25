@@ -76,15 +76,15 @@
         "type": "smoke",
         "location": "stairs",
         "source": "https://youtu.be/qRXanvKP8do" 
-        }
-       {
+        },
+      {
        "description": "Thrown before T apps",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "b bench",
         "source": "https://youtu.be/G89WndN0soM" 
-    },
+         },
         {
        "description": "Thrown from B Site",
         "map": "mirage",
@@ -92,15 +92,15 @@
         "type": "smoke",
         "location": "b apps",
         "source": "https://youtu.be/63IB7bHteBo" 
-    },
-        {
+        },
+      {
        "description": "Fast T Ramp smoke while running",
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
         "location": "ramp",
         "source": "https://youtu.be/wxkiLvOxTwM" 
-    },
+        },
     
       {
        "description": "Pop Flash to peek Mid from Window",
@@ -109,7 +109,7 @@
         "type": "flash",
         "location": "mid",
         "source": "https://youtu.be/PYdjPVcaxN0" 
-    },
+        },
       {
        "description": "Pop Flash for Teammates Mid/Window",
         "map": "mirage",
@@ -117,7 +117,7 @@
         "type": "flash",
         "location": "mid",
         "source": "https://youtu.be/2-ntWSakVHI" 
-    },
+        },
       {
        "description": "Pop Flash for Teammates peek out Top Mid",
         "map": "mirage",
@@ -125,7 +125,7 @@
         "type": "flash",
         "location": "mid",
         "source": "https://youtu.be/lGvaHGdEAZE" 
-    },
+        },
     {
        "description": "Pop Flash for peek B Car and Apps",
         "map": "mirage",
@@ -133,15 +133,15 @@
         "type": "flash",
         "location": "b apps car",
         "source": "https://youtu.be/r6h2U6hnWdE" 
-    },
-         {
+        },
+        {
        "description": "Run-Flash for B Site Push out Apps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
         "location": "b site",
         "source": "https://youtu.be/ZyBHlFo4srE" 
-    },
+        },
     
     {
        "description": "Step-Flash for T-Ramp from Underwoods A Site",
