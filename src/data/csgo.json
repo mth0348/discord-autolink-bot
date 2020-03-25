@@ -33,5 +33,48 @@
         "type": "smoke",
         "location": "mid b short",
         "source": "https://youtu.be/lr7G9VU5o6s" 
-    } 
+    }, 
+    
+          {
+       "description": "Thrown from Top Mid to go b short",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector",
+        "source": "https://youtu.be/PRMya2dfdPQ" 
+    },
+              {
+       "description": "Thrown from T Ramp, doesn't Cover Jungle",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector",
+        "source": "https://youtu.be/DX0hmzhJwVA" 
+    },
+              {
+       "description": "Thrown from T Ramp, covers Jungle and Connector",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector and jungle",
+        "source": "https://youtu.be/PwZMzJsMdoQ" 
+    },
+    
+                  {
+       "description": "Thrown with Jump+Throw, covers CT",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "ct",
+        "source": "https://youtu.be/gPessAcXo2U" 
+    },
+    
+                      {
+       "description": "Thrown from T Ramp covers Stairs, supreme for Palace player",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "stairs",
+        "source": "https://youtu.be/gPessAcXo2U" 
+    }
 ]
