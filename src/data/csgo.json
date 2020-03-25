@@ -24,7 +24,14 @@
         "side": "t",
         "type": "smoke",
         "location": "mid window",
-        "source": " https://youtu.be/DXYFcsBqzEw" 
+        "source": "https://youtu.be/DXYFcsBqzEw" 
+    }, 
+      {
+       "description": "Thrown from Top Mid",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "mid b short",
+        "source": "https://youtu.be/lr7G9VU5o6s" 
     } 
-    
 ]
