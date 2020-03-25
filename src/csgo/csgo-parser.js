@@ -1,50 +1,106 @@
+const Discord = require('discord.js');
+const Fuse = require('fuse.js');
+
 const CsgoResponse = require('./csgo-response.js');
 const CsgoHelpResponse = require('./csgo-response-help.js');
 const csgoList = require('./../data/csgo.json');
-const Fuse = require('fuse.js');
 
 class CsgoNadeParser {
-    constructor() {
+    constructor(client) {
+        this.mapOptions = { keys: ['map'] };
+        this.typeOptions = { keys: ['item.type'] };
+        this.sideOptions = { keys: ['item.side'] };
+        this.locationOptions = { keys: ['item.location'] };
     }
 
-    parseMessage(message) {
-        let options = { keys: [{ 
-            name: 'map', 
-            weight: 0.99
-        }] };
-
-        let fuse = new Fuse(csgoList, options);
-
+    startWorkflow(message) {
         if (message.content.length <= 7) {
             return this.getHelpResponse();
         }
-        let searchTerm = message.content.substring(7);
+
+        this.smoke_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_smoke');
+        this.molotov_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_molotov_ct');
+        this.flash_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_flash');
+
+        let searchTerms = message.content.substring(7).split(" ");
+        let results = csgoList;
+        results = this.populateResultWithSearch(results, searchTerms, 0, this.mapOptions);
+        results = this.populateResultWithSearch(results, searchTerms, 1, this.typeOptions);
+        results = this.populateResultWithSearch(results, searchTerms, 2, this.sideOptions);
+        results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions);
         
-        let map = this.getMap(searchTerm);
-        let searchResult = fuse.search(map);
+        console.log(results.length);
+        if (results === null || results.length === 0) {
+            message.reply("Sorry, doesn't look like anything to me.");
+        }
+        else if (results.length === 1) {
+            let first = results[0].item;
+            this.embedResponse(message, this.createItem(first));
+        }
+        else {
+            if (searchTerms.length === 1) {
+                message.channel.send(`There are ${results.length} clips for that. For which grenade type do you want to search? Click the appropriate emoji.`).then(m => {
+                    m.react(this.smoke_emoji.id);
+                    m.react(this.molotov_emoji.id);
+                    m.react(this.flash_emoji.id);
 
-        if (searchResult.length === 0) {
-            return null;
+                    const filter = (reaction, user) => { return user.id !== m.author.id; };
+                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time']} )
+                    .then(collected => {
+                        const reaction = collected.first();
+                        switch (reaction.emoji.id) {
+                            case this.smoke_emoji.id: 
+                                message.content += ' smoke';
+                                return this.startWorkflow(message);
+                            case this.molotov_emoji.id: 
+                                message.content += ' molotov';
+                                return this.startWorkflow(message);
+                            case this.flash_emoji.id: 
+                                message.content += ' flash';
+                                return this.startWorkflow(message);
+                        }
+                    }).catch((e) => { console.log(e); });
+                }).catch((e) => { console.log(e); });
+            }
         }
 
-        let first = searchResult[0].item;
-        return this.createItem(first);
-
-        if (searchResult.length === 1) {
-            let first = searchResult[0].item;
-            return this.createItem(first);
-        }
+        return null;
     }
 
-    getMap(searchTerm) {
-        let i = searchTerm.indexOf(" ");
-        if (i < 0) {
-            return searchTerm;
+    embedResponse(message, response) {
+        const embed = new Discord.MessageEmbed()
+            .setColor('#ff9900')
+            .setTitle(response.getTitle())
+            .setAuthor(response.getAuthor(), response.getIcon())
+            .setDescription(response.getDescription())
+            .setThumbnail(response.getThumbnailUrl())
+            .setImage(response.source)
+            .setTimestamp()
+            .setFooter(response.getFooter(), 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128');
+
+        if (response.isHelp()) {
+            embed.addField(response.helpName, response.helpValue);
+            embed.addField(response.helpName2, response.helpValue2);
+            embed.addField(response.helpName3, response.helpValue3);
+            embed.addField(response.helpName4, response.helpValue4);
+            embed.addField(response.helpName5, response.helpValue5);
         }
-        return searchTerm.substring(0, i);
+
+        message.channel.send(embed);
+    }
+
+    populateResultWithSearch(results, searchTerms, index, searchOptions) {
+        if (searchTerms.length > index && results.length > 1) {
+            let searchTerm = searchTerms[index];
+            let fuse = new Fuse(results, searchOptions);
+            results = fuse.search(searchTerm);
+        }
+        return results;
     }
 
     createItem(data) {
+        if (data.item)
+            data = data.item;
         return new CsgoResponse(data.description, data.map, data.side, data.type, data.location, data.source);
     }
 
@@ -54,31 +110,3 @@ class CsgoNadeParser {
 }
 
 module.exports = CsgoNadeParser;
-
-// // stores the favorite author in a constant variable
-// function parse(message): {
-//     message.react('👍').then(() => message.react('👎'));
-
-//     const filter = (reaction, user) => {
-//         return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
-//     };
-
-//     message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-//         .then(collected => {
-//             const reaction = collected.first();
-
-//             if (reaction.emoji.name === '👍') {
-//                 message.reply('you reacted with a thumbs up.');
-//             } else {
-//                 message.reply('you reacted with a thumbs down.');
-//             }
-//         })
-//         .catch(collected => {
-//             message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
-//         });
-// }
- 
-// // exports the variables and functions above so that other modules can use them
-// module.exports.parse = parse;
-// module.exports.favoriteBook = favoriteBook;
-// module.exports.getBookRecommendations = getBookRecommendations;
