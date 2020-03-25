@@ -41,7 +41,7 @@ class CsgoNadeParser {
         }
         else if (results.length === 1) {
             let first = results[0];
-            this.discordHelper.embedResponse(message, this.createItem(first));
+            message.channel.send(`I found this clip: ${first.source}.`)
         }
         else {
             if (searchTerms.length === 1) {
