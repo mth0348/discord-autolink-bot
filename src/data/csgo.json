@@ -5,7 +5,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid",
+        "location": "top mid window & connector",
         "source": "https://youtu.be/wMDxgNhl9qI" 
     },
 
@@ -14,7 +14,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid",
+        "location": "top mid window & short",
         "source": "https://youtu.be/JSWmUxqZr20" 
     },
     
