@@ -1,18 +1,18 @@
 [
     {
-        "description": "Covers Connector but not Short",
+        "description": "Covers Connector and Window but not B-Short",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid window connector",
+        "location": "top mid",
         "source": "https://youtu.be/wMDxgNhl9qI"
     },
     {
-        "description": "Covers Short but not Connector",
+        "description": "Covers Short but not Connector and Window B-Short",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid window b short",
+        "location": "top mid",
         "source": "https://youtu.be/JSWmUxqZr20"
     },
     {
@@ -20,7 +20,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "mid window",
+        "location": "window",
         "source": "https://youtu.be/DXYFcsBqzEw"
     },
     {
@@ -76,7 +76,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "b bench",
+        "location": "bench",
         "source": "https://youtu.be/G89WndN0soM"
     },
     {
@@ -84,7 +84,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
-        "location": "b apps",
+        "location": "apps",
         "source": "https://youtu.be/63IB7bHteBo"
     },
     {
@@ -124,7 +124,7 @@
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "b apps car",
+        "location": "apps car",
         "source": "https://youtu.be/r6h2U6hnWdE"
     },
     {
@@ -140,7 +140,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "a ramp",
+        "location": "ramp",
         "source": "https://youtu.be/Rza_elU2lQk"
     },
     {
@@ -156,7 +156,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "molotov",
-        "location": "a site ninja",
+        "location": "ninja",
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
@@ -164,7 +164,7 @@
         "map": "mirage",
         "side": "t",
         "type": "molotov",
-        "location": "a site ninja",
+        "location": "ninja",
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
@@ -172,7 +172,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "b apps",
+        "location": "apps",
         "source": "https://youtu.be/TbJOqULU87E"
     },
     {
@@ -180,7 +180,7 @@
         "map": "mirage",
         "side": "t",
         "type": "molotov",
-        "location": "a underwood",
+        "location": "underwood",
         "source": "https://youtu.be/Q7y8cKXeX4Q"
     }
 ]
