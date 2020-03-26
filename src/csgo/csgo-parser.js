@@ -1,6 +1,6 @@
 const Fuse = require('fuse.js');
 
-const DiscordHelper = require('./../discord-helper.js');
+const { DiscordHelper } = require('./../discord-helper.js');
 
 const CsgoResponse = require('./csgo-response.js');
 const CsgoHelpResponse = require('./csgo-response-help.js');
@@ -11,14 +11,14 @@ class CsgoNadeParser {
         this.mapOptions = { keys: ['map'], threshold: 0.4 };
         this.typeOptions = { keys: ['type'] };
         this.sideOptions = { keys: ['side'], threshold: 0 };
-        this.locationOptions = { keys: ['location'] };
+        this.locationOptions = { keys: ['location'], threshold: 0.4, includeScore: true, distance: 10 };
 
         this.discordHelper = new DiscordHelper();
     }
 
     startWorkflow(message) {
         if (message.content.length <= 7) {
-            this.discordHelper.embedResponse(message, this.getHelpResponse());
+            this.discordHelper.richEmbedMessage(message, this.getHelpResponse());
             return null;
         }
 
@@ -33,15 +33,21 @@ class CsgoNadeParser {
         results = this.populateResultWithSearch(results, searchTerms, 0, this.mapOptions);
         results = this.populateResultWithSearch(results, searchTerms, 1, this.typeOptions);
         results = this.populateResultWithSearch(results, searchTerms, 2, this.sideOptions);
-        results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions);
+        results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions, true, message);
         
         console.log(results.length);
         if (results === null || results.length === 0) {
-            message.reply("Sorry, doesn't look like anything to me.");
+            message.reply("Sorry, doesn't look like anything to me. Enter '!nades' for help.");
         }
         else if (results.length === 1) {
             let first = results[0];
-            message.channel.send(`I found this clip: ${first.description}, ${first.source}.`)
+            message.channel.send(first.source);
+        }
+        else if (results.length === 2 && this.twoMatches) {
+            this.twoMatches = false;
+            let first = results[0];
+            let second = results[1];
+            message.channel.send(`${first.source}\n${second.source}.`)
         }
         else {
             if (searchTerms.length === 1) {
@@ -90,12 +96,14 @@ class CsgoNadeParser {
                 }).catch((e) => { console.log(e); });
             }
 
-            if (searchTerms.length === 3) {
+            if (searchTerms.length >= 3) {
                 message.channel.send(`There are ${results.length} clips for that. Enter one of the following:.`).then(m => {
+                    let responseText = "Options:\n";
                     for (let i = 0; i < results.length; i++) {
                         const r = results[i];
-                        message.channel.send(`"!nades ${r.map} ${r.type} ${r.side} ${r.location}"`);
+                        responseText += `!nades ${r.map} ${r.type} ${r.side} ${r.location}\n`
                     }
+                    message.channel.send(responseText);
                     return null;
                 }).catch((e) => { console.log(e); });
             }
@@ -104,11 +112,28 @@ class CsgoNadeParser {
         return null;
     }
 
-    populateResultWithSearch(results, searchTerms, index, searchOptions, isStrict) {
+    populateResultWithSearch(results, searchTerms, index, searchOptions, includeRest) {
         if (searchTerms.length > index && results.length > 1) {
-            let searchTerm = searchTerms[index];
+            let searchTerm = '';
+            if (includeRest){
+                for (var i = index; i < searchTerms.length; i++) {
+                    searchTerm += ` ${searchTerms[i]}`;
+                }
+            }else {
+                searchTerm = searchTerms[index];
+            }
             let fuse = new Fuse(results, searchOptions);
             let searchResults = fuse.search(searchTerm);
+
+            /* immediately return almost perfect match/es */
+            if (searchResults.length > 0 && searchResults[0].score < 0.1) {
+                return [ searchResults[0].item ];
+            }
+            if (searchResults.length > 1 && (searchResults[1].score - searchResults[0].score) < 0.1) {
+                this.twoMatches = true;
+                return [ searchResults[0].item, searchResults[1].item ];
+            }
+
             let newResults = [];
             searchResults.forEach(e => {
                 newResults.push(e.item); /* this removes the unnecessary .item property nesting */

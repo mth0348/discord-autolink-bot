@@ -1,3 +1,4 @@
+const { SimpleResponse } = require('./../discord-helper.js');
 
 String.prototype.toCamelCase = function() {
     return this.substr(0, 1).toUpperCase() + this.substr(1);
@@ -15,6 +16,10 @@ class CsgoResponse {
 
     isHelp() {
         return false;
+    }
+
+    getColor() {
+        return '#ff9900';
     }
 
     getTitle() {
@@ -49,6 +54,10 @@ class CsgoResponse {
 
     getFooter() {
         return `created by DrunKenBot`;
+    }
+
+    toSimpleResponse() {
+        return new SimpleResponse(this.getTitle(), this.getDescription(), this.getColor());
     }
 }
 
