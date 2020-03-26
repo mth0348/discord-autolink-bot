@@ -23,9 +23,11 @@ class DrunkenBot {
             if (message.content.startsWith(`${config.prefix}deleteall`)) {
                 if (!this.deleteConfirm) {
                     this.deleteConfirm = 1;
+                    console.log(`User '${message.member.nickname}' attempts to delete all messages...`);
                     return;
                 }
-                
+                console.log(`User '${message.member.nickname}' deleted all messages!`);
+
                 async function clear() {
                     message.delete();
                     let fetched;
