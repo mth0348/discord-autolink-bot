@@ -35,19 +35,24 @@ class CsgoNadeParser {
         results = this.populateResultWithSearch(results, searchTerms, 2, this.sideOptions);
         results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions, true, message);
         
-        console.log(results.length);
+        console.log(`Search for '${message.content.substring(7)}', ${results.length} results found.`);
+
         if (results === null || results.length === 0) {
             message.reply("Sorry, doesn't look like anything to me. Enter '!nades' for help.");
         }
         else if (results.length === 1) {
             let first = results[0];
             message.channel.send(first.source);
+
+            console.log("Returned one single match.")
         }
         else if (results.length === 2 && this.twoMatches) {
             this.twoMatches = false;
             let first = results[0];
             let second = results[1];
             message.channel.send(`${first.source}\n${second.source}.`)
+
+            console.log("Returned with two matches.")
         }
         else {
             if (searchTerms.length === 1) {
@@ -71,8 +76,8 @@ class CsgoNadeParser {
                                 message.content += ' flash';
                                 return this.startWorkflow(message);
                         }
-                    }).catch((e) => { console.log(e); });
-                }).catch((e) => { console.log(e); });
+                    }).catch((e) => { console.warn(e); });
+                }).catch((e) => { console.warn(e); });
             }
 
             if (searchTerms.length === 2) {
@@ -92,8 +97,8 @@ class CsgoNadeParser {
                                 message.content += ' ct';
                                 return this.startWorkflow(message);
                         }
-                    }).catch((e) => { console.log(e); });
-                }).catch((e) => { console.log(e); });
+                    }).catch((e) => { console.warn(e); });
+                }).catch((e) => { console.warn(e); });
             }
 
             if (searchTerms.length >= 3) {
@@ -105,7 +110,7 @@ class CsgoNadeParser {
                     }
                     message.channel.send(responseText);
                     return null;
-                }).catch((e) => { console.log(e); });
+                }).catch((e) => { console.warn(e); });
             }
         }
 
