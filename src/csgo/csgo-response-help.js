@@ -20,6 +20,10 @@ class CsgoHelpResponse {
         return `Learn smoke, molotov and flash nades!`;
     }
 
+    getColor() {
+        return '#ff9900';
+    }
+
     getDescription() {
         return `This bot will help you become a master of grenades in CS GO. Because you suck, flashing your own team mates. :frowning2:`;
     }

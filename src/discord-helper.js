@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 
 class DiscordHelper {
-    embedResponse(message, response) {
+    richEmbedMessage(message, response) {
         const embed = new Discord.MessageEmbed()
-            .setColor('#ff9900')
+            .setColor(response.getColor())
             .setTitle(response.getTitle())
             .setAuthor(response.getAuthor(), response.getIcon())
             .setDescription(response.getDescription())
@@ -22,7 +22,36 @@ class DiscordHelper {
 
         message.channel.send(embed);
     }
+
+    embedMessage(message, response) {
+        const embed = new Discord.MessageEmbed()
+            .setColor(response.getColor())
+            .setTitle(response.getTitle())
+            .setDescription(response.getDescription())
+
+        message.channel.send(embed);
+    }
 }
 
-module.exports = DiscordHelper;
+class SimpleResponse {
+    constructor(title, description, color) {
+        this.description = description;
+        this.title = title;
+        this.color = color;
+    }
+
+    getColor() {
+        return this.color;
+    }
+
+    getTitle() {
+        return this.title;
+    }
+
+    getDescription() {
+        return this.description;
+    }
+}
+
+module.exports = { DiscordHelper, SimpleResponse };
 
