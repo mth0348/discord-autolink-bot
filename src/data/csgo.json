@@ -182,5 +182,23 @@
         "type": "molotov",
         "location": "underwood",
         "source": "https://youtu.be/Q7y8cKXeX4Q"
-    }
+    },
+       {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "ct",
+        "source": "https://youtu.be/_u9eNdzP6gs"
+    },
+           {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "coffins",
+        "source": "https://youtu.be/7s36QASohFk"
+    },
+    
+    
 ]
