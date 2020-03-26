@@ -1,196 +1,186 @@
-
 [
     {
-       "description": "Covers connector but not short",
+        "description": "Covers Connector but not Short",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "top mid window connector",
-        "source": "https://youtu.be/wMDxgNhl9qI" 
-        },
-
+        "source": "https://youtu.be/wMDxgNhl9qI"
+    },
     {
-       "description": "Covers short but not connector",
+        "description": "Covers Short but not Connector",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "top mid window b short",
-        "source": "https://youtu.be/JSWmUxqZr20" 
-        },
-    
-   {
-       "description": "Thrown from Top Mid",
+        "source": "https://youtu.be/JSWmUxqZr20"
+    },
+    {
+        "description": "Thrown from Top Mid",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "mid window",
-        "source": "https://youtu.be/DXYFcsBqzEw" 
-    }, 
-      {
-       "description": "Thrown from Top Mid",
+        "source": "https://youtu.be/DXYFcsBqzEw"
+    },
+    {
+        "description": "Thrown from Top Mid",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "mid b short",
-        "source": "https://youtu.be/lr7G9VU5o6s" 
-    }, 
-    
-      {
-       "description": "Thrown from Top Mid to go b short",
+        "source": "https://youtu.be/lr7G9VU5o6s"
+    },
+    {
+        "description": "Thrown from Top Mid to go B Short",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "connector",
-        "source": "https://youtu.be/PRMya2dfdPQ" 
+        "source": "https://youtu.be/PRMya2dfdPQ"
     },
-              {
-       "description": "Thrown from T Ramp, doesn't Cover Jungle",
+    {
+        "description": "Thrown from T Ramp, doesn't cover Jungle",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "connector",
-        "source": "https://youtu.be/DX0hmzhJwVA" 
+        "source": "https://youtu.be/DX0hmzhJwVA"
     },
-       {
-       "description": "Thrown from T Ramp, covers Jungle and Connector",
+    {
+        "description": "Thrown from T Ramp, covers Jungle and Connector",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "connector jungle",
-        "source": "https://youtu.be/PwZMzJsMdoQ" 
+        "source": "https://youtu.be/PwZMzJsMdoQ"
     },
-    
-         {
-       "description": "Thrown with Jump+Throw, covers CT",
+    {
+        "description": "Thrown with Jump+Throw, covers CT",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "ct",
-        "source": "https://youtu.be/gPessAcXo2U" 
+        "source": "https://youtu.be/gPessAcXo2U"
     },
-    
-       {
-       "description": "Thrown from T Ramp covers Stairs, supreme for Palace player",
+    {
+        "description": "Thrown from T Ramp covers Stairs, supreme for Palace player",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "stairs",
-        "source": "https://youtu.be/qRXanvKP8do" 
-        },
-      {
-       "description": "Thrown before T apps",
+        "source": "https://youtu.be/qRXanvKP8do"
+    },
+    {
+        "description": "Thrown before T apps",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
         "location": "b bench",
-        "source": "https://youtu.be/G89WndN0soM" 
-         },
-        {
-       "description": "Thrown from B Site",
+        "source": "https://youtu.be/G89WndN0soM"
+    },
+    {
+        "description": "Thrown from B Site",
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
         "location": "b apps",
-        "source": "https://youtu.be/63IB7bHteBo" 
-        },
-      {
-       "description": "Fast T Ramp smoke while running",
+        "source": "https://youtu.be/63IB7bHteBo"
+    },
+    {
+        "description": "Fast T Ramp smoke while running",
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
         "location": "ramp",
-        "source": "https://youtu.be/wxkiLvOxTwM" 
-        },
-    
-      {
-       "description": "Pop Flash to peek Mid from Window",
+        "source": "https://youtu.be/wxkiLvOxTwM"
+    },
+    {
+        "description": "Pop Flash to peek Mid from Window",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
         "location": "mid",
-        "source": "https://youtu.be/PYdjPVcaxN0" 
-        },
-      {
-       "description": "Pop Flash for Teammates Mid/Window",
+        "source": "https://youtu.be/PYdjPVcaxN0"
+    },
+    {
+        "description": "Pop Flash for Teammates Mid/Window",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
         "location": "mid",
-        "source": "https://youtu.be/2-ntWSakVHI" 
-        },
-      {
-       "description": "Pop Flash for Teammates peek out Top Mid",
+        "source": "https://youtu.be/2-ntWSakVHI"
+    },
+    {
+        "description": "Pop Flash for Teammates peek out Top Mid",
         "map": "mirage",
         "side": "t",
         "type": "flash",
         "location": "mid",
-        "source": "https://youtu.be/lGvaHGdEAZE" 
-        },
+        "source": "https://youtu.be/lGvaHGdEAZE"
+    },
     {
-       "description": "Pop Flash for peek B Car and Apps",
+        "description": "Pop Flash for peek B Car and Apps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
         "location": "b apps car",
-        "source": "https://youtu.be/r6h2U6hnWdE" 
-        },
-        {
-       "description": "Run-Flash for B Site Push out Apps",
+        "source": "https://youtu.be/r6h2U6hnWdE"
+    },
+    {
+        "description": "Run-Flash for B Site Push out Apps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
         "location": "b site",
-        "source": "https://youtu.be/ZyBHlFo4srE" 
-        },
-    
+        "source": "https://youtu.be/ZyBHlFo4srE"
+    },
     {
-       "description": "Step-Flash for T-Ramp from Underwoods A Site",
+        "description": "Step-Flash for T-Ramp from Underwoods A Site",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
         "location": "a ramp",
-        "source": "https://youtu.be/Rza_elU2lQk" 
+        "source": "https://youtu.be/Rza_elU2lQk"
     },
-        {
-       "description": "Flash for A-Site from Palace",
+    {
+        "description": "Flash for A-Site from Palace",
         "map": "mirage",
         "side": "t",
         "type": "flash",
         "location": "a site",
-        "source": "https://youtu.be/frZpU04ZKYc" 
+        "source": "https://youtu.be/frZpU04ZKYc"
     },
-            {
-       "description": "Molotov for Ninja A from Stairs",
+    {
+        "description": "Molotov for Ninja A from Stairs",
         "map": "mirage",
         "side": "ct",
         "type": "molotov",
         "location": "a site ninja",
-        "source": "https://youtu.be/0hqERDZn7kA" 
+        "source": "https://youtu.be/0hqERDZn7kA"
     },
-                {
-       "description": "Molotov for Ninja A from Stairs",
+    {
+        "description": "Molotov for Ninja A from Stairs",
         "map": "mirage",
         "side": "t",
         "type": "molotov",
         "location": "a site ninja",
-        "source": "https://youtu.be/0hqERDZn7kA" 
+        "source": "https://youtu.be/0hqERDZn7kA"
     },
-                    {
-       "description": "Flash for B Apps from Car",
+    {
+        "description": "Flash for B Apps from Car",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
         "location": "b apps",
-        "source": "https://youtu.be/TbJOqULU87E" 
+        "source": "https://youtu.be/TbJOqULU87E"
     },
-    
-                   {
-       "description": "Molotov for A Underwood from Palace",
+    {
+        "description": "Molotov for A Underwood from Palace",
         "map": "mirage",
         "side": "t",
         "type": "molotov",
         "location": "a underwood",
-        "source": "https://youtu.be/Q7y8cKXeX4Q" 
+        "source": "https://youtu.be/Q7y8cKXeX4Q"
     }
 ]
-
