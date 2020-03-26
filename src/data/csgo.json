@@ -198,7 +198,217 @@
         "type": "smoke",
         "location": "coffins",
         "source": "https://youtu.be/7s36QASohFk"
+    },
+    
+    
+
+       {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "mid a short",
+        "source": "https://youtu.be/tTqC8taNzyc"
+    },
+	
+	     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "b site",
+        "source": "https://youtu.be/Oz5JyrgirB0"
+    },
+	
+		     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "mid",
+        "source": "https://youtu.be/FCbBBnWyvY4"
+    },
+	
+			     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "pit",
+        "source": "https://youtu.be/iLUlfFcIeIU"
+    },
+	
+				     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "boiler",
+        "source": "https://youtu.be/YMQh7wLRzyc"
+    },
+	
+					     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "back alley",
+        "source": "https://youtu.be/paeOwYW81Tw"
+    },
+	
+						     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "mid",
+        "source": "https://youtu.be/WZlpML2HMoc"
+    },
+	
+							     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "mid",
+        "source": "https://youtu.be/gkw6_pjugUY"
+    },
+	
+								     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "mid",
+        "source": "https://youtu.be/-lU5XGRw9Xs"
+    },
+	
+									     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "library",
+        "source": "https://youtu.be/MLNGKS3zVMo"
+    },
+		
+									     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "b site",
+        "source": "https://youtu.be/Nk4ULf-2FGs"
+    },
+										     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "coffins",
+        "source": "https://youtu.be/yHx4_m5Hj5Y"
+    },
+	
+											     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "coffins",
+        "source": "https://youtu.be/3bBJpCGKN84"
+    },
+	
+												     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "banana",
+        "source": "https://youtu.be/_D2fAA0t-bQ"
+    },
+													     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "banana",
+        "source": "https://youtu.be/4zx5Lh-1-vo"
+    },
+														     {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "banana",
+        "source": "https://youtu.be/PoiR65RsWGI"
+    },
+															     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "a long mid",
+        "source": "https://youtu.be/cjmFxKFyvjI"
+    },
+																     {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "library",
+        "source": "https://youtu.be/d7ltMGyuVHs"
+    },
+				    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "library",
+        "source": "https://youtu.be/RNkSiyiwzcs"
+    },
+	
+					    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "a long mid",
+        "source": "https://youtu.be/OrWetbr1GwU"
+    },
+	
+						    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "library",
+        "source": "https://youtu.be/OrWetbr1GwU"
+    },
+					    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "library",
+        "source": "https://youtu.be/OrWetbr1GwU"
+    },
+						    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "boiler short",
+        "source": "https://youtu.be/T--5nlFsJ4U"
+    },
+						    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "molotov",
+        "location": "quad",
+        "source": "https://youtu.be/pbr2hjg6SDI"
     }
+	
     
     
 ]
