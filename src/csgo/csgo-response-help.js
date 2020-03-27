@@ -17,7 +17,7 @@ class CsgoHelpResponse {
     }
 
     getTitle() {
-        return `Nade you way to the top!`;
+        return `Nade your way to the top!`;
     }
 
     getColor() {
