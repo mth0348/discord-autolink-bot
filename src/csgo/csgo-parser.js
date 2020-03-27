@@ -84,7 +84,7 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time'] })
+                    m.awaitReactions(filter, { max: 3, time: 20000, errors: ['time'] })
                         .then(collected => {
                             const reaction = collected.first();
                             switch (reaction.emoji.id) {
@@ -108,7 +108,7 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time'] })
+                    m.awaitReactions(filter, { max: 2, time: 20000, errors: ['time'] })
                         .then(collected => {
                             const reaction = collected.first();
                             switch (reaction.emoji.id) {
