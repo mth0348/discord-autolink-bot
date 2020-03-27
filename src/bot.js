@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
 
-const config = require('./../config.json');
 const CsgoNadeParser = require('./csgo/csgo-parser.js')
+const GeneralParser = require('./general/general-parser.js')
+const config = require('./../config.json');
 
 class DrunkenBot {
-    constructor(token) {
+    constructor() {
         this.client = new Discord.Client();
 
         this.client.login(config.token);
@@ -16,32 +17,17 @@ class DrunkenBot {
 
     registerParsers() {
         this.csgoNadeParser = new CsgoNadeParser(this.client);
+        this.generalParser = new GeneralParser(this.client);
     }
 
     registerCallbacks() {
         this.client.on('message', message => {
-            if (message.content.startsWith(`${config.prefix}nades`)) {
+            if (this.csgoNadeParser.isCommand(config.prefix, message)) {
                 this.csgoNadeParser.startWorkflow(message);
             }
 
-            if (message.content.startsWith(`${config.prefix}deleteall`)) {
-                if (!this.deleteConfirm) {
-                    this.deleteConfirm = 1;
-                    console.log(`User '${message.member.nickname}' attempts to delete all messages...`);
-                    return;
-                }
-                console.log(`User '${message.member.nickname}' deleted all messages!`);
-
-                async function clear() {
-                    message.delete();
-                    let fetched;
-                    do {
-                        fetched = await message.channel.messages.fetch({limit: 99});
-                        message.channel.bulkDelete(fetched);
-                    } while(fetched.size >= 2);
-                }
-                clear();
-                this.deleteConfirm = undefined;
+            if (this.generalParser.isCommand(config.prefix, message)) {
+                this.generalParser.startWorkflow(message);
             }
         });
     }
