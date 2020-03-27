@@ -1,4 +1,14 @@
 {
 	"prefix": "!",
-	"token": "NjkyMDM0MzkxNzM1NTMzNjI5.XnopaQ.Kgt-GRqF8d302x1g4YMc0GAniZw"
+	"token": "NjkyMDM0MzkxNzM1NTMzNjI5.XnopaQ.Kgt-GRqF8d302x1g4YMc0GAniZw",
+
+	"channelPermissions": {
+		"general": [ 
+			"bot-playground"
+		],
+		"csgo": [ 
+			"cs-go", 
+			"bot-playground"
+		]
+	}
 }

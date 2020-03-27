@@ -1,10 +1,12 @@
+const config = require('./../../config.json');
+
 class GeneralParser {
     constructor(client) {
-        this.allowedChannels = [ 'bot-playground' ];
+        this.allowedChannels = config.channelPermissions.general;
     }
 
-    isCommand(prefix, message) {
-        let isCommand = message.content.startsWith(`${prefix}deleteall`);
+    isCommand(message) {
+        let isCommand = message.content.startsWith(`${config.prefix}deleteall`);
         if (isCommand) {
             for (let i = 0; i < this.allowedChannels.length; i++) {
                 const allowedChannel = this.allowedChannels[i];

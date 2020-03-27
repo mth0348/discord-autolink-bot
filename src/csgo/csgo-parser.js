@@ -5,6 +5,7 @@ const { DiscordHelper, SimpleResponse } = require('./../discord-helper.js');
 const CsgoResponse = require('./csgo-response.js');
 const CsgoHelpResponse = require('./csgo-response-help.js');
 const csgoList = require('./../data/csgo.json');
+const config = require('./../../config.json');
 
 class CsgoNadeParser {
     constructor(client) {
@@ -16,11 +17,11 @@ class CsgoNadeParser {
         this.discordHelper = new DiscordHelper();
         this.failCount = 0;
 
-        this.allowedChannels = [ 'cs-go', 'bot-playground' ];
+        this.allowedChannels = config.channelPermissions.csgo;
     }
 
-    isCommand(prefix, message) {
-        let isCommand = message.content.startsWith(`${prefix}nades`);
+    isCommand(message) {
+        let isCommand = message.content.startsWith(`${config.prefix}nades`);
         if (isCommand) {
             for (let i = 0; i < this.allowedChannels.length; i++) {
                 const allowedChannel = this.allowedChannels[i];
@@ -29,7 +30,7 @@ class CsgoNadeParser {
                 }
             }
         }
-        return false;
+        return isCommand;
     }
 
     startWorkflow(message) {
