@@ -41,7 +41,7 @@ class CsgoHelpResponse {
     }
 
     getFooter() {
-        return `created by DrunKenBot`;
+        return `created by DrunKenBot - v1.0`;
     }
 }
 
