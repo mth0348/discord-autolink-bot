@@ -18,11 +18,8 @@ class CsgoNadeParser {
         this.allowedChannels = config.channelPermissions.csgo;
 
         this.failCount = 0;
-        this.defaultAwaitReactionFilter = (reaction, user) => {
-            let b=  user.id !== reaction.message.author.id; 
-            return b;
-        };
-        this.defaultAwaitReactionOptions = { max: 1, time: 1200 };
+        this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
+        this.defaultAwaitReactionOptions = { max: 1, time: 12000 };
     }
 
     isCommandAllowed(message) {
@@ -83,7 +80,7 @@ class CsgoNadeParser {
         else {
             this.failCount = 0;
             if (searchTerms.length === 1) {
-                message.channel.send(`There are ${results.length} clips for that. For which grenade type do you want to search? Click the appropriate emoji.`).then(m => {
+                message.channel.send(`There are ${results.length} clips for '${searchTerms[0]}'. Click the appropriate grenade emoji.`).then(m => {
                     if (this.isPresent(results, r => r.type, 'smoke')) m.react(this.smoke_emoji.id);
                     if (this.isPresent(results, r => r.type, 'molotov')) m.react(this.molotov_emoji.id);
                     if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
@@ -107,7 +104,7 @@ class CsgoNadeParser {
             }
 
             if (searchTerms.length === 2) {
-                message.channel.send(`There are ${results.length} clips for that. For which side do you want to search? Click the appropriate emoji.`).then(m => {
+                message.channel.send(`There are ${results.length} clips for '${searchTerms[0]} ${searchTerms[1]}'. Click the appropriate side emoji.`).then(m => {
                     if (this.isPresent(results, r => r.side, 't')) m.react(this.t_emoji.id);
                     if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
 
