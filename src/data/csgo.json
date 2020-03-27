@@ -52,7 +52,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "jungle and connector",
+        "location": "jungle connector",
         "source": "https://youtu.be/PwZMzJsMdoQ"
     },
     {
@@ -60,7 +60,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "ct",
+        "location": "ct ticket",
         "source": "https://youtu.be/gPessAcXo2U"
     },
     {
@@ -188,7 +188,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "ct",
+        "location": "ct boost",
         "source": "https://youtu.be/_u9eNdzP6gs"
     },
     {
@@ -316,7 +316,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "ct",
+        "location": "ct sand bags",
         "source": "https://youtu.be/4zx5Lh-1-vo"
     },
     {
