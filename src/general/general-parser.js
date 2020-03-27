@@ -30,9 +30,9 @@ class GeneralParser {
             message.delete();
             let fetched;
             do {
-                fetched = await message.channel.messages.fetch({limit: 99});
+                fetched = await message.channel.messages.fetch({ limit: 99 });
                 message.channel.bulkDelete(fetched);
-            } while(fetched.size >= 2);
+            } while (fetched.size >= 2);
         }
         clear();
         this.deleteConfirm = undefined;

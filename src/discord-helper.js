@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 
 class DiscordHelper {
-//region MESSAGE AND EMBED SUPPORT
+
+    //region MESSAGE AND EMBED SUPPORT
     richEmbedMessage(message, response) {
         const embed = new Discord.MessageEmbed()
             .setColor(response.getColor())
@@ -32,9 +33,9 @@ class DiscordHelper {
 
         message.channel.send(embed);
     }
-//endregion
+    //endregion
 
-//region PERMISSION HANDLING
+    //region PERMISSION HANDLING
     checkIsCommand(message, command) {
         return message.content.startsWith(command);
     }
@@ -65,7 +66,7 @@ class DiscordHelper {
         console.log(`No permission for user '${message.member.displayName}' for roles '${allowedRoles}'.`);
         return false;
     }
-//endregion
+    //endregion
 }
 
 class SimpleResponse {

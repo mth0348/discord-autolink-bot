@@ -49,7 +49,7 @@ class CsgoNadeParser {
         results = this.populateResultWithSearch(results, searchTerms, 1, this.typeOptions);
         results = this.populateResultWithSearch(results, searchTerms, 2, this.sideOptions);
         results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions, true, message);
-        
+
         console.log(`Search for '${message.content.substring(7)}', ${results.length} results found.`);
 
         if (results === null || results.length === 0) {
@@ -84,21 +84,21 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time']} )
-                    .then(collected => {
-                        const reaction = collected.first();
-                        switch (reaction.emoji.id) {
-                            case this.smoke_emoji.id: 
-                                message.content += ' smoke';
-                                return this.startWorkflow(message);
-                            case this.molotov_emoji.id: 
-                                message.content += ' molotov';
-                                return this.startWorkflow(message);
-                            case this.flash_emoji.id: 
-                                message.content += ' flash';
-                                return this.startWorkflow(message);
-                        }
-                    }).catch((e) => { console.warn(e); });
+                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time'] })
+                        .then(collected => {
+                            const reaction = collected.first();
+                            switch (reaction.emoji.id) {
+                                case this.smoke_emoji.id:
+                                    message.content += ' smoke';
+                                    return this.startWorkflow(message);
+                                case this.molotov_emoji.id:
+                                    message.content += ' molotov';
+                                    return this.startWorkflow(message);
+                                case this.flash_emoji.id:
+                                    message.content += ' flash';
+                                    return this.startWorkflow(message);
+                            }
+                        }).catch((e) => { console.warn(e); });
                 }).catch((e) => { console.warn(e); });
             }
 
@@ -108,18 +108,18 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time']} )
-                    .then(collected => {
-                        const reaction = collected.first();
-                        switch (reaction.emoji.id) {
-                            case this.t_emoji.id: 
-                                message.content += ' t';
-                                return this.startWorkflow(message);
-                            case this.ct_emoji.id: 
-                                message.content += ' ct';
-                                return this.startWorkflow(message);
-                        }
-                    }).catch((e) => { console.warn(e); });
+                    m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time'] })
+                        .then(collected => {
+                            const reaction = collected.first();
+                            switch (reaction.emoji.id) {
+                                case this.t_emoji.id:
+                                    message.content += ' t';
+                                    return this.startWorkflow(message);
+                                case this.ct_emoji.id:
+                                    message.content += ' ct';
+                                    return this.startWorkflow(message);
+                            }
+                        }).catch((e) => { console.warn(e); });
                 }).catch((e) => { console.warn(e); });
             }
 
@@ -142,11 +142,11 @@ class CsgoNadeParser {
     populateResultWithSearch(results, searchTerms, index, searchOptions, includeRest) {
         if (searchTerms.length > index && results.length > 1) {
             let searchTerm = '';
-            if (includeRest){
+            if (includeRest) {
                 for (var i = index; i < searchTerms.length; i++) {
                     searchTerm += ` ${searchTerms[i]}`;
                 }
-            }else {
+            } else {
                 searchTerm = searchTerms[index];
             }
             let fuse = new Fuse(results, searchOptions);
@@ -154,18 +154,18 @@ class CsgoNadeParser {
 
             // return almost perfect match.
             if (searchResults.length > 0 && searchResults[0].score < 0.05) {
-                return [ searchResults[0].item ];
+                return [searchResults[0].item];
             }
             // return almost perfect matches if their score is very similar.
             if (searchResults.length === 2 && (searchResults[1].score - searchResults[0].score) < 0.05) {
                 this.twoMatches = true;
-                return [ searchResults[0].item, searchResults[1].item ];
+                return [searchResults[0].item, searchResults[1].item];
             }
 
             // this removes the unnecessary .item property nesting.
             let newResults = [];
             searchResults.forEach(e => {
-                newResults.push(e.item); 
+                newResults.push(e.item);
             });
             results = newResults;
         }
@@ -192,7 +192,7 @@ class CsgoNadeParser {
 
     isPresent(list, propertySelector, propertyValue) {
         for (var i = 0; i < list.length; i++) {
-            if (propertySelector(list[i]).toLowerCase() === propertyValue.toLowerCase()) 
+            if (propertySelector(list[i]).toLowerCase() === propertyValue.toLowerCase())
                 return true;
         }
         return false;

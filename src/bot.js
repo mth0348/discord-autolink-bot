@@ -10,7 +10,7 @@ class DrunkenBot {
 
         this.client.login(config.token);
         console.log('DrunKenBot started.');
-        
+
         this.csgoNadeParser = new CsgoNadeParser(this.client);
         console.log('Listening for csgo nades commands...');
 
