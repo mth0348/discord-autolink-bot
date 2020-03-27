@@ -15,9 +15,14 @@ class CsgoNadeParser {
         this.locationOptions = { keys: ['location'], threshold: 0.25, includeScore: true, distance: 30, minMatchCharLength: 0 };
 
         this.discordHelper = new DiscordHelper();
-        this.failCount = 0;
-
         this.allowedChannels = config.channelPermissions.csgo;
+
+        this.failCount = 0;
+        this.defaultAwaitReactionFilter = (reaction, user) => {
+            let b=  user.id !== reaction.message.author.id; 
+            return b;
+        };
+        this.defaultAwaitReactionOptions = { max: 1, time: 1200 };
     }
 
     isCommandAllowed(message) {
@@ -83,8 +88,7 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.type, 'molotov')) m.react(this.molotov_emoji.id);
                     if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
 
-                    const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 3, time: 20000, errors: ['time'] })
+                    m.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
                         .then(collected => {
                             const reaction = collected.first();
                             switch (reaction.emoji.id) {
@@ -98,8 +102,8 @@ class CsgoNadeParser {
                                     message.content += ' flash';
                                     return this.startWorkflow(message);
                             }
-                        }).catch((e) => { console.warn(e); });
-                }).catch((e) => { console.warn(e); });
+                        }).catch(this.errorHandler);
+                }).catch(this.errorHandler);
             }
 
             if (searchTerms.length === 2) {
@@ -107,8 +111,7 @@ class CsgoNadeParser {
                     if (this.isPresent(results, r => r.side, 't')) m.react(this.t_emoji.id);
                     if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
 
-                    const filter = (reaction, user) => { return user.id !== m.author.id; };
-                    m.awaitReactions(filter, { max: 2, time: 20000, errors: ['time'] })
+                    m.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
                         .then(collected => {
                             const reaction = collected.first();
                             switch (reaction.emoji.id) {
@@ -119,8 +122,8 @@ class CsgoNadeParser {
                                     message.content += ' ct';
                                     return this.startWorkflow(message);
                             }
-                        }).catch((e) => { console.warn(e); });
-                }).catch((e) => { console.warn(e); });
+                        }).catch(this.errorHandler);
+                }).catch(this.errorHandler);
             }
 
             if (searchTerms.length >= 3) {
@@ -132,7 +135,7 @@ class CsgoNadeParser {
                     }
                     message.channel.send(responseText);
                     return;
-                }).catch((e) => { console.warn(e); });
+                }).catch(this.errorHandler);
             }
         }
 
@@ -196,6 +199,10 @@ class CsgoNadeParser {
                 return true;
         }
         return false;
+    }
+
+    errorHandler(e) {
+        console.warn(e);
     }
 }
 
