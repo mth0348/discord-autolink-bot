@@ -300,17 +300,10 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "banana",
+        "location": "banana close B",
         "source": "https://youtu.be/_D2fAA0t-bQ"
     },
-    {
-        "description": "",
-        "map": "inferno",
-        "side": "ct",
-        "type": "flash",
-        "location": "ct",
-        "source": "https://youtu.be/4zx5Lh-1-vo"
-    },
+
     {
         "description": "",
         "map": "inferno",
@@ -318,6 +311,14 @@
         "type": "flash",
         "location": "banana",
         "source": "https://youtu.be/PoiR65RsWGI"
+    },
+        {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "ct",
+        "source": "https://youtu.be/4zx5Lh-1-vo"
     },
     {
         "description": "",
