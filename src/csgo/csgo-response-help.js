@@ -1,6 +1,6 @@
 class CsgoHelpResponse {
     constructor(supportedMaps) {
-        this.helpName = "Supported maps:";
+        this.helpName = "Supported maps (so far):";
         this.helpName2 = "Commands:";
         this.helpName3 = 'Examples';
         this.helpValue = supportedMaps;
