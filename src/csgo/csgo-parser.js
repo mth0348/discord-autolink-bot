@@ -1,6 +1,6 @@
 const Fuse = require('fuse.js');
 
-const { DiscordHelper } = require('./../discord-helper.js');
+const { DiscordHelper, SimpleResponse } = require('./../discord-helper.js');
 
 const CsgoResponse = require('./csgo-response.js');
 const CsgoHelpResponse = require('./csgo-response-help.js');
@@ -14,12 +14,14 @@ class CsgoNadeParser {
         this.locationOptions = { keys: ['location'], threshold: 0.4, includeScore: true, distance: 10 };
 
         this.discordHelper = new DiscordHelper();
+        this.failCount = 0;
     }
 
     startWorkflow(message) {
         if (message.content.length <= 7) {
+            this.failCount = 0;
             this.discordHelper.richEmbedMessage(message, this.getHelpResponse());
-            return null;
+            return;
         }
 
         this.smoke_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_smoke');
@@ -38,15 +40,21 @@ class CsgoNadeParser {
         console.log(`Search for '${message.content.substring(7)}', ${results.length} results found.`);
 
         if (results === null || results.length === 0) {
+            this.failCount++;
+            if (this.checkFailedEastereggMessage(message)) {
+                return;
+            }
             message.reply("Sorry, doesn't look like anything to me. Enter '!nades' for help.");
         }
         else if (results.length === 1) {
+            this.failCount = 0;
             let first = results[0];
             message.channel.send(first.source);
 
             console.log("Returned one single match.")
         }
         else if (results.length === 2 && this.twoMatches) {
+            this.failCount = 0;
             this.twoMatches = false;
             let first = results[0];
             let second = results[1];
@@ -55,6 +63,7 @@ class CsgoNadeParser {
             console.log("Returned with two matches.")
         }
         else {
+            this.failCount = 0;
             if (searchTerms.length === 1) {
                 message.channel.send(`There are ${results.length} clips for that. For which grenade type do you want to search? Click the appropriate emoji.`).then(m => {
                     m.react(this.smoke_emoji.id);
@@ -154,6 +163,16 @@ class CsgoNadeParser {
 
     getHelpResponse() {
         return new CsgoHelpResponse();
+    }
+
+    checkFailedEastereggMessage(message) {
+        if (this.failCount >= 3) {
+            this.failCount = 0;
+            this.discordHelper.embedMessage(message, new SimpleResponse(`It's not so hard!`, `I've noticed you are having trouble entering a valid command for '!nades'...\nTry only '!nades' and I will list you all possible commands. :chicken:`, '#22ff22'));
+            return true;
+        }
+
+        return false;
     }
 }
 

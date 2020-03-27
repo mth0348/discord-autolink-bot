@@ -17,7 +17,7 @@ class CsgoHelpResponse {
     }
 
     getTitle() {
-        return `Learn smoke, molotov and flash nades!`;
+        return `Nade you way to the top!`;
     }
 
     getColor() {
@@ -25,7 +25,7 @@ class CsgoHelpResponse {
     }
 
     getDescription() {
-        return `This bot will help you become a master of grenades in CS GO. Because you suck, flashing your own team mates. :frowning2:`;
+        return `This bot will help you become a master of grenades in CS GO. Just enter search terms like the map, grenade type and more to find detailed clips of how to throw a grenade for that exact spot.`;
     }
 
     getThumbnailUrl() {
