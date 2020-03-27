@@ -66,9 +66,9 @@ class CsgoNadeParser {
             this.failCount = 0;
             if (searchTerms.length === 1) {
                 message.channel.send(`There are ${results.length} clips for that. For which grenade type do you want to search? Click the appropriate emoji.`).then(m => {
-                    m.react(this.smoke_emoji.id);
-                    m.react(this.molotov_emoji.id);
-                    m.react(this.flash_emoji.id);
+                    if (this.isPresent(results, r => r.type, 'smoke')) m.react(this.smoke_emoji.id);
+                    if (this.isPresent(results, r => r.type, 'molotov')) m.react(this.molotov_emoji.id);
+                    if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
                     m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time']} )
@@ -91,8 +91,8 @@ class CsgoNadeParser {
 
             if (searchTerms.length === 2) {
                 message.channel.send(`There are ${results.length} clips for that. For which side do you want to search? Click the appropriate emoji.`).then(m => {
-                    m.react(this.t_emoji.id);
-                    m.react(this.ct_emoji.id);
+                    if (this.isPresent(results, r => r.side, 't')) m.react(this.t_emoji.id);
+                    if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
 
                     const filter = (reaction, user) => { return user.id !== m.author.id; };
                     m.awaitReactions(filter, { max: 1, time: 20000, errors: ['time']} )
@@ -118,7 +118,7 @@ class CsgoNadeParser {
                         responseText += `!nades ${r.map} ${r.type} ${r.side} ${r.location}\n`
                     }
                     message.channel.send(responseText);
-                    return null;
+                    return;
                 }).catch((e) => { console.warn(e); });
             }
         }
@@ -172,6 +172,14 @@ class CsgoNadeParser {
             return true;
         }
 
+        return false;
+    }
+
+    isPresent(list, propertySelector, propertyValue) {
+        for (var i = 0; i < list.length; i++) {
+            if (propertySelector(list[i]).toLowerCase() === propertyValue.toLowerCase()) 
+                return true;
+        }
         return false;
     }
 }
