@@ -22,13 +22,20 @@ class DrunkenBot {
 
     registerCommandParsers() {
         this.client.on('message', message => {
-            if (this.csgoNadeParser.isCommandAllowed(message)) {
-                this.csgoNadeParser.startWorkflow(message);
+            try {
+                if (this.csgoNadeParser.isCommandAllowed(message)) {
+                    this.csgoNadeParser.startWorkflow(message);
+                }
+    
+                if (this.generalParser.isCommandAllowed(message)) {
+                    this.generalParser.startWorkflow(message);
+                }
             }
-
-            if (this.generalParser.isCommandAllowed(message)) {
-                this.generalParser.startWorkflow(message);
+            catch (e) {
+                console.warn(e);
+                message.channel.send("Oops, something went wrong, sorry. Please try again...")
             }
+            
         });
     }
 }
