@@ -11,7 +11,7 @@ class CsgoNadeParser {
         this.mapOptions = { keys: ['map'], threshold: 0.4 };
         this.typeOptions = { keys: ['type'] };
         this.sideOptions = { keys: ['side'], threshold: 0 };
-        this.locationOptions = { keys: ['location'], threshold: 0.25, includeScore: true, distance: 10 };
+        this.locationOptions = { keys: ['location'], threshold: 0.25, includeScore: true, distance: 30 };
 
         this.discordHelper = new DiscordHelper();
         this.failCount = 0;
