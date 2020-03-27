@@ -22,11 +22,11 @@ class DrunkenBot {
 
     registerCallbacks() {
         this.client.on('message', message => {
-            if (this.csgoNadeParser.isCommand(message)) {
+            if (this.csgoNadeParser.isCommandAllowed(message)) {
                 this.csgoNadeParser.startWorkflow(message);
             }
 
-            if (this.generalParser.isCommand(message)) {
+            if (this.generalParser.isCommandAllowed(message)) {
                 this.generalParser.startWorkflow(message);
             }
         });

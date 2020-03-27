@@ -20,17 +20,14 @@ class CsgoNadeParser {
         this.allowedChannels = config.channelPermissions.csgo;
     }
 
-    isCommand(message) {
-        let isCommand = message.content.startsWith(`${config.prefix}nades`);
+    isCommandAllowed(message) {
+        let isCommand = this.discordHelper.checkIsCommand(message, `${config.prefix}nades`);
         if (isCommand) {
-            for (let i = 0; i < this.allowedChannels.length; i++) {
-                const allowedChannel = this.allowedChannels[i];
-                if (message.channel.name.toLowerCase() === allowedChannel.toLowerCase()) {
-                    return true;
-                }
-            }
+            let isAllowedInChannel = this.discordHelper.checkChannelPermissions(message, config.channelPermissions.csgo);
+            let isAllowedRole = this.discordHelper.checkRolePermissions(message, config.rolePermissions.csgo);
+            return isAllowedInChannel && isAllowedRole;
         }
-        return isCommand;
+        return false;
     }
 
     startWorkflow(message) {

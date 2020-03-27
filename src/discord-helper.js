@@ -31,6 +31,37 @@ class DiscordHelper {
 
         message.channel.send(embed);
     }
+
+    checkIsCommand(message, command) {
+        return message.content.startsWith(command);
+    }
+    
+    checkChannelPermissions(message, allowedChannels) {
+        for (let i = 0; i < allowedChannels.length; i++) {
+            const allowedChannel = allowedChannels[i];
+            if (message.channel.name.toLowerCase() === allowedChannel.toLowerCase()) {
+                return true;
+            }
+        }
+        console.log(`No permission for channel '${message.channel.name}'.`);
+        return false;
+    }
+
+    checkRolePermissions(message, allowedRoles) {
+        let memberRoles = message.member.roles.cache;
+        for (let i = 0; i < allowedRoles.length; i++) {
+            const allowedRole = allowedRoles[i];
+
+            for (let j = 0; j < memberRoles.size; j++) {
+                const memberRole = memberRoles.toJSON()[j];
+                if (allowedRole.toLowerCase() === memberRole.name.toLowerCase()) {
+                    return true;
+                }
+            }
+        }
+        console.log(`No permission for user '${message.member.displayName}' for roles '${allowedRoles}'.`);
+        return false;
+    }
 }
 
 class SimpleResponse {

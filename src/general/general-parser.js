@@ -1,19 +1,19 @@
+const { DiscordHelper } = require('./../discord-helper.js');
+
 const config = require('./../../config.json');
 
 class GeneralParser {
     constructor(client) {
-        this.allowedChannels = config.channelPermissions.general;
+        this.client = client;
+        this.discordHelper = new DiscordHelper();
     }
 
-    isCommand(message) {
-        let isCommand = message.content.startsWith(`${config.prefix}deleteall`);
+    isCommandAllowed(message) {
+        let isCommand = this.discordHelper.checkIsCommand(message, `${config.prefix}deleteall`);
         if (isCommand) {
-            for (let i = 0; i < this.allowedChannels.length; i++) {
-                const allowedChannel = this.allowedChannels[i];
-                if (message.channel.name.toLowerCase() === allowedChannel.toLowerCase()) {
-                    return true;
-                }
-            }
+            let isAllowedInChannel = this.discordHelper.checkChannelPermissions(message, config.channelPermissions.general);
+            let isAllowedRole = this.discordHelper.checkRolePermissions(message, config.rolePermissions.general);
+            return isAllowedInChannel && isAllowedRole;
         }
         return false;
     }

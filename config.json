@@ -10,5 +10,14 @@
 			"cs-go", 
 			"bot-playground"
 		]
+	},
+	"rolePermissions": {
+		"general": [
+			"Bot-Maker"
+		],
+		"csgo": [
+			"DrunKen",
+			"Bot-Maker"
+		]
 	}
 }
