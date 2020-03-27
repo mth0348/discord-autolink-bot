@@ -279,7 +279,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "mid",
+        "location": "a long",
         "source": "https://youtu.be/-lU5XGRw9Xs"
     },
 	
@@ -308,15 +308,7 @@
         "location": "coffins",
         "source": "https://youtu.be/yHx4_m5Hj5Y"
     },
-	
-											     {
-        "description": "",
-        "map": "inferno",
-        "side": "ct",
-        "type": "flash",
-        "location": "coffins",
-        "source": "https://youtu.be/3bBJpCGKN84"
-    },
+
 	
 												     {
         "description": "",
@@ -331,7 +323,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "banana",
+        "location": "ct",
         "source": "https://youtu.be/4zx5Lh-1-vo"
     },
 														     {
@@ -363,7 +355,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "library",
+        "location": "a long site",
         "source": "https://youtu.be/RNkSiyiwzcs"
     },
 	
@@ -372,7 +364,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "library",
+        "location": "a long mid",
         "source": "https://youtu.be/OrWetbr1GwU"
     },
 						    {
@@ -380,7 +372,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "boiler short",
+        "location": "boiler a short",
         "source": "https://youtu.be/T--5nlFsJ4U"
     },
 						    {
