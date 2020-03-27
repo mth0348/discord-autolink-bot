@@ -35,7 +35,8 @@ class CsgoNadeParser {
     startWorkflow(message) {
         if (message.content.length <= 7) {
             this.failCount = 0;
-            this.discordHelper.richEmbedMessage(message, this.getHelpResponse());
+            let supportedMaps = this.evaluateSupportedMaps();
+            this.discordHelper.richEmbedMessage(message, this.getHelpResponse(supportedMaps));
             return;
         }
 
@@ -176,8 +177,8 @@ class CsgoNadeParser {
         return new CsgoResponse(data.description, data.map, data.side, data.type, data.location, data.source);
     }
 
-    getHelpResponse() {
-        return new CsgoHelpResponse();
+    getHelpResponse(supportedMaps) {
+        return new CsgoHelpResponse(supportedMaps);
     }
 
     checkFailedEastereggMessage(message) {
@@ -200,6 +201,16 @@ class CsgoNadeParser {
 
     errorHandler(e) {
         console.warn(e);
+    }
+
+    evaluateSupportedMaps() {
+        let mapsString = '';
+        csgoList.forEach(element => {
+            if (mapsString.toLowerCase().indexOf(element.map.toLowerCase()) < 0) {
+                mapsString += `${element.map.toCamelCase()}, `;
+            }
+        });
+        return mapsString.substring(0, mapsString.length-2);
     }
 }
 

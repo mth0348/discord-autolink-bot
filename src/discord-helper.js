@@ -20,6 +20,7 @@ class DiscordHelper {
             if (response.helpName3) embed.addField(response.helpName3, response.helpValue3);
             if (response.helpName4) embed.addField(response.helpName4, response.helpValue4);
             if (response.helpName5) embed.addField(response.helpName5, response.helpValue5);
+            if (response.helpName6) embed.addField(response.helpName6, response.helpValue6);
         }
 
         message.channel.send(embed);
