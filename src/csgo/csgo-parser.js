@@ -10,7 +10,7 @@ const config = require('./../../config.json');
 class CsgoNadeParser {
     constructor(client) {
         this.mapOptions = { keys: ['map'], threshold: 0.4 };
-        this.typeOptions = { keys: ['type'] };
+        this.typeOptions = { keys: ['type'], threshold: 0.4 };
         this.sideOptions = { keys: ['side'], threshold: 0 };
         this.locationOptions = { keys: ['location'], threshold: 0.25, includeScore: true, distance: 30, minMatchCharLength: 0 };
 
@@ -19,7 +19,7 @@ class CsgoNadeParser {
 
         this.failCount = 0;
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
-        this.defaultAwaitReactionOptions = { max: 1, time: 12000 };
+        this.defaultAwaitReactionOptions = { max: 1, time: 20000 };
     }
 
     isCommandAllowed(message) {
