@@ -11,7 +11,7 @@ class CsgoNadeParser {
         this.mapOptions = { keys: ['map'], threshold: 0.4 };
         this.typeOptions = { keys: ['type'] };
         this.sideOptions = { keys: ['side'], threshold: 0 };
-        this.locationOptions = { keys: ['location'], threshold: 0.4, includeScore: true, distance: 10 };
+        this.locationOptions = { keys: ['location'], threshold: 0.25, includeScore: true, distance: 10 };
 
         this.discordHelper = new DiscordHelper();
         this.failCount = 0;
@@ -140,10 +140,10 @@ class CsgoNadeParser {
             let searchResults = fuse.search(searchTerm);
 
             /* immediately return almost perfect match/es */
-            if (searchResults.length > 0 && searchResults[0].score < 0.1) {
+            if (searchResults.length > 0 && searchResults[0].score < 0.05) {
                 return [ searchResults[0].item ];
             }
-            if (searchResults.length > 1 && (searchResults[1].score - searchResults[0].score) < 0.1) {
+            if (searchResults.length === 2 && (searchResults[1].score - searchResults[0].score) < 0.1) {
                 this.twoMatches = true;
                 return [ searchResults[0].item, searchResults[1].item ];
             }
