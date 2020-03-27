@@ -3,15 +3,14 @@ class CsgoHelpResponse {
         this.helpName = "Supported maps:";
         this.helpName2 = "Commands:";
         this.helpName3 = 'Map is mandatory:';
-        this.helpName4 = 'You can add the type as well';
-        this.helpName5 = "Then you may add the side as well, like 'c' or 'ct':";
-        this.helpName6 = 'Example';
+        this.helpName4 = 'Example';
         this.helpValue = supportedMaps;
         this.helpValue2 = "Use commands starting with '!nades' to get more infos about grenade throws on that map. Start with the map, like so:";
-        this.helpValue3 = "!nades {map}";
-        this.helpValue4 = "!nades {map} [type]";
-        this.helpValue5 = "!nades {map} [type] [side]";
-        this.helpValue6 = "!nades mirage smoke t window";
+        this.helpValue3 = "!nades {map}\n"
+                        + "!nades {map} [type]\n"
+                        + "!nades {map} [type] [side]";
+        this.helpValue4 = "!nades mirage smoke ct\n"
+                        + "!nades mirage smoke t window\n";
     }
 
     isHelp() {
