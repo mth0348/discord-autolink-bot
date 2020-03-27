@@ -300,7 +300,7 @@
         "location": "b site",
         "source": "https://youtu.be/Nk4ULf-2FGs"
     },
-										     {
+					{
         "description": "",
         "map": "inferno",
         "side": "ct",
@@ -310,7 +310,7 @@
     },
 
 	
-												     {
+						{
         "description": "",
         "map": "inferno",
         "side": "ct",
@@ -318,7 +318,7 @@
         "location": "banana",
         "source": "https://youtu.be/_D2fAA0t-bQ"
     },
-													     {
+							{
         "description": "",
         "map": "inferno",
         "side": "ct",
@@ -326,7 +326,7 @@
         "location": "ct",
         "source": "https://youtu.be/4zx5Lh-1-vo"
     },
-														     {
+		{
         "description": "",
         "map": "inferno",
         "side": "ct",
@@ -334,7 +334,7 @@
         "location": "banana",
         "source": "https://youtu.be/PoiR65RsWGI"
     },
-															     {
+				{
         "description": "",
         "map": "inferno",
         "side": "t",
@@ -342,7 +342,15 @@
         "location": "a long mid",
         "source": "https://youtu.be/cjmFxKFyvjI"
     },
-																     {
+		{
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "a long mid",
+        "source": "https://youtu.be/OrWetbr1GwU"
+    },
+	{															     {
         "description": "",
         "map": "inferno",
         "side": "t",
@@ -350,7 +358,7 @@
         "location": "library",
         "source": "https://youtu.be/d7ltMGyuVHs"
     },
-				    {
+				{
         "description": "",
         "map": "inferno",
         "side": "t",
@@ -359,15 +367,8 @@
         "source": "https://youtu.be/RNkSiyiwzcs"
     },
 	
-					    {
-        "description": "",
-        "map": "inferno",
-        "side": "t",
-        "type": "smoke",
-        "location": "a long mid",
-        "source": "https://youtu.be/OrWetbr1GwU"
-    },
-						    {
+
+				{
         "description": "",
         "map": "inferno",
         "side": "t",
@@ -375,7 +376,7 @@
         "location": "boiler a short",
         "source": "https://youtu.be/T--5nlFsJ4U"
     },
-						    {
+		{
         "description": "",
         "map": "inferno",
         "side": "t",
