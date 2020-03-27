@@ -9,18 +9,18 @@ class DrunkenBot {
         this.client = new Discord.Client();
 
         this.client.login(config.token);
-        console.log('AutoLinkBot initialized.');
+        console.log('DrunKenBot started.');
         
-        this.registerCallbacks();
-        this.registerParsers();
-    }
-
-    registerParsers() {
         this.csgoNadeParser = new CsgoNadeParser(this.client);
+        console.log('Listening for csgo nades commands...');
+
         this.generalParser = new GeneralParser(this.client);
+        console.log('Listening for general commands...');
+
+        this.registerCommandParsers();
     }
 
-    registerCallbacks() {
+    registerCommandParsers() {
         this.client.on('message', message => {
             if (this.csgoNadeParser.isCommandAllowed(message)) {
                 this.csgoNadeParser.startWorkflow(message);

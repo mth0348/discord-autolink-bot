@@ -152,18 +152,20 @@ class CsgoNadeParser {
             let fuse = new Fuse(results, searchOptions);
             let searchResults = fuse.search(searchTerm);
 
-            /* immediately return almost perfect match/es */
+            // return almost perfect match.
             if (searchResults.length > 0 && searchResults[0].score < 0.05) {
                 return [ searchResults[0].item ];
             }
-            if (searchResults.length === 2 && (searchResults[1].score - searchResults[0].score) < 0.1) {
+            // return almost perfect matches if their score is very similar.
+            if (searchResults.length === 2 && (searchResults[1].score - searchResults[0].score) < 0.05) {
                 this.twoMatches = true;
                 return [ searchResults[0].item, searchResults[1].item ];
             }
 
+            // this removes the unnecessary .item property nesting.
             let newResults = [];
             searchResults.forEach(e => {
-                newResults.push(e.item); /* this removes the unnecessary .item property nesting */
+                newResults.push(e.item); 
             });
             results = newResults;
         }

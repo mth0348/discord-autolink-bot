@@ -303,7 +303,6 @@
         "location": "banana close B",
         "source": "https://youtu.be/_D2fAA0t-bQ"
     },
-
     {
         "description": "",
         "map": "inferno",
@@ -312,7 +311,7 @@
         "location": "banana",
         "source": "https://youtu.be/PoiR65RsWGI"
     },
-        {
+    {
         "description": "",
         "map": "inferno",
         "side": "ct",
