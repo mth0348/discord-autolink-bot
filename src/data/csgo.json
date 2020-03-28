@@ -72,7 +72,7 @@
         "source": "https://youtu.be/qRXanvKP8do"
     },
     {
-        "description": "Thrown before T apps",
+        "description": "Thrown before T aps",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
@@ -84,7 +84,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
-        "location": "apps",
+        "location": "aps",
         "source": "https://youtu.be/63IB7bHteBo"
     },
     {
@@ -120,15 +120,15 @@
         "source": "https://youtu.be/lGvaHGdEAZE"
     },
     {
-        "description": "Pop Flash for peek B Car and Apps",
+        "description": "Pop Flash for peek B Car and Aps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "apps car",
+        "location": "aps car",
         "source": "https://youtu.be/r6h2U6hnWdE"
     },
     {
-        "description": "Run-Flash for B Site Push out Apps",
+        "description": "Run-Flash for B Site Push out Aps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
@@ -168,11 +168,11 @@
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
-        "description": "Flash for B Apps from Car",
+        "description": "Flash for B Aps from Car",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "apps",
+        "location": "aps",
         "source": "https://youtu.be/TbJOqULU87E"
     },
     {
