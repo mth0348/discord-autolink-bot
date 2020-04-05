@@ -366,5 +366,79 @@
         "type": "molotov",
         "location": "quad",
         "source": "https://youtu.be/pbr2hjg6SDI"
+    },
+    
+        {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "molotov",
+        "location": "a site rug",
+        "source": "https://youtu.be/_zZoMXoRk6k"
+    },
+ 
+              {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "top mid",
+        "source": "https://youtu.be/ppSFxB56ae8"
+    },
+                  {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "a upper",
+        "source": "https://youtu.be/hCvqJK11bBo"
+    },
+                      {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "b site alley",
+        "source": "https://youtu.be/-TDnpfSRRWs"
+    },
+                          {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector b site",
+        "source": "https://youtu.be/RK-2n9-p4z0"
+    },
+                             {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "heaven a site",
+        "source": "https://youtu.be/hrQSRA5T8oA"
+    },
+                                 {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "palace b site",
+        "source": "https://youtu.be/oo0rElhoKDM"
+    },
+                                     {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "walkway a mid",
+        "source": "https://youtu.be/x2DwgaEsDss"
+    },
+                                         {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "molotov",
+        "location": "a long entrance",
+        "source": "https://youtu.be/SzcTI1Q4JVI"
     }
 ]
