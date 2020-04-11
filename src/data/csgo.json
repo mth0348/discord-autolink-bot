@@ -496,7 +496,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "a-connector",
+        "location": "connector a",
         "source": "https://youtu.be/gRjzLxlKrbA"
     },
                                                                          {
@@ -504,7 +504,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector b",
+        "location": "connector sidewalk",
         "source": "https://youtu.be/gY-K8kEAUSw"
     },
                                                                                      {
@@ -512,7 +512,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector b",
+        "location": "connector sidewalk",
         "source": "https://youtu.be/DoC3fU89ios"
     },
                                                                              {
