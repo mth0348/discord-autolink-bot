@@ -473,14 +473,7 @@
         "location": "ebox",
         "source": "https://youtu.be/UX_bRWxbvi0"
     },
-                                                             {
-        "description": "",
-        "map": "train",
-        "side": "t",
-        "type": "smoke",
-        "location": "a-connector",
-        "source": "https://youtu.be/gRjzLxlKrbA"
-    },
+
                                                                  {
         "description": "",
         "map": "train",
@@ -498,6 +491,14 @@
         "location": "bombtrain red",
         "source": "https://youtu.be/0swjRl_SwaA"
     },
+                                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "a-connector",
+        "source": "https://youtu.be/gRjzLxlKrbA"
+    },
                                                                          {
         "description": "",
         "map": "train",
@@ -505,6 +506,14 @@
         "type": "smoke",
         "location": "connector b",
         "source": "https://youtu.be/gY-K8kEAUSw"
+    },
+                                                                                     {
+        "description": "run throw",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector b",
+        "source": "https://youtu.be/DoC3fU89ios"
     },
                                                                              {
         "description": "",
@@ -514,14 +523,7 @@
         "location": "sidewalk b",
         "source": "https://youtu.be/AnpKQOaJsSg"
     },
-                                                                                 {
-        "description": "run throw",
-        "map": "train",
-        "side": "t",
-        "type": "smoke",
-        "location": "connector b",
-        "source": "https://youtu.be/DoC3fU89ios"
-    },
+
     
                                                                                     {
         "description": "",
