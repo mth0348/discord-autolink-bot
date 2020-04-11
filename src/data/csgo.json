@@ -440,5 +440,112 @@
         "type": "molotov",
         "location": "a long entrance",
         "source": "https://youtu.be/SzcTI1Q4JVI"
+    },
+                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "green A3",
+        "source": "https://youtu.be/lc-FnkfKRng"
+    },
+                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "ticket",
+        "source": "https://youtu.be/DuRV7erpCnE"
+    },
+                                                     {
+        "description": "Thrown from B",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "hell",
+        "source": "https://youtu.be/vRF9cEpePWE"
+    },
+                                                         {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "ebox",
+        "source": "https://youtu.be/UX_bRWxbvi0"
+    },
+                                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector a",
+        "source": "https://youtu.be/gRjzLxlKrbA"
+    },
+                                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "bombtrain red",
+        "source": "https://youtu.be/XNCCO8k1z44"
+    },
+    
+                                                                     {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "bombtrain red",
+        "source": "https://youtu.be/0swjRl_SwaA"
+    },
+                                                                         {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector b",
+        "source": "https://youtu.be/gY-K8kEAUSw"
+    },
+                                                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "sidewalk b",
+        "source": "https://youtu.be/AnpKQOaJsSg"
+    },
+                                                                                 {
+        "description": "run throw",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector b",
+        "source": "https://youtu.be/DoC3fU89ios"
+    },
+    
+                                                                                    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "sidewalk close",
+        "source": "https://youtu.be/QPMH3dH6aXo"
+    },
+                                                                                        {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "summit",
+        "source": "https://youtu.be/Hz_8I5WzGBY"
+    },
+                                                                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "catwalk",
+        "source": "https://youtu.be/IRlLhj8Zmpg"
     }
+    
 ]
