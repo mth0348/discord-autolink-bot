@@ -425,6 +425,14 @@
         "location": "palace b site",
         "source": "https://youtu.be/oo0rElhoKDM"
     },
+                                          {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "palace b site",
+        "source": "https://youtu.be/il_NREzebqw"
+    },
                                      {
         "description": "",
         "map": "anubis",
@@ -433,6 +441,7 @@
         "location": "walkway a mid",
         "source": "https://youtu.be/x2DwgaEsDss"
     },
+   
                                          {
         "description": "",
         "map": "anubis",
