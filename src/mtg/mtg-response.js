@@ -41,15 +41,16 @@ class MtgResponse {
     }
 
     getThumbnailUrl() {
+        // imgur album: https://imgur.com/a/bI68wfc
         switch (this.rarity) {
             case 'common': 
-                return '../data/img/mtg_common.png';
+                return 'https://i.imgur.com/6V5T9JD.png';
             case 'uncommon': 
-                return '../data/img/mtg_uncommon.png';
+                return 'https://i.imgur.com/Zc0Y8sy.png';
             case 'rare': 
-                return '../data/img/mtg_rare.png';
+                return 'https://i.imgur.com/zy2hjQu.png';
             case 'mythic': 
-                return '../data/img/mtg_mythic.png';
+                return 'https://i.imgur.com/65eqVD8.png';
         }
     }
 
