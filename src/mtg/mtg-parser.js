@@ -50,10 +50,10 @@ class MtgParser {
     }
 
     getRarity(rarityFactor) {
-        return rarityFactor < 0.9 ? "Mythic Rare"
-             : rarityFactor < 1.0 ? "Rare"
-             : rarityFactor < 0.9 ? "Uncommon"
-             : "Common";
+        return rarityFactor < 0.9 ? "mythic"
+             : rarityFactor < 1.0 ? "rare"
+             : rarityFactor < 0.9 ? "uncommon"
+             : "common";
     }
 }
 
