@@ -1,0 +1,1332 @@
+{
+    "types": [
+        "creature",
+        "artifact",
+        "land",
+        "enchantment",
+        "instant",
+        "sorcery"
+    ],
+    "subtypes": [
+        "Advisor",
+        "Aetherborn",
+        "Ally",
+        "Angel",
+        "Antelope",
+        "Ape",
+        "Archer",
+        "Archon",
+        "Army",
+        "Artificer",
+        "Assassin",
+        "Assembly-Worker",
+        "Atog",
+        "Aurochs",
+        "Avatar",
+        "Azra",
+        "Badger",
+        "Barbarian",
+        "Basilisk",
+        "Bat",
+        "Bear",
+        "Beast",
+        "Beeble",
+        "Berserker",
+        "Bird",
+        "Blinkmoth",
+        "Boar",
+        "Bringer",
+        "Brushwagg",
+        "Camarid",
+        "Camel",
+        "Caribou",
+        "Carrier",
+        "Cat",
+        "Centaur",
+        "Cephalid",
+        "Chimera",
+        "Citizen",
+        "Cleric",
+        "Cockatrice",
+        "Construct",
+        "Coward",
+        "Crab",
+        "Crocodile",
+        "Cyclops",
+        "Dauthi",
+        "Demigod",
+        "Demon",
+        "Deserter",
+        "Devil",
+        "Dinosaur",
+        "Djinn",
+        "Dragon",
+        "Drake",
+        "Dreadnought",
+        "Drone",
+        "Druid",
+        "Dryad",
+        "Dwarf",
+        "Efreet",
+        "Egg",
+        "Elder",
+        "Eldrazi",
+        "Elemental",
+        "Elephant",
+        "Elf",
+        "Elk",
+        "Eye",
+        "Faerie",
+        "Ferret",
+        "Fish",
+        "Flagbearer",
+        "Fox",
+        "Frog",
+        "Fungus",
+        "Gargoyle",
+        "Germ",
+        "Giant",
+        "Gnome",
+        "Goat",
+        "Goblin",
+        "God",
+        "Golem",
+        "Gorgon",
+        "Graveborn",
+        "Gremlin",
+        "Griffin",
+        "Hag",
+        "Harpy",
+        "Hellion",
+        "Hippo",
+        "Hippogriff",
+        "Homarid",
+        "Homunculus",
+        "Horror",
+        "Horse",
+        "Hound",
+        "Human",
+        "Hydra",
+        "Hyena",
+        "Illusion",
+        "Imp",
+        "Incarnation",
+        "Insect",
+        "Jackal",
+        "Jellyfish",
+        "Juggernaut",
+        "Kavu",
+        "Kirin",
+        "Kithkin",
+        "Knight",
+        "Kobold",
+        "Kor",
+        "Kraken",
+        "Lamia",
+        "Lammasu",
+        "Leech",
+        "Leviathan",
+        "Lhurgoyf",
+        "Licid",
+        "Lizard",
+        "Manticore",
+        "Masticore",
+        "Mercenary",
+        "Merfolk",
+        "Metathran",
+        "Minion",
+        "Minotaur",
+        "Mole",
+        "Monger",
+        "Mongoose",
+        "Monk",
+        "Monkey",
+        "Moonfolk",
+        "Mouse",
+        "Mutant",
+        "Myr",
+        "Mystic",
+        "Naga",
+        "Nautilus",
+        "Nephilim",
+        "Nightmare",
+        "Nightstalker",
+        "Ninja",
+        "Noble",
+        "Noggle",
+        "Nomad",
+        "Nymph",
+        "Octopus",
+        "Ogre",
+        "Ooze",
+        "Orb",
+        "Orc",
+        "Orgg",
+        "Otter",
+        "Ouphe",
+        "Ox",
+        "Oyster",
+        "Pangolin",
+        "Peasant",
+        "Pegasus",
+        "Pentavite",
+        "Pest",
+        "Phelddagrif",
+        "Phoenix",
+        "Pilot",
+        "Pincher",
+        "Pirate",
+        "Plant",
+        "Praetor",
+        "Prism",
+        "Processor",
+        "Rabbit",
+        "Rat",
+        "Rebel",
+        "Reflection",
+        "Rhino",
+        "Rigger",
+        "Rogue",
+        "Sable",
+        "Salamander",
+        "Samurai",
+        "Sand",
+        "Saproling",
+        "Satyr",
+        "Scarecrow",
+        "Scion",
+        "Scorpion",
+        "Scout",
+        "Sculpture",
+        "Serf",
+        "Serpent",
+        "Servo",
+        "Shade",
+        "Shaman",
+        "Shapeshifter",
+        "Shark",
+        "Sheep",
+        "Siren",
+        "Skeleton",
+        "Slith",
+        "Sliver",
+        "Slug",
+        "Snake",
+        "Soldier",
+        "Soltari",
+        "Spawn",
+        "Specter",
+        "Spellshaper",
+        "Sphinx",
+        "Spider",
+        "Spike",
+        "Spirit",
+        "Splinter",
+        "Sponge",
+        "Squid",
+        "Squirrel",
+        "Starfish",
+        "Surrakar",
+        "Survivor",
+        "Tentacle",
+        "Tetravite",
+        "Thalakos",
+        "Thopter",
+        "Thrull",
+        "Treefolk",
+        "Trilobite",
+        "Triskelavite",
+        "Troll",
+        "Turtle",
+        "Unicorn",
+        "Vampire",
+        "Vedalken",
+        "Viashino",
+        "Volver",
+        "Wall",
+        "Warlock",
+        "Warrior",
+        "Weird",
+        "Werewolf",
+        "Whale",
+        "Wizard",
+        "Wolf",
+        "Wolverine",
+        "Wombat",
+        "Worm",
+        "Wraith",
+        "Wurm",
+        "Yeti",
+        "Zombie",
+        "Zubera"
+    ],
+    "keywords": [
+        {
+            "name": "Deathtouch",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Defender",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Double Strike",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Enchant ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(type)",
+            "types": [
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Equip",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "equipment"
+            ]
+        },
+        {
+            "name": "First Strike",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Flash",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Flying",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Haste",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Hexproof",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment",
+                "land"
+            ]
+        },
+        {
+            "name": "Indestructible",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Intimidate",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Landwalk",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Lifelink",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Protection from ",
+            "hasCost": false,
+            "hasAction": false,
+            "hasNameExtension": "(color|type)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Reach",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Shroud",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "land",
+                "artifact",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Trample",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Vigilance",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Banding",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cumulative Upkeep",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Flanking",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Phasing",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment",
+                "land"
+            ]
+        },
+        {
+            "name": "Buyback",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Shadow",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cycling",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment",
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Echo",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Fading ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Kicker",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Flashback",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Madness",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "sorcery",
+                "instant",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Fear",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Morph",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Amplify ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Storm",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Affinity for ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(type)",
+            "types": [
+                "artifact"
+            ]
+        },
+        {
+            "name": "Entwine",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Modular ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "artifact"
+            ]
+        },
+        {
+            "name": "Sunburst",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Bushido ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Splice onto Arcane",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Ninjutsu",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Convoke",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Dredge ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Transmute",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Bloodthirst ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Replicate",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Forecast",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Split Second",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant"
+            ]
+        },
+        {
+            "name": "Suspend ",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Vanishing ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Aura Swap",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Delve",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery",
+                "creature"
+            ]
+        },
+        {
+            "name": "Gravestorm",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Changeling",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Evoke",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Persist",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Devour",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Exalted",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "land",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Unearth",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cascade",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Annihilator ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Rebound",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Totem Armor",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "aura"
+            ]
+        },
+        {
+            "name": "Infect",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Battle Cry",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Living Weapon",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "equipment"
+            ]
+        },
+        {
+            "name": "Undying",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Miracle",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Overload",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Scavenge",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Unleash",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cipher",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Evolve",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Extort",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Tribute ",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Dethrone",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Prowess",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Dash",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Menace",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Awaken",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Ingest",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Surge",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Fabricate",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Improvise",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "artifact"
+            ]
+        },
+        {
+            "name": "Embalm",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Eternalize",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Afflict",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "(number)",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Ascend",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "enchantment",
+                "land"
+            ]
+        },
+        {
+            "name": "Jump-Start",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Mentor",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Riot",
+            "hasCost": false,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Spectacle",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Escape",
+            "hasCost": true,
+            "hasAction": false,
+            "nameExtension": "",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery"
+            ]
+        }
+    ],
+    "permanentConditions": [
+        {
+            "text": "When (name) enters the battlefield",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever (name) enters the battlefield or attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "When you cast this spell",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever another creature enters the battlefield",
+            "replacementText": "Whenever another creature would enter the battlefield",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another nontoken creature enters the battlefield",
+            "replacementText": "Whenever another nontoken creature would enter the battlefield",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another creature enters the battlefield under your control",
+            "replacementText": "Whenever another creature would enter the battlefield under your control",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another nontoken creature enters the battlefield under your control",
+            "replacementText": "Whenever another nontoken creature would enter the battlefield under your control",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever you gain life",
+            "replacementText": "Whenever you would gain life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever an opponent gains life",
+            "replacementText": "Whenever an opponent would gain life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever you lose life",
+            "replacementText": "Whenever you would lose life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever an opponent loses life",
+            "replacementText": "Whenever an opponent would lose life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever (name) attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever you cast a(n) (type|colorname) spell",
+            "replacementText": "",
+            "context": "spell"
+        },
+        {
+            "text": "Whenever a creature an opponent controls attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever (name) becomes tapped",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever a creature an opponent controls becomes tapped",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "At the beginning of combat on your turn",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of your ukpeep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of your endstep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of each upkeep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of each combat",
+            "replacementText": "",
+            "context": "phase"
+        }
+    ],
+    "permanentEvents": [
+        "(self) deals (number) damage to any target",
+        "(self) deals (number) damage to target (player)",
+        "(self) deals (number) damage to target creature an opponent controls",
+        "(self) deals (number) damage to target (subtype) creature an opponent controls",
+        "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
+        "draw a card",
+        "draw (numbername) cards",
+        "destroy target creature",
+        "destroy (self)",
+        "you lose (number) life",
+        "you lose (number) life and draw a card",
+        "destroy target (type) an opponent controls",
+        "target (player) discards a card",
+        "target (player) discards (numbername) cards",
+        "target (player) draws a card",
+        "target (player) draws (numbername) cards",
+        "target (player) sacrifices a creature",
+        "target (player) sacrifices two creatures",
+        "target (player) sacrifices a(n) (type)",
+        "target (player) sacrifices two (type)s",
+        "target (player) sacrifices a (subtype) creature",
+        "target (player) sacrifices a non-(subtype) creature",
+        "sacrifice (self)",
+        "sacrifice a creature",
+        "put (number) +1/+1 counter(s) on target creature",
+        "put (number) +1/+1 counter(s) on target (subtype) creature",
+        "put (number) +1/+1 counter(s) on target non-(subtype) creature",
+        "put (number) -1/-1 counter(s) on target creature",
+        "put (number) -1/-1 counter(s) on target (subtype) creature",
+        "put (number) -1/-1 counter(s) on target non-(subtype) creature",
+        "put a (keyword) counter on another creature",
+        "put a (keyword) counter on another (subtype) creature",
+        "put a (keyword) counter on another non-(subtype) creature",
+        "put the top (numbername) cards of your library into your graveyard",
+        "return target (type) card from your graveyard to your hand",
+        "return target (permanent) card from your graveyard to the battlefield",
+        "exile target (type)",
+        "exile (self)",
+        "each (player) exiles (numbername) cards from his or her hand",
+        "each (player) exiles a card from his or her hand",
+        "each (player) discards a card",
+        "each (player) discards (numbername) cards",
+        "target (player) discards a card",
+        "target (player) discards (numbername) cards",
+        "discard a card",
+        "discard (numbername) cards"
+    ],
+    "permanentStatics": [
+        "(other) creatures you control have (keyword)",
+        "(other) creatures you control have (keyword) and (keyword)",
+        "(subtype)s you control have -(number)/-(number)",
+        "(subtype)s you control have -(number)/-(number) and (keyword)",
+        "(subtype)s you control have +(number)/+(number)",
+        "(subtype)s you control have +(number)/+(number) and (keyword)"
+    ]
+}
