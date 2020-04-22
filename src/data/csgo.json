@@ -52,7 +52,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "jungle connector",
+        "location": "jungle",
         "source": "https://youtu.be/PwZMzJsMdoQ"
     },
     {
@@ -72,7 +72,7 @@
         "source": "https://youtu.be/qRXanvKP8do"
     },
     {
-        "description": "Thrown before T apps",
+        "description": "Thrown before T aps",
         "map": "mirage",
         "side": "t",
         "type": "smoke",
@@ -84,7 +84,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
-        "location": "apps",
+        "location": "aps",
         "source": "https://youtu.be/63IB7bHteBo"
     },
     {
@@ -120,15 +120,15 @@
         "source": "https://youtu.be/lGvaHGdEAZE"
     },
     {
-        "description": "Pop Flash for peek B Car and Apps",
+        "description": "Pop Flash for peek B Car and Aps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "apps car",
+        "location": "aps car",
         "source": "https://youtu.be/r6h2U6hnWdE"
     },
     {
-        "description": "Run-Flash for B Site Push out Apps",
+        "description": "Run-Flash for B Site Push out Aps",
         "map": "mirage",
         "side": "t",
         "type": "flash",
@@ -168,11 +168,11 @@
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
-        "description": "Flash for B Apps from Car",
+        "description": "Flash for B Aps from Car",
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "apps",
+        "location": "aps",
         "source": "https://youtu.be/TbJOqULU87E"
     },
     {
@@ -366,5 +366,197 @@
         "type": "molotov",
         "location": "quad",
         "source": "https://youtu.be/pbr2hjg6SDI"
+    },
+    
+        {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "molotov",
+        "location": "a site rug",
+        "source": "https://youtu.be/_zZoMXoRk6k"
+    },
+ 
+              {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "top mid",
+        "source": "https://youtu.be/ppSFxB56ae8"
+    },
+                  {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "a upper",
+        "source": "https://youtu.be/hCvqJK11bBo"
+    },
+                      {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "b site alley",
+        "source": "https://youtu.be/-TDnpfSRRWs"
+    },
+                          {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector b site",
+        "source": "https://youtu.be/RK-2n9-p4z0"
+    },
+                             {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "heaven a site",
+        "source": "https://youtu.be/hrQSRA5T8oA"
+    },
+                                 {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "palace b site",
+        "source": "https://youtu.be/oo0rElhoKDM"
+    },
+                                          {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "palace b site",
+        "source": "https://youtu.be/il_NREzebqw"
+    },
+                                     {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "walkway a mid",
+        "source": "https://youtu.be/x2DwgaEsDss"
+    },
+   
+                                         {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "molotov",
+        "location": "a long entrance",
+        "source": "https://youtu.be/SzcTI1Q4JVI"
+    },
+                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "green A3",
+        "source": "https://youtu.be/lc-FnkfKRng"
+    },
+                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "ticket",
+        "source": "https://youtu.be/DuRV7erpCnE"
+    },
+                                                     {
+        "description": "Thrown from B",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "hell",
+        "source": "https://youtu.be/vRF9cEpePWE"
+    },
+                                                         {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "ebox",
+        "source": "https://youtu.be/UX_bRWxbvi0"
+    },
+
+                                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "bombtrain red",
+        "source": "https://youtu.be/XNCCO8k1z44"
+    },
+    
+                                                                     {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "bombtrain red",
+        "source": "https://youtu.be/0swjRl_SwaA"
+    },
+                                                                 {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector a",
+        "source": "https://youtu.be/gRjzLxlKrbA"
+    },
+                                                                         {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector sidewalk",
+        "source": "https://youtu.be/gY-K8kEAUSw"
+    },
+                                                                                     {
+        "description": "run throw",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "connector sidewalk",
+        "source": "https://youtu.be/DoC3fU89ios"
+    },
+                                                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "sidewalk b",
+        "source": "https://youtu.be/AnpKQOaJsSg"
+    },
+
+    
+                                                                                    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "sidewalk close",
+        "source": "https://youtu.be/QPMH3dH6aXo"
+    },
+                                                                                        {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "summit",
+        "source": "https://youtu.be/Hz_8I5WzGBY"
+    },
+                                                                                             {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "catwalk",
+        "source": "https://youtu.be/IRlLhj8Zmpg"
     }
+    
 ]
