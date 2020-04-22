@@ -264,7 +264,7 @@
         {
             "name": "Deathtouch",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -273,7 +273,7 @@
         {
             "name": "Defender",
             "hasCost": false,
-            "hasAction": false,
+            "score": -1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -282,7 +282,7 @@
         {
             "name": "Double Strike",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -291,7 +291,7 @@
         {
             "name": "Enchant ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0,
             "nameExtension": "(type)",
             "types": [
                 "enchantment"
@@ -300,7 +300,7 @@
         {
             "name": "Equip",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0,
             "nameExtension": "",
             "types": [
                 "equipment"
@@ -309,7 +309,7 @@
         {
             "name": "First Strike",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -318,7 +318,7 @@
         {
             "name": "Flash",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -329,7 +329,7 @@
         {
             "name": "Flying",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -338,7 +338,7 @@
         {
             "name": "Haste",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.5,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -347,7 +347,7 @@
         {
             "name": "Hexproof",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -359,7 +359,7 @@
         {
             "name": "Indestructible",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -371,7 +371,7 @@
         {
             "name": "Intimidate",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -380,7 +380,7 @@
         {
             "name": "Landwalk",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -389,7 +389,7 @@
         {
             "name": "Lifelink",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -398,7 +398,7 @@
         {
             "name": "Protection from ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "hasNameExtension": "(color|type)",
             "types": [
                 "creature"
@@ -407,7 +407,7 @@
         {
             "name": "Reach",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.2,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -416,7 +416,7 @@
         {
             "name": "Shroud",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -428,7 +428,7 @@
         {
             "name": "Trample",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -437,7 +437,7 @@
         {
             "name": "Vigilance",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.5,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -446,7 +446,7 @@
         {
             "name": "Banding",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -455,7 +455,7 @@
         {
             "name": "Cumulative Upkeep",
             "hasCost": true,
-            "hasAction": false,
+            "score": -1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -464,7 +464,7 @@
         {
             "name": "Flanking",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.3,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -473,7 +473,7 @@
         {
             "name": "Phasing",
             "hasCost": false,
-            "hasAction": false,
+            "score": -0.5,
             "nameExtension": "(number)",
             "types": [
                 "creature",
@@ -485,7 +485,7 @@
         {
             "name": "Buyback",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -495,7 +495,7 @@
         {
             "name": "Shadow",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.5,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -504,7 +504,7 @@
         {
             "name": "Cycling",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -518,7 +518,7 @@
         {
             "name": "Echo",
             "hasCost": true,
-            "hasAction": false,
+            "score": -0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -527,7 +527,7 @@
         {
             "name": "Fading ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "(number)",
             "types": [
                 "creature",
@@ -539,7 +539,7 @@
         {
             "name": "Kicker",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -550,7 +550,7 @@
         {
             "name": "Flashback",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -560,7 +560,7 @@
         {
             "name": "Madness",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -572,7 +572,7 @@
         {
             "name": "Fear",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -581,7 +581,7 @@
         {
             "name": "Morph",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -590,7 +590,7 @@
         {
             "name": "Amplify ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -599,7 +599,7 @@
         {
             "name": "Storm",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -609,7 +609,7 @@
         {
             "name": "Affinity for ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "(type)",
             "types": [
                 "artifact"
@@ -618,34 +618,35 @@
         {
             "name": "Entwine",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0,
             "nameExtension": "",
             "types": [
-                "creature"
+                "instant",
+                "sorcery"
             ]
         },
         {
             "name": "Modular ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "(number)",
             "types": [
-                "artifact"
+                "artifact creature"
             ]
         },
         {
             "name": "Sunburst",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
-                "creature"
+                "artifact creature"
             ]
         },
         {
             "name": "Bushido ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.3,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -654,7 +655,7 @@
         {
             "name": "Splice onto Arcane",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -664,7 +665,7 @@
         {
             "name": "Ninjutsu",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -673,7 +674,7 @@
         {
             "name": "Convoke",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -685,7 +686,7 @@
         {
             "name": "Dredge ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -694,7 +695,7 @@
         {
             "name": "Transmute",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -706,7 +707,7 @@
         {
             "name": "Bloodthirst ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.3,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -715,7 +716,7 @@
         {
             "name": "Replicate",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -725,7 +726,7 @@
         {
             "name": "Forecast",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -734,7 +735,7 @@
         {
             "name": "Split Second",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant"
@@ -743,7 +744,7 @@
         {
             "name": "Suspend ",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -752,7 +753,7 @@
         {
             "name": "Vanishing ",
             "hasCost": false,
-            "hasAction": false,
+            "score": -0.5,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -761,7 +762,7 @@
         {
             "name": "Aura Swap",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "enchantment"
@@ -770,7 +771,7 @@
         {
             "name": "Delve",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.6,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -781,7 +782,7 @@
         {
             "name": "Gravestorm",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -791,7 +792,7 @@
         {
             "name": "Changeling",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.2,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -800,7 +801,7 @@
         {
             "name": "Evoke",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.9,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -809,7 +810,7 @@
         {
             "name": "Persist",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -818,7 +819,7 @@
         {
             "name": "Devour",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -827,7 +828,7 @@
         {
             "name": "Exalted",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -838,7 +839,7 @@
         {
             "name": "Unearth",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -847,7 +848,7 @@
         {
             "name": "Cascade",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -859,7 +860,7 @@
         {
             "name": "Annihilator ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.6,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -868,7 +869,7 @@
         {
             "name": "Rebound",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1.2,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -878,7 +879,7 @@
         {
             "name": "Totem Armor",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "aura"
@@ -887,7 +888,7 @@
         {
             "name": "Infect",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -896,7 +897,7 @@
         {
             "name": "Battle Cry",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -905,7 +906,7 @@
         {
             "name": "Living Weapon",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.7,
             "nameExtension": "",
             "types": [
                 "equipment"
@@ -914,7 +915,7 @@
         {
             "name": "Undying",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -923,7 +924,7 @@
         {
             "name": "Miracle",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -933,7 +934,7 @@
         {
             "name": "Overload",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -943,7 +944,7 @@
         {
             "name": "Scavenge",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -952,7 +953,7 @@
         {
             "name": "Unleash",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -961,7 +962,7 @@
         {
             "name": "Cipher",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -971,7 +972,7 @@
         {
             "name": "Evolve",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -980,7 +981,7 @@
         {
             "name": "Extort",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.5,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -990,7 +991,7 @@
         {
             "name": "Tribute ",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -999,7 +1000,7 @@
         {
             "name": "Dethrone",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1008,7 +1009,7 @@
         {
             "name": "Prowess",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1017,7 +1018,7 @@
         {
             "name": "Dash",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1026,7 +1027,7 @@
         {
             "name": "Menace",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1035,7 +1036,7 @@
         {
             "name": "Awaken",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "(number)",
             "types": [
                 "instant",
@@ -1045,7 +1046,7 @@
         {
             "name": "Ingest",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1054,7 +1055,7 @@
         {
             "name": "Surge",
             "hasCost": true,
-            "hasAction": false,
+            "score": 0.4,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1063,7 +1064,7 @@
         {
             "name": "Fabricate",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -1072,7 +1073,7 @@
         {
             "name": "Improvise",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "artifact"
@@ -1081,7 +1082,7 @@
         {
             "name": "Embalm",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1090,7 +1091,7 @@
         {
             "name": "Eternalize",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1099,7 +1100,7 @@
         {
             "name": "Afflict",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "(number)",
             "types": [
                 "creature"
@@ -1108,7 +1109,7 @@
         {
             "name": "Ascend",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.6,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -1119,7 +1120,7 @@
         {
             "name": "Jump-Start",
             "hasCost": false,
-            "hasAction": false,
+            "score": 0.8,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -1129,7 +1130,7 @@
         {
             "name": "Mentor",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1138,7 +1139,7 @@
         {
             "name": "Riot",
             "hasCost": false,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature"
@@ -1147,7 +1148,7 @@
         {
             "name": "Spectacle",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "instant",
@@ -1157,7 +1158,7 @@
         {
             "name": "Escape",
             "hasCost": true,
-            "hasAction": false,
+            "score": 1,
             "nameExtension": "",
             "types": [
                 "creature",
@@ -1274,52 +1275,194 @@
         }
     ],
     "permanentEvents": [
-        "(self) deals (number) damage to any target",
-        "(self) deals (number) damage to target (player)",
-        "(self) deals (number) damage to target creature an opponent controls",
-        "(self) deals (number) damage to target (subtype) creature an opponent controls",
-        "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
-        "draw a card",
-        "draw (numbername) cards",
-        "destroy target creature",
-        "destroy (self)",
-        "you lose (number) life",
-        "you lose (number) life and draw a card",
-        "destroy target (type) an opponent controls",
-        "target (player) discards a card",
-        "target (player) discards (numbername) cards",
-        "target (player) draws a card",
-        "target (player) draws (numbername) cards",
-        "target (player) sacrifices a creature",
-        "target (player) sacrifices two creatures",
-        "target (player) sacrifices a(n) (type)",
-        "target (player) sacrifices two (type)s",
-        "target (player) sacrifices a (subtype) creature",
-        "target (player) sacrifices a non-(subtype) creature",
-        "sacrifice (self)",
-        "sacrifice a creature",
-        "put (number) +1/+1 counter(s) on target creature",
-        "put (number) +1/+1 counter(s) on target (subtype) creature",
-        "put (number) +1/+1 counter(s) on target non-(subtype) creature",
-        "put (number) -1/-1 counter(s) on target creature",
-        "put (number) -1/-1 counter(s) on target (subtype) creature",
-        "put (number) -1/-1 counter(s) on target non-(subtype) creature",
-        "put a (keyword) counter on another creature",
-        "put a (keyword) counter on another (subtype) creature",
-        "put a (keyword) counter on another non-(subtype) creature",
-        "put the top (numbername) cards of your library into your graveyard",
-        "return target (type) card from your graveyard to your hand",
-        "return target (permanent) card from your graveyard to the battlefield",
-        "exile target (type)",
-        "exile (self)",
-        "each (player) exiles (numbername) cards from his or her hand",
-        "each (player) exiles a card from his or her hand",
-        "each (player) discards a card",
-        "each (player) discards (numbername) cards",
-        "target (player) discards a card",
-        "target (player) discards (numbername) cards",
-        "discard a card",
-        "discard (numbername) cards"
+        {
+            "text": "(self) deals (number) damage to any target",
+            "score": 1
+        },
+        {
+            "text": "(self) deals (number) damage to target (player)",
+            "score": 1
+        },
+        {
+            "text": "(self) deals (number) damage to target creature an opponent controls",
+            "score": 0.6
+        },
+        {
+            "text": "(self) deals (number) damage to target (subtype) creature an opponent controls",
+            "score": 0.2
+        },
+        {
+            "text": "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
+            "score": 0.4
+        },
+        {
+            "text": "draw a card",
+            "score": 1
+        },
+        {
+            "text": "draw (numbername) cards",
+            "score": 2
+        },
+        {
+            "text": "destroy target creature",
+            "score": 1.5
+        },
+        {
+            "text": "destroy (self)",
+            "score": -1
+        },
+        {
+            "text": "you lose (number) life",
+            "score": -0.5
+        },
+        {
+            "text": "you lose (number) life and draw a card",
+            "score": 0.4
+        },
+        {
+            "text": "destroy target (type) an opponent controls",
+            "score": 1.5
+        },
+        {
+            "text": "target (player) discards a card",
+            "score": 1
+        },
+        {
+            "text": "target (player) discards (numbername) cards",
+            "score": 1.7
+        },
+        {
+            "text": "target (player) draws a card",
+            "score": 1
+        },
+        {
+            "text": "target (player) draws (numbername) cards",
+            "score": 2
+        },
+        {
+            "text": "target (player) sacrifices a creature",
+            "score": 1.2
+        },
+        {
+            "text": "target (player) sacrifices two creatures",
+            "score": 2
+        },
+        {
+            "text": "target (player) sacrifices a(n) (type)",
+            "score": 1.2
+        },
+        {
+            "text": "target (player) sacrifices two (type)s",
+            "score": 1.4
+        },
+        {
+            "text": "target (player) sacrifices a (subtype) creature",
+            "score": 0.6
+        },
+        {
+            "text": "target (player) sacrifices a non-(subtype) creature",
+            "score": 0.8
+        },
+        {
+            "text": "sacrifice (self)",
+            "score": -1
+        },
+        {
+            "text": "sacrifice a creature",
+            "score": -0.8
+        },
+        {
+            "text": "put (number) +1/+1 counter(s) on target creature",
+            "score": 1.1
+        },
+        {
+            "text": "put (number) +1/+1 counter(s) on target (subtype) creature",
+            "score": 0.7
+        },
+        {
+            "text": "put (number) +1/+1 counter(s) on target non-(subtype) creature",
+            "score": 0.9
+        },
+        {
+            "text": "put (number) -1/-1 counter(s) on target creature",
+            "score": 1.2
+        },
+        {
+            "text": "put (number) -1/-1 counter(s) on target (subtype) creature",
+            "score": 0.7
+        },
+        {
+            "text": "put (number) -1/-1 counter(s) on target non-(subtype) creature",
+            "score": 1.1
+        },
+        {
+            "text": "put a (keyword) counter on another creature",
+            "score": 1
+        },
+        {
+            "text": "put a (keyword) counter on (other) (subtype) creature",
+            "score": 0.9
+        },
+        {
+            "text": "put a (keyword) counter on (other) non-(subtype) creature",
+            "score": 0.9
+        },
+        {
+            "text": "put the top (numbername) cards of your library into your graveyard",
+            "score": -0.5
+        },
+        {
+            "text": "target (player) put the top (numbername) cards of his or her library into his or her graveyard",
+            "score": 0.5
+        },
+        {
+            "text": "return target (type) card from your graveyard to your hand",
+            "score": 0.7
+        },
+        {
+            "text": "return target (permanent) card from your graveyard to the battlefield",
+            "score": 2.2
+        },
+        {
+            "text": "exile target (type)",
+            "score": 2.2
+        },
+        {
+            "text": "exile (self)",
+            "score": -1
+        },
+        {
+            "text": "each (player) exiles (numbername) cards from his or her hand",
+            "score": 2
+        },
+        {
+            "text": "each (player) exiles a card from his or her hand",
+            "score": 1.4
+        },
+        {
+            "text": "each (player) discards a card",
+            "score": 1.2
+        },
+        {
+            "text": "each (player) discards (numbername) cards",
+            "score": 2
+        },
+        {
+            "text": "target (player) discards a card",
+            "score": 1
+        },
+        {
+            "text": "target (player) discards (numbername) cards",
+            "score": 2
+        },
+        {
+            "text": "discard a card",
+            "score": -0.8
+        },
+        {
+            "text": "discard (numbername) cards",
+            "score": -1.6
+        }
     ],
     "permanentStatics": [
         "(other) creatures you control have (keyword)",

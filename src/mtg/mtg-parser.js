@@ -9,6 +9,10 @@ class MtgParser {
     constructor(client) {
         this.client = client;
         this.discordHelper = new DiscordHelper();
+
+        this.colors = [ "W","U","B","R","G" ];
+        this.powers = [ 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9 ];
+        this.toughnesses = [ 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9 ];
     }
 
     isCommandAllowed(message) {
@@ -34,15 +38,30 @@ class MtgParser {
     }
 
     createCreatureCard(message) {
-        let rarityFactor = this.random(0.8, 1.2); // low means mythic
-        let rarity = this.getRarity();
-        let power = this.random(0, 8);
-        let toughness = this.random(1, 8);
-        let cmc = Math.ceil((power + toughness) * 0.5 * rarityFactor);
+        let totalScore = 0;
+        
+        let rarityScore = this.random(0, 1); // high means mythic
+        let rarity = this.getRarity(rarityScore);
+        totalScore += -rarityScore;
+        console.log(totalScore);
 
-        let color = [ "W","U","B","R","G" ][this.random(0,4)];
+        let power = this.powers[this.random(0, this.powers.length - 1)];
+        totalScore += Math.floor(power / 2);
+        console.log(totalScore);
 
-        this.discordHelper.richEmbedMessage(message, new MtgResponse("Toothless Predator", `{${cmc-1}}{${color}}`, color, "Creature", "Lizard", rarity, "", "", power, toughness));
+        let toughness = this.toughnesses[this.random(0, this.toughnesses.length - 1)];
+        totalScore += Math.floor(toughness / 2);
+        console.log(totalScore);
+
+        let color = this.colors[this.random(0, this.colors.length - 1)];
+
+        let keyword = this.getKeyword("creature");
+        totalScore += keyword.score;
+        console.log(totalScore);
+
+        let cmc = Math.ceil(totalScore);
+
+        this.discordHelper.richEmbedMessage(message, new MtgResponse("Toothless Predator", `{${cmc}}`, color, "Creature", "Lizard", rarity, keyword.name, "", power, toughness));
     }
 
     random(minInclusive, maxInclusive) {
@@ -50,11 +69,34 @@ class MtgParser {
     }
 
     getRarity(rarityFactor) {
-        return rarityFactor < 0.9 ? "mythic"
-             : rarityFactor < 1.0 ? "rare"
-             : rarityFactor < 0.9 ? "uncommon"
+        return rarityFactor >= 3/4 ? "mythic"
+             : rarityFactor >= 2/4 ? "rare"
+             : rarityFactor >= 1/4 ? "uncommon"
              : "common";
+    }
+
+    getKeyword(type) {
+        let keywords = mtgData.keywords.filter(e => e.types.some(t => t === type));
+        let selected = keywords[this.random(0, keywords.length - 1)];
+
+        if (selected.hasCost) {
+            return { name: selected.name + " - {R}", score: selected.score };
+        }
+        return { name: selected.name, score: selected.score };
     }
 }
 
 module.exports = MtgParser;
+
+
+
+/*
+special keywords:
+entwine
+kicker
+forecast
+overload
+tribute
+
+this spell can't be countered.
+*/

@@ -55,7 +55,7 @@ class MtgResponse {
     }
 
     getAuthor() {
-        return 'MtG Random';
+        return 'MtG Random Card';
     }
 
     getIcon() {
