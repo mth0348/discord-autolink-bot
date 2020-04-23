@@ -53,7 +53,7 @@ class MtgParser {
     startWorkflow(message) {
         this.getEmojis(message);
 
-        let validInputs = ["instant", "creature", "sorcery", "enchtantment", "artifact", "land"]
+        let validInputs = ["instant", "creature", "sorcery", "enchantment", "artifact", "land"]
         let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
@@ -93,7 +93,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let totalScore = 0.3 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -293,7 +293,7 @@ class MtgParser {
     }
 
     parseSyntax(text, context) {
-        let maxDepth = 5;
+        let maxDepth = 10;
         let depth = 0;
         while (text.indexOf("(") >= 0) {
             depth++;
@@ -303,24 +303,24 @@ class MtgParser {
             if (text.indexOf("(numbername)") >= 0) {
                 moreThanOne = true;
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
-                text = text.replace(/\(numbername\)/g, number);
+                text = text.replace("(numbername)", number);
                 this.lastNumber += number === "two" ? 2 : 3;
             }
             if (text.indexOf("(number)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
                 moreThanOne = moreThanOne || number > 1;
-                text = text.replace(/\(number\)/g, number);
+                text = text.replace("(number)", number);
                 this.lastNumber += number;
             }
             if (text.indexOf("(number2)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5][this.random(0, 11)];
                 moreThanOne = moreThanOne || number > 1;
-                text = text.replace(/\(number2\)/g, number);
+                text = text.replace("(number2)", number);
                 this.lastNumber += number;
             }
 
             if (text.indexOf("(keyword)") >= 0) {
-                text = text.replace(/\(keyword\)/g, this.getKeyword("creature", true).name);
+                text = text.replace("(keyword)", this.getKeyword("creature", true).name);
             }
 
             let subtype = "";
@@ -347,16 +347,16 @@ class MtgParser {
             if (text.indexOf("(type)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
                 useN = type === "enchantment" || type === "artifact";
-                text = text.replace(/\(type\)/g, type);
+                text = text.replace("(type)", type);
             }
 
-            text = text.replace(/\(player\)/g, this.random(0, 1) === 1 ? "player" : "opponent");
-            text = text.replace(/\(permanent\)/g, mtgData.types[this.random(2, mtgData.types.length - 1)]);
+            text = text.replace("(player)", this.random(0, 1) === 1 ? "player" : "opponent");
+            text = text.replace("(permanent)", mtgData.permanentTypes[this.random(0, mtgData.permanentTypes.length - 1)]);
             text = text.replace(/\(name\)/g, this.card.name);
-            text = text.replace(/\(s\)/g, moreThanOne ? "s" : "");
-            text = text.replace(/\(n\)/g, useN ? "n" : "");
-            text = text.replace(/\(color\)/g, this.colors[this.random(0, this.colors.length - 1)]);
-            text = text.replace(/\(type\|color\)/g, this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)]);
+            text = text.replace("(s)", moreThanOne ? "s" : "");
+            text = text.replace("(n)", useN ? "n" : "");
+            text = text.replace("(color)", this.colors[this.random(0, this.colors.length - 1)]);
+            text = text.replace("(type|color)", this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)]);
         }
 
         return text;
@@ -421,20 +421,18 @@ class MtgParser {
                     manacost = `{${cmc - 1}}{${color}}`;
                 }
             } else {
-                manacost = `{${cmc - 1}}{${manacost}}`;
+                manacost = `{${cmc - 1}}{${color}}`;
 
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
                     manacost = `{${color}}{${color}}`;
-                else
-                    manacost = `{${cmc - 1}}{${manacost}}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
                     manacost = `{${color}}{${color}}{${color}}`;
 
                 if (cmc > 3)
-                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}{${color}}`;
+                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}{${manacost}}`;
             }
         }
 

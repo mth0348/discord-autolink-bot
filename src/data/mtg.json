@@ -6,6 +6,13 @@
         "artifact",
         "land",
         "enchantment",
+        "permanent"
+    ],
+    "permanentTypes": [
+        "creature",
+        "artifact",
+        "land",
+        "enchantment",
         "permanent",
         "noncreature permanent",
         "nonland permanent"
@@ -2059,10 +2066,10 @@
     "spellNames": {
         "adjectives": [
             "powerful",
-            "deviously clever",
+            "deviously Clever",
             "second-chance",
             "devastating",
-            "indisputably powerful",
+            "indisputably Powerful",
             "elemental",
             "potent",
             "abhorrent",
@@ -2119,6 +2126,10 @@
             "beacon of",
             "become",
             "beast",
+            "beastly",
+            "heavenly",
+            "righteous",
+            "glorious",
             "feral",
             "ferocious",
             "betrayal of",
@@ -2209,7 +2220,27 @@
             "greed",
             "energy",
             "flame",
-            "dismissal"
+            "dismissal",
+            "devastation",
+            "finale",
+            "adventure",
+            "shift",
+            "purge",
+            "company",
+            "damnation",
+            "complications",
+            "condemnation",
+            "mists",
+            "tendrils",
+            "consumption",
+            "consecration",
+            "desecration",
+            "resolution",
+            "plunder",
+            "revenge",
+            "vengeance",
+            "lash",
+            "winds"
         ]
     }
 }
