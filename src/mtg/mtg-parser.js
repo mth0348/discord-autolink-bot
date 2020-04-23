@@ -264,6 +264,7 @@ class MtgParser {
         text = text.replace(/\{R\}/g, this.emojis[13]);
         text = text.replace(/\{G\}/g, this.emojis[14]);
         text = text.replace(/\{X\}/g, this.emojis[15]);
+        text = text.replace(/\{T\}/g, this.emojis[16]);
 
         return text;
     }
