@@ -1481,7 +1481,7 @@
             "colorIdentity": "bg"
         },
         {
-            "text": "return target (permanent) card from your graveyard to the battlefield",
+            "text": "return target (permanent) card from your graveyard to the battlefield under your control",
             "score": 2.2,
             "colorIdentity": "bg"
         },
@@ -1641,17 +1641,17 @@
             "score": 0.5
         },
         {
-            "text": "return target (type) to its owners hand",
+            "text": "return target (type) to its owner's hand",
             "colorIdentity": "u",
             "score": 1
         },
         {
-            "text": "return target non-(subtype) creature to its owners hand",
+            "text": "return target non-(subtype) creature to its owner's hand",
             "colorIdentity": "u",
             "score": 1
         },
         {
-            "text": "return target (subtype) creature to its owners hand",
+            "text": "return target (subtype) creature to its owner's hand",
             "colorIdentity": "u",
             "score": 1
         },
@@ -1681,7 +1681,7 @@
             "score": 5
         },
         {
-            "text": "tap all (type)s target opponent controls",
+            "text": "tap all (permanent)s target opponent controls",
             "colorIdentity": "u",
             "score": 3
         },

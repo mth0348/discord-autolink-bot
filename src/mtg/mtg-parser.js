@@ -1,6 +1,7 @@
 const { DiscordHelper } = require('../discord-helper.js');
 
 const MtgResponse = require('./mtg-response.js');
+const MtgHelpResponse = require('./mtg-response-help.js');
 const MtgCard = require('./mtg-card.js');
 
 const config = require('../../config.json');
@@ -53,7 +54,12 @@ class MtgParser {
     startWorkflow(message) {
         this.getEmojis(message);
 
-        let validInputs = ["instant", "creature", "sorcery", "enchantment", "artifact", "land"]
+        if (message.content == "!mtg help") {
+            this.discordHelper.richEmbedMessage(message, new MtgHelpResponse(message));
+            return;
+        }
+
+        let validInputs = ["instant", "creature", "sorcery"]
         let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
@@ -76,6 +82,9 @@ class MtgParser {
             case "instant":
                 this.createInstantCard(message);
                 break;
+            case "sorcery":
+                this.createSorceryCard(message);
+                break;
         }
     }
 
@@ -93,7 +102,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0.3 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let totalScore = 0.4 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -109,6 +118,46 @@ class MtgParser {
         console.log("manacost:\t" + manacost);
 
         this.card.type = "Instant";
+        this.card.subtype = undefined;
+        this.card.power = undefined;
+        this.card.color = color;
+        this.card.cost = this.resolveManaSymbols(manacost);
+        this.card.oracle = this.resolveManaSymbols(oracle.text.toCamelCase());
+        this.card.flavor = "";
+
+        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
+    }
+
+    createSorceryCard(message) {
+        this.lastNumber = 0;
+
+        let name = this.getInstantSorceryName();
+        this.card = new MtgCard();
+        this.card.name = name;
+
+        let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
+        let rarityText = this.getRarity(rarity);
+        this.card.rarity = rarityText;
+
+        let oracle = this.getSpellAbility();
+
+        // evaluate cmc.
+        let totalScore = 0 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let cmc = Math.max(1, Math.ceil(totalScore));
+        if (oracle.isComplicated)
+            cmc = Math.min(2, cmc);
+
+        let color = this.getColorFromIdentity(this.colorIdentity);
+        let manacost = this.getManacostFromCmc(cmc, color);
+
+        console.log("lastNumber:\t" + this.lastNumber);
+        console.log("o-score:\t" + oracle.score);
+        console.log("cmc:\t\t" + cmc);
+        console.log("coloridentity:\t" + this.colorIdentity);
+        console.log("color:\t\t" + color);
+        console.log("manacost:\t" + manacost);
+
+        this.card.type = "Sorcery";
         this.card.subtype = undefined;
         this.card.power = undefined;
         this.card.color = color;
@@ -286,7 +335,7 @@ class MtgParser {
             let secondEvent = secondEventPool[this.random(0, secondEventPool.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
 
-            return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score), isComplicated: (event.score < 0) };
+            return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score), isComplicated: (event.score < 0 || secondEvent.score < 0) };
         }
 
         return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
@@ -432,7 +481,7 @@ class MtgParser {
                     manacost = `{${color}}{${color}}{${color}}`;
 
                 if (cmc > 3)
-                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}{${manacost}}`;
+                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${manacost}`;
             }
         }
 
