@@ -469,19 +469,27 @@ class MtgParser {
                 else {
                     manacost = `{${cmc - 1}}{${color}}`;
                 }
-            } else {
-                manacost = `{${cmc - 1}}{${color}}`;
-
+            } else if (cmc === 3) {
+                let threeSymbols = this.random(1, 4) === 4;
+                if (threeSymbols) {
+                    return `{${color}}{${color}}{${color}}`;
+                }
+                
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
-                    manacost = `{${color}}{${color}}`;
+                    return `{1}{${color}}{${color}}`;
+
+                return `{2}${color}`;
+            } else {
+                let twoSymbols = this.flipCoin();
+                if (twoSymbols)
+                return `{${cmc - 2}}{${color}}{${color}}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
-                    manacost = `{${color}}{${color}}{${color}}`;
+                    return `{${cmc - 3}}{${color}}{${color}}{${color}}`;
 
-                if (cmc > 3)
-                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${manacost}`;
+                manacost = `{${cmc - 1}}{${color}}`;
             }
         }
 
@@ -504,7 +512,7 @@ class MtgParser {
                         manacost = `{${color[0]}}{${color[1]}}{${color[1]}}`;
                         break;
                 }
-            } else if (cmc >= 3) {
+            } else if (cmc > 3) {
                 let fourSymbols = this.random(0, 3); // 0 = none, 1 = first symbol twice, 2 = second symbol twice, 3 = both symbol twice.
                 switch (fourSymbols) {
                     case 0:

@@ -1391,12 +1391,12 @@
             "colorIdentity": "wbr"
         },
         {
-            "text": "target (player) sacrifices a(n) (type)",
+            "text": "target (player) sacrifices a(n) (permanent)",
             "score": 1.2,
             "colorIdentity": "wbr"
         },
         {
-            "text": "target (player) sacrifices two (type)s",
+            "text": "target (player) sacrifices two (permanent)s",
             "score": 1.4,
             "colorIdentity": "wbr"
         },
@@ -1486,7 +1486,7 @@
             "colorIdentity": "bg"
         },
         {
-            "text": "exile target (type)",
+            "text": "exile target (permanent)",
             "score": 2.2,
             "colorIdentity": "w"
         },
@@ -1641,7 +1641,7 @@
             "score": 0.5
         },
         {
-            "text": "return target (type) to its owner's hand",
+            "text": "return target (permanent) to its owner's hand",
             "colorIdentity": "u",
             "score": 1
         },
@@ -1671,12 +1671,12 @@
             "score": 5
         },
         {
-            "text": "gain control of target (type) an opponent controls until end of turn",
+            "text": "gain control of target (permanent) an opponent controls until end of turn",
             "colorIdentity": "r",
             "score": 2.5
         },
         {
-            "text": "gain control of target (type) an opponent controls",
+            "text": "gain control of target (permanent) an opponent controls",
             "colorIdentity": "u",
             "score": 5
         },
@@ -1716,7 +1716,7 @@
             "score": -2
         },
         {
-            "text": "tap all (type)s you control",
+            "text": "tap all (permanent)s you control",
             "colorIdentity": "u",
             "score": -2
         },
@@ -1831,12 +1831,12 @@
             "score": 2.1
         },
         {
-            "text": "target (player) sacrifices a(n) (type)",
+            "text": "target (player) sacrifices a(n) (permanent)",
             "colorIdentity": "wb",
             "score": 2.1
         },
         {
-            "text": "target (player) sacrifices (numbername) (type)s",
+            "text": "target (player) sacrifices (numbername) (permanent)s",
             "colorIdentity": "r",
             "score": 1.5
         },
@@ -1869,11 +1869,24 @@
             "text": "creatures with (keyword) can't block this turn",
             "colorIdentity": "r",
             "score": 0.2
+        },
+        {
+            "text": "counter target (type) spell",
+            "colorIdentity": "u",
+            "score": 1.2
         }
     ],
     "creatureNames": {
         "adjectives": [
-            "furry",
+            "furious",
+            "rebellious",
+            "insurgent",
+            "blasphemous",
+            "torrential",
+            "rabid",
+            "riotous",
+            "rampant",
+            "fanatic",+
             "ferocious",
             "dangerous",
             "poisonous",
@@ -1995,6 +2008,14 @@
             "Tusqra",
             "Megdo",
             "Dasze",
+            "Reysar",
+            "Rayek",
+            "Bilam",
+            "Gulugulu",
+            "Respert",
+            "Twislo",
+            "Gustom",
+            "Frenko",
             "Ceudni",
             "Cerzo",
             "Zodna"
@@ -2016,6 +2037,7 @@
             "champion",
             "convict",
             "angel",
+            "fanatic",
             "adept",
             "advisor",
             "advocate",
