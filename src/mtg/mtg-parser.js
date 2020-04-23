@@ -53,14 +53,23 @@ class MtgParser {
     startWorkflow(message) {
         this.getEmojis(message);
 
-        let cardType = mtgData.types[this.random(0, mtgData.types.length - 1)];
+        let cardType = "creature";
+
+        let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
+        if (args.length > 1) 
+            cardType = args[1];
+
+        if (!mtgData.types.some(t => t === cardType.toLowerCase())) {
+            message.channel.send(`"${cardType}" is not an official card type. Leave blank or use "creature", for example.`)
+            return; 
+        }
+
+        console.log(`--- Creating new ${cardType} card... ---`);
+
         switch (cardType) {
             case "creature":
                 this.createCreatureCard(message);
-                return;
-            default:
-                this.createCreatureCard(message);
-                return;
+                break;
         }
     }
 
@@ -70,37 +79,35 @@ class MtgParser {
         this.card.subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase();
         this.card.subtype += [false, false, false, true][this.random(0, 3)] ? " " + mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase() : "";
 
-        let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
-        this.colorIdentity = "";
 
-        let name = "";
         let isLegendary = [false, false, false, false, false, true][this.random(0, 5)];
-        if (isLegendary) {
-            name = mtgData.names.names[this.random(0, mtgData.names.names.length - 1)] + ", " + (this.flipCoin() ? "the " : "");
-            this.card.supertype = "Legendary";
-            rarity = this.flipCoin() ? 4 : 3;
+        let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
 
+        if (isLegendary) {
+            rarity = this.flipCoin() ? 4 : 3;
         }
-        name = name.toCamelCase() + mtgData.names.adjectives[this.random(0, mtgData.names.adjectives.length - 1)].toCamelCase() + " " + mtgData.names.nouns[this.random(0, mtgData.names.nouns.length - 1)].toCamelCase();
+        let name = this.getCreatureName();
         this.card.name = name;
 
         let totalScore = 0;
-        console.log("new card:");
+        console.log("score calculation:");
 
         let power = this.powers[this.random(0, this.powers.length - 1)];
         totalScore += power / 2;
-        console.log("p: " + (power / 2) + " (=" + totalScore + ")");
+        console.log("power :\t\t" + (power / 2));
 
         let toughness = this.toughnesses[this.random(0, this.toughnesses.length - 1)];
         totalScore += toughness / 2;
-        console.log("t: " + (toughness / 2) + " (=" + totalScore + ")");
+        console.log("toughness:\t " + (toughness / 2));
 
+        this.colorIdentity = "";
         let ability = "";
         let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
+        
         if (hasAbility >= 1 || rarity >= 4) {
             let ability1 = this.getTriggeredAbility();
             totalScore += ability1.score;
-            console.log("a1: " + ability1.score + " (=" + totalScore + ")");
+            console.log("ability 1:\t" + ability1.score);
             ability = ability1.text;
 
             // TODO: verify if this is necessary.
@@ -115,46 +122,56 @@ class MtgParser {
         if (hasAbility > 1) {
             let ability2 = this.getTriggeredAbility();
             totalScore += ability2.score;
-            console.log("a2: " + ability2.score + " (=" + totalScore + ")");
+            console.log("ability 2:\t" + ability2.score);
             ability += "\n\n" + ability2.text;
         }
-        
-        this.coloridentity = "g";
 
+        // if color identity has not been set during abilities, then do it randomly.
+        if (this.colorIdentity === "") {
+            this.colorIdentity = ["w", "u", "b", "r", "g"][this.random(0, 4)];
+        }
+
+        // decide color from determined identity.
         let color = this.getColorFromIdentity(this.colorIdentity);
         this.card.color = color;
 
+        // decide keywords, if any. Max two.        
         let keyword = "";
         let hasKeyword = this.random(0, 2);
         if (hasKeyword >= 1 || rarity >= 3) {
             let keyword1 = this.getKeyword("creature", false, rarity);
             totalScore += keyword1.score;
-            console.log("k1: " + keyword1.score + " (=" + totalScore + ")");
+            console.log("keyword 1:\t" + keyword1.score);
             keyword = keyword1.name;
         } else if (hasKeyword > 1) {
             let keyword2 = this.getKeyword("creature", false, rarity);
             totalScore += keyword2.score;
-            console.log("k2: " + keyword2.score + " (=" + totalScore + ")");
+            console.log("keyword 2:\t" + keyword2.score);
             keyword += ", " + keyword2.name;
         }
 
         let rarityScore = -rarity / 4;
         totalScore += rarityScore;
-        console.log("rarity: " + rarityScore + " (=" + totalScore + ")");
-
-        if (this.colorIdentity === "") {
-            this.colorIdentity = ["w", "u", "b", "r", "g"][this.random(0, 4)];
-        }
+        console.log("rarity:\t\t" + rarityScore);
+        console.log("\t\t---");
+        console.log("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
 
         let cmc = Math.ceil(totalScore);
+
+        // ensure minimum cmc.
+        if (power >= 3 || toughness > 3)
+        cmc = Math.max(cmc, 1);
+        if (power >= 2 && toughness >= 2)
+            cmc = Math.max(cmc, 2);
+
         let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}`;
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
-        
-        console.log("coloridentity: " + this.colorIdentity);
-        console.log("color: " + color);
-        console.log("cmc: " + cmc);
-        console.log("manacost: " + manacost);
+
+        console.log("cmc:\t\t" + cmc);
+        console.log("coloridentity:\t" + this.colorIdentity);
+        console.log("color:\t\t" + color);
+        console.log("manacost:\t" + manacost);
 
         this.card.cost = this.resolveManaSymbols(manacost);
         this.card.rarity = rarityText;
@@ -162,6 +179,9 @@ class MtgParser {
         this.card.flavor = "";
         this.card.power = power;
         this.card.toughness = toughness;
+
+        if (this.card.oracle.indexOf("undefined") > 0) 
+            debugger;
 
         this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
     }
@@ -213,10 +233,10 @@ class MtgParser {
         if (this.flipCoin()) {
             let secondEvent = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
-            return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}, then ${this.resolveSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score) };
+            return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text, condition.context)}, then ${this.resolveSyntax(secondEvent.text, condition.context)}.`, score: (event.score + secondEvent.score) };
         }
 
-        return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}.`, score: event.score };
+        return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text, condition.context)}.`, score: event.score };
     }
 
     resolveSyntax(text, context) {
@@ -269,7 +289,9 @@ class MtgParser {
             }
 
             text = text.replace(/\(player\)/g, this.random(0, 1) === 1 ? "player" : "opponent");
-            text = text.replace(/\(permanent\)/g, mtgData.types[this.random(2, mtgData.types.length - 1)]);
+            let chosen = mtgData.types[this.random(2, mtgData.types.length - 1)];
+            console.log(chosen);
+            text = text.replace(/\(permanent\)/g, chosen);
             text = text.replace(/\(name\)/g, this.card.name);
             text = text.replace(/\(s\)/g, moreThanOne ? "s" : "");
             text = text.replace(/\(n\)/g, useN ? "n" : "");
@@ -331,10 +353,15 @@ class MtgParser {
             manacost = `{${color}}`;
             if (cmc > 1) {
                 let twoSymbols = this.flipCoin();
+                if (twoSymbols)
+                    manacost = `{${color}}{${color}}`;
+
                 let threeSymbols = this.random(1, 4) === 4;
-                if (twoSymbols) manacost = `{${color}}{${color}}`;
-                if (threeSymbols) manacost = `{${color}}{${color}}{${color}}`;
-                manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${manacost}`;
+                if (threeSymbols && cmc > 2)
+                    manacost = `{${color}}{${color}}{${color}}`;
+
+                if (cmc > 3)
+                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${manacost}`;
             }
         }
 
@@ -394,6 +421,15 @@ class MtgParser {
         }
 
         return manacost;
+    }
+
+    getCreatureName(isLegendary) {
+        let name = "";
+        if (isLegendary) {
+            name = mtgData.names.names[this.random(0, mtgData.names.names.length - 1)] + ", " + (this.flipCoin() ? "the " : "");
+            this.card.supertype = "Legendary";
+        }
+        return name.toCamelCase() + mtgData.names.adjectives[this.random(0, mtgData.names.adjectives.length - 1)].toCamelCase() + " " + mtgData.names.nouns[this.random(0, mtgData.names.nouns.length - 1)].toCamelCase();
     }
 }
 
