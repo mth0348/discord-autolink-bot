@@ -53,7 +53,7 @@ class MtgParser {
     startWorkflow(message) {
         this.getEmojis(message);
 
-        let validInputs = [ "instant", "creature", "sorcery", "enchtantment", "artifact", "land" ]
+        let validInputs = ["instant", "creature", "sorcery", "enchtantment", "artifact", "land"]
         let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
@@ -82,19 +82,21 @@ class MtgParser {
     createInstantCard(message) {
         this.lastNumber = 0;
 
-        let name = this.getCreatureName();
+        let name = this.getInstantSorceryName();
         this.card = new MtgCard();
         this.card.name = name;
 
-        let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
+        let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
         let rarityText = this.getRarity(rarity);
         this.card.rarity = rarityText;
 
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = oracle.score * (this.lastNumber > 0 ? this.lastNumber / 2 : 1);
-        let cmc = Math.ceil(totalScore);
+        let totalScore = oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let cmc = Math.max(1, Math.ceil(totalScore));
+        if (oracle.isComplicated)
+            cmc = Math.min(2, cmc);
 
         let color = this.getColorFromIdentity(this.colorIdentity);
         let manacost = this.getManacostFromCmc(cmc, color);
@@ -125,10 +127,10 @@ class MtgParser {
 
 
         let isLegendary = [false, false, false, false, false, true][this.random(0, 5)];
-        let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
+        let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
 
         if (isLegendary) {
-            rarity = this.flipCoin() ? 4 : 3;
+            rarity = 3;
         }
         let name = this.getCreatureName();
         this.card.name = name;
@@ -223,9 +225,6 @@ class MtgParser {
         this.card.power = power;
         this.card.toughness = toughness;
 
-        if (this.card.oracle.indexOf("undefined") > 0)
-            console.log(card);
-
         this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
     }
 
@@ -243,10 +242,6 @@ class MtgParser {
     getKeyword(type, justSimple, rarity) {
         let keywords = mtgData.keywords.filter(e => e.types.some(t => t === type.toLowerCase()) && (justSimple === undefined || e.hasCost === false && e.nameExtension === ""));
         let selected = keywords[this.random(0, keywords.length - 1)];
-
-        if (selected === undefined || selected.nameExtension === undefined) {
-            let a = 0 + 0;
-        }
 
         let text = selected.name;
 
@@ -286,11 +281,12 @@ class MtgParser {
         let event = mtgData.instantSorceryEvents[this.random(0, mtgData.instantSorceryEvents.length - 1)];
         this.colorIdentity += event.colorIdentity;
 
-        if ([false, false, true][this.random(0, 2)]) {
-            let secondEvent = mtgData.instantSorceryEvents[this.random(0, mtgData.instantSorceryEvents.length - 1)];
+        if ([false, false, true][this.random(0, 2)] || event.score < 0) {
+            let secondEventPool = mtgData.instantSorceryEvents.filter(e => (event.score < 0) ? (e.score > 0) : true);
+            let secondEvent = secondEventPool[this.random(0, secondEventPool.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
 
-            return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score) };
+            return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score), isComplicated: (event.score < 0) };
         }
 
         return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
@@ -324,7 +320,7 @@ class MtgParser {
             }
 
             if (text.indexOf("(keyword)") >= 0) {
-                text = text.replace(/\(keyword\)/g, this.getKeyword(this.card.type, true).name);
+                text = text.replace(/\(keyword\)/g, this.getKeyword("creature", true).name);
             }
 
             let subtype = "";
@@ -333,7 +329,7 @@ class MtgParser {
                 text = text.replace(/\(subtype\)/g, subtype);
             }
 
-            if (text.indexOf("(other)") >= 0 && this.card.subtype.indexOf(subtype) >= 0) {
+            if (text.indexOf("(other)") >= 0 && this.card.subtype !== undefined && this.card.subtype.indexOf(subtype) >= 0) {
                 text = text.replace(/\(other\)/g, "another ");
             } else {
                 text = text.replace(/\(other\)/g, "");
@@ -350,7 +346,7 @@ class MtgParser {
             let useN = false;
             if (text.indexOf("(type)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
-                useN = type === "enchantment";
+                useN = type === "enchantment" || type === "artifact";
                 text = text.replace(/\(type\)/g, type);
             }
 
@@ -422,23 +418,23 @@ class MtgParser {
                     manacost = `{${color}}{${color}}`;
                 }
                 else {
-                    manacost = `{${cmc - 1}}${color}`;
+                    manacost = `{${cmc - 1}}{${color}}`;
                 }
             } else {
-                manacost = `{${cmc - 1}}${manacost}`;
-                
+                manacost = `{${cmc - 1}}{${manacost}}`;
+
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
                     manacost = `{${color}}{${color}}`;
                 else
-                    manacost = `{${cmc - 1}}${manacost}`;
+                    manacost = `{${cmc - 1}}{${manacost}}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
                     manacost = `{${color}}{${color}}{${color}}`;
 
                 if (cmc > 3)
-                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${color}`;
+                    manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}{${color}}`;
             }
         }
 
@@ -488,7 +484,7 @@ class MtgParser {
             if (cmc === 1) {
                 manacost = `{${color[this.random(0, color.length - 1)]}}`;
             } else if (cmc === 2) {
-                let rnd = color[this.random(0, color.length - 2)];
+                let rnd = this.random(0, color.length - 2);
                 manacost = `{${color[rnd]}}{${color[rnd + 1]}}`;
             } else if (cmc === 3) {
                 manacost = `{${color[0]}}{${color[1]}}{${color[2]}}`;
@@ -503,10 +499,19 @@ class MtgParser {
     getCreatureName(isLegendary) {
         let name = "";
         if (isLegendary) {
-            name = mtgData.names.names[this.random(0, mtgData.names.names.length - 1)] + ", " + (this.flipCoin() ? "the " : "");
+            name = mtgData.creatureNames.names[this.random(0, mtgData.creatureNames.names.length - 1)] + ", " + (this.flipCoin() ? "the " : "");
             this.card.supertype = "Legendary";
         }
-        return name.toCamelCase() + mtgData.names.adjectives[this.random(0, mtgData.names.adjectives.length - 1)].toCamelCase() + " " + mtgData.names.nouns[this.random(0, mtgData.names.nouns.length - 1)].toCamelCase();
+        return name.toCamelCase()
+            + mtgData.creatureNames.adjectives[this.random(0, mtgData.creatureNames.adjectives.length - 1)].toCamelCase()
+            + " " + mtgData.creatureNames.nouns[this.random(0, mtgData.creatureNames.nouns.length - 1)].toCamelCase();
+    }
+
+    getInstantSorceryName() {
+        let name = "";
+        return name.toCamelCase()
+            + mtgData.spellNames.adjectives[this.random(0, mtgData.spellNames.adjectives.length - 1)].toCamelCase()
+            + " " + mtgData.spellNames.nouns[this.random(0, mtgData.spellNames.nouns.length - 1)].toCamelCase();
     }
 }
 

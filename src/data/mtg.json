@@ -7,7 +7,7 @@
         "land",
         "enchantment",
         "permanent",
-        "non-creature permanent",
+        "noncreature permanent",
         "nonland permanent"
     ],
     "subtypes": [
@@ -1621,7 +1621,7 @@
         {
             "text": "draw (numbername) cards",
             "colorIdentity": "u",
-            "score": 2.2
+            "score": 2.5
         },
         {
             "text": "draw a card",
@@ -1632,10 +1632,239 @@
             "text": "you gain (number2) life",
             "colorIdentity": "w",
             "score": 0.5
+        },
+        {
+            "text": "return target (type) to its owners hand",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "return target non-(subtype) creature to its owners hand",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "return target (subtype) creature to its owners hand",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "destroy target creature with flying",
+            "colorIdentity": "g",
+            "score": 1.2
+        },
+        {
+            "text": "return up to (numbername) card(s) from your graveyard to your hand",
+            "colorIdentity": "g",
+            "score": 2.2
+        },
+        {
+            "text": "return target (type) card from your graveyard to the battlefield",
+            "colorIdentity": "wb",
+            "score": 5
+        },
+        {
+            "text": "gain control of target (type) an opponent controls until end of turn",
+            "colorIdentity": "r",
+            "score": 2.5
+        },
+        {
+            "text": "gain control of target (type) an opponent controls",
+            "colorIdentity": "u",
+            "score": 5
+        },
+        {
+            "text": "tap all (type)s target opponent controls",
+            "colorIdentity": "u",
+            "score": 3
+        },
+        {
+            "text": "tap all (subtype) creatures target opponent controls",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "tap all non-(subtype) creatures target opponent controls",
+            "colorIdentity": "u",
+            "score": 3
+        },
+        {
+            "text": "untap target creature you control",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "untap all creatures you control",
+            "colorIdentity": "u",
+            "score": 4
+        },
+        {
+            "text": "tap all (subtype) creatures you control",
+            "colorIdentity": "u",
+            "score": -1
+        },
+        {
+            "text": "tap all non-(subtype) creatures you control",
+            "colorIdentity": "u",
+            "score": -2
+        },
+        {
+            "text": "tap all (type)s you control",
+            "colorIdentity": "u",
+            "score": -2
+        },
+        {
+            "text": "prevent the next (number2) damage that would be dealt to you",
+            "colorIdentity": "w",
+            "score": 0.4
+        },
+        {
+            "text": "prevent the next (number2) damage that would be dealt to creatures you control",
+            "colorIdenity": "w",
+            "score": 0.4
+        },
+        {
+            "text": "prevent all combat damage that would be dealt this turn",
+            "colorIdentity": "g",
+            "score": 0.2
+        },
+        {
+            "text": "you and creatures you control gain hexproof until end of turn",
+            "colorIdentity": "wu",
+            "score": 2.5
+        },
+        {
+            "text": "counter target spell",
+            "colorIdentity": "u",
+            "score": 2.5
+        },
+        {
+            "text": "target (player) loses (number) life and you gain (number) life",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "target (player) loses (number2) life",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "destroy target (permanent)",
+            "colorIdentity": "wbg",
+            "score": 2
+        },
+        {
+            "text": "exile target (permanent)",
+            "colorIdentity": "wb",
+            "score": 2
+        },
+        {
+            "text": "destroy target creature",
+            "colorIdentity": "wb",
+            "score": 2
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "br",
+            "score": -3
+        },
+        {
+            "text": "discard a card",
+            "colorIdentity": "ubr",
+            "score": -1
+        },
+        {
+            "text": "target (permanent) gains protection from (color) until end of turn",
+            "colorIdentity": "w",
+            "score": 1
+        },
+        {
+            "text": "exile target (permanent) you control, then return it to the battlefield",
+            "colorIdentity": "w",
+            "score": 2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 1.2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number2)/+(number2) until end of turn",
+            "colorIdentity": "wg",
+            "score": 1.2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/+0 until and gain (keyword) end of turn",
+            "colorIdentity": "r",
+            "score": 1.3
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/-(number) until end of turn",
+            "colorIdentity": "b",
+            "score": 1.1
+        },
+        {
+            "text": "target creature get +(number)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "wubrg",
+            "score": 1.3
+        },
+        {
+            "text": "target creature get +(number)/+0 and gains (keyword) and (keyword) until end of turn",
+            "colorIdentity": "wubrg",
+            "score": 1.5
+        },
+        {
+            "text": "switch target creature's power and toughness until end of turn",
+            "colorIdentity": "ur",
+            "score": 1.5
+        },
+        {
+            "text": "destroy target artifact",
+            "colorIdentity": "r",
+            "score": 2.1
+        },
+        {
+            "text": "target (player) sacrifices a(n) (type)",
+            "colorIdentity": "wb",
+            "score": 2.1
+        },
+        {
+            "text": "target (player) sacrifices (numbername) (type)s",
+            "colorIdentity": "r",
+            "score": 1.5
+        },
+        {
+            "text": "each player sacrifices a(n) (permanent)",
+            "colorIdentity": "wbr",
+            "score": 2.1
+        },
+        {
+            "text": "each player sacrifices (numbername) (permanent)s",
+            "colorIdentity": "wbr",
+            "score": 1.5
+        },
+        {
+            "text": "create a (number)/(number) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(number) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(number) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 1
+        },
+        {
+            "text": "creatures with (keyword) can't block this turn",
+            "colorIdentity": "r",
+            "score": 0.2
         }
-
     ],
-    "names": {
+    "creatureNames": {
         "adjectives": [
             "furry",
             "ferocious",
@@ -1825,6 +2054,162 @@
             "fire-born",
             "water-born",
             "one"
+        ]
+    },
+    "spellNames": {
+        "adjectives": [
+            "powerful",
+            "deviously clever",
+            "second-chance",
+            "devastating",
+            "indisputably powerful",
+            "elemental",
+            "potent",
+            "abhorrent",
+            "crazy",
+            "experimental",
+            "destructive",
+            "rogue",
+            "clever",
+            "infinite",
+            "madcap",
+            "savage",
+            "severe",
+            "curious",
+            "black",
+            "white",
+            "pure",
+            "divine",
+            "ceremonial",
+            "clerical",
+            "surgical",
+            "secret",
+            "subtle",
+            "protective",
+            "dangerous",
+            "terrible",
+            "considerable",
+            "inhuman",
+            "inanimate",
+            "armed",
+            "zealous",
+            "artful",
+            "artificial",
+            "artificer's",
+            "mutated",
+            "artisan's",
+            "aspect of",
+            "assassin's",
+            "assert",
+            "autumn's",
+            "summer's",
+            "avenging",
+            "striking",
+            "destroying",
+            "avoid",
+            "awakened",
+            "back to",
+            "forward",
+            "nature's",
+            "banished",
+            "banishment",
+            "barbed",
+            "charged",
+            "barrier ",
+            "beacon of",
+            "become",
+            "beast",
+            "feral",
+            "ferocious",
+            "betrayal of",
+            "death of",
+            "beginning of",
+            "bile",
+            "biomass",
+            "ominous",
+            "baleful",
+            "portenous",
+            "disastrous",
+            "ill-omened",
+            "cataclystic",
+            "fatal",
+            "inauspicious",
+            "calamitous",
+            "baneful",
+            "fishy",
+            "suspicious",
+            "suspect",
+            "risky",
+            "perilous",
+            "pestilent",
+            "wicked",
+            "precarious",
+            "unreasonalbe",
+            "hazardous",
+            "desperate",
+            "unstable",
+            "cruel",
+            "disreputable",
+            "miscreant",
+            "vile",
+            "calculated"
+        ],
+        "nouns": [
+            "blast",
+            "mutation",
+            "flesh",
+            "draught",
+            "offering",
+            "blight",
+            "within",
+            "apparition",
+            "attack",
+            "desctruction",
+            "cry",
+            "light",
+            "promotion",
+            "balefire",
+            "fire",
+            "strike",
+            "death",
+            "breach",
+            "unmaking",
+            "blessing",
+            "lightning",
+            "decree",
+            "charm",
+            "stroke",
+            "trap",
+            "backdraft",
+            "banishment",
+            "bolt",
+            "hope",
+            "shoal",
+            "power",
+            "spell",
+            "magic",
+            "hostility",
+            "malevolence",
+            "impact",
+            "hunt",
+            "freeze",
+            "storm",
+            "reprisal",
+            "volley",
+            "ritual",
+            "ambitions",
+            "concentration",
+            "expulsion",
+            "explosion",
+            "strength",
+            "force",
+            "oil",
+            "impurity",
+            "purity",
+            "greed",
+            "energy",
+            "flame",
+            "dismissal"
         ]
     }
 }
