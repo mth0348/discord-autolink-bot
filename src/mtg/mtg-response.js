@@ -1,21 +1,22 @@
 const { SimpleResponse } = require('../discord-helper.js');
+const { MtgCard } = require('./mtg-card.js');
 
 String.prototype.toCamelCase = function() {
     return this.substr(0, 1).toUpperCase() + this.substr(1);
 };
 
 class MtgResponse {
-    constructor(name, cost, color, type, subtype, rarity, oracle, flavor, power, toughness) {
-        this.name = name;
-        this.cost = cost;
-        this.color = color;
-        this.type = type;
-        this.subtype = subtype;
-        this.rarity = rarity;
-        this.oracle = oracle;
-        this.flavor = flavor;
-        this.power = power;
-        this.toughness = toughness;
+    constructor(mtgCard) {
+        this.name = mtgCard.name;
+        this.cost = mtgCard.cost;
+        this.color = mtgCard.color;
+        this.type = mtgCard.type;
+        this.subtype = mtgCard.subtype;
+        this.rarity = mtgCard.rarity;
+        this.oracle = mtgCard.oracle;
+        this.flavor = mtgCard.flavor;
+        this.power = mtgCard.power;
+        this.toughness = mtgCard.toughness;
     }
 
     isHelp() {

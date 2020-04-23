@@ -1,11 +1,14 @@
 {
     "types": [
+        "instant",
+        "sorcery",
         "creature",
         "artifact",
         "land",
         "enchantment",
-        "instant",
-        "sorcery"
+        "permanent",
+        "non-creature permanent",
+        "nonland permanent"
     ],
     "subtypes": [
         "Advisor",
@@ -289,7 +292,7 @@
             ]
         },
         {
-            "name": "Enchant ",
+            "name": "Enchant",
             "hasCost": false,
             "score": 0,
             "nameExtension": "(type)",
@@ -396,10 +399,10 @@
             ]
         },
         {
-            "name": "Protection from ",
+            "name": "Protection from",
             "hasCost": false,
             "score": 1.2,
-            "hasNameExtension": "(color|type)",
+            "nameExtension": "(color|type)",
             "types": [
                 "creature"
             ]
@@ -525,7 +528,7 @@
             ]
         },
         {
-            "name": "Fading ",
+            "name": "Fading",
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "(number)",
@@ -588,7 +591,7 @@
             ]
         },
         {
-            "name": "Amplify ",
+            "name": "Amplify",
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "(number)",
@@ -607,7 +610,7 @@
             ]
         },
         {
-            "name": "Affinity for ",
+            "name": "Affinity for",
             "hasCost": false,
             "score": 1,
             "nameExtension": "(type)",
@@ -626,7 +629,7 @@
             ]
         },
         {
-            "name": "Modular ",
+            "name": "Modular",
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "(number)",
@@ -644,7 +647,7 @@
             ]
         },
         {
-            "name": "Bushido ",
+            "name": "Bushido",
             "hasCost": false,
             "score": 0.3,
             "nameExtension": "(number)",
@@ -684,7 +687,7 @@
             ]
         },
         {
-            "name": "Dredge ",
+            "name": "Dredge",
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "(number)",
@@ -705,7 +708,7 @@
             ]
         },
         {
-            "name": "Bloodthirst ",
+            "name": "Bloodthirst",
             "hasCost": false,
             "score": 0.3,
             "nameExtension": "(number)",
@@ -742,7 +745,7 @@
             ]
         },
         {
-            "name": "Suspend ",
+            "name": "Suspend",
             "hasCost": true,
             "score": 0.7,
             "nameExtension": "(number)",
@@ -751,7 +754,7 @@
             ]
         },
         {
-            "name": "Vanishing ",
+            "name": "Vanishing",
             "hasCost": false,
             "score": -0.5,
             "nameExtension": "(number)",
@@ -858,7 +861,7 @@
             ]
         },
         {
-            "name": "Annihilator ",
+            "name": "Annihilator",
             "hasCost": false,
             "score": 1.6,
             "nameExtension": "(number)",
@@ -989,7 +992,7 @@
             ]
         },
         {
-            "name": "Tribute ",
+            "name": "Tribute",
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "(number)",
@@ -1269,7 +1272,7 @@
             "context": "phase"
         },
         {
-            "text": "At the beginning of each combat",
+            "text": "At the beginning of combat on each turn",
             "replacementText": "",
             "context": "phase"
         }
@@ -1320,7 +1323,7 @@
             "score": 0.4
         },
         {
-            "text": "destroy target (type) an opponent controls",
+            "text": "destroy target (permanent) an opponent controls",
             "score": 1.5
         },
         {
@@ -1332,12 +1335,20 @@
             "score": 1.7
         },
         {
-            "text": "target (player) draws a card",
+            "text": "target player draws a card",
             "score": 1
         },
         {
-            "text": "target (player) draws (numbername) cards",
-            "score": 2
+            "text": "target opponent draws a card",
+            "score": -1
+        },
+        {
+            "text": "target player draws (numbername) cards",
+            "score": 2.2
+        },
+        {
+            "text": "target opponent draws (numbername) cards",
+            "score": -2.2
         },
         {
             "text": "target (player) sacrifices a creature",
@@ -1372,27 +1383,27 @@
             "score": -0.8
         },
         {
-            "text": "put (number) +1/+1 counter(s) on target creature",
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
             "score": 1.1
         },
         {
-            "text": "put (number) +1/+1 counter(s) on target (subtype) creature",
+            "text": "put (numbername) +1/+1 counter(s) on target (subtype) creature",
             "score": 0.7
         },
         {
-            "text": "put (number) +1/+1 counter(s) on target non-(subtype) creature",
+            "text": "put (numbername) +1/+1 counter(s) on target non-(subtype) creature",
             "score": 0.9
         },
         {
-            "text": "put (number) -1/-1 counter(s) on target creature",
+            "text": "put (numbername) -1/-1 counter(s) on target creature",
             "score": 1.2
         },
         {
-            "text": "put (number) -1/-1 counter(s) on target (subtype) creature",
+            "text": "put (numbername) -1/-1 counter(s) on target (subtype) creature",
             "score": 0.7
         },
         {
-            "text": "put (number) -1/-1 counter(s) on target non-(subtype) creature",
+            "text": "put (numbername) -1/-1 counter(s) on target non-(subtype) creature",
             "score": 1.1
         },
         {
@@ -1400,11 +1411,11 @@
             "score": 1
         },
         {
-            "text": "put a (keyword) counter on (other) (subtype) creature",
+            "text": "put a (keyword) counter on (other)target (subtype) creature",
             "score": 0.9
         },
         {
-            "text": "put a (keyword) counter on (other) non-(subtype) creature",
+            "text": "put a (keyword) counter on (other)target non-(subtype) creature",
             "score": 0.9
         },
         {
@@ -1432,19 +1443,35 @@
             "score": -1
         },
         {
-            "text": "each (player) exiles (numbername) cards from his or her hand",
+            "text": "each player exiles (numbername) cards from his or her hand",
+            "score": 0
+        },
+        {
+            "text": "each opponent exiles (numbername) cards from his or her hand",
             "score": 2
         },
         {
-            "text": "each (player) exiles a card from his or her hand",
+            "text": "each player exiles a card from his or her hand",
             "score": 1.4
         },
         {
-            "text": "each (player) discards a card",
+            "text": "each opponent exiles a card from his or her hand",
+            "score": 0
+        },
+        {
+            "text": "each player discards a card",
+            "score": 0
+        },
+        {
+            "text": "each opponent discards a card",
             "score": 1.2
         },
         {
-            "text": "each (player) discards (numbername) cards",
+            "text": "each player discards (numbername) cards",
+            "score": 0
+        },
+        {
+            "text": "each opponent discards (numbername) cards",
             "score": 2
         },
         {
@@ -1465,8 +1492,8 @@
         }
     ],
     "permanentStatics": [
-        "(other) creatures you control have (keyword)",
-        "(other) creatures you control have (keyword) and (keyword)",
+        "(other)creatures you control have (keyword)",
+        "(other)creatures you control have (keyword) and (keyword)",
         "(subtype)s you control have -(number)/-(number)",
         "(subtype)s you control have -(number)/-(number) and (keyword)",
         "(subtype)s you control have +(number)/+(number)",
