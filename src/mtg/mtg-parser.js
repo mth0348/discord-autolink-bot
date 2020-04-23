@@ -479,7 +479,7 @@ class MtgParser {
                 if (twoSymbols)
                     return `{1}{${color}}{${color}}`;
 
-                return `{2}${color}`;
+                return `{2}{${color}}`;
             } else {
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
