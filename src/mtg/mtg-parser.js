@@ -68,6 +68,7 @@ class MtgParser {
         this.card = new MtgCard();
         this.card.type = "Creature";
         this.card.subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase();
+        this.card.subtype += [false, false, false, true][this.random(0, 3)] ? " " + mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase() : "";
 
         let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
         this.colorIdentity = "";
@@ -94,20 +95,6 @@ class MtgParser {
         totalScore += toughness / 2;
         console.log("t: " + (toughness / 2) + " (=" + totalScore + ")");
 
-        let keyword = "";
-        let hasKeyword = this.random(0, 2);
-        if (hasKeyword >= 1 || rarity >= 3) {
-            let keyword1 = this.getKeyword("creature");
-            totalScore += keyword1.score;
-            console.log("k1: " + keyword1.score + " (=" + totalScore + ")");
-            keyword = keyword1.name;
-        } else if (hasKeyword > 1) {
-            let keyword2 = this.getKeyword("creature");
-            totalScore += keyword2.score;
-            console.log("k2: " + keyword2.score + " (=" + totalScore + ")");
-            keyword += ", " + keyword2.name;
-        }
-
         let ability = "";
         let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
         if (hasAbility >= 1 || rarity >= 4) {
@@ -116,17 +103,39 @@ class MtgParser {
             console.log("a1: " + ability1.score + " (=" + totalScore + ")");
             ability = ability1.text;
 
+            // TODO: verify if this is necessary.
             if (ability1.score > 1.0) {
                 rarity = Math.max(rarity + 1, 4);
             }
             if (ability1.score < -1.0) {
                 rarity = Math.min(rarity - 1, 1);
             }
-        } else if (hasAbility > 1) {
+
+        }
+        if (hasAbility > 1) {
             let ability2 = this.getTriggeredAbility();
             totalScore += ability2.score;
             console.log("a2: " + ability2.score + " (=" + totalScore + ")");
             ability += "\n\n" + ability2.text;
+        }
+        
+        this.coloridentity = "g";
+
+        let color = this.getColorFromIdentity(this.colorIdentity);
+        this.card.color = color;
+
+        let keyword = "";
+        let hasKeyword = this.random(0, 2);
+        if (hasKeyword >= 1 || rarity >= 3) {
+            let keyword1 = this.getKeyword("creature", false, rarity);
+            totalScore += keyword1.score;
+            console.log("k1: " + keyword1.score + " (=" + totalScore + ")");
+            keyword = keyword1.name;
+        } else if (hasKeyword > 1) {
+            let keyword2 = this.getKeyword("creature", false, rarity);
+            totalScore += keyword2.score;
+            console.log("k2: " + keyword2.score + " (=" + totalScore + ")");
+            keyword += ", " + keyword2.name;
         }
 
         let rarityScore = -rarity / 4;
@@ -140,38 +149,14 @@ class MtgParser {
         let cmc = Math.ceil(totalScore);
         let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}`;
         let rarityText = this.getRarity(rarity);
-        let color = this.getColorFromIdentity(this.colorIdentity);
-        let manacost = "";
-
-        if (cmc === 1) {
-            manacost = `{${color[this.random(0, color.length - 1)]}}`;
-        }
-        else if (cmc === 2) {
-            if (color.length > 2) {
-                manacost = `{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}`;
-            } else {
-                manacost = `{${color.split("").join("}{")}}`;
-                let dif = cmc - color.length;
-                if (dif > 0) {
-                    manacost = `{${dif}}${manacost}`;
-                }
-            }
-        }
-        else if (cmc >= 3) {
-            if (color.length > 3) {
-                manacost = `{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}`;
-            } else {
-                manacost = `{${color.split("").join("}{")}}`;
-                let dif = cmc - color.length;
-                if (dif > 0) {
-                    manacost = `{${dif}}${manacost}`;
-                }
-            }
-        }
-        console.log(color);
+        let manacost = this.getManacostFromCmc(cmc, color);
+        
+        console.log("coloridentity: " + this.colorIdentity);
+        console.log("color: " + color);
+        console.log("cmc: " + cmc);
+        console.log("manacost: " + manacost);
 
         this.card.cost = this.resolveManaSymbols(manacost);
-        this.card.color = color;
         this.card.rarity = rarityText;
         this.card.oracle = this.resolveManaSymbols(oracle);
         this.card.flavor = "";
@@ -192,7 +177,7 @@ class MtgParser {
                     : "common";
     }
 
-    getKeyword(type, justSimple) {
+    getKeyword(type, justSimple, rarity) {
         let keywords = mtgData.keywords.filter(e => e.types.some(t => t === type.toLowerCase()) && (justSimple === undefined || e.hasCost === false && e.nameExtension === ""));
         let selected = keywords[this.random(0, keywords.length - 1)];
 
@@ -206,7 +191,9 @@ class MtgParser {
             text += " " + this.resolveSyntax(selected.nameExtension);
         }
         if (selected.hasCost) {
-            text += " - {r}";
+            let cost = 2 / rarity + cmc / 4;
+            let keywordcost = this.getManacostFromCmc(Math.floor(cost), this.card.color);
+            text += ` - ${keywordcost}`;
         }
 
         return { name: text, score: selected.score };
@@ -320,16 +307,93 @@ class MtgParser {
     }
 
     getColorFromIdentity(colorIdentity) {
-        let max = 0, maxColor = '';
-        colorIdentity.split('').forEach(function (char) {
-            if (colorIdentity.split(char).length > max) {
-                max = colorIdentity.split(char).length;
-                maxColor = char;
+        let colorCount = [{ c: "w", count: 0 }, { c: "u", count: 0 }, { c: "b", count: 0 }, { c: "r", count: 0 }, { c: "g", count: 0 }];
+        colorCount[0].count = colorIdentity.split("").filter(c => c === "w").length;
+        colorCount[1].count = colorIdentity.split("").filter(c => c === "u").length;
+        colorCount[2].count = colorIdentity.split("").filter(c => c === "b").length;
+        colorCount[3].count = colorIdentity.split("").filter(c => c === "r").length;
+        colorCount[4].count = colorIdentity.split("").filter(c => c === "g").length;
+        let maxList = colorCount.sort((a, b) => a.count > b.count ? -1 : a.count === b.count ? 0 : 1);
+        let max = maxList[0].count;
+
+        if (colorIdentity.length === 5) {
+            return colorCount[this.random(0, 4)].c;
+        }
+        return colorCount.filter(c => c.count === max).map(c => c.c).join("");
+    }
+
+    getManacostFromCmc(cmc, colorString) {
+        let manacost = "";
+        let color = colorString.split("");
+
+        // Mono color.
+        if (color.length === 1) {
+            manacost = `{${color}}`;
+            if (cmc > 1) {
+                let twoSymbols = this.flipCoin();
+                let threeSymbols = this.random(1, 4) === 4;
+                if (twoSymbols) manacost = `{${color}}{${color}}`;
+                if (threeSymbols) manacost = `{${color}}{${color}}{${color}}`;
+                manacost = `{${cmc - (threeSymbols ? 3 : twoSymbols ? 2 : 1)}}${manacost}`;
             }
-        });
-        if (max === 1)
-            return colorIdentity;
-        return maxColor;
+        }
+
+        // Two colors.
+        if (color.length === 2) {
+            if (cmc === 1) {
+                manacost = `{${color[this.random(0, 1)]}}`;
+            } else if (cmc === 2) {
+                manacost = `{${color[0]}}{${color[1]}}`;
+            } else if (cmc === 3) {
+                let threeSymbols = this.random(0, 2); // 0 = none, 1 = first symbol twice, 2 = second symbol twice.
+                switch (threeSymbols) {
+                    case 0:
+                        manacost = `{1}{${color[0]}}{${color[1]}}`;
+                        break;
+                    case 1:
+                        manacost = `{${color[0]}}{${color[0]}}{${color[1]}}`;
+                        break;
+                    case 2:
+                        manacost = `{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        break;
+                }
+            } else if (cmc >= 3) {
+                let fourSymbols = this.random(0, 3); // 0 = none, 1 = first symbol twice, 2 = second symbol twice, 3 = both symbol twice.
+                switch (fourSymbols) {
+                    case 0:
+                        manacost = `{${cmc - 2}}{${color[0]}}{${color[1]}}`;
+                        break;
+                    case 1:
+                        manacost = `{${cmc - 3}}{${color[0]}}{${color[0]}}{${color[1]}}`;
+                        break;
+                    case 2:
+                        manacost = `{${cmc - 3}}{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        break;
+                    case 3:
+                        manacost = `{${color[0]}}{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        if (cmc > 4) {
+                            manacost = `{${cmc - 4}}${manacost}`;
+                        }
+                        break;
+                }
+            }
+        }
+
+        // More than two colors.
+        if (color.length >= 3) {
+            if (cmc === 1) {
+                manacost = `{${color[this.random(0, color.length - 1)]}}`;
+            } else if (cmc === 2) {
+                let rnd = color[this.random(0, color.length - 2)];
+                manacost = `{${color[rnd]}}{${color[rnd + 1]}}`;
+            } else if (cmc === 3) {
+                manacost = `{${color[0]}}{${color[1]}}{${color[2]}}`;
+            } else if (cmc >= 3) {
+                manacost = `{${cmc - 3}}{${color[0]}}{${color[1]}}{${color[2]}}`;
+            }
+        }
+
+        return manacost;
     }
 }
 

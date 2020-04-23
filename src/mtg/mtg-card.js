@@ -10,7 +10,7 @@ class MtgCard {
         this.flavor = "";
         this.power = "";
         this.toughness = "";
-    }
+    }   
 }
 
 module.exports = MtgCard;
