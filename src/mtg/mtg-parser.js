@@ -250,7 +250,7 @@ class MtgParser {
         console.log("\t\t---");
         console.log("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
 
-        let cmc = Math.ceil(totalScore);
+        let cmc = Math.max(1, Math.ceil(totalScore));
 
         // ensure minimum cmc.
         if (power >= 3 || toughness > 3)
