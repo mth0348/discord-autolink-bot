@@ -12,8 +12,8 @@ class MtgParser {
         this.discordHelper = new DiscordHelper();
 
         this.colors = ["white", "blue", "black", "red", "green"];
-        this.powers = [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9];
-        this.toughnesses = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9];
+        this.powers = [0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 7, 8];
+        this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7, 8];
     }
 
     isCommandAllowed(message) {
@@ -66,13 +66,22 @@ class MtgParser {
 
     createCreatureCard(message) {
         this.card = new MtgCard();
-        this.card.name = "Toothless Predator";
         this.card.type = "Creature";
         this.card.subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase();
 
-        let color = this.colors[this.random(0, this.colors.length - 1)];
         let rarity = [1, 1, 2, 2, 3, 4][this.random(0, 5)]; // 1 = common, 4 = mythic
-        let rarityText = this.getRarity(rarity);
+        this.colorIdentity = "";
+
+        let name = "";
+        let isLegendary = [false, false, false, false, false, true][this.random(0, 5)];
+        if (isLegendary) {
+            name = mtgData.names.names[this.random(0, mtgData.names.names.length - 1)] + ", " + (this.flipCoin() ? "the " : "");
+            this.card.supertype = "Legendary";
+            rarity = this.flipCoin() ? 4 : 3;
+
+        }
+        name = name.toCamelCase() + mtgData.names.adjectives[this.random(0, mtgData.names.adjectives.length - 1)].toCamelCase() + " " + mtgData.names.nouns[this.random(0, mtgData.names.nouns.length - 1)].toCamelCase();
+        this.card.name = name;
 
         let totalScore = 0;
         console.log("new card:");
@@ -124,10 +133,44 @@ class MtgParser {
         totalScore += rarityScore;
         console.log("rarity: " + rarityScore + " (=" + totalScore + ")");
 
+        if (this.colorIdentity === "") {
+            this.colorIdentity = ["w", "u", "b", "r", "g"][this.random(0, 4)];
+        }
+
         let cmc = Math.ceil(totalScore);
         let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}`;
+        let rarityText = this.getRarity(rarity);
+        let color = this.getColorFromIdentity(this.colorIdentity);
+        let manacost = "";
 
-        this.card.cost = this.resolveManaSymbols(`{${cmc}}`);
+        if (cmc === 1) {
+            manacost = `{${color[this.random(0, color.length - 1)]}}`;
+        }
+        else if (cmc === 2) {
+            if (color.length > 2) {
+                manacost = `{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}`;
+            } else {
+                manacost = `{${color.split("").join("}{")}}`;
+                let dif = cmc - color.length;
+                if (dif > 0) {
+                    manacost = `{${dif}}${manacost}`;
+                }
+            }
+        }
+        else if (cmc >= 3) {
+            if (color.length > 3) {
+                manacost = `{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}{${color[this.random(0, color.length - 1)]}}`;
+            } else {
+                manacost = `{${color.split("").join("}{")}}`;
+                let dif = cmc - color.length;
+                if (dif > 0) {
+                    manacost = `{${dif}}${manacost}`;
+                }
+            }
+        }
+        console.log(color);
+
+        this.card.cost = this.resolveManaSymbols(manacost);
         this.card.color = color;
         this.card.rarity = rarityText;
         this.card.oracle = this.resolveManaSymbols(oracle);
@@ -163,7 +206,7 @@ class MtgParser {
             text += " " + this.resolveSyntax(selected.nameExtension);
         }
         if (selected.hasCost) {
-            text += " - {R}";
+            text += " - {r}";
         }
 
         return { name: text, score: selected.score };
@@ -173,6 +216,8 @@ class MtgParser {
         let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
         let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
 
+        this.colorIdentity += event.colorIdentity;
+
         let isReplacement = [false, false, false, true][this.random(0, 3)] && condition.replacementText.length > 0;
         if (isReplacement) {
             return { text: `${this.resolveSyntax(condition.replacementText, condition.context)}, instead ${this.resolveSyntax(event.text)}.`, score: event.score };
@@ -180,7 +225,8 @@ class MtgParser {
 
         if (this.flipCoin()) {
             let secondEvent = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
-            return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}, then ${this.resolveSyntax(secondEvent.text)}.`, score: event.score + secondEvent.score };    
+            this.colorIdentity += secondEvent.colorIdentity;
+            return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}, then ${this.resolveSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score) };
         }
 
         return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}.`, score: event.score };
@@ -258,13 +304,13 @@ class MtgParser {
         text = text.replace(/\{7\}/g, this.emojis[7]);
         text = text.replace(/\{8\}/g, this.emojis[8]);
         text = text.replace(/\{9\}/g, this.emojis[9]);
-        text = text.replace(/\{W\}/g, this.emojis[10]);
-        text = text.replace(/\{U\}/g, this.emojis[11]);
-        text = text.replace(/\{B\}/g, this.emojis[12]);
-        text = text.replace(/\{R\}/g, this.emojis[13]);
-        text = text.replace(/\{G\}/g, this.emojis[14]);
-        text = text.replace(/\{X\}/g, this.emojis[15]);
-        text = text.replace(/\{T\}/g, this.emojis[16]);
+        text = text.replace(/\{w\}/g, this.emojis[10]);
+        text = text.replace(/\{u\}/g, this.emojis[11]);
+        text = text.replace(/\{b\}/g, this.emojis[12]);
+        text = text.replace(/\{r\}/g, this.emojis[13]);
+        text = text.replace(/\{g\}/g, this.emojis[14]);
+        text = text.replace(/\{x\}/g, this.emojis[15]);
+        text = text.replace(/\{t\}/g, this.emojis[16]);
 
         return text;
     }
@@ -272,14 +318,26 @@ class MtgParser {
     flipCoin() {
         return this.random(0, 1) === 1;
     }
+
+    getColorFromIdentity(colorIdentity) {
+        let max = 0, maxColor = '';
+        colorIdentity.split('').forEach(function (char) {
+            if (colorIdentity.split(char).length > max) {
+                max = colorIdentity.split(char).length;
+                maxColor = char;
+            }
+        });
+        if (max === 1)
+            return colorIdentity;
+        return maxColor;
+    }
 }
 
 module.exports = MtgParser;
 
-
-
 /*
 special keywords:
+
 entwine
 kicker
 forecast

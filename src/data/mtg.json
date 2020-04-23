@@ -1285,219 +1285,273 @@
     "permanentEvents": [
         {
             "text": "(self) deals (number) damage to any target",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "r"
         },
         {
             "text": "(self) deals (number) damage to target (player)",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "r"
         },
         {
             "text": "(self) deals (number) damage to target creature an opponent controls",
-            "score": 0.6
+            "score": 0.6,
+            "colorIdentity": "r"
         },
         {
             "text": "(self) deals (number) damage to target (subtype) creature an opponent controls",
-            "score": 0.2
+            "score": 0.2,
+            "colorIdentity": "r"
         },
         {
             "text": "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
-            "score": 0.4
+            "score": 0.4,
+            "colorIdentity": "r"
         },
         {
             "text": "draw a card",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "draw (numbername) cards",
-            "score": 2.5
+            "score": 2.5,
+            "colorIdentity": "u"
         },
         {
             "text": "destroy target creature",
-            "score": 1.5
+            "score": 1.5,
+            "colorIdentity": "wub"
         },
         {
             "text": "destroy (self)",
-            "score": -1
+            "score": -1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "you lose (number) life",
-            "score": -0.5
+            "score": -0.5,
+            "colorIdentity": "b"
         },
         {
             "text": "you lose (number) life and draw a card",
-            "score": 0.4
+            "score": 0.4,
+            "colorIdentity": "b"
         },
         {
             "text": "destroy target (permanent) an opponent controls",
-            "score": 1.5
+            "score": 1.5,
+            "colorIdentity": "wbg"
         },
         {
             "text": "target (player) discards a card",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "target (player) discards (numbername) cards",
-            "score": 1.7
+            "score": 1.7,
+            "colorIdentity": "br"
         },
         {
             "text": "target player draws a card",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "target opponent draws a card",
-            "score": -1
+            "score": -1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "target player draws (numbername) cards",
-            "score": 2.5
+            "score": 2.5,
+            "colorIdentity": "u"
         },
         {
             "text": "target opponent draws (numbername) cards",
-            "score": -2.2
+            "score": -2.2,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "target (player) sacrifices a creature",
-            "score": 1.2
+            "score": 1.2,
+            "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices two creatures",
-            "score": 2
+            "score": 2,
+            "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices a(n) (type)",
-            "score": 1.2
+            "score": 1.2,
+            "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices two (type)s",
-            "score": 1.4
+            "score": 1.4,
+            "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices a (subtype) creature",
-            "score": 0.6
+            "score": 0.6,
+            "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices a non-(subtype) creature",
-            "score": 0.8
+            "score": 0.8,
+            "colorIdentity": "wbr"
         },
         {
             "text": "sacrifice (self)",
-            "score": -1
+            "score": -1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "sacrifice a creature",
-            "score": -0.8
+            "score": -0.8,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target creature",
-            "score": 1.1
+            "score": 1.1,
+            "colorIdentity": "gr"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target (subtype) creature",
-            "score": 0.7
+            "score": 0.7,
+            "colorIdentity": "rg"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target non-(subtype) creature",
-            "score": 0.9
+            "score": 0.9,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put (numbername) -1/-1 counter(s) on target creature",
-            "score": 1.2
+            "score": 1.2,
+            "colorIdentity": "b"
         },
         {
             "text": "put (numbername) -1/-1 counter(s) on target (subtype) creature",
-            "score": 0.7
+            "score": 0.7,
+            "colorIdentity": "b"
         },
         {
             "text": "put (numbername) -1/-1 counter(s) on target non-(subtype) creature",
-            "score": 1.1
+            "score": 1.1,
+            "colorIdentity": "b"
         },
         {
             "text": "put a (keyword) counter on another target creature",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put a (keyword) counter on (other)target (subtype) creature",
-            "score": 0.9
+            "score": 0.9,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put a (keyword) counter on (other)target non-(subtype) creature",
-            "score": 0.9
+            "score": 0.9,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put the top (numbername) cards of your library into your graveyard",
-            "score": -0.5
+            "score": -0.5,
+            "colorIdentity": "ub"
         },
         {
             "text": "target (player) put the top (numbername) cards of his or her library into his or her graveyard",
-            "score": 0.5
+            "score": 0.5,
+            "colorIdentity": "ub"
         },
         {
             "text": "return target (type) card from your graveyard to your hand",
-            "score": 0.7
+            "score": 0.7,
+            "colorIdentity": "bg"
         },
         {
             "text": "return target (permanent) card from your graveyard to the battlefield",
-            "score": 2.2
+            "score": 2.2,
+            "colorIdentity": "bg"
         },
         {
             "text": "exile target (type)",
-            "score": 2.2
+            "score": 2.2,
+            "colorIdentity": "w"
         },
         {
             "text": "exile (self)",
-            "score": -1
+            "score": -1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "each player exiles (numbername) cards from his or her hand",
-            "score": 0
+            "score": 0.4,
+            "colorIdentity": "br"
         },
         {
             "text": "each opponent exiles (numbername) cards from his or her hand",
-            "score": 2.5
+            "score": 2.5,
+            "colorIdentity": "b"
         },
         {
             "text": "each player exiles a card from his or her hand",
-            "score": 1.5
+            "score": 1.5,
+            "colorIdentity": "br"
         },
         {
             "text": "each opponent exiles a card from his or her hand",
-            "score": 0
+            "score": 0,
+            "colorIdentity": "b"
         },
         {
             "text": "each player discards a card",
-            "score": 0
+            "score": 0,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "each opponent discards a card",
-            "score": 1.5
+            "score": 1.5,
+            "colorIdentity": "b"
         },
         {
             "text": "each player discards (numbername) cards",
-            "score": 0
+            "score": 0,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "each opponent discards (numbername) cards",
-            "score": 2
+            "score": 2.5,
+            "colorIdentity": "b"
         },
         {
             "text": "target (player) discards a card",
-            "score": 1
+            "score": 1,
+            "colorIdentity": "b"
         },
         {
             "text": "target (player) discards (numbername) cards",
-            "score": 2.5
+            "score": 2.5,
+            "colorIdentity": "b"
         },
         {
             "text": "discard a card",
-            "score": -0.8
+            "score": -0.8,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "discard (numbername) cards",
-            "score": -1.6
+            "score": -1.6,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "take an extra turn",
-            "score": 3.5
+            "score": 3.5,
+            "colorIdentity": "u"
         }
     ],
     "permanentStatics": [
@@ -1696,7 +1750,8 @@
             "guardian",
             "felidar",
             "fire-born",
-            "water-born"
+            "water-born",
+            "one"
         ]
     }
 }

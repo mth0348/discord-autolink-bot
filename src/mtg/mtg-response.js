@@ -11,6 +11,7 @@ class MtgResponse {
         this.cost = mtgCard.cost;
         this.color = mtgCard.color;
         this.type = mtgCard.type;
+        this.supertype = mtgCard.supertype;
         this.subtype = mtgCard.subtype;
         this.rarity = mtgCard.rarity;
         this.oracle = mtgCard.oracle;
@@ -24,13 +25,13 @@ class MtgResponse {
     }
 
     getColor() {
-        return this.color === 'W' ? '#ffffee' :
-        this.color === 'U' ? '#2222ff' :
-        this.color === 'B' ? '#000000' :
-        this.color === 'R' ? '#ff2222' :
-        this.color === 'G' ? '#22ff22' :
-        this.color.length > 1 ? '#ff9900' :
-        '#dddddd';
+        return this.color === 'w' ? '#ffffee' :
+        this.color === 'u' ? '#2222ff' :
+        this.color === 'b' ? '#000000' :
+        this.color === 'r' ? '#ff2222' :
+        this.color === 'g' ? '#22ff22' :
+        this.color === 'c' ? '#dddddd' :
+        '#ff9900';
     }
 
     getTitle() {
@@ -38,7 +39,7 @@ class MtgResponse {
     }
 
     getDescription() {
-        return `${this.type}${(this.subtype !== undefined ? ' - ' : '')}${this.subtype}\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
+        return `${(this.supertype !== undefined ? this.supertype + ' ' : '')}${this.type}${(this.subtype !== undefined ? ' - ' : '')}${this.subtype}\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
     }
 
     getThumbnailUrl() {
