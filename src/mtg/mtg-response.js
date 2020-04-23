@@ -39,7 +39,7 @@ class MtgResponse {
     }
 
     getDescription() {
-        return `${(this.supertype !== undefined ? this.supertype + ' ' : '')}${this.type}${(this.subtype !== undefined ? ' - ' : '')}${this.subtype}\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
+        return `${(this.supertype !== undefined ? this.supertype + ' ' : '')}${this.type}${(this.subtype !== undefined ? ` - ${this.subtype}` : '')}\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
     }
 
     getThumbnailUrl() {

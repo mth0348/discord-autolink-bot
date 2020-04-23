@@ -1562,6 +1562,79 @@
         "(subtype)s you control have +(number)/+(number)",
         "(subtype)s you control have +(number)/+(number) and (keyword)"
     ],
+    "instantSorceryEvents": [
+        {
+            "text": "(name) deals (number) damge to any target",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damge to any target",
+            "colorIdentity": "r",
+            "score": 1.7
+        },
+        {
+            "text": "(name) deals (number2) damge to target creature an opponent controls",
+            "colorIdentity": "r",
+            "score": 1.5
+        },
+        {
+            "text": "(name) deals (number2) damge to each creature an opponent controls",
+            "colorIdentity": "r",
+            "score": 2
+        },
+        {
+            "text": "(name) deals (number2) damge to each creature",
+            "colorIdentity": "r",
+            "score": 1.2
+        },
+        {
+            "text": "(name) deals (number2) damge to each (subtype) creature an opponent controls",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damge to each non-(subtype) creature an opponent controls",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damge to each (subtype) creature",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damge to each non-(subtype) creature",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "colorIdentity": "g",
+            "score": 1
+        },
+        {
+            "text": "put (numbername) -1/-1 counter(s) on target creature an opponent controls",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "draw (numbername) cards",
+            "colorIdentity": "u",
+            "score": 2.2
+        },
+        {
+            "text": "draw a card",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "you gain (number2) life",
+            "colorIdentity": "w",
+            "score": 0.5
+        }
+
+    ],
     "names": {
         "adjectives": [
             "furry",
