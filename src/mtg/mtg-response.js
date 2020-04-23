@@ -37,7 +37,7 @@ class MtgResponse {
     }
 
     getDescription() {
-        return `${this.type}${(this.subtype !== undefined ? ' - ' : '')}${this.subtype} (${this.rarity})\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
+        return `${this.type}${(this.subtype !== undefined ? ' - ' : '')}${this.subtype}\n\n${this.oracle}${(this.power !== undefined ? `\n\n${this.power} / ${this.toughness}` : '')}`;
     }
 
     getThumbnailUrl() {

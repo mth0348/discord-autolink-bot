@@ -55,9 +55,19 @@ class MtgParser {
 
         let color = this.colors[this.random(0, this.colors.length - 1)];
 
-        let keyword = this.getKeyword("creature");
-        totalScore += keyword.score;
-        console.log(totalScore);
+        let keyword = "";
+        let hasKeyword = this.random(0, 2);
+        if (hasKeyword >= 1) {
+            let keyword1 = this.getKeyword("creature");
+            totalScore += keyword1.score;
+            console.log(totalScore);
+            keyword = keyword1.name;
+        } else if (hasKeyword > 1) {
+            let keyword2 = this.getKeyword("creature");
+            totalScore += keyword2.score;
+            console.log(totalScore);
+            keyword += ", " + keyword2.name;
+        }
 
         let cmc = Math.ceil(totalScore);
 
