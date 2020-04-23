@@ -45,7 +45,8 @@ class MtgParser {
             message.guild.emojis.cache.find(e => e.name === 'mtg_R'),
             message.guild.emojis.cache.find(e => e.name === 'mtg_G'),
 
-            message.guild.emojis.cache.find(e => e.name === 'mtg_X') // 15
+            message.guild.emojis.cache.find(e => e.name === 'mtg_X'), // 15
+            message.guild.emojis.cache.find(e => e.name === 'mtg_T')
         ];
     }
 
@@ -86,7 +87,7 @@ class MtgParser {
 
         let keyword = "";
         let hasKeyword = this.random(0, 2);
-        if (hasKeyword >= 1) {
+        if (hasKeyword >= 1 || rarity >= 3) {
             let keyword1 = this.getKeyword("creature");
             totalScore += keyword1.score;
             console.log("k1: " + keyword1.score + " (=" + totalScore + ")");
@@ -100,11 +101,18 @@ class MtgParser {
 
         let ability = "";
         let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
-        if (hasAbility >= 1) {
+        if (hasAbility >= 1 || rarity >= 4) {
             let ability1 = this.getTriggeredAbility();
             totalScore += ability1.score;
             console.log("a1: " + ability1.score + " (=" + totalScore + ")");
             ability = ability1.text;
+
+            if (ability1.score > 1.0) {
+                rarity = Math.max(rarity + 1, 4);
+            }
+            if (ability1.score < -1.0) {
+                rarity = Math.min(rarity - 1, 1);
+            }
         } else if (hasAbility > 1) {
             let ability2 = this.getTriggeredAbility();
             totalScore += ability2.score;
@@ -112,7 +120,7 @@ class MtgParser {
             ability += "\n\n" + ability2.text;
         }
 
-        let rarityScore = -(rarity / 4 + hasKeyword / 4 + hasAbility / 4);
+        let rarityScore = -rarity / 4;
         totalScore += rarityScore;
         console.log("rarity: " + rarityScore + " (=" + totalScore + ")");
 
@@ -135,9 +143,9 @@ class MtgParser {
     }
 
     getRarity(rarityFactor) {
-        return rarityFactor >= 3 ? "mythic"
-            : rarityFactor >= 2 ? "rare"
-                : rarityFactor >= 1 ? "uncommon"
+        return rarityFactor >= 4 ? "mythic"
+            : rarityFactor >= 3 ? "rare"
+                : rarityFactor >= 2 ? "uncommon"
                     : "common";
     }
 
@@ -152,7 +160,7 @@ class MtgParser {
         let text = selected.name;
 
         if (selected.nameExtension.length > 0) {
-            text += + " " + this.resolveSyntax(selected.nameExtension);
+            text += " " + this.resolveSyntax(selected.nameExtension);
         }
         if (selected.hasCost) {
             text += " - {R}";
@@ -164,6 +172,17 @@ class MtgParser {
     getTriggeredAbility() {
         let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
         let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+
+        let isReplacement = [false, false, false, true][this.random(0, 3)] && condition.replacementText.length > 0;
+        if (isReplacement) {
+            return { text: `${this.resolveSyntax(condition.replacementText, condition.context)}, instead ${this.resolveSyntax(event.text)}.`, score: event.score };
+        }
+
+        if (this.flipCoin()) {
+            let secondEvent = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+            return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}, then ${this.resolveSyntax(secondEvent.text)}.`, score: event.score + secondEvent.score };    
+        }
+
         return { text: `${this.resolveSyntax(condition.text, condition.context)}, ${this.resolveSyntax(event.text)}.`, score: event.score };
     }
 
@@ -209,13 +228,20 @@ class MtgParser {
                 }
             }
 
+            let useN = false;
+            if (text.indexOf("(type)") >= 0) {
+                let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
+                useN = type === "enchantment";
+                text = text.replace(/\(type\)/g, type);
+            }
+
             text = text.replace(/\(player\)/g, this.random(0, 1) === 1 ? "player" : "opponent");
-            text = text.replace(/\(type\)/g, mtgData.types[this.random(0, mtgData.types.length - 1)]);
             text = text.replace(/\(permanent\)/g, mtgData.types[this.random(2, mtgData.types.length - 1)]);
             text = text.replace(/\(name\)/g, this.card.name);
             text = text.replace(/\(s\)/g, moreThanOne ? "s" : "");
+            text = text.replace(/\(n\)/g, useN ? "n" : "");
             text = text.replace(/\(color\)/g, this.colors[this.random(0, this.colors.length - 1)]);
-            text = text.replace(/\(color\|type\)/g, this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)]);
+            text = text.replace(/\(type\|color\)/g, this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)]);
         }
 
         return text;
@@ -240,6 +266,10 @@ class MtgParser {
         text = text.replace(/\{X\}/g, this.emojis[15]);
 
         return text;
+    }
+
+    flipCoin() {
+        return this.random(0, 1) === 1;
     }
 }
 
