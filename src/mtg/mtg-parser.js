@@ -452,7 +452,7 @@ class MtgParser {
             let secondEvent = secondEventPool[this.random(0, secondEventPool.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
 
-            if (this.random(1, 5) == 5) {
+            if (this.random(1, 3) == 3) {
                 let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
                 if (sKeyword.text.length > 0) {
                     if (sKeyword.secondAbility.length > 0) {
