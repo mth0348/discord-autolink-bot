@@ -276,6 +276,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "bg",
             "types": [
                 "creature"
             ]
@@ -285,6 +286,7 @@
             "hasCost": false,
             "score": -1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -294,6 +296,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wr",
             "types": [
                 "creature"
             ]
@@ -303,6 +306,7 @@
             "hasCost": false,
             "score": 0,
             "nameExtension": "(type)",
+            "colorIdentity": "wubrg",
             "types": [
                 "enchantment"
             ]
@@ -312,6 +316,7 @@
             "hasCost": true,
             "score": 0,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "equipment"
             ]
@@ -321,6 +326,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "wbg",
             "types": [
                 "creature"
             ]
@@ -330,6 +336,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "u",
             "types": [
                 "creature",
                 "artifact",
@@ -341,6 +348,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -350,6 +358,7 @@
             "hasCost": false,
             "score": 0.5,
             "nameExtension": "",
+            "colorIdentity": "rg",
             "types": [
                 "creature"
             ]
@@ -359,6 +368,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "ubg",
             "types": [
                 "creature",
                 "artifact",
@@ -371,6 +381,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "artifact",
@@ -383,15 +394,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "",
-            "types": [
-                "creature"
-            ]
-        },
-        {
-            "name": "Landwalk",
-            "hasCost": false,
-            "score": 0.4,
-            "nameExtension": "",
+            "colorIdentity": "brg",
             "types": [
                 "creature"
             ]
@@ -401,6 +404,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wb",
             "types": [
                 "creature"
             ]
@@ -410,6 +414,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "(type|color)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -419,6 +424,7 @@
             "hasCost": false,
             "score": 0.2,
             "nameExtension": "",
+            "colorIdentity": "g",
             "types": [
                 "creature"
             ]
@@ -428,6 +434,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "land",
@@ -440,6 +447,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "rg",
             "types": [
                 "creature"
             ]
@@ -449,15 +457,7 @@
             "hasCost": false,
             "score": 0.5,
             "nameExtension": "",
-            "types": [
-                "creature"
-            ]
-        },
-        {
-            "name": "Banding",
-            "hasCost": false,
-            "score": 0.4,
-            "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -467,29 +467,9 @@
             "hasCost": true,
             "score": -1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
-            ]
-        },
-        {
-            "name": "Flanking",
-            "hasCost": false,
-            "score": 0.3,
-            "nameExtension": "",
-            "types": [
-                "creature"
-            ]
-        },
-        {
-            "name": "Phasing",
-            "hasCost": false,
-            "score": -0.5,
-            "nameExtension": "(number)",
-            "types": [
-                "creature",
-                "artifact",
-                "enchantment",
-                "land"
             ]
         },
         {
@@ -497,6 +477,7 @@
             "hasCost": true,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -507,6 +488,7 @@
             "hasCost": false,
             "score": 0.5,
             "nameExtension": "",
+            "colorIdentity": "b",
             "types": [
                 "creature"
             ]
@@ -516,6 +498,7 @@
             "hasCost": true,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "artifact",
@@ -530,6 +513,7 @@
             "hasCost": true,
             "score": -0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -539,6 +523,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "artifact",
@@ -551,6 +536,7 @@
             "hasCost": true,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "instant",
@@ -562,6 +548,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "ur",
             "types": [
                 "instant",
                 "sorcery"
@@ -572,6 +559,7 @@
             "hasCost": true,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "br",
             "types": [
                 "creature",
                 "sorcery",
@@ -584,6 +572,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "b",
             "types": [
                 "creature"
             ]
@@ -593,6 +582,7 @@
             "hasCost": true,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -602,6 +592,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -611,6 +602,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -621,6 +613,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "(type)",
+            "colorIdentity": "wubrg",
             "types": [
                 "artifact"
             ]
@@ -630,6 +623,7 @@
             "hasCost": true,
             "score": 0,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -640,6 +634,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "artifact creature"
             ]
@@ -649,6 +644,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "artifact creature"
             ]
@@ -658,6 +654,7 @@
             "hasCost": false,
             "score": 0.3,
             "nameExtension": "(number)",
+            "colorIdentity": "w",
             "types": [
                 "creature"
             ]
@@ -667,6 +664,7 @@
             "hasCost": true,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -677,6 +675,7 @@
             "hasCost": true,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "ub",
             "types": [
                 "creature"
             ]
@@ -686,6 +685,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "instant",
@@ -698,6 +698,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "(number)",
+            "colorIdentity": "bg",
             "types": [
                 "creature"
             ]
@@ -707,6 +708,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "instant",
@@ -719,6 +721,7 @@
             "hasCost": false,
             "score": 0.3,
             "nameExtension": "(number)",
+            "colorIdentity": "r",
             "types": [
                 "creature"
             ]
@@ -728,6 +731,7 @@
             "hasCost": true,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "ur",
             "types": [
                 "instant",
                 "sorcery"
@@ -738,6 +742,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -747,6 +752,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant"
             ]
@@ -756,6 +762,7 @@
             "hasCost": true,
             "score": 0.7,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -765,6 +772,7 @@
             "hasCost": false,
             "score": -0.5,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -774,6 +782,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "enchantment"
             ]
@@ -783,6 +792,7 @@
             "hasCost": false,
             "score": 1.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery",
@@ -794,6 +804,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "baaaaaaaaa",
             "types": [
                 "instant",
                 "sorcery"
@@ -804,6 +815,7 @@
             "hasCost": false,
             "score": 0.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -813,6 +825,7 @@
             "hasCost": true,
             "score": 0.9,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -822,6 +835,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -831,6 +845,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -840,6 +855,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "land",
@@ -851,6 +867,7 @@
             "hasCost": true,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -860,6 +877,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "instant",
@@ -872,6 +890,7 @@
             "hasCost": false,
             "score": 1.6,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -881,6 +900,7 @@
             "hasCost": false,
             "score": 1.2,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -891,6 +911,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "aura"
             ]
@@ -900,6 +921,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -909,6 +931,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "wr",
             "types": [
                 "creature"
             ]
@@ -918,6 +941,7 @@
             "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "equipment"
             ]
@@ -927,6 +951,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -936,6 +961,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -946,6 +972,7 @@
             "hasCost": true,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -956,6 +983,7 @@
             "hasCost": true,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -965,6 +993,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -974,6 +1003,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -984,6 +1014,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -993,6 +1024,7 @@
             "hasCost": true,
             "score": 0.5,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "enchantment"
@@ -1003,6 +1035,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1012,6 +1045,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1021,6 +1055,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1030,6 +1065,7 @@
             "hasCost": true,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1039,6 +1075,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1048,6 +1085,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -1058,6 +1096,7 @@
             "hasCost": false,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1067,6 +1106,7 @@
             "hasCost": true,
             "score": 0.4,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1076,6 +1116,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1085,6 +1126,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "artifact"
             ]
@@ -1094,6 +1136,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1103,6 +1146,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1112,6 +1156,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1121,6 +1166,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "enchantment",
@@ -1132,6 +1178,7 @@
             "hasCost": false,
             "score": 0.8,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -1142,6 +1189,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1151,6 +1199,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature"
             ]
@@ -1160,6 +1209,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "instant",
                 "sorcery"
@@ -1170,6 +1220,7 @@
             "hasCost": true,
             "score": 1,
             "nameExtension": "",
+            "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "instant",
@@ -1294,6 +1345,16 @@
             "text": "(self) deals (number) damage to any target",
             "score": 1,
             "colorIdentity": "r"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on (self)",
+            "score": 0.6,
+            "colorIdentity": "g"
+        },
+        {
+            "text": "untap (self)",
+            "score": 0.6,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "(self) deals (number) damage to target (player)",
@@ -1559,6 +1620,11 @@
             "text": "take an extra turn",
             "score": 3.5,
             "colorIdentity": "u"
+        },
+        {
+            "text": "Add (mana)",
+            "score": 2,
+            "colorIdentity": "wubrg"
         }
     ],
     "permanentStatics": [
@@ -1568,6 +1634,58 @@
         "(subtype)s you control have -(number)/-(number) and (keyword)",
         "(subtype)s you control have +(number)/+(number)",
         "(subtype)s you control have +(number)/+(number) and (keyword)"
+    ],
+    "permanentActivatedCosts": [
+        {
+            "text": "sacrifice (self)",
+            "colorIdentity": "wubrg",
+            "score": 6
+        },
+        {
+            "text": "discard a card",
+            "colorIdentity": "ubr",
+            "score": 3
+        },
+        {
+            "text": "discard (numbername) cards",
+            "colorIdentity": "ubr",
+            "score": 6
+        },
+        {
+            "text": "tap another untapped creature you control",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "put a -1/-1 counter on (self)",
+            "colorIdentity": "bg",
+            "score": 3
+        },
+        {
+            "text": "pay (number) life",
+            "colorIdentity": "b",
+            "score": 4
+        },
+        {
+            "text": "pay (number2) life",
+            "colorIdentity": "b",
+            "score": 6
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "wubrg",
+            "score": 10
+        },
+        {
+            "text": "sacrifice a (permanent)",
+            "colorIdentity": "wubrg",
+            "score": 6
+        },
+        {
+            "text": "discard a (type) card",
+            "colorIdentity": "wubrg",
+            "score": 3
+        }
     ],
     "instantSorceryEvents": [
         {
@@ -1643,22 +1761,22 @@
         {
             "text": "return target (permanent) to its owner's hand",
             "colorIdentity": "u",
-            "score": 1
+            "score": 0.9
         },
         {
             "text": "return target non-(subtype) creature to its owner's hand",
             "colorIdentity": "u",
-            "score": 1
+            "score": 0.8
         },
         {
             "text": "return target (subtype) creature to its owner's hand",
             "colorIdentity": "u",
-            "score": 1
+            "score": 0.5
         },
         {
             "text": "destroy target creature with flying",
             "colorIdentity": "g",
-            "score": 1.2
+            "score": 1
         },
         {
             "text": "return up to (numbername) card(s) from your graveyard to your hand",

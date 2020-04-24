@@ -102,7 +102,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let totalScore = 0.4 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -142,7 +142,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 8;
+        let totalScore = 0 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -192,7 +192,7 @@ class MtgParser {
         console.log("power :\t\t" + (power / 2));
 
         let toughness = this.toughnesses[this.random(0, this.toughnesses.length - 1)];
-        totalScore += toughness / 2;
+        totalScore += toughness / 3; /* less weight than power */
         console.log("toughness:\t " + (toughness / 2));
 
         // decide triggered abilities.
@@ -215,8 +215,8 @@ class MtgParser {
             }
 
         }
-        if (hasAbility > 1) {
-            let ability2 = this.getTriggeredAbility();
+        if (true || hasAbility > 1) {
+            let ability2 = true ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
             totalScore += ability2.score;
             console.log("ability 2:\t" + ability2.score);
             secondAbility = ability2.text;
@@ -277,7 +277,7 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
-        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility !== undefined ? `\n\n${secondAbility}` : '')}`;
+        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility !== "" ? `\n\n${secondAbility}` : '')}`;
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
@@ -308,7 +308,12 @@ class MtgParser {
     }
 
     getKeyword(type, justSimple, rarity) {
-        let keywords = mtgData.keywords.filter(e => e.types.some(t => t === type.toLowerCase()) && (justSimple === undefined || e.hasCost === false && e.nameExtension === ""));
+        let color = this.card.color === "" ? "wubrg" : this.card.color;
+        let keywords = mtgData.keywords.filter(e =>
+            color.split("").some(c => e.colorIdentity.indexOf(c) >= 0) /* same color */
+            && e.types.some(t => t === type.toLowerCase()) /* same type */
+            && (justSimple === undefined || e.hasCost === false && e.nameExtension === "")); /* simple conditions */
+
         let selected = keywords[this.random(0, keywords.length - 1)];
         let text = selected.name;
 
@@ -350,6 +355,37 @@ class MtgParser {
         }
 
         return { text: `${this.parseSyntax(condition.text, condition.context)}, ${this.parseSyntax(event.text, condition.context)}.`, score: event.score };
+    }
+
+    getActivatedAbility(rarity) {
+        let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+        let cost = 2 / rarity + event.score * this.random(1, 2);
+        cost = Math.max(1, Math.floor(cost));
+
+        let tapSymbol = this.flipCoin() || cost > 2.0;
+        let keywordcost = "";
+
+        this.colorIdentity += event.colorIdentity;
+
+        // get color at this stage.
+        let color = this.getColorFromIdentity(event.colorIdentity);
+
+        if ([false, false, false, true][this.random(0, 3)]) {
+            let activated = this.getActivatedCost(Math.min(6, cost), color);
+            keywordcost = activated.text.toCamelCase();
+            //event.score += (cost - activated.score);
+            if (tapSymbol)
+                keywordcost = `{t}, ${keywordcost}`;
+        }
+        else {
+            keywordcost = this.getManacostFromCmc(cost, color);
+            if (tapSymbol)
+                keywordcost = `${keywordcost !== "" ? keywordcost + ", " : ""}{t}`;
+        }
+
+        this.colorIdentity += event.colorIdentity;
+
+        return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
     }
 
     getSpellAbility() {
@@ -395,7 +431,7 @@ class MtgParser {
             }
 
             if (text.indexOf("(keyword)") >= 0) {
-                text = text.replace("(keyword)", this.getKeyword("creature", true).name);
+                text = text.replace("(keyword)", this.getKeyword("creature", true).name.toLowerCase());
             }
 
             let subtype = "";
@@ -423,6 +459,13 @@ class MtgParser {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
                 useN = type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
+            }
+
+            if (text.indexOf("(mana)") >= 0) {
+                let symbols = "wubrg".split("");
+                let symbol = `{${symbols[this.random(0, 4)]}}`;
+                if (this.flipCoin()) symbol += symbol;
+                text = text.replace("(mana)", symbol);
             }
 
             text = text.replace("(player)", this.random(0, 1) === 1 ? "player" : "opponent");
@@ -500,16 +543,16 @@ class MtgParser {
                 if (threeSymbols) {
                     return `{${color}}{${color}}{${color}}`;
                 }
-                
+
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
                     return `{1}{${color}}{${color}}`;
 
                 return `{2}{${color}}`;
-            } else {
+            } else if (cmc > 3) {
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
-                return `{${cmc - 2}}{${color}}{${color}}`;
+                    return `{${cmc - 2}}{${color}}{${color}}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
@@ -569,12 +612,26 @@ class MtgParser {
                 manacost = `{${color[rnd]}}{${color[rnd + 1]}}`;
             } else if (cmc === 3) {
                 manacost = `{${color[0]}}{${color[1]}}{${color[2]}}`;
-            } else if (cmc >= 3) {
+            } else if (cmc > 3) {
                 manacost = `{${cmc - 3}}{${color[0]}}{${color[1]}}{${color[2]}}`;
             }
         }
 
         return manacost;
+    }
+
+    getActivatedCost(cost, color) {
+        let costs = mtgData.permanentActivatedCosts.filter(e =>
+            color.split("").some(c => e.colorIdentity.indexOf(c) >= 0) /* same color */
+            && cost <= e.score); /* score of activatedcost = "value" of ability */
+
+        if (costs.length <= 0)
+            return "";
+
+        let activated = costs[this.random(0, costs.length - 1)];
+        this.colorIdentity += activated.colorIdentity;
+
+        return activated;
     }
 
     getCreatureName(isLegendary) {
@@ -601,12 +658,13 @@ class MtgParser {
         kicker
 
         kicker
+        ascend
         forecast
         tribute*/
-        if (keywords === undefined) 
+        if (keywords === undefined)
             return false;
 
-        if (keywords.toLowerCase().indexOf("forecast") >= 0 || keywords.toLowerCase().indexOf("tribute") >= 0 || keywords.toLowerCase().indexOf("kicker") >= 0) {
+        if (keywords.toLowerCase().indexOf("forecast") >= 0 || keywords.toLowerCase().indexOf("tribute") >= 0 || keywords.toLowerCase().indexOf("kicker") >= 0 || keywords.toLowerCase().indexOf("ascend") >= 0) {
             return true;
         }
     }
@@ -626,6 +684,10 @@ class MtgParser {
         }
         if (keywords.toLowerCase().indexOf("kicker") >= 0) {
             return { text: this.parseSyntax(`If (self) was kicked, ${event.text}.`) };
+        }
+        if (keywords.toLowerCase().indexOf("ascend") >= 0) {
+            let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
+            return { text: this.parseSyntax(`${condition.text.toCamelCase()}, if you control the city's blessing, ${event.text}.`) };
         }
         return undefined;
     }
