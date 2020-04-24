@@ -1918,17 +1918,17 @@
         {
             "text": "prevent the next (number2) damage that would be dealt to you",
             "colorIdentity": "w",
-            "score": 0.4
+            "score": 0.2
         },
         {
             "text": "prevent the next (number2) damage that would be dealt to creatures you control",
             "colorIdenity": "w",
-            "score": 0.4
+            "score": 0.2
         },
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
-            "score": 0.2
+            "score": -0.2
         },
         {
             "text": "you and creatures you control gain hexproof until end of turn",
@@ -2191,7 +2191,7 @@
             "fleshmad",
             "stalwart",
             "condemned",
-            "lion-harted",
+            "lion-hearted",
             "dazzling",
             "true-strike",
             "courageous",
