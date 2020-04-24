@@ -533,7 +533,7 @@ class MtgParser {
             }
 
             if (text.indexOf("(mana)") >= 0) {
-                let symbols = "wubrg".split("");
+                let symbols = this.colorIdentity.split("");
                 let symbol = `{${symbols[this.random(0, 4)]}}`;
                 if (this.flipCoin()) symbol += symbol;
                 text = text.replace("(mana)", symbol);
@@ -801,6 +801,8 @@ class MtgParser {
         if (keyword.name === "Miracle") {
             score -= 1;
         }
+
+        score = Math.max(1, score);
 
         // update color.
         this.colorIdentity += keyword.colorIdentity;

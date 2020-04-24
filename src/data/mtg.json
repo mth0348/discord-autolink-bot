@@ -26,7 +26,6 @@
         "Ape",
         "Archer",
         "Archon",
-        "Army",
         "Artificer",
         "Assassin",
         "Assembly-Worker",
@@ -1426,7 +1425,7 @@
         },
         {
             "text": "target (player) discards (numbername) cards",
-            "score": 1.7,
+            "score": 2.5,
             "colorIdentity": "br"
         },
         {
@@ -1441,7 +1440,7 @@
         },
         {
             "text": "target player draws (numbername) cards",
-            "score": 2.5,
+            "score": 3,
             "colorIdentity": "u"
         },
         {
@@ -1596,7 +1595,7 @@
         },
         {
             "text": "each player discards (numbername) cards",
-            "score": 0,
+            "score": 0.5,
             "colorIdentity": "wubrg"
         },
         {
@@ -1666,8 +1665,8 @@
             "nofollowup": true
         },
         {
-            "text": "reveal the top (numbername2) cards from your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
-            "score": 2,
+            "text": "reveal the top X cards from your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.2,
             "colorIdentity": "ug",
             "nofollowup": true
         },
@@ -1763,47 +1762,47 @@
     ],
     "instantSorceryEvents": [
         {
-            "text": "(name) deals (number) damge to any target",
+            "text": "(name) deals (number) damage to any target",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damge to any target",
+            "text": "(name) deals (number2) damage to any target",
             "colorIdentity": "r",
             "score": 1.7
         },
         {
-            "text": "(name) deals (number2) damge to target creature an opponent controls",
+            "text": "(name) deals (number2) damage to target creature an opponent controls",
             "colorIdentity": "r",
             "score": 1.5
         },
         {
-            "text": "(name) deals (number2) damge to each creature target opponent controls",
+            "text": "(name) deals (number2) damage to each creature target opponent controls",
             "colorIdentity": "r",
             "score": 2
         },
         {
-            "text": "(name) deals (number2) damge to each creature",
+            "text": "(name) deals (number2) damage to each creature",
             "colorIdentity": "r",
             "score": 1.2
         },
         {
-            "text": "(name) deals (number2) damge to each (subtype) creature target opponent controls",
+            "text": "(name) deals (number2) damage to each (subtype) creature target opponent controls",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damge to each non-(subtype) creature target opponent controls",
+            "text": "(name) deals (number2) damage to each non-(subtype) creature target opponent controls",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damge to each (subtype) creature",
+            "text": "(name) deals (number2) damage to each (subtype) creature",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damge to each non-(subtype) creature",
+            "text": "(name) deals (number2) damage to each non-(subtype) creature",
             "colorIdentity": "r",
             "score": 1
         },
@@ -1820,7 +1819,7 @@
         {
             "text": "draw (numbername) cards",
             "colorIdentity": "u",
-            "score": 3
+            "score": 3.1
         },
         {
             "text": "draw a card",
@@ -2015,7 +2014,7 @@
         {
             "text": "switch target creature's power and toughness until end of turn",
             "colorIdentity": "ur",
-            "score": 1.5
+            "score": 0
         },
         {
             "text": "destroy target artifact",
@@ -2235,7 +2234,6 @@
             "miner",
             "champion",
             "convict",
-            "angel",
             "fanatic",
             "adept",
             "advisor",
