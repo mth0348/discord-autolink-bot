@@ -283,7 +283,6 @@ class MtgParser {
         if (keyword.length > 0) oracles.push(keyword);
         if (ability.length > 0) oracles.push(ability);
         if (secondAbility.length > 0) oracles.push(secondAbility);
-        if (secondAbility.length > 0) oracles.push(secondAbility);
         let oracle = oracles.join("\n\n");
 
         let rarityText = this.getRarity(rarity);
