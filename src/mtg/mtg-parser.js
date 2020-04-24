@@ -102,7 +102,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
+        let totalScore = 0.4 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -142,7 +142,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
+        let totalScore = 0 + oracle.score * (this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated)
             cmc = Math.min(2, cmc);
@@ -460,6 +460,11 @@ class MtgParser {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
                 useN = type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
+            }
+            
+            if (text.indexOf("(type/counterable)") >= 0) {
+                let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
+                text = text.replace("(type)", type.replace("land", "creature"));
             }
 
             if (text.indexOf("(mana)") >= 0) {

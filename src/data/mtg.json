@@ -1746,7 +1746,7 @@
         {
             "text": "draw (numbername) cards",
             "colorIdentity": "u",
-            "score": 2.5
+            "score": 3
         },
         {
             "text": "draw a card",
@@ -1989,7 +1989,7 @@
             "score": 0.2
         },
         {
-            "text": "counter target (type) spell",
+            "text": "counter target (type/counterable) spell",
             "colorIdentity": "u",
             "score": 1.2
         }
