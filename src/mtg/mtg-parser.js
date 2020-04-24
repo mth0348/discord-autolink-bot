@@ -534,7 +534,7 @@ class MtgParser {
 
             if (text.indexOf("(mana)") >= 0) {
                 let symbols = this.colorIdentity.split("");
-                let symbol = `{${symbols[this.random(0, 4)]}}`;
+                let symbol = `{${symbols[this.random(0, this.colorIdentity.length - 1)]}}`;
                 if (this.flipCoin()) symbol += symbol;
                 text = text.replace("(mana)", symbol);
             }
