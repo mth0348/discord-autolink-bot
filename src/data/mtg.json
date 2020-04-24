@@ -645,6 +645,7 @@
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
             "types": [
                 "artifact creature"
             ]
@@ -686,6 +687,7 @@
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
             "types": [
                 "creature",
                 "instant",
@@ -743,6 +745,7 @@
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
             "types": [
                 "creature"
             ]
@@ -1775,7 +1778,7 @@
             "score": 1.5
         },
         {
-            "text": "(name) deals (number2) damge to each creature an opponent controls",
+            "text": "(name) deals (number2) damge to each creature target opponent controls",
             "colorIdentity": "r",
             "score": 2
         },
@@ -1785,12 +1788,12 @@
             "score": 1.2
         },
         {
-            "text": "(name) deals (number2) damge to each (subtype) creature an opponent controls",
+            "text": "(name) deals (number2) damge to each (subtype) creature target opponent controls",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damge to each non-(subtype) creature an opponent controls",
+            "text": "(name) deals (number2) damge to each non-(subtype) creature target opponent controls",
             "colorIdentity": "r",
             "score": 1
         },
@@ -1990,7 +1993,7 @@
             "score": 1.2
         },
         {
-            "text": "up to (numbername) target creatures each get +(number)/+0 until and gain (keyword) end of turn",
+            "text": "up to (numbername) target creatures each get +(number)/+0 until and gain (keyword) until end of turn",
             "colorIdentity": "r",
             "score": 1.3
         },

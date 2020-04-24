@@ -96,24 +96,24 @@ class MtgParser {
 
     sendCard(message) {
         let self = this;
-        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed) {
+        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function (embed) {
             embed.react("👍🏻");
             embed.react("📢");
             embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
-                        .then(collected => {
-                            const reaction = collected.first();
-                            if (reaction === undefined) return;
-                            switch (reaction.emoji.name) {
-                                case "👍🏻":
-                                    // do nothing. appreciate the vote.
-                                    return;
-                                case "📢":
-                                    let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
-                                    let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
-                                    reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
-                                    return;
-                            }
-                        }).catch(e => console.log(e));
+                .then(collected => {
+                    const reaction = collected.first();
+                    if (reaction === undefined) return;
+                    switch (reaction.emoji.name) {
+                        case "👍🏻":
+                            // do nothing. appreciate the vote.
+                            return;
+                        case "📢":
+                            let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+                            let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
+                            reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
+                            return;
+                    }
+                }).catch(e => console.log(e));
         });
     }
 
@@ -128,7 +128,7 @@ class MtgParser {
         let rarityText = this.getRarity(rarity);
         this.card.rarity = rarityText;
 
-        let oracle = this.getSpellAbility();
+        let oracle = this.getSpellAbility(rarity);
 
         // evaluate cmc.
         let totalScore = 0.4 + oracle.score * (this.lastNumber > 8 ? this.lastNumber / 4 : this.lastNumber > 4 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
@@ -347,7 +347,7 @@ class MtgParser {
         let keywords = mtgData.keywords.filter(e =>
             color.split("").some(c => e.colorIdentity.indexOf(c) >= 0) /* same color */
             && e.types.some(t => t === type.toLowerCase()) /* same type */
-            && (justSimple === undefined || e.hasCost === false && e.nameExtension === "")); /* simple conditions */
+            && (justSimple === undefined || e.hasCost === false && e.nameExtension === "" && e.excludeFromSimple === undefined)); /* simple conditions */
 
         let selected = keywords[this.random(0, keywords.length - 1)];
         let text = selected.name;
@@ -417,7 +417,7 @@ class MtgParser {
         return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
     }
 
-    getSpellAbility() {
+    getSpellAbility(rarity) {
         let event = mtgData.instantSorceryEvents[this.random(0, mtgData.instantSorceryEvents.length - 1)];
         this.colorIdentity += event.colorIdentity;
 
@@ -426,7 +426,31 @@ class MtgParser {
             let secondEvent = secondEventPool[this.random(0, secondEventPool.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
 
+            if (this.random(1, 8) == 8) {
+                let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
+                if (sKeyword.text.length > 0) {
+                    if (sKeyword.secondAbility.length > 0) {
+                        secondEvent.text = sKeyword.secondAbility;
+                    }
+                    if (sKeyword.ability.length > 0) {
+                        event.text = sKeyword.ability;
+                        return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
+                    }
+                    event.text = `${sKeyword.text}\n\n${event.text}`;
+                }
+            }
+
             return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score), isComplicated: (event.score < 0 || secondEvent.score < 0) };
+        }
+
+        if (this.random(1, 8) == 8) {
+            let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
+            if (sKeyword.text.length > 0) {
+                if (sKeyword.ability.length > 0) {
+                    event.text = sKeyword.ability;
+                }
+                event.text = `${sKeyword.text}\n\n${event.text.toCamelCase()}`;
+            }
         }
 
         return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
@@ -448,7 +472,7 @@ class MtgParser {
             }
             if (text.indexOf("(numbername2)") >= 0) {
                 moreThanOne = true;
-                let number = ["two", "two", "three", "three", "three", "four", "five" ][this.random(0, 6)];
+                let number = ["two", "two", "three", "three", "three", "four", "five"][this.random(0, 6)];
                 text = text.replace("(numbername2)", number);
                 this.lastNumber += number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5;
             }
@@ -498,7 +522,7 @@ class MtgParser {
 
             if (text.indexOf("(type/counterable)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
-                text = text.replace("(type)", type.replace("land", "creature"));
+                text = text.replace("(type/counterable)", type.replace("land", "creature"));
             }
 
             if (text.indexOf("(mana)") >= 0) {
@@ -693,14 +717,6 @@ class MtgParser {
     }
 
     hasSpecialPermanentKeywords(keywords) {
-        /*entwine
-        overload
-        kicker
-
-        kicker
-        ascend
-        forecast
-        tribute*/
         if (keywords === undefined)
             return false;
 
@@ -736,6 +752,62 @@ class MtgParser {
             return { text: this.parseSyntax(`${condition.text.toCamelCase()}, if you control the city's blessing, ${event.text}.`) };
         }
         return undefined;
+    }
+
+    handleSpecialSpellKeywords(oracleText, rarity) {
+        let instantSorceryKeywords = mtgData.keywords.filter(e => e.score > 0 && e.types.some(t => t === "instant" || t === "sorcery"));
+        let keyword = instantSorceryKeywords[this.random(0, instantSorceryKeywords.length - 1)];
+        let ability = "";
+        let secondAbility = "";
+
+        if (keyword === undefined || keyword === null) {
+            return { text: "", ability: "", secondAbility: "" };
+        }
+
+        let score = keyword.score;
+
+        if (keyword.name === "Kicker") {
+            let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
+            let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
+            secondAbility = event.name;
+            score += event.score;
+            this.colorIdentity += event.colorIdentity;
+        }
+
+        if (keyword.name === "Entwine") {
+            let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
+            let event1 = positiveEvents[this.random(0, positiveEvents.length - 1)];
+            let event2 = positiveEvents[this.random(0, positiveEvents.length - 1)];
+            ability = `choose one:\n  • ${event1.name}\n  • ${event2.name}`;
+            score += (event1.score + event2.score) / 2;
+            this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
+        }
+
+        if (keyword.name === "Overload") {
+            if (oracleText.indexOf("target") < 0)
+                return { text: "", ability: "", secondAbility: "" };
+            score + 1;
+        }
+        if (keyword.name === "Spectacle") {
+            score -= 1;
+        }
+        if (keyword.name === "Miracle") {
+            score -= 1;
+        }
+
+        // update color.
+        this.colorIdentity += keyword.colorIdentity;
+        this.card.color = this.getColorFromIdentity(this.colorIdentity);
+
+        let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(selected.nameExtension)}` : keyword.name;
+
+        if (keyword.hasCost) {
+            let cost = 2 / rarity + score * this.random(2, 3) / 3;
+            let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
+            return { text: `${keywordName}${keyword.nameExtension > 0 ? ' -' : ''} ${keywordcost}`, ability: ability, secondAbility: secondAbility };
+        }
+
+        return { text: keywordName, ability: ability, secondAbility: secondAbility };
     }
 }
 
