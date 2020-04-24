@@ -309,7 +309,7 @@ class MtgParser {
         let cmc = Math.max(1, Math.ceil(totalScore));
 
         // ensure color p/t rules.
-        if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u")) {
+        if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u") >= 0) {
             let p = power;
             let t = toughness;
             toughness = Math.max(power, toughness);
