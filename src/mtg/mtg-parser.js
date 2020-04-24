@@ -308,6 +308,25 @@ class MtgParser {
 
         let cmc = Math.max(1, Math.ceil(totalScore));
 
+        // ensure color p/t rules.
+        if (this.flipCoin()) {
+            if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u")) {
+                let p = power;
+                let t = toughness;
+                toughness = Math.max(power, toughness);
+                power = Math.min(power, toughness);
+            }
+        }
+        if (this.flipCoin()) {
+            let dif = power - toughness;
+            if (dif > 3) {
+                power -= 1;
+            }
+            if (dif < -3) {
+                toughness -= 1;
+            }
+        }
+
         // ensure minimum cmc.
         if (power >= 3 || toughness > 3)
             cmc = Math.max(cmc, 1);
