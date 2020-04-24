@@ -1236,6 +1236,11 @@
             "context": "self"
         },
         {
+            "text": "Whenever (name) attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
             "text": "Whenever (name) enters the battlefield or attacks",
             "replacementText": "",
             "context": "self"

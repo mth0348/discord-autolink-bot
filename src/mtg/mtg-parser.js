@@ -50,7 +50,19 @@ class MtgParser {
             message.guild.emojis.cache.find(e => e.name === 'mtg_G'),
 
             message.guild.emojis.cache.find(e => e.name === 'mtg_X'), // 15
-            message.guild.emojis.cache.find(e => e.name === 'mtg_T')
+            message.guild.emojis.cache.find(e => e.name === 'mtg_T'),
+
+            message.guild.emojis.cache.find(e => e.name === 'mtg_BG'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_BR'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_GU'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_GW'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_RG'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_RW'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_UB'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_UR'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_WB'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_WU')
+
         ];
     }
 
@@ -597,6 +609,17 @@ class MtgParser {
         text = text.replace(/\{x\}/g, this.emojis[15]);
         text = text.replace(/\{t\}/g, this.emojis[16]);
 
+        text = text.replace(/\{bg\}/g, this.emojis[17]);
+        text = text.replace(/\{br\}/g, this.emojis[18]);
+        text = text.replace(/\{ug\}/g, this.emojis[19]);
+        text = text.replace(/\{wg\}/g, this.emojis[20]);
+        text = text.replace(/\{rg\}/g, this.emojis[21]);
+        text = text.replace(/\{wr\}/g, this.emojis[22]);
+        text = text.replace(/\{ub\}/g, this.emojis[23]);
+        text = text.replace(/\{ur\}/g, this.emojis[24]);
+        text = text.replace(/\{wb\}/g, this.emojis[25]);
+        text = text.replace(/\{wu\}/g, this.emojis[26]);
+
         return text;
     }
 
@@ -663,7 +686,7 @@ class MtgParser {
         // Two colors.
         if (color.length === 2) {
             if (cmc === 1) {
-                manacost = `{${color[this.random(0, 1)]}}`;
+                manacost = `{${color}}`;
             } else if (cmc === 2) {
                 manacost = `{${color[0]}}{${color[1]}}`;
             } else if (cmc === 3) {
