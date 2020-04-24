@@ -98,7 +98,7 @@ class MtgParser {
         let self = this;
         this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed) {
             embed.react("👍🏻");
-            embed.react("❓");
+            embed.react("📢");
             embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
                         .then(collected => {
                             const reaction = collected.first();
@@ -107,7 +107,7 @@ class MtgParser {
                                 case "👍🏻":
                                     // do nothing. appreciate the vote.
                                     return;
-                                case "❓":
+                                case "📢":
                                     let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
                                     let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
                                     reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
