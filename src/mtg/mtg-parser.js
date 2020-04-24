@@ -59,13 +59,14 @@ class MtgParser {
         this.thumbsup = message.guild.emojis.cache.find(e => e.name === 'thumbsup::skin-tone-1');
         this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
+        let validInputs = ["creature", "instant", "sorcery"];
+        let cardType = validInputs[this.random(0, validInputs.length - 1)];
+
         if (message.content == "!mtg help") {
-            this.discordHelper.richEmbedMessage(message, new MtgHelpResponse(message));
+            let supportedCardTypes = validInputs.join(", ");
+            this.discordHelper.richEmbedMessage(message, new MtgHelpResponse(supportedCardTypes));
             return;
         }
-
-        let validInputs = ["instant", "creature", "sorcery"]
-        let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
         if (args.length > 1)

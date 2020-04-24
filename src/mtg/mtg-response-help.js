@@ -1,9 +1,9 @@
 class MtgHelpResponse {
-    constructor() {
+    constructor(supportedCardTypes) {
         this.helpName = "Supported card types:";
         this.helpName2 = "Commands:";
         this.helpName3 = 'Examples';
-        this.helpValue = "creature, instant, sorcery";
+        this.helpValue = supportedCardTypes;
         this.helpValue2 = "Use the following command structure. The card type is optional:\n"
                         + "!mtg [cardtype]";
         this.helpValue3 = "!mtg\n"
@@ -25,7 +25,7 @@ class MtgHelpResponse {
     }
 
     getDescription() {
-        return `Generate a random magic card by entering "!mtg".`;
+        return `Generate a random magic card by entering "!mtg". Please give the card a thumbs up if you like it and a thumbs down if the ruling doesn't work out or is completely busted.`;
     }
 
     getThumbnailUrl() {
