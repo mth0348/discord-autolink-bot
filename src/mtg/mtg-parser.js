@@ -77,7 +77,8 @@ class MtgParser {
             return;
         }
 
-        console.log(`--- Creating new ${cardType} card... ---`);
+        this.log = [];
+        this.log.push(`--- Creating new ${cardType} card... ---`);
 
         this.colorIdentity = "";
 
@@ -93,7 +94,8 @@ class MtgParser {
                 break;
         }
 
-        console.log(`cardname:\t${this.card.name}`);
+        this.log.push(`cardname:\t${this.card.name}`);
+        console.log(this.log.join("\n"));
     }
 
     sendCard(message) {
@@ -113,9 +115,10 @@ class MtgParser {
                             let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
                             let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
                             reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
+                            reportChannel.send("Logs:\n" + self.log.join("\n"));
                             return;
                     }
-                }).catch(e => console.log(e));
+                }).catch(e => this.log.push(e));
         });
     }
 
@@ -142,12 +145,12 @@ class MtgParser {
         let color = this.getColorFromIdentity(this.colorIdentity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
-        console.log("lastNumber:\t" + this.lastNumber);
-        console.log("o-score:\t" + oracle.score);
-        console.log("cmc:\t\t" + cmc);
-        console.log("coloridentity:\t" + this.colorIdentity);
-        console.log("color:\t\t" + color);
-        console.log("manacost:\t" + manacost);
+        this.log.push("lastNumber:\t" + this.lastNumber);
+        this.log.push("o-score:\t" + oracle.score);
+        this.log.push("cmc:\t\t" + cmc);
+        this.log.push("coloridentity:\t" + this.colorIdentity);
+        this.log.push("color:\t\t" + color);
+        this.log.push("manacost:\t" + manacost);
 
         this.card.type = "Instant";
         this.card.subtype = undefined;
@@ -183,12 +186,12 @@ class MtgParser {
         let color = this.getColorFromIdentity(this.colorIdentity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
-        console.log("lastNumber:\t" + this.lastNumber);
-        console.log("o-score:\t" + oracle.score);
-        console.log("cmc:\t\t" + cmc);
-        console.log("coloridentity:\t" + this.colorIdentity);
-        console.log("color:\t\t" + color);
-        console.log("manacost:\t" + manacost);
+        this.log.push("lastNumber:\t" + this.lastNumber);
+        this.log.push("o-score:\t" + oracle.score);
+        this.log.push("cmc:\t\t" + cmc);
+        this.log.push("coloridentity:\t" + this.colorIdentity);
+        this.log.push("color:\t\t" + color);
+        this.log.push("manacost:\t" + manacost);
 
         this.card.type = "Sorcery";
         this.card.subtype = undefined;
@@ -218,15 +221,15 @@ class MtgParser {
         this.card.name = name;
 
         let totalScore = 0;
-        console.log("score calculation:");
+        this.log.push("score calculation:");
 
         let power = this.powers[this.random(0, this.powers.length - 1)];
         totalScore += power / 2;
-        console.log("power :\t\t" + (power / 2));
+        this.log.push("power :\t\t" + (power / 2));
 
         let toughness = this.toughnesses[this.random(0, this.toughnesses.length - 1)];
         totalScore += toughness / 3; /* less weight than power */
-        console.log("toughness:\t " + (toughness / 2));
+        this.log.push("toughness:\t " + (toughness / 2));
 
         // decide triggered abilities.
         let ability = "";
@@ -236,7 +239,7 @@ class MtgParser {
         if (hasAbility >= 1 || rarity >= 4) {
             let ability1 = this.getTriggeredAbility();
             totalScore += ability1.score;
-            console.log("ability 1:\t" + ability1.score);
+            this.log.push("ability 1:\t" + ability1.score);
             ability = ability1.text;
 
             // TODO: verify if this is necessary.
@@ -250,7 +253,7 @@ class MtgParser {
         if (hasAbility > 1) {
             let ability2 = this.flipCoin() ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
             totalScore += ability2.score;
-            console.log("ability 2:\t" + ability2.score);
+            this.log.push("ability 2:\t" + ability2.score);
             secondAbility = ability2.text;
 
             rarity = Math.max(2, rarity); /* at least uncommon if two abilities. */
@@ -271,12 +274,12 @@ class MtgParser {
         if (hasKeyword >= 1 || rarity >= 3) {
             let keyword1 = this.getKeyword("creature", false, rarity);
             totalScore += keyword1.score;
-            console.log("keyword 1:\t" + keyword1.score);
+            this.log.push("keyword 1:\t" + keyword1.score);
             keyword = keyword1.name;
         } else if (hasKeyword > 1) {
             let keyword2 = this.getKeyword("creature", false, rarity);
             totalScore += keyword2.score;
-            console.log("keyword 2:\t" + keyword2.score);
+            this.log.push("keyword 2:\t" + keyword2.score);
             keyword += ", " + keyword2.name;
         }
 
@@ -299,9 +302,9 @@ class MtgParser {
 
         let rarityScore = -rarity / 4;
         totalScore += rarityScore;
-        console.log("rarity:\t\t" + rarityScore);
-        console.log("\t\t---");
-        console.log("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
+        this.log.push("rarity:\t\t" + rarityScore);
+        this.log.push("\t\t---");
+        this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
 
         let cmc = Math.max(1, Math.ceil(totalScore));
 
@@ -320,10 +323,10 @@ class MtgParser {
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
-        console.log("cmc:\t\t" + cmc);
-        console.log("coloridentity:\t" + this.colorIdentity);
-        console.log("color:\t\t" + color);
-        console.log("manacost:\t" + manacost);
+        this.log.push("cmc:\t\t" + cmc);
+        this.log.push("coloridentity:\t" + this.colorIdentity);
+        this.log.push("color:\t\t" + color);
+        this.log.push("manacost:\t" + manacost);
 
         this.card.cost = this.resolveManaSymbols(manacost);
         this.card.rarity = rarityText;
