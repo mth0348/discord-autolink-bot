@@ -425,7 +425,7 @@ class MtgParser {
                 this.lastNumber += number;
             }
             if (text.indexOf("(number2)") >= 0) {
-                let number = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5][this.random(0, 11)];
+                let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
                 moreThanOne = moreThanOne || number > 1;
                 text = text.replace("(number2)", number);
                 this.lastNumber += number;
@@ -461,7 +461,7 @@ class MtgParser {
                 useN = type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
             }
-            
+
             if (text.indexOf("(type/counterable)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
                 text = text.replace("(type)", type.replace("land", "creature"));
