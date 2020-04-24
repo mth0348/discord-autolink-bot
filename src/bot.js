@@ -9,7 +9,7 @@ class DrunkenBot {
     constructor() {
         this.client = new Discord.Client();
 
-        this.client.login(config.token);
+        this.client.login(process.env.TOKEN);
         console.log('DrunKenBot started.');
 
         this.csgoNadeParser = new CsgoNadeParser(this.client);
