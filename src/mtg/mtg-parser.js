@@ -98,7 +98,7 @@ class MtgParser {
         let self = this;
         this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed) {
             embed.react("👍🏻");
-            embed.react("👎🏻");
+            embed.react("❓");
             embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
                         .then(collected => {
                             const reaction = collected.first();
@@ -107,7 +107,7 @@ class MtgParser {
                                 case "👍🏻":
                                     // do nothing. appreciate the vote.
                                     return;
-                                case "👎🏻":
+                                case "❓":
                                     let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
                                     let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
                                     reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
@@ -242,7 +242,6 @@ class MtgParser {
             if (ability1.score < -1.0) {
                 rarity = Math.min(rarity - 1, 1);
             }
-
         }
         if (hasAbility > 1) {
             let ability2 = this.flipCoin() ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
@@ -376,7 +375,7 @@ class MtgParser {
             return { text: `${this.parseSyntax(condition.replacementText, condition.context)}, instead ${this.parseSyntax(event.text)}.`, score: event.score };
         }
 
-        if (this.flipCoin()) {
+        if (this.flipCoin() && event.nofollowup === undefined) {
             let secondEvent = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
             return { text: `${this.parseSyntax(condition.text, condition.context)}, ${this.parseSyntax(event.text, condition.context)}, then ${this.parseSyntax(secondEvent.text, condition.context)}.`, score: (event.score + secondEvent.score) };
@@ -446,6 +445,12 @@ class MtgParser {
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
                 text = text.replace("(numbername)", number);
                 this.lastNumber += number === "two" ? 2 : 3;
+            }
+            if (text.indexOf("(numbername2)") >= 0) {
+                moreThanOne = true;
+                let number = ["two", "two", "three", "three", "three", "four", "five" ][this.random(0, 6)];
+                text = text.replace("(numbername2)", number);
+                this.lastNumber += number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5;
             }
             if (text.indexOf("(number)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
@@ -722,6 +727,8 @@ class MtgParser {
             return { text: this.parseSyntax(`When (self) enters the battlefield, if tribute wasn't paid, ${event.text}.`) };
         }
         if (keywords.toLowerCase().indexOf("kicker") >= 0) {
+            if (this.flipCoin() && this.card.type == "Creature")
+                return { text: this.parseSyntax(`If (self) was kicked, it enters the battlefield with (numbername) +1/+1 counters on it.`) };
             return { text: this.parseSyntax(`If (self) was kicked, ${event.text}.`) };
         }
         if (keywords.toLowerCase().indexOf("ascend") >= 0) {

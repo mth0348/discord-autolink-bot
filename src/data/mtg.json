@@ -1338,6 +1338,11 @@
             "text": "Whenever you draw a card",
             "replacementText": "Whenever you would draw a card",
             "context": "draw"
+        },
+        {
+            "text": "Whenever a creature dealt damage by (self) this turn dies",
+            "replacementText": "Whenever a creature dealt damage by (self) this turn would die",
+            "context": "creature"
         }
     ],
     "permanentEvents": [
@@ -1622,9 +1627,75 @@
             "colorIdentity": "u"
         },
         {
-            "text": "Add (mana)",
+            "text": "add (mana)",
             "score": 2,
             "colorIdentity": "wubrg"
+        },
+        {
+            "text": "(self) gets +(number)/+0 until end of turn",
+            "score": 0.5,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "(self) gets +(number)/+(number) until end of turn",
+            "score": 0.5,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "(self) gets +(number2)/+(number2) until end of turn",
+            "score": 1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "(self) deals damage equal to its power to target creature",
+            "score": 2.2,
+            "colorIdentity": "rg"
+        },
+        {
+            "text": "(self) deals damage equal to its power to any target",
+            "score": 2.6,
+            "colorIdentity": "rg"
+        },
+        {
+            "text": "reveal the top X cards from your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "nofollowup": true
+        },
+        {
+            "text": "reveal the top (numbername2) cards from your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "nofollowup": true
+        },
+        {
+            "text": "reveal the top X cards from your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "nofollowup": true
+        },
+        {
+            "text": "reveal the top X cards from your library, where X is the number of instant and sorcery cards in your graveyard. (self) deals X damage to any target",
+            "score": 3,
+            "colorIdentity": "r",
+            "nofollowup": true
+        },
+        {
+            "text": "proliferate, then destroy each nonland permanent with (numbername) or more counters on it",
+            "score": 3,
+            "colorIdentity": "b",
+            "nofollowup": true
+        },
+        {
+            "text": "proliferate",
+            "score": 1.2,
+            "colorIdentity": "ubg"
+        },
+        {
+            "text": "proliferate, then proliferate again",
+            "score": 1.2,
+            "colorIdentity": "ubg",
+            "nofollowup": true
         }
     ],
     "permanentStatics": [

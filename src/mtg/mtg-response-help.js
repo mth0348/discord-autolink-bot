@@ -25,7 +25,7 @@ class MtgHelpResponse {
     }
 
     getDescription() {
-        return `Generate a random magic card by entering "!mtg". Please give the card a 👍🏻 if you like it and a 👎🏻 if the ruling doesn't work out or if the card is completely overpowered.`;
+        return `Generate a random magic card by entering "!mtg". Please give the card a "👍🏻" if you like it and a "❓" if the ruling doesn't work out or if the card is completely overpowered.`;
     }
 
     getThumbnailUrl() {
