@@ -1868,7 +1868,7 @@
         {
             "text": "gain control of target (permanent) an opponent controls",
             "colorIdentity": "u",
-            "score": 5
+            "score": 4.2
         },
         {
             "text": "tap all (permanent)s target opponent controls",
@@ -1883,17 +1883,17 @@
         {
             "text": "tap all non-(subtype) creatures target opponent controls",
             "colorIdentity": "u",
-            "score": 3
+            "score": 2.5
         },
         {
             "text": "untap target creature you control",
             "colorIdentity": "u",
-            "score": 1
+            "score": 0
         },
         {
             "text": "untap all creatures you control",
             "colorIdentity": "u",
-            "score": 4
+            "score": 3
         },
         {
             "text": "tap all (subtype) creatures you control",
