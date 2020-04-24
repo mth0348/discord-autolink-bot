@@ -13,7 +13,7 @@ class MtgParser {
         this.discordHelper = new DiscordHelper();
 
         this.colors = ["white", "blue", "black", "red", "green"];
-        this.powers = [0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 7, 8];
+        this.powers = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 7, 8];
         this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7, 8];
 
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
@@ -177,7 +177,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = 0.0 + oracle.score + (this.lastNumber > 8 ? this.lastNumber / 4 : this.lastNumber > 4 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 8 ? this.lastNumber / 4 : this.lastNumber > 4 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
