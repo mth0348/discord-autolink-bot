@@ -735,7 +735,7 @@
         },
         {
             "name": "Forecast",
-            "hasCost": true,
+            "hasCost": false,
             "score": 0.7,
             "nameExtension": "",
             "types": [

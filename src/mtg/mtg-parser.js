@@ -195,6 +195,7 @@ class MtgParser {
         totalScore += toughness / 2;
         console.log("toughness:\t " + (toughness / 2));
 
+        // decide triggered abilities.
         let ability = "";
         let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
 
@@ -217,7 +218,7 @@ class MtgParser {
             let ability2 = this.getTriggeredAbility();
             totalScore += ability2.score;
             console.log("ability 2:\t" + ability2.score);
-            ability += "\n\n" + ability2.text;
+            this.secondAbility = ability2.text;
         }
 
         // if color identity has not been set during abilities, then do it randomly.
@@ -244,6 +245,23 @@ class MtgParser {
             keyword += ", " + keyword2.name;
         }
 
+        if (this.hasSpecialPermanentKeywords(keyword)) {
+            let sAbility = this.handleSpecialPermanentKeywords(keyword, rarity);
+            if (sAbility !== undefined) {
+                if (sAbility.removeKeyword !== undefined) {
+                    keyword = keyword.replace(sAbility.removeKeyword, "");
+                    keyword = keyword.replace(", ", "");
+                }
+
+                if (ability.length > 0) {
+                    // overwrite 2nd ability if any is present.
+                    this.secondAbility = sAbility.text;
+                } else {
+                    this.ability = sAbility.text;
+                }
+            }
+        }
+
         let rarityScore = -rarity / 4;
         totalScore += rarityScore;
         console.log("rarity:\t\t" + rarityScore);
@@ -258,7 +276,7 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
-        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}`;
+        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(this.secondAbility !== undefined ? `\n\n${this.secondAbility}` : '')}`;
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
@@ -291,24 +309,31 @@ class MtgParser {
     getKeyword(type, justSimple, rarity) {
         let keywords = mtgData.keywords.filter(e => e.types.some(t => t === type.toLowerCase()) && (justSimple === undefined || e.hasCost === false && e.nameExtension === ""));
         let selected = keywords[this.random(0, keywords.length - 1)];
-
         let text = selected.name;
 
         if (selected.nameExtension.length > 0) {
             text += " " + this.parseSyntax(selected.nameExtension);
         }
         if (selected.hasCost) {
-            let cost = 2 / rarity + cmc / 4;
-            let keywordcost = this.getManacostFromCmc(Math.floor(cost), this.card.color);
+            let cost = 2 / rarity + selected.score * this.random(1, 2);
+            let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
             text += ` - ${keywordcost}`;
         }
 
         return { name: text, score: selected.score };
     }
 
-    getTriggeredAbility() {
+    getTriggeredAbility(keywords) {
         let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
         let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+
+        // handle special keywords.
+        if (this.hasSpecialPermanentKeywords(keywords)) {
+            let special = this.handleSpecialPermanentKeywords(keywords, condition, event);
+            condition.text = special.conditionText;
+            condition.context = special.context;
+            event.text = special.eventText;
+        }
 
         this.colorIdentity += event.colorIdentity;
 
@@ -568,6 +593,40 @@ class MtgParser {
             + mtgData.spellNames.adjectives[this.random(0, mtgData.spellNames.adjectives.length - 1)].toCamelCase()
             + " " + mtgData.spellNames.nouns[this.random(0, mtgData.spellNames.nouns.length - 1)].toCamelCase();
     }
+
+    hasSpecialPermanentKeywords(keywords) {
+        /*entwine
+        overload
+        kicker
+
+        kicker
+        forecast
+        tribute*/
+        if (keywords === undefined) 
+            return false;
+
+        if (keywords.toLowerCase().indexOf("forecast") >= 0 || keywords.toLowerCase().indexOf("tribute") >= 0 || keywords.toLowerCase().indexOf("kicker") >= 0) {
+            return true;
+        }
+    }
+
+    handleSpecialPermanentKeywords(keywords, rarity) {
+        let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+
+        let cost = 2 / rarity + event.score * this.random(1, 2);
+        let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
+
+        if (keywords.toLowerCase().indexOf("forecast") >= 0) {
+            return { text: this.parseSyntax(`Forecast - ${keywordcost}, Reveal (self) from your hand: ${event.text.toCamelCase()}.`), removeKeyword: "forecast" };
+        }
+        if (keywords.toLowerCase().indexOf("tribute") >= 0) {
+            return { text: this.parseSyntax(`When (self) enters the battlefield, if tribute wasn't paid, ${event.text}.`) };
+        }
+        if (keywords.toLowerCase().indexOf("kicker") >= 0) {
+            return { text: this.parseSyntax(`If (self) was kicked, ${event}.`) };
+        }
+        return undefined;
+    }
 }
 
 module.exports = MtgParser;
@@ -575,11 +634,7 @@ module.exports = MtgParser;
 /*
 special keywords:
 
-entwine
-kicker
-forecast
-overload
-tribute
+
 
 this spell can't be countered.
 */
