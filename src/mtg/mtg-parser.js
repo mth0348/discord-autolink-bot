@@ -17,7 +17,7 @@ class MtgParser {
         this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7, 8];
 
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
-        this.defaultAwaitReactionOptions = { max: 1, time: 20000 };
+        this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
     }
 
     isCommandAllowed(message) {
@@ -309,20 +309,21 @@ class MtgParser {
         let cmc = Math.max(1, Math.ceil(totalScore));
 
         // ensure color p/t rules.
-        if (this.flipCoin()) {
-            if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u")) {
-                let p = power;
-                let t = toughness;
-                toughness = Math.max(power, toughness);
-                power = Math.min(p, t);
-            }
+        if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u")) {
+            let p = power;
+            let t = toughness;
+            toughness = Math.max(power, toughness);
+            power = Math.min(p, t);
         }
+
         if (this.flipCoin()) {
             let dif = power - toughness;
             if (dif > 3) {
                 power -= 1;
+                toughness += 1;
             }
             if (dif < -3) {
+                power += 1;
                 toughness -= 1;
             }
         }
