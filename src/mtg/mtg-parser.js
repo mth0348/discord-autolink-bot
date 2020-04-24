@@ -15,6 +15,9 @@ class MtgParser {
         this.colors = ["white", "blue", "black", "red", "green"];
         this.powers = [0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 7, 8];
         this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7, 8];
+
+        this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
+        this.defaultAwaitReactionOptions = { max: 1, time: 20000 };
     }
 
     isCommandAllowed(message) {
@@ -53,6 +56,8 @@ class MtgParser {
 
     startWorkflow(message) {
         this.getEmojis(message);
+        this.thumbsup = message.guild.emojis.cache.find(e => e.name === 'thumbsup::skin-tone-1');
+        this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
         if (message.content == "!mtg help") {
             this.discordHelper.richEmbedMessage(message, new MtgHelpResponse(message));
@@ -86,6 +91,30 @@ class MtgParser {
                 this.createSorceryCard(message);
                 break;
         }
+    }
+
+    sendCard(message) {
+        let self = this;
+        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed, original) {
+            embed.react("👍🏻");
+            embed.react("👎🏻");
+            embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
+                        .then(collected => {
+                            const reaction = collected.first();
+                            if (reaction === undefined) return;
+                            switch (reaction.emoji.name) {
+                                case "👍🏻":
+                                    // do nothing. appreciate the vote.
+                                    return;
+                                case "👎🏻":
+                                    let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+                                    let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
+                                    reportChannel.send(`MtG: ${username} reported the following card:`);
+                                    reportChannel.send(original);
+                                    return;
+                            }
+                        }).catch(e => console.log(e));
+        });
     }
 
     createInstantCard(message) {
@@ -125,7 +154,7 @@ class MtgParser {
         this.card.oracle = this.resolveManaSymbols(oracle.text.toCamelCase());
         this.card.flavor = "";
 
-        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
+        this.sendCard(message);
     }
 
     createSorceryCard(message) {
@@ -165,7 +194,7 @@ class MtgParser {
         this.card.oracle = this.resolveManaSymbols(oracle.text.toCamelCase());
         this.card.flavor = "";
 
-        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
+        this.sendCard(message);
     }
 
     createCreatureCard(message) {
@@ -300,7 +329,7 @@ class MtgParser {
         this.card.power = power;
         this.card.toughness = toughness;
 
-        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card));
+        this.sendCard(message);
     }
 
     random(minInclusive, maxInclusive) {
@@ -359,7 +388,7 @@ class MtgParser {
     getActivatedAbility(rarity) {
         let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
         let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
-        
+
         let cost = 2 / rarity + event.score * this.random(1, 2);
         cost = Math.max(1, Math.floor(cost));
 

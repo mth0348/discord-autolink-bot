@@ -89,6 +89,7 @@ class CsgoNadeParser {
                     m.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
                         .then(collected => {
                             const reaction = collected.first();
+                            if (reaction === undefined) return;
                             switch (reaction.emoji.id) {
                                 case this.smoke_emoji.id:
                                     message.content += ' smoke';
