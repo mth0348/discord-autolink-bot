@@ -96,7 +96,7 @@ class MtgParser {
 
     sendCard(message) {
         let self = this;
-        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed, original) {
+        this.discordHelper.richEmbedMessage(message, new MtgResponse(this.card), function(embed) {
             embed.react("👍🏻");
             embed.react("👎🏻");
             embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
@@ -110,8 +110,7 @@ class MtgParser {
                                 case "👎🏻":
                                     let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
                                     let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username);
-                                    reportChannel.send(`MtG: ${username} reported the following card:`);
-                                    reportChannel.send(original);
+                                    reportChannel.send(`MtG: ${username} reported the following card:\n${reaction.message.url}`);
                                     return;
                             }
                         }).catch(e => console.log(e));

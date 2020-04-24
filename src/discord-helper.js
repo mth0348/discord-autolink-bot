@@ -23,7 +23,7 @@ class DiscordHelper {
             if (response.helpName6) embed.addField(response.helpName6, response.helpValue6);
         }
 
-        message.channel.send(embed).then(e => {if (followup != undefined) followup(e, embed); });
+        message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
     }
 
     embedMessage(message, response) {
