@@ -197,6 +197,7 @@ class MtgParser {
 
         // decide triggered abilities.
         let ability = "";
+        let secondAbility = "";
         let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
 
         if (hasAbility >= 1 || rarity >= 4) {
@@ -218,7 +219,7 @@ class MtgParser {
             let ability2 = this.getTriggeredAbility();
             totalScore += ability2.score;
             console.log("ability 2:\t" + ability2.score);
-            this.secondAbility = ability2.text;
+            secondAbility = ability2.text;
         }
 
         // if color identity has not been set during abilities, then do it randomly.
@@ -255,9 +256,9 @@ class MtgParser {
 
                 if (ability.length > 0) {
                     // overwrite 2nd ability if any is present.
-                    this.secondAbility = sAbility.text;
+                    secondAbility = sAbility.text;
                 } else {
-                    this.ability = sAbility.text;
+                    ability = sAbility.text;
                 }
             }
         }
@@ -276,7 +277,7 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
-        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(this.secondAbility !== undefined ? `\n\n${this.secondAbility}` : '')}`;
+        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility !== undefined ? `\n\n${secondAbility}` : '')}`;
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
@@ -611,7 +612,8 @@ class MtgParser {
     }
 
     handleSpecialPermanentKeywords(keywords, rarity) {
-        let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+        let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
+        let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
 
         let cost = 2 / rarity + event.score * this.random(1, 2);
         let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
@@ -623,7 +625,7 @@ class MtgParser {
             return { text: this.parseSyntax(`When (self) enters the battlefield, if tribute wasn't paid, ${event.text}.`) };
         }
         if (keywords.toLowerCase().indexOf("kicker") >= 0) {
-            return { text: this.parseSyntax(`If (self) was kicked, ${event}.`) };
+            return { text: this.parseSyntax(`If (self) was kicked, ${event.text}.`) };
         }
         return undefined;
     }
