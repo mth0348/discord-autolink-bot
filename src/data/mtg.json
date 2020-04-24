@@ -2197,7 +2197,9 @@
             "courageous",
             "audacious",
             "unfearful",
-            "spirited"
+            "spirited",
+            "blood-seeking",
+            "blood-leeching"
         ],
         "names": [
             "Therod",
@@ -2438,6 +2440,8 @@
     "spellNames": {
         "adjectives": [
             "powerful",
+            "blood-seeking",
+            "blood-leeching",
             "unblemished",
             "inevitable",
             "heroic",
@@ -2542,7 +2546,7 @@
             "final",
             "cleaved",
             "torn",
-            "devided",
+            "divided",
             "foul",
             "polarized",
             "electrified",
