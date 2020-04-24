@@ -438,7 +438,7 @@ class MtgParser {
                         event.text = sKeyword.ability;
                         return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
                     }
-                    event.text = `${sKeyword.text}\n\n${event.text}`;
+                    event.text = `${sKeyword.text}\n\n${event.text.toCamelCase()}`;
                 }
             }
 
@@ -780,7 +780,7 @@ class MtgParser {
             let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
             let event1 = positiveEvents[this.random(0, positiveEvents.length - 1)];
             let event2 = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            ability = `choose one:\n  • ${event1.name}\n  • ${event2.name}`;
+            ability = `choose one:\n  • ${event1.name.toCamelCase()}\n  • ${event2.name.toCamelCase()}`;
             score += (event1.score + event2.score) / 2;
             this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
         }
