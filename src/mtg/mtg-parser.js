@@ -148,7 +148,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity);
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 8 ? this.lastNumber / 4 : this.lastNumber > 4 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -189,7 +189,7 @@ class MtgParser {
         let oracle = this.getSpellAbility();
 
         // evaluate cmc.
-        let totalScore = -0.2 + oracle.score + (this.lastNumber > 8 ? this.lastNumber / 4 : this.lastNumber > 4 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
