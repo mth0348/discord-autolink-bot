@@ -217,7 +217,7 @@ class MtgParser {
         if (isLegendary) {
             rarity = 3;
         }
-        let name = this.getCreatureName();
+        let name = this.getCreatureName(isLegendary);
         this.card.name = name;
 
         let totalScore = 0;
