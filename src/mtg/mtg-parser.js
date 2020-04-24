@@ -315,6 +315,13 @@ class MtgParser {
             toughness = Math.max(power, toughness);
             power = Math.min(p, t);
         }
+        if (this.card.color.indexOf("r") >= 0) {
+            let p = power;
+            let t = toughness;
+            power = Math.max(power, toughness);
+            toughness = Math.min(p, t);
+        }
+        
 
         if (this.flipCoin()) {
             let dif = power - toughness;
