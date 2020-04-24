@@ -358,7 +358,9 @@ class MtgParser {
     }
 
     getActivatedAbility(rarity) {
-        let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
+        let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
+        let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
+        
         let cost = 2 / rarity + event.score * this.random(1, 2);
         cost = Math.max(1, Math.floor(cost));
 
