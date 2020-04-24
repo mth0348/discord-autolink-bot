@@ -279,7 +279,13 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
-        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility.length > 0 ? `\n\n${secondAbility}` : '')}`;
+        let oracles = [];
+        if (keyword.length > 0) oracles.push(keyword);
+        if (ability.length > 0) oracles.push(ability);
+        if (secondAbility.length > 0) oracles.push(secondAbility);
+        if (secondAbility.length > 0) oracles.push(secondAbility);
+        let oracle = oracles.join("\n\n");
+
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
@@ -512,7 +518,7 @@ class MtgParser {
         let maxList = colorCount.sort((a, b) => a.count > b.count ? -1 : a.count === b.count ? 0 : 1);
         let max = maxList[0].count;
 
-        if (colorIdentity.length === 5) {
+        if (colorIdentity === "wubrg") {
             return colorCount[this.random(0, 4)].c;
         }
         return colorCount.filter(c => c.count === max).map(c => c.c).join("");
