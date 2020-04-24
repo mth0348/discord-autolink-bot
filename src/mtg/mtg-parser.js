@@ -801,7 +801,7 @@ class MtgParser {
         this.colorIdentity += keyword.colorIdentity;
         this.card.color = this.getColorFromIdentity(this.colorIdentity);
 
-        let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(selected.nameExtension)}` : keyword.name;
+        let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(keyword.nameExtension)}` : keyword.name;
 
         if (keyword.hasCost) {
             let cost = 2 / rarity + score * this.random(2, 3) / 3;
