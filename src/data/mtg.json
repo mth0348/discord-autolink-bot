@@ -1830,7 +1830,7 @@
         {
             "text": "you gain (number2) life",
             "colorIdentity": "w",
-            "score": 0.5
+            "score": 0
         },
         {
             "text": "return target (permanent) to its owner's hand",
@@ -2206,6 +2206,7 @@
             "Tusqra",
             "Megdo",
             "Dasze",
+            "Sendril",
             "Reysar",
             "Rayek",
             "Bilam",
