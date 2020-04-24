@@ -610,15 +610,34 @@ class MtgParser {
         text = text.replace(/\{t\}/g, this.emojis[16]);
 
         text = text.replace(/\{bg\}/g, this.emojis[17]);
+        text = text.replace(/\{gb\}/g, this.emojis[17]);
+
         text = text.replace(/\{br\}/g, this.emojis[18]);
+        text = text.replace(/\{rb\}/g, this.emojis[18]);
+
         text = text.replace(/\{ug\}/g, this.emojis[19]);
+        text = text.replace(/\{gu\}/g, this.emojis[19]);
+
         text = text.replace(/\{wg\}/g, this.emojis[20]);
+        text = text.replace(/\{gw\}/g, this.emojis[20]);
+
         text = text.replace(/\{rg\}/g, this.emojis[21]);
+        text = text.replace(/\{gr\}/g, this.emojis[21]);
+
         text = text.replace(/\{wr\}/g, this.emojis[22]);
+        text = text.replace(/\{rw\}/g, this.emojis[22]);
+
         text = text.replace(/\{ub\}/g, this.emojis[23]);
+        text = text.replace(/\{bu\}/g, this.emojis[23]);
+
         text = text.replace(/\{ur\}/g, this.emojis[24]);
+        text = text.replace(/\{ru\}/g, this.emojis[24]);
+
         text = text.replace(/\{wb\}/g, this.emojis[25]);
+        text = text.replace(/\{bw\}/g, this.emojis[25]);
+
         text = text.replace(/\{wu\}/g, this.emojis[26]);
+        text = text.replace(/\{uw\}/g, this.emojis[26]);
 
         return text;
     }
