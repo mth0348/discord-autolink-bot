@@ -314,7 +314,7 @@ class MtgParser {
                 let p = power;
                 let t = toughness;
                 toughness = Math.max(power, toughness);
-                power = Math.min(power, toughness);
+                power = Math.min(p, t);
             }
         }
         if (this.flipCoin()) {
