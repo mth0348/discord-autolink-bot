@@ -220,6 +220,8 @@ class MtgParser {
             totalScore += ability2.score;
             console.log("ability 2:\t" + ability2.score);
             secondAbility = ability2.text;
+
+            rarity = Math.max(2, rarity); /* at least uncommon if two abilities. */
         }
 
         // if color identity has not been set during abilities, then do it randomly.
@@ -332,14 +334,6 @@ class MtgParser {
     getTriggeredAbility(keywords) {
         let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
         let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
-
-        // handle special keywords.
-        if (this.hasSpecialPermanentKeywords(keywords)) {
-            let special = this.handleSpecialPermanentKeywords(keywords, condition, event);
-            condition.text = special.conditionText;
-            condition.context = special.context;
-            event.text = special.eventText;
-        }
 
         this.colorIdentity += event.colorIdentity;
 
@@ -679,7 +673,7 @@ class MtgParser {
         let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
 
         if (keywords.toLowerCase().indexOf("forecast") >= 0) {
-            return { text: this.parseSyntax(`Forecast - ${keywordcost}, Reveal (self) from your hand: ${event.text.toCamelCase()}.`), removeKeyword: "forecast" };
+            return { text: this.parseSyntax(`Forecast - ${keywordcost}, Reveal (self) from your hand: ${event.text.toCamelCase()}.`), removeKeyword: "Forecast" };
         }
         if (keywords.toLowerCase().indexOf("tribute") >= 0) {
             return { text: this.parseSyntax(`When (self) enters the battlefield, if tribute wasn't paid, ${event.text}.`) };
