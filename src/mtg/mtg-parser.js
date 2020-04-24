@@ -215,8 +215,8 @@ class MtgParser {
             }
 
         }
-        if (true || hasAbility > 1) {
-            let ability2 = true ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
+        if (hasAbility > 1) {
+            let ability2 = this.flipCoin() ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
             totalScore += ability2.score;
             console.log("ability 2:\t" + ability2.score);
             secondAbility = ability2.text;
@@ -279,7 +279,7 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
-        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility !== "" ? `\n\n${secondAbility}` : '')}`;
+        let oracle = `${keyword.length > 0 ? `${keyword}\n\n` : ``}${ability}${(secondAbility.length > 0 ? `\n\n${secondAbility}` : '')}`;
         let rarityText = this.getRarity(rarity);
         let manacost = this.getManacostFromCmc(cmc, color);
 
@@ -668,6 +668,10 @@ class MtgParser {
     handleSpecialPermanentKeywords(keywords, rarity) {
         let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
         let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
+
+        // update color.
+        this.colorIdentity += event.colorIdentity;
+        this.card.color = this.getColorFromIdentity(this.colorIdentity);
 
         let cost = 2 / rarity + event.score * this.random(1, 2);
         let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
