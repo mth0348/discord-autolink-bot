@@ -1,4 +1,4 @@
 const DrunkenBot = require('./src/bot');
 
 // main.
-new DrunkenBot();
+new DrunkenBot(process.env.TOKEN);

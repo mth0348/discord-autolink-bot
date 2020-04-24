@@ -6,10 +6,10 @@ const MtgParser = require('./mtg/mtg-parser.js')
 const config = require('./../config.json');
 
 class DrunkenBot {
-    constructor() {
+    constructor(token) {
         this.client = new Discord.Client();
 
-        this.client.login(process.env.TOKEN);
+        this.client.login(token);
         console.log('DrunKenBot started.');
 
         this.csgoNadeParser = new CsgoNadeParser(this.client);
