@@ -1305,19 +1305,9 @@
             "context": "spell"
         },
         {
-            "text": "Whenever a creature an opponent controls attacks",
-            "replacementText": "",
-            "context": "creature"
-        },
-        {
             "text": "Whenever (name) becomes tapped",
             "replacementText": "",
             "context": "self"
-        },
-        {
-            "text": "Whenever a creature an opponent controls becomes tapped",
-            "replacementText": "",
-            "context": "creature"
         },
         {
             "text": "At the beginning of combat on your turn",
@@ -1352,6 +1342,56 @@
         {
             "text": "Whenever a creature dealt damage by (self) this turn dies",
             "replacementText": "Whenever a creature dealt damage by (self) this turn would die",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever one or more creatures you control attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever one or more creatures an opponent controls attack",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control blocks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control becomes blocked",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls blocks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls becomes blocked",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control becomes tapped",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls becomes tapped",
+            "replacementText": "",
             "context": "creature"
         }
     ],
@@ -1707,6 +1747,21 @@
             "colorIdentity": "wubrg"
         },
         {
+            "text": "create a Food token",
+            "score": 0.6,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "create (numbername) Food tokens",
+            "score": 1.1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "create (numbername2) Food tokens",
+            "score": 1.3,
+            "colorIdentity": "wubrg"
+        },
+        {
             "text": "(self) gets +(number)/+0 until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg"
@@ -1762,9 +1817,44 @@
             "nofollowup": true
         },
         {
+            "text": "destroy each (permanent)",
+            "score": 3.1,
+            "colorIdentity": "wbg",
+            "nofollowup": true
+        },
+        {
+            "text": "destroy each (permanent) target opponent controls",
+            "score": 4.1,
+            "colorIdentity": "wbg",
+            "nofollowup": true
+        },
+        {
+            "text": "destroy all creatures",
+            "score": 3,
+            "colorIdentity": "wb",
+            "nofollowup": true
+        },
+        {
+            "text": "you lose the game",
+            "score": -6.0,
+            "colorIdentity": "br",
+            "nofollowup": true
+        },
+        {
+            "text": "you win the game",
+            "score": 6.0,
+            "colorIdentity": "wb",
+            "nofollowup": true
+        },
+        {
             "text": "proliferate",
             "score": 0.8,
             "colorIdentity": "ubg"
+        },
+        {
+            "text": "destroy target artifact, creature or planeswalker",
+            "colorIdentity": "wbr",
+            "score": 2.0
         },
         {
             "text": "scry (number)",
@@ -1990,6 +2080,11 @@
             "score": 1
         },
         {
+            "text": "destroy target artifact, creature or planeswalker",
+            "colorIdentity": "wbr",
+            "score": 2.0
+        },
+        {
             "text": "return up to (numbername) card(s) from your graveyard to your hand",
             "colorIdentity": "g",
             "score": 2.2
@@ -2159,14 +2254,34 @@
             "score": 1.1
         },
         {
-            "text": "target creature get +(number)/+0 and gains (keyword) until end of turn",
+            "text": "target creature gets +(number)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "wubrg",
             "score": 1.3
         },
         {
-            "text": "target creature get +(number)/+0 and gains (keyword) and (keyword) until end of turn",
+            "text": "target creature gets +(number)/+0 and gains (keyword) and (keyword) until end of turn",
             "colorIdentity": "wubrg",
             "score": 1.5
+        },
+        {
+            "text": "target attacking creature gets +(number)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 0.5
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 0.5
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "r",
+            "score": 1.2
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+(number2) and gains (keyword) until end of turn",
+            "colorIdentity": "rg",
+            "score": 1.7
         },
         {
             "text": "switch target creature's power and toughness until end of turn",
@@ -2248,6 +2363,36 @@
             "text": "tap up to (numbername2) target (permanent)s",
             "colorIdentity": "wu",
             "score": 1.4
+        },
+        {
+            "text": "destroy each (permanent)",
+            "score": 3.1,
+            "colorIdentity": "wbg",
+            "nofollowup": true
+        },
+        {
+            "text": "destroy each (permanent) target opponent controls",
+            "score": 4.1,
+            "colorIdentity": "wbg",
+            "nofollowup": true
+        },
+        {
+            "text": "destroy all creatures",
+            "score": 3,
+            "colorIdentity": "wb",
+            "nofollowup": true
+        },
+        {
+            "text": "you lose the game",
+            "score": -6.0,
+            "colorIdentity": "br",
+            "nofollowup": true
+        },
+        {
+            "text": "you win the game",
+            "score": 6.0,
+            "colorIdentity": "wb",
+            "nofollowup": true
         }
     ],
     "creatureNames": {
