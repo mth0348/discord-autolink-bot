@@ -2,28 +2,28 @@
 	"prefix": "!",
 	"channelPermissions": {
 		"general": [
-			"bot-playground"
+			"dev-playground"
 		],
 		"csgo": [
 			"cs-go",
-			"bot-playground"
+			"dev-playground"
 		],
 		"mtg": [
 			"magic-the-gathering",
-			"bot-playground"
+			"dev-playground"
 		]
 	},
 	"rolePermissions": {
 		"general": [
-			"Bot-Maker"
+			"Bot-Developer"
 		],
 		"csgo": [
 			"DrunKen",
-			"Bot-Maker"
+			"Bot-Developer"
 		],
 		"mtg": [
 			"DrunKen",
-			"Bot-Maker"
+			"Bot-Developer"
 		]
 	}
 }
