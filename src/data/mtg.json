@@ -1482,6 +1482,11 @@
             "colorIdentity": "wbr"
         },
         {
+            "text": "target (player) sacrifices a creature",
+            "score": 1.2,
+            "colorIdentity": "wbr"
+        },
+        {
             "text": "target (player) sacrifices two creatures",
             "score": 2.1,
             "colorIdentity": "wbr"
@@ -1522,14 +1527,29 @@
             "colorIdentity": "gr"
         },
         {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "score": 1.1,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "score": 1.1,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername2) +1/+1 counter(s) on target creature",
+            "score": 1.3,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername2) +1/+1 counter(s) on target creature",
+            "score": 1.3,
+            "colorIdentity": "gr"
+        },
+        {
             "text": "put (numbername) +1/+1 counter(s) on target (subtype) creature",
             "score": 0.7,
             "colorIdentity": "rg"
-        },
-        {
-            "text": "put (numbername) +1/+1 counter(s) on target non-(subtype) creature",
-            "score": 0.9,
-            "colorIdentity": "wubrg"
         },
         {
             "text": "put (numbername) -1/-1 counter(s) on target creature",
@@ -1542,9 +1562,9 @@
             "colorIdentity": "b"
         },
         {
-            "text": "put (numbername) -1/-1 counter(s) on target non-(subtype) creature",
-            "score": 1.1,
-            "colorIdentity": "b"
+            "text": "put a (keyword) counter on another target creature",
+            "score": 1,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "put a (keyword) counter on another target creature",
@@ -1557,13 +1577,13 @@
             "colorIdentity": "wubrg"
         },
         {
-            "text": "put a (keyword) counter on (other)target non-(subtype) creature",
-            "score": 0.9,
-            "colorIdentity": "wubrg"
-        },
-        {
             "text": "put the top (numbername) cards of your library into your graveyard",
             "score": -0.5,
+            "colorIdentity": "ub"
+        },
+        {
+            "text": "put the top (numbername2) cards of your library into your graveyard",
+            "score": -0.8,
             "colorIdentity": "ub"
         },
         {
@@ -1577,14 +1597,39 @@
             "colorIdentity": "bg"
         },
         {
+            "text": "return target creature card from your graveyard to the battlefield under your control",
+            "score": 2.8,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target creature card from a graveyard to the battlefield under your control",
+            "score": 3.0,
+            "colorIdentity": "wbg"
+        },
+        {
             "text": "return target (permanent) card from your graveyard to the battlefield under your control",
-            "score": 2.2,
-            "colorIdentity": "bg"
+            "score": 3.0,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from a graveyard to the battlefield under your control",
+            "score": 3.4,
+            "colorIdentity": "wbg"
         },
         {
             "text": "exile target (permanent)",
             "score": 2.2,
-            "colorIdentity": "w"
+            "colorIdentity": "wb"
+        },
+        {
+            "text": "exile target creature",
+            "score": 2.2,
+            "colorIdentity": "wb"
+        },
+        {
+            "text": "exile target permanent",
+            "score": 3.0,
+            "colorIdentity": "wb"
         },
         {
             "text": "exile (self)",

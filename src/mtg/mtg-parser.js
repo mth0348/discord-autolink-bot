@@ -318,7 +318,7 @@ class MtgParser {
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
 
-        let cmc = Math.max(1, Math.ceil(totalScore));
+        let cmc = Math.min(10, Math.max(1, Math.ceil(totalScore)));
 
         // ensure color p/t rules.
         if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u") >= 0) {
