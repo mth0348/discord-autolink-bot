@@ -41,7 +41,7 @@ class MtgHelpResponse {
     }
 
     getFooter() {
-        return `created by DrunKenBot - v1.0 beta`;
+        return `created by DrunKenBot - v1.2 beta`;
     }
 }
 
