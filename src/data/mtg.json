@@ -2244,7 +2244,7 @@
             "score": 1.2
         },
         {
-            "text": "up to (numbername) target creatures each get +(number)/+0 until and gain (keyword) until end of turn",
+            "text": "up to (numbername) target creatures each get +(number)/+0 and gain (keyword) until end of turn",
             "colorIdentity": "r",
             "score": 1.3
         },
