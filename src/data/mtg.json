@@ -1818,19 +1818,19 @@
         },
         {
             "text": "destroy each (permanent)",
-            "score": 3.1,
+            "score": 3.5,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
             "text": "destroy each (permanent) target opponent controls",
-            "score": 4.1,
+            "score": 5.1,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
             "text": "destroy all creatures",
-            "score": 3,
+            "score": 3.1,
             "colorIdentity": "wb",
             "nofollowup": true
         },
@@ -2366,19 +2366,19 @@
         },
         {
             "text": "destroy each (permanent)",
-            "score": 3.1,
+            "score": 3.5,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
             "text": "destroy each (permanent) target opponent controls",
-            "score": 4.1,
+            "score": 5.1,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
             "text": "destroy all creatures",
-            "score": 3,
+            "score": 3.2,
             "colorIdentity": "wb",
             "nofollowup": true
         },
