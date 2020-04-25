@@ -5,3 +5,4 @@
 * changeling - enforce shapeshifter
 * (n) for keywords like "evolve"
 * persist toughness > 1
+* (keyword) should not resolve into "cascade" and "delve"

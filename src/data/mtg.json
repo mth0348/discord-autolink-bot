@@ -335,6 +335,7 @@
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "u",
+            "excludeFromSimple": true,
             "types": [
                 "creature",
                 "artifact",
@@ -794,6 +795,7 @@
             "score": 1.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
             "types": [
                 "instant",
                 "sorcery",
@@ -805,7 +807,8 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
-            "colorIdentity": "baaaaaaaaa",
+            "colorIdentity": "b",
+            "excludeFromSimple": true,
             "types": [
                 "instant",
                 "sorcery"
@@ -879,6 +882,7 @@
             "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
             "types": [
                 "creature",
                 "instant",
@@ -1413,8 +1417,28 @@
             "colorIdentity": "b"
         },
         {
+            "text": "you lose (number2) life",
+            "score": -0.9,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "you gain (number) life",
+            "score": 0,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "you gain (number2) life",
+            "score": 0.5,
+            "colorIdentity": "wbg"
+        },
+        {
             "text": "you lose (number) life and draw a card",
             "score": 0.4,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "you lose (number2) life and draw (numbername) cards",
+            "score": 1,
             "colorIdentity": "b"
         },
         {
@@ -1459,7 +1483,7 @@
         },
         {
             "text": "target (player) sacrifices two creatures",
-            "score": 2,
+            "score": 2.1,
             "colorIdentity": "wbr"
         },
         {
@@ -1469,12 +1493,12 @@
         },
         {
             "text": "target (player) sacrifices two (permanent)s",
-            "score": 1.4,
+            "score": 2.4,
             "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices a (subtype) creature",
-            "score": 0.6,
+            "score": 0.4,
             "colorIdentity": "wbr"
         },
         {
@@ -1694,14 +1718,54 @@
         },
         {
             "text": "proliferate",
-            "score": 1.2,
+            "score": 0.8,
             "colorIdentity": "ubg"
+        },
+        {
+            "text": "scry (number)",
+            "score": 0,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "scry (number2)",
+            "score": 0.2,
+            "colorIdentity": "wubrg"
         },
         {
             "text": "proliferate, then proliferate again",
             "score": 1.2,
             "colorIdentity": "ubg",
             "nofollowup": true
+        },
+        {
+            "text": "tap target creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap target (color) creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap target (subtype) creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap target (permanent)",
+            "colorIdentity": "wu",
+            "score": 0.5
+        },
+        {
+            "text": "tap up to (numbername) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1
+        },
+        {
+            "text": "tap up to (numbername2) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1.4
         }
     ],
     "permanentStatics": [
@@ -1716,37 +1780,37 @@
         {
             "text": "sacrifice (self)",
             "colorIdentity": "wubrg",
-            "score": 6
+            "score": 10
         },
         {
             "text": "discard a card",
             "colorIdentity": "ubr",
-            "score": 3
+            "score": 7
         },
         {
             "text": "discard (numbername) cards",
             "colorIdentity": "ubr",
-            "score": 6
+            "score": 10
         },
         {
             "text": "tap another untapped creature you control",
             "colorIdentity": "wubrg",
-            "score": 3
+            "score": 5
         },
         {
             "text": "put a -1/-1 counter on (self)",
             "colorIdentity": "bg",
-            "score": 3
+            "score": 7
         },
         {
             "text": "pay (number) life",
             "colorIdentity": "b",
-            "score": 4
+            "score": 7
         },
         {
             "text": "pay (number2) life",
             "colorIdentity": "b",
-            "score": 6
+            "score": 10
         },
         {
             "text": "discard your hand",
@@ -1756,24 +1820,34 @@
         {
             "text": "sacrifice a (permanent)",
             "colorIdentity": "wubrg",
-            "score": 6
+            "score": 10
         },
         {
             "text": "discard a (type) card",
             "colorIdentity": "wubrg",
-            "score": 3
+            "score": 7
         }
     ],
     "instantSorceryEvents": [
         {
             "text": "(name) deals (number) damage to any target",
             "colorIdentity": "r",
-            "score": 1
+            "score": 0.8
         },
         {
             "text": "(name) deals (number2) damage to any target",
             "colorIdentity": "r",
             "score": 1.7
+        },
+        {
+            "text": "(name) deals (number) damage to any target",
+            "colorIdentity": "r",
+            "score": 0.8
+        },
+        {
+            "text": "(name) deals (number2) damage to any target",
+            "colorIdentity": "r",
+            "score": 1.5
         },
         {
             "text": "(name) deals (number2) damage to target creature an opponent controls",
@@ -1798,7 +1872,7 @@
         {
             "text": "(name) deals (number2) damage to each non-(subtype) creature target opponent controls",
             "colorIdentity": "r",
-            "score": 1
+            "score": 2
         },
         {
             "text": "(name) deals (number2) damage to each (subtype) creature",
@@ -1826,6 +1900,16 @@
             "score": 3.1
         },
         {
+            "text": "scry (number2)",
+            "colorIdentity": "wubrg",
+            "score": 0
+        },
+        {
+            "text": "scry (number)",
+            "colorIdentity": "wubrg",
+            "score": 0
+        },
+        {
             "text": "draw a card",
             "colorIdentity": "u",
             "score": 1
@@ -1849,6 +1933,11 @@
             "text": "return target (subtype) creature to its owner's hand",
             "colorIdentity": "u",
             "score": 0.5
+        },
+        {
+            "text": "return target creature you control to its owner's hand",
+            "colorIdentity": "u",
+            "score": -1
         },
         {
             "text": "destroy target creature with flying",
@@ -1896,6 +1985,11 @@
             "score": 0
         },
         {
+            "text": "tap target creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
             "text": "untap all creatures you control",
             "colorIdentity": "u",
             "score": 3
@@ -1904,6 +1998,16 @@
             "text": "tap all (subtype) creatures you control",
             "colorIdentity": "u",
             "score": -1
+        },
+        {
+            "text": "tap all creatures you control",
+            "colorIdentity": "u",
+            "score": -1.1
+        },
+        {
+            "text": "tap all creatures target (player) controls",
+            "colorIdentity": "u",
+            "score": 2.2
         },
         {
             "text": "tap all non-(subtype) creatures you control",
@@ -1918,17 +2022,20 @@
         {
             "text": "prevent the next (number2) damage that would be dealt to you",
             "colorIdentity": "w",
-            "score": 0.2
+            "score": 0.2,
+            "instantOnly": true
         },
         {
             "text": "prevent the next (number2) damage that would be dealt to creatures you control",
             "colorIdenity": "w",
-            "score": 0.2
+            "score": 0.2,
+            "instantOnly": true
         },
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
-            "score": -0.2
+            "score": -0.2,
+            "instantOnly": true
         },
         {
             "text": "you and creatures you control gain hexproof until end of turn",
@@ -1938,7 +2045,8 @@
         {
             "text": "counter target spell",
             "colorIdentity": "u",
-            "score": 2.5
+            "score": 2.5,
+            "instantOnly": true
         },
         {
             "text": "target (player) loses (number) life and you gain (number) life",
@@ -2066,9 +2174,35 @@
             "score": 0.2
         },
         {
+            "text": "creatures your opponents control can't block this turn",
+            "colorIdentity": "r",
+            "score": 0.2
+        },
+        {
+            "text": "creatures your opponents lose (keyword) until end of turn",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
             "text": "counter target (type/counterable) spell",
             "colorIdentity": "u",
-            "score": 1.2
+            "score": 1.2,
+            "instantOnly": true
+        },
+        {
+            "text": "tap target (permanent)",
+            "colorIdentity": "wu",
+            "score": 0.5
+        },
+        {
+            "text": "tap up to (numbername) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1
+        },
+        {
+            "text": "tap up to (numbername2) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1.4
         }
     ],
     "creatureNames": {

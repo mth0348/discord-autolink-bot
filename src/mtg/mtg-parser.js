@@ -141,14 +141,14 @@ class MtgParser {
         this.card = new MtgCard();
         this.card.name = name;
 
-        let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
+        let rarity = [1, 1, 2, 2, 2, 3, 3, 4][this.random(0, 7)]; // 1 = common, 4 = mythic
         let rarityText = this.getRarity(rarity);
         this.card.rarity = rarityText;
 
-        let oracle = this.getSpellAbility(rarity);
+        let oracle = this.getSpellAbility(rarity, "instant");
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 4 : this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -186,7 +186,7 @@ class MtgParser {
         let rarityText = this.getRarity(rarity);
         this.card.rarity = rarityText;
 
-        let oracle = this.getSpellAbility();
+        let oracle = this.getSpellAbility(rarity, "sorcery");
 
         // evaluate cmc.
         let totalScore = -0.2 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
@@ -246,7 +246,7 @@ class MtgParser {
         // decide triggered abilities.
         let ability = "";
         let secondAbility = "";
-        let hasAbility = [0, 0, 0, 1, 1, 1, 2][this.random(0, 6)];
+        let hasAbility = [0, 0, 1, 1, 1, 2, 2][this.random(0, 6)];
 
         if (hasAbility >= 1 || rarity >= 4) {
             let ability1 = this.getTriggeredAbility();
@@ -353,6 +353,16 @@ class MtgParser {
         if (power >= 2 && toughness >= 2)
             cmc = Math.max(cmc, 2);
 
+        // ensure subtype.
+        if (keyword.indexOf("Changeling") >= 0) {
+            this.card.subtype = "Shapeshifter";
+        }
+
+        // ensure persist toughness.
+        if (keyword.indexOf("Persist") >= 0) {
+            this.card.toughness = Math.max(this.card.toughness, 2);
+        }
+
         let oracles = [];
         if (keyword.length > 0) oracles.push(keyword);
         if (ability.length > 0) oracles.push(ability);
@@ -421,7 +431,7 @@ class MtgParser {
             return { text: `${this.parseSyntax(condition.replacementText, condition.context)}, instead ${this.parseSyntax(event.text)}.`, score: event.score };
         }
 
-        if (this.flipCoin() && event.nofollowup === undefined) {
+        if (this.random(1, 4) === 4 && event.nofollowup === undefined) {
             let secondEvent = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
             return { text: `${this.parseSyntax(condition.text, condition.context)}, ${this.parseSyntax(event.text, condition.context)}, then ${this.parseSyntax(secondEvent.text, condition.context)}.`, score: (event.score + secondEvent.score) };
@@ -463,48 +473,61 @@ class MtgParser {
         return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
     }
 
-    getSpellAbility(rarity) {
-        let event = mtgData.instantSorceryEvents[this.random(0, mtgData.instantSorceryEvents.length - 1)];
+    getSpellAbility(rarity, type) {
+        let eventSource = mtgData.instantSorceryEvents.filter(e => type !== "instant" ? e.instantOnly === undefined : true);
+        let event = eventSource[this.random(0, eventSource.length - 1)];
         this.colorIdentity += event.colorIdentity;
 
-        if ([false, false, true][this.random(0, 2)] || event.score < 0) {
+        let score = event.score;
+        let oracleText = event.text.toCamelCase();
+        let isComplicated = false;
+
+        // add second ability with "then".
+        if (this.random(1, 5) === 5 || event.score < 0) {
             let secondEventPool = mtgData.instantSorceryEvents.filter(e => (event.score < 0) ? (e.score > 0) : true);
             let secondEvent = secondEventPool[this.random(0, secondEventPool.length - 1)];
             this.colorIdentity += secondEvent.colorIdentity;
+            score += secondEvent.score;
 
-            if (this.random(1, 3) == 3) {
-                let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
-                if (sKeyword.text.length > 0) {
-                    if (sKeyword.secondAbility.length > 0) {
-                        secondEvent.text = sKeyword.secondAbility;
-                    }
-                    if (sKeyword.ability.length > 0) {
-                        event.text = sKeyword.ability;
-                        return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
-                    }
-                    event.text = `${sKeyword.text}\n\n${event.text.toCamelCase()}`;
-                }
-            }
-
-            return { text: `${this.parseSyntax(event.text)}, then ${this.parseSyntax(secondEvent.text)}.`, score: (event.score + secondEvent.score), isComplicated: (event.score < 0 || secondEvent.score < 0) };
+            oracleText = `${oracleText}, then ${secondEvent.text}`;
+            isComplicated = event.score < 0 || secondEvent.score < 0;
         }
 
-        if (this.random(1, 8) == 8) {
+        // add second ability with new line.
+        if (this.random(1, 8) === 8 || rarity >= 4) {
+            let additionalEventSource = mtgData.instantSorceryEvents.filter(e => e.score > 0);
+            let additionalEvent = additionalEventSource[this.random(0, additionalEventSource.length - 1)];
+            this.colorIdentity += additionalEvent.colorIdentity;
+            score += additionalEvent.score;
+
+            oracleText = `${oracleText}.\n${additionalEvent.text.toCamelCase()}`;
+            isComplicated = true;
+        }
+
+        // add keyword.
+        //if (this.random(1, 6) === 6) {
+        if (true) {
             let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
             if (sKeyword.text.length > 0) {
-                if (sKeyword.ability.length > 0) {
-                    event.text = sKeyword.ability;
+                if (sKeyword.ability.length > 0 && sKeyword.overwriteAbility) {
+                    oracleText = sKeyword.ability.toCamelCase();
                 }
-                event.text = `${sKeyword.text}\n\n${event.text.toCamelCase()}`;
+                else if (sKeyword.ability.length > 0 && !sKeyword.overwriteAbility) {
+                    oracleText += `\n\n${sKeyword.ability.toCamelCase()}`;
+                }
+                oracleText = `${sKeyword.text}\n\n${oracleText.toCamelCase()}`;
             }
         }
 
-        return { text: `${this.parseSyntax(event.text)}.`, score: event.score };
+        return { text: `${this.parseSyntax(oracleText)}.`, score: score, isComplicated: isComplicated };
     }
 
     parseSyntax(text, context) {
         let maxDepth = 10;
         let depth = 0;
+
+        let selfCount = 0;
+
         while (text.indexOf("(") >= 0) {
             depth++;
             if (depth >= maxDepth) break;
@@ -552,16 +575,17 @@ class MtgParser {
             }
 
             if (text.indexOf("(self)") >= 0) {
-                if (context === "self") {
+                if (context === "self" || selfCount > 0) {
                     text = text.replace(/\(self\)/g, "it");
                 } else {
+                    selfCount++;
                     text = text.replace(/\(self\)/g, this.card.name);
                 }
             }
 
             let useN = false;
             if (text.indexOf("(type)") >= 0) {
-                let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
+                let type = mtgData.types[this.random(0, mtgData.types.length - 1)];
                 useN = type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
             }
@@ -705,7 +729,7 @@ class MtgParser {
         // Two colors.
         if (color.length === 2) {
             if (cmc === 1) {
-                manacost = `{${color}}`;
+                manacost = `{${color[0]}${color[1]}}`;
             } else if (cmc === 2) {
                 manacost = `{${color[0]}}{${color[1]}}`;
             } else if (cmc === 3) {
@@ -834,7 +858,7 @@ class MtgParser {
         let instantSorceryKeywords = mtgData.keywords.filter(e => e.score > 0 && e.types.some(t => t === "instant" || t === "sorcery"));
         let keyword = instantSorceryKeywords[this.random(0, instantSorceryKeywords.length - 1)];
         let ability = "";
-        let secondAbility = "";
+        let overwriteAbility = false;
 
         if (keyword === undefined || keyword === null) {
             return { text: "", ability: "", secondAbility: "" };
@@ -845,7 +869,7 @@ class MtgParser {
         if (keyword.name === "Kicker") {
             let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
             let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            secondAbility = event.name;
+            ability = event.name;
             score += event.score;
             this.colorIdentity += event.colorIdentity;
         }
@@ -855,20 +879,21 @@ class MtgParser {
             let event1 = positiveEvents[this.random(0, positiveEvents.length - 1)];
             let event2 = positiveEvents[this.random(0, positiveEvents.length - 1)];
             ability = `choose one:\n  • ${event1.name.toCamelCase()}\n  • ${event2.name.toCamelCase()}`;
+            overwriteAbility = true;
             score += (event1.score + event2.score) / 2;
             this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
         }
 
         if (keyword.name === "Overload") {
             if (oracleText.indexOf("target") < 0)
-                return { text: "", ability: "", secondAbility: "" };
-            score + 1;
+                return { text: "", ability: "", overwriteAbility: overwriteAbility };
+            score += 1.5;
         }
         if (keyword.name === "Spectacle") {
             score -= 1;
         }
         if (keyword.name === "Miracle") {
-            score -= 1;
+            score -= 1.5;
         }
 
         score = Math.max(1, score);
@@ -882,10 +907,10 @@ class MtgParser {
         if (keyword.hasCost) {
             let cost = 2 / rarity + score * this.random(2, 3) / 3;
             let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
-            return { text: `${keywordName}${keyword.nameExtension > 0 ? ' -' : ''} ${keywordcost}`, ability: ability, secondAbility: secondAbility };
+            return { text: `${keywordName}${keyword.nameExtension.length > 0 ? ' -' : ''} ${keywordcost}`, ability: ability, overwriteAbility: overwriteAbility };
         }
 
-        return { text: keywordName, ability: ability, secondAbility: secondAbility };
+        return { text: keywordName, ability: ability, overwriteAbility: overwriteAbility };
     }
 }
 
