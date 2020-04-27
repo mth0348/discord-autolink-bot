@@ -564,21 +564,21 @@ class MtgParser {
             let subtype = "";
             if (text.indexOf("(subtype)") >= 0) {
                 subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)];
-                text = text.replace(/\(subtype\)/g, subtype);
+                text = text.replace("(subtype)", subtype);
             }
 
             if (text.indexOf("(other)") >= 0 && this.card.subtype !== undefined && this.card.subtype.indexOf(subtype) >= 0) {
-                text = text.replace(/\(other\)/g, "another ");
+                text = text.replace("(other)", "another ");
             } else {
-                text = text.replace(/\(other\)/g, "");
+                text = text.replace("(other)", "");
             }
 
             if (text.indexOf("(self)") >= 0) {
                 if (context === "self" || selfCount > 0) {
-                    text = text.replace(/\(self\)/g, "it");
+                    text = text.replace("(self)", "it");
                 } else {
                     selfCount++;
-                    text = text.replace(/\(self\)/g, this.card.name);
+                    text = text.replace("(self)", this.card.name);
                 }
             }
 
