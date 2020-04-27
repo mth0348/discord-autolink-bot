@@ -879,7 +879,7 @@
         {
             "name": "Cascade",
             "hasCost": false,
-            "score": 1.2,
+            "score": 1.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "excludeFromSimple": true,
@@ -1854,7 +1854,7 @@
         {
             "text": "destroy target artifact, creature or planeswalker",
             "colorIdentity": "wbr",
-            "score": 2.0
+            "score": 2.2
         },
         {
             "text": "scry (number)",
@@ -2082,7 +2082,7 @@
         {
             "text": "destroy target artifact, creature or planeswalker",
             "colorIdentity": "wbr",
-            "score": 2.0
+            "score": 2.2
         },
         {
             "text": "return up to (numbername) card(s) from your graveyard to your hand",
@@ -2291,7 +2291,7 @@
         {
             "text": "destroy target artifact",
             "colorIdentity": "r",
-            "score": 2.1
+            "score": 1.6
         },
         {
             "text": "target (player) sacrifices a(n) (permanent)",
@@ -2365,14 +2365,14 @@
             "score": 1.4
         },
         {
-            "text": "destroy each (permanent)",
-            "score": 3.5,
+            "text": "destroy all (permanent)s",
+            "score": 3.6,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
-            "text": "destroy each (permanent) target opponent controls",
-            "score": 5.1,
+            "text": "destroy all (permanent)s target opponent controls",
+            "score": 5.8,
             "colorIdentity": "wbg",
             "nofollowup": true
         },

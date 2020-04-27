@@ -282,7 +282,7 @@ class MtgParser {
 
         // decide keywords, if any. Max two.        
         let keyword = "";
-        let hasKeyword = this.random(0, 2);
+        let hasKeyword = [0, 0, 1, 2][this.random(0, 3)];
         if (hasKeyword >= 1 || rarity >= 3) {
             let keyword1 = this.getKeyword("creature", false, rarity);
             totalScore += keyword1.score;
@@ -505,8 +505,7 @@ class MtgParser {
         }
 
         // add keyword.
-        //if (this.random(1, 6) === 6) {
-        if (true) {
+        if (this.random(1, 6) === 6) {
             let sKeyword = this.handleSpecialSpellKeywords(event.text, rarity);
             if (sKeyword.text.length > 0) {
                 if (sKeyword.ability.length > 0 && sKeyword.overwriteAbility) {

@@ -1,8 +1,1 @@
-* counterspell, fog only on instants
-* infinite death/win (lose life, lose life)
-* multicolor- one-cmc
-* multicolor- one-cmc
-* changeling - enforce shapeshifter
-* (n) for keywords like "evolve"
-* persist toughness > 1
-* (keyword) should not resolve into "cascade" and "delve"
+fix two identical keywords
