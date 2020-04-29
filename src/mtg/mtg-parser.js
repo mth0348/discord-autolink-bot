@@ -88,7 +88,7 @@ class MtgParser {
         this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
         let validInputs = ["creature", "instant", "sorcery", "planeswalker"];
-        let cardType = "planeswalker";//validInputs[this.random(0, validInputs.length - 1)];
+        let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         if (message.content == "!mtg help") {
             let supportedCardTypes = validInputs.join(", ");
