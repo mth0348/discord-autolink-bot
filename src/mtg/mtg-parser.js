@@ -541,6 +541,7 @@ class MtgParser {
         if (this.random(1, 10) == 10) {
             isFirstStatic = true;
             let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
+            staticEvent.text = staticEvent.text.replace("3", "2"); /* don't allow +3 */
             plusEvent = staticEvent;
             this.colorIdentity += plusEvent.colorIdentity;
             plusCost = staticEvent.score * 1.5;
