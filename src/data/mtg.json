@@ -1399,7 +1399,7 @@
         {
             "text": "(self) deals (number) damage to any target",
             "score": 1,
-            "colorIdentity": "r"
+            "colorIdentity": "rr"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on (self)",
@@ -1409,27 +1409,28 @@
         {
             "text": "untap (self)",
             "score": 0.6,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "(self) deals (number) damage to target (player)",
             "score": 1,
-            "colorIdentity": "r"
+            "colorIdentity": "rr"
         },
         {
             "text": "(self) deals (number) damage to target creature an opponent controls",
             "score": 0.6,
-            "colorIdentity": "r"
+            "colorIdentity": "rr"
         },
         {
             "text": "(self) deals (number) damage to target (subtype) creature an opponent controls",
             "score": 0.2,
-            "colorIdentity": "r"
+            "colorIdentity": "rr"
         },
         {
             "text": "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
             "score": 0.4,
-            "colorIdentity": "r"
+            "colorIdentity": "rr"
         },
         {
             "text": "draw a card",
@@ -1439,12 +1440,12 @@
         {
             "text": "draw (numbername) cards",
             "score": 2.5,
-            "colorIdentity": "u"
+            "colorIdentity": "uu"
         },
         {
             "text": "destroy target creature",
             "score": 1.5,
-            "colorIdentity": "wub"
+            "colorIdentity": "wwbb"
         },
         {
             "text": "destroy (self)",
@@ -1484,7 +1485,7 @@
         {
             "text": "destroy target (permanent) an opponent controls",
             "score": 1.5,
-            "colorIdentity": "wbg"
+            "colorIdentity": "wwbbg"
         },
         {
             "text": "target (player) discards a card",
@@ -1543,18 +1544,19 @@
         },
         {
             "text": "target (player) sacrifices a (subtype) creature",
-            "score": 0.4,
+            "score": 0.6,
             "colorIdentity": "wbr"
         },
         {
             "text": "target (player) sacrifices a non-(subtype) creature",
-            "score": 0.8,
+            "score": 1.2,
             "colorIdentity": "wbr"
         },
         {
             "text": "sacrifice (self)",
             "score": -1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "sacrifice a creature",
@@ -1674,7 +1676,8 @@
         {
             "text": "exile (self)",
             "score": -1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "each player exiles (numbername) cards from his or her hand",
@@ -1738,7 +1741,7 @@
         },
         {
             "text": "take an extra turn",
-            "score": 3.5,
+            "score": 5.5,
             "colorIdentity": "u"
         },
         {
@@ -1764,27 +1767,32 @@
         {
             "text": "(self) gets +(number)/+0 until end of turn",
             "score": 0.5,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "(self) gets +(number)/+(number) until end of turn",
             "score": 0.5,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "(self) gets +(number2)/+(number2) until end of turn",
             "score": 1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "(self) deals damage equal to its power to target creature",
             "score": 2.2,
-            "colorIdentity": "rg"
+            "colorIdentity": "rg",
+            "creatureOnly": true
         },
         {
             "text": "(self) deals damage equal to its power to any target",
             "score": 2.6,
-            "colorIdentity": "rg"
+            "colorIdentity": "rg",
+            "creatureOnly": true
         },
         {
             "text": "reveal the top X cards from your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
@@ -1805,26 +1813,32 @@
             "nofollowup": true
         },
         {
-            "text": "reveal the top X cards from your library, where X is the number of instant and sorcery cards in your graveyard. (self) deals X damage to any target",
-            "score": 3,
+            "text": "reveal the top X cards from your library, where X is the number of instant and sorcery cards in your graveyard. Put those cards into your hand",
+            "score": 5,
             "colorIdentity": "r",
             "nofollowup": true
         },
         {
+            "text": "draw X cards, where X is the number of (permanent)s you control",
+            "score": 5,
+            "colorIdentity": "u",
+            "nofollowup": true
+        },
+        {
             "text": "proliferate, then destroy each nonland permanent with (numbername) or more counters on it",
-            "score": 3,
+            "score": 2,
             "colorIdentity": "b",
             "nofollowup": true
         },
         {
-            "text": "destroy each (permanent)",
+            "text": "destroy all (permanent)s",
             "score": 3.5,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
         {
             "text": "destroy each (permanent) target opponent controls",
-            "score": 5.1,
+            "score": 6.2,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
@@ -1853,8 +1867,18 @@
         },
         {
             "text": "destroy target artifact, creature or planeswalker",
-            "colorIdentity": "wbr",
+            "colorIdentity": "wwbbr",
             "score": 2.2
+        },
+        {
+            "text": "destroy target creature or planeswalker",
+            "colorIdentity": "wwbb",
+            "score": 2
+        },
+        {
+            "text": "destroy target planeswalker",
+            "colorIdentity": "wwbb",
+            "score": 2
         },
         {
             "text": "scry (number)",
@@ -1904,12 +1928,46 @@
         }
     ],
     "permanentStatics": [
-        "(other)creatures you control have (keyword)",
-        "(other)creatures you control have (keyword) and (keyword)",
-        "(subtype)s you control have -(number)/-(number)",
-        "(subtype)s you control have -(number)/-(number) and (keyword)",
-        "(subtype)s you control have +(number)/+(number)",
-        "(subtype)s you control have +(number)/+(number) and (keyword)"
+        {
+            "text": "creatures you control have (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1.2
+        },
+        {
+            "text": "creatures you control have (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1.8
+        },
+        {
+            "text": "creatures you control get -(number)/-(number)",
+            "colorIdentity": "bb",
+            "score": -4
+        },
+        {
+            "text": "creatures you control get +(number)/+(number)",
+            "colorIdentity": "wwbg",
+            "score": 4
+        },
+        {
+            "text": "creatures you don't control get -1/-1",
+            "colorIdentity": "bb",
+            "score": 4
+        },
+        {
+            "text": "creatures you don't control get -2/-2",
+            "colorIdentity": "bb",
+            "score": 6
+        },
+        {
+            "text": "creatures you don't control get -(number)/-(number)",
+            "colorIdentity": "bb",
+            "score": 6
+        },
+        {
+            "text": "creatures you control get +1/+1 and have (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 4.2
+        }
     ],
     "permanentActivatedCosts": [
         {
@@ -1966,57 +2024,57 @@
     "instantSorceryEvents": [
         {
             "text": "(name) deals (number) damage to any target",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 0.8
         },
         {
             "text": "(name) deals (number2) damage to any target",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1.7
         },
         {
             "text": "(name) deals (number) damage to any target",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 0.8
         },
         {
             "text": "(name) deals (number2) damage to any target",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1.5
         },
         {
             "text": "(name) deals (number2) damage to target creature an opponent controls",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1.5
         },
         {
             "text": "(name) deals (number2) damage to each creature target opponent controls",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 2
         },
         {
             "text": "(name) deals (number2) damage to each creature",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1.2
         },
         {
             "text": "(name) deals (number2) damage to each (subtype) creature target opponent controls",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1
         },
         {
             "text": "(name) deals (number2) damage to each non-(subtype) creature target opponent controls",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 2
         },
         {
             "text": "(name) deals (number2) damage to each (subtype) creature",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1
         },
         {
             "text": "(name) deals (number2) damage to each non-(subtype) creature",
-            "colorIdentity": "r",
+            "colorIdentity": "rr",
             "score": 1
         },
         {
@@ -2078,6 +2136,16 @@
             "text": "destroy target creature with flying",
             "colorIdentity": "g",
             "score": 1
+        },
+        {
+            "text": "destroy target tapped creature",
+            "colorIdentity": "wwbb",
+            "score": 1.1
+        },
+        {
+            "text": "destroy target (color) creature",
+            "colorIdentity": "ww",
+            "score": 1.2
         },
         {
             "text": "destroy target artifact, creature or planeswalker",
@@ -2395,6 +2463,417 @@
             "nofollowup": true
         }
     ],
+    "planeswalkerNames": {
+        "names": [
+            "Aegnor",
+            "Aego",
+            "Aelena",
+            "Aelene",
+            "Aeleanor",
+            "Aelinor",
+            "Aelrindel",
+            "Aemma",
+            "Aerendyl",
+            "Aeson",
+            "Afamrail",
+            "Agis",
+            "Ailmar",
+            "Aithlin",
+            "Akasha",
+            "Akash",
+            "Akashi",
+            "Akkar",
+            "Alabyran",
+            "Alae",
+            "Alaesa",
+            "Alaglossa",
+            "Alais",
+            "Alavara",
+            "Alea",
+            "Alerathla",
+            "Allannia",
+            "Alloralla",
+            "Alys",
+            "Alyssa",
+            "Alyssia",
+            "Amaryll",
+            "Amaryllis",
+            "Aquilaen",
+            "Aranel",
+            "Arazorwyn",
+            "Aredhel",
+            "Arwen",
+            "Axil",
+            "Axilea",
+            "Axilia",
+            "Azari",
+            "Azariah",
+            "Baela",
+            "Baelen",
+            "Beala",
+            "Beleg",
+            "Beluar",
+            "Bhuraelea",
+            "Biafyndar",
+            "Bialaer",
+            "Blythe",
+            "Blythswana",
+            "Bonna",
+            "Bonnalurie",
+            "Braern",
+            "Braerindra",
+            "Briareth",
+            "Caerthynna",
+            "Calarel",
+            "Cameron",
+            "Cauladra",
+            "Celeborn",
+            "Celebrían",
+            "Celebrimbor",
+            "Chandrelle",
+            "Chasianna",
+            "Chathanglas",
+            "Cheyrth",
+            "Chichlandra",
+            "Chin’nesstre",
+            "Chomylla",
+            "Círdan",
+            "Ciyradyl",
+            "Cluhurach",
+            "Cluym",
+            "Cohnal",
+            "Conall",
+            "Connak",
+            "Cornaith",
+            "Corym",
+            "Curunir",
+            "Cymbiir",
+            "Cystenn",
+            "Daeharice",
+            "Daemeon",
+            "Daealla",
+            "Daena",
+            "Daenestra",
+            "Daenys",
+            "Daeondra",
+            "Dakath",
+            "Dalyor",
+            "Darcassan",
+            "Dior",
+            "Doreah",
+            "Earendil",
+            "Edrahil",
+            "Eladithas",
+            "Elanjar",
+            "Elaran",
+            "Elashor",
+            "Elbauthin",
+            "Elbereth",
+            "Eldaernth",
+            "Eldar",
+            "Eldrin",
+            "Elaria",
+            "Elénaril",
+            "Elenshaer",
+            "Elenwe",
+            "Ellania",
+            "Elora",
+            "Eluchil",
+            "Elwin",
+            "Elwing",
+            "Elyssa",
+            "Erlan",
+            "Erlathan",
+            "Eroan",
+            "Erolith",
+            "Eschallus",
+            "Estelar",
+            "Etchelion",
+            "Ethlando",
+            "Ettrian",
+            "Evindal",
+            "Eyrynnhv",
+            "Faelar",
+            "Faelyn",
+            "Faeranduil",
+            "Falael",
+            "Fëanor",
+            "Fenris",
+            "Fhaertala",
+            "Filaurel",
+            "Filauria",
+            "Fildaerae",
+            "Finduilas",
+            "Filvendor",
+            "Fingolfin",
+            "Finrod",
+            "Folduin",
+            "Fraeya",
+            "Gael",
+            "Gaelira",
+            "Gaemon",
+            "Gaerradh",
+            "Gaylia",
+            "Ghilanna",
+            "Gil-galad",
+            "Gilgalad",
+            "Glorfindel",
+            "Glynkas",
+            "Glynnii",
+            "Gweyr",
+            "Gwynnestri",
+            "Gylledha",
+            "Haalija",
+            "Hacathra",
+            "Haela",
+            "Haemir",
+            "Hagduin",
+            "Haladavar",
+            "Halaema",
+            "Halaena",
+            "Halafarin",
+            "Halama",
+            "Halanaestra",
+            "Hameada",
+            "Haryk",
+            "Hastos",
+            "Hatharal",
+            "Herbalar",
+            "Holcene",
+            "Holone",
+            "Horith",
+            "Hubyr",
+            "Hycis",
+            "Hyacinth",
+            "Iahalae",
+            "Ialantha",
+            "Iarmenor",
+            "Iefyr",
+            "Ievos",
+            "Idril",
+            "Ikeshia",
+            "Ilbryn",
+            "Iliven",
+            "Ilmadia",
+            "Ilthuryn",
+            "Ilyrana",
+            "Ilythyrra",
+            "Imdalace",
+            "Imizael",
+            "Inarie",
+            "Inchel",
+            "Inialos",
+            "Injros",
+            "Intevar",
+            "Iolas",
+            "Irithiel",
+            "Ithirae",
+            "Iziuel",
+            "Jahandra",
+            "Jassin",
+            "Jhaan",
+            "Jhaartael",
+            "Jhaeros",
+            "Kaeda",
+            "Kaylessa",
+            "Keara",
+            "Keerla",
+            "Keishara",
+            "Kelkalyn",
+            "Kethryllia",
+            "Kevan",
+            "Keya",
+            "Klaern",
+            "Kolvar",
+            "Kuornos",
+            "Kuskyn",
+            "Kymil",
+            "Kyrenic",
+            "Kyrrha",
+            "Kyrtaar",
+            "Kythaela",
+            "Laamtora",
+            "Laeanna",
+            "Laena",
+            "Laerdya",
+            "Lazziar",
+            "Leandra",
+            "Leilatha",
+            "Liluth",
+            "Llamryl",
+            "Lúthien",
+            "Lyraesel",
+            "Maaleshiira",
+            "Maegelle",
+            "Maelyrra",
+            "Maeralya",
+            "Maiele",
+            "Meara",
+            "Mereena",
+            "Merlara",
+            "Mithrandir",
+            "Miriel",
+            "Molonym",
+            "Molostroi",
+            "Montagor",
+            "Morgan",
+            "Morthil",
+            "Morwen",
+            "Mylaela",
+            "Myrddin",
+            "Myriil",
+            "Myrin",
+            "Myrynda",
+            "Mythanthar",
+            "Naertho",
+            "Naeryndam",
+            "Napraeleon",
+            "Narbeth",
+            "Nardual",
+            "Nelaeryn",
+            "Neldor",
+            "Nerilamin",
+            "Nesterin",
+            "Nevarth",
+            "Nhamashal",
+            "Nieven",
+            "Nindr",
+            "Nuovis",
+            "Nushala",
+            "Nym",
+            "Nylaathria",
+            "Ochyllyss",
+            "Oluevaera",
+            "Onas",
+            "Oribel",
+            "Oritris",
+            "Orndacil",
+            "Ornthalas",
+            "Orris",
+            "Orym",
+            "Oslarelar",
+            "Otaehryn",
+            "Othorion",
+            "Paeral",
+            "Paeris",
+            "Phaerl",
+            "Phaendar",
+            "Phantyni",
+            "Pharom",
+            "Phelorna",
+            "Phraan",
+            "Phuingara",
+            "Phyrra",
+            "Pirphal",
+            "Pleufan",
+            "Purtham",
+            "Pyrder",
+            "Quaela",
+            "Quaeth",
+            "Quamara",
+            "Raegel",
+            "Raejiisa",
+            "Raerauntha",
+            "Rathiain",
+            "Raunaeril",
+            "Ravaphine",
+            "Reinys",
+            "Renestrae",
+            "Reysalor",
+            "Rhistel",
+            "Rubrae",
+            "Ryllae",
+            "Saelethil",
+            "Saelihn",
+            "Saélihn",
+            "Saevel",
+            "Saeya",
+            "Sasha",
+            "Seiveril",
+            "Shalana",
+            "Shalantha",
+            "Shalheira",
+            "Shandalar",
+            "Shanyrria",
+            "Sharaera",
+            "Sharian",
+            "Sheedra",
+            "Shiera",
+            "Shyael",
+            "Shyllisyrr",
+            "Siirist",
+            "Silvyr",
+            "Sinnafain",
+            "Soliania",
+            "Soora",
+            "Sorsasta",
+            "Sudryl",
+            "Susklahava",
+            "Sylmae",
+            "Symrustar",
+            "Syndra",
+            "Synnorha",
+            "Syrenese",
+            "Syrune",
+            "Syviis",
+            "Taena",
+            "Taenaran",
+            "Taenya",
+            "Taeriel",
+            "Taerntym",
+            "Takari",
+            "Talaedra",
+            "Talanashta",
+            "Talila",
+            "Talilia",
+            "Talindra",
+            "Tamara",
+            "Tamnaeuth",
+            "Tannivh",
+            "Tarasynora",
+            "Tassarion",
+            "Teharissa",
+            "Tehlmar",
+            "Therona",
+            "Thingol",
+            "Thranduil",
+            "Tiatha",
+            "Toross",
+            "Travaran",
+            "Triandal",
+            "Tsarra",
+            "Turgon",
+            "Tyria",
+            "Urmicca",
+            "Usunaar",
+            "Uthorim",
+            "Vaalyun",
+            "Vaegon",
+            "Vaella",
+            "Vaeril",
+            "Valindra",
+            "Veara",
+            "Venrie",
+            "Vestele",
+            "Viansola",
+            "Violen",
+            "Virjeon",
+            "Viserra",
+            "Zabbas",
+            "Zaltarish",
+            "Zeale",
+            "Zhuirentel",
+            "Yaereene",
+            "Yalanilue",
+            "Yathlanae",
+            "Yhendorn",
+            "Ylyndar",
+            "Ynshael",
+            "Yrlissa",
+            "Yrneha",
+            "Yrniela"
+        ]
+    },
     "creatureNames": {
         "adjectives": [
             "furious",
@@ -2626,7 +3105,7 @@
             "knight",
             "substigator",
             "devourer",
-            "oblitorator",
+            "obliterator",
             "breeder",
             "professor",
             "tyrant",

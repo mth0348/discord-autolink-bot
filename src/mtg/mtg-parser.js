@@ -52,7 +52,7 @@ class MtgParser {
             message.guild.emojis.cache.find(e => e.name === 'mtg_X'), // 15
             message.guild.emojis.cache.find(e => e.name === 'mtg_T'),
 
-            message.guild.emojis.cache.find(e => e.name === 'mtg_BG'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_BG'), // 17
             message.guild.emojis.cache.find(e => e.name === 'mtg_BR'),
             message.guild.emojis.cache.find(e => e.name === 'mtg_GU'),
             message.guild.emojis.cache.find(e => e.name === 'mtg_GW'),
@@ -61,8 +61,24 @@ class MtgParser {
             message.guild.emojis.cache.find(e => e.name === 'mtg_UB'),
             message.guild.emojis.cache.find(e => e.name === 'mtg_UR'),
             message.guild.emojis.cache.find(e => e.name === 'mtg_WB'),
-            message.guild.emojis.cache.find(e => e.name === 'mtg_WU')
+            message.guild.emojis.cache.find(e => e.name === 'mtg_WU'),
 
+            message.guild.emojis.cache.find(e => e.name === 'mtg_zero'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_plus1'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_plus2'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_plus3'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus1'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus2'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus3'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus4'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus5'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus6'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus7'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_minus8'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_pw_2'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_pw_3'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_pw_4'),
+            message.guild.emojis.cache.find(e => e.name === 'mtg_pw_5') // 27
         ];
     }
 
@@ -71,8 +87,8 @@ class MtgParser {
         this.thumbsup = message.guild.emojis.cache.find(e => e.name === 'thumbsup::skin-tone-1');
         this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
-        let validInputs = ["creature", "instant", "sorcery"];
-        let cardType = validInputs[this.random(0, validInputs.length - 1)];
+        let validInputs = ["creature", "instant", "sorcery", "planeswalker"];
+        let cardType = "planeswalker";//validInputs[this.random(0, validInputs.length - 1)];
 
         if (message.content == "!mtg help") {
             let supportedCardTypes = validInputs.join(", ");
@@ -80,11 +96,11 @@ class MtgParser {
             return;
         }
 
-        let args = message.content.split(" ");//mtgData.types[this.random(0, mtgData.types.length - 1)];
+        let args = message.content.split(" ");
         if (args.length > 1)
             cardType = args[1];
 
-        if (!mtgData.types.some(t => t === cardType.toLowerCase())) {
+        if (!validInputs.some(t => t === cardType.toLowerCase())) {
             message.channel.send(`"${cardType}" is not an official card type. Leave blank or use "creature", for example.`)
             return;
         }
@@ -103,6 +119,9 @@ class MtgParser {
                 break;
             case "sorcery":
                 this.createSorceryCard(message);
+                break;
+            case "planeswalker":
+                this.createPlaneswalkerCard(message);
                 break;
         }
 
@@ -166,6 +185,43 @@ class MtgParser {
 
         this.card.type = "Instant";
         this.card.subtype = undefined;
+        this.card.power = undefined;
+        this.card.color = color;
+        this.card.cost = this.resolveManaSymbols(manacost);
+        this.card.oracle = this.resolveManaSymbols(oracle.text.toCamelCase());
+        this.card.flavor = "";
+
+        this.sendCard(message);
+    }
+
+    createPlaneswalkerCard(message) {
+        this.lastNumber = 0;
+
+        let name = this.getPlaneswalkerName();
+        this.card = new MtgCard();
+        this.card.name = name;
+        this.card.supertype = "Legendary";
+        this.card.type = "Planeswalker";
+        this.card.subtype = name.split(" ")[0].replace(",", "");
+
+        let oracle = this.getPlaneswalkerOracle();
+        let cmc = Math.max(2, Math.ceil(oracle.score));
+
+        let color = this.getColorFromIdentity(this.colorIdentity);
+        let manacost = this.getManacostFromCmc(cmc, color);
+
+        this.log.push("lastNumber:\t" + this.lastNumber);
+        this.log.push("o-score:\t" + oracle.score);
+        this.log.push("cmc:\t\t" + cmc);
+        this.log.push("coloridentity:\t" + this.colorIdentity);
+        this.log.push("color:\t\t" + color);
+        this.log.push("manacost:\t" + manacost);
+
+        let rarity = oracle.firstPositive ? 4 : 3; // 1 = common, 4 = mythic
+        let rarityText = this.getRarity(rarity);
+        this.card.rarity = rarityText;
+
+
         this.card.power = undefined;
         this.card.color = color;
         this.card.cost = this.resolveManaSymbols(manacost);
@@ -333,7 +389,7 @@ class MtgParser {
             power = Math.max(power, toughness);
             toughness = Math.min(p, t);
         }
-        
+
 
         if (this.flipCoin()) {
             let dif = power - toughness;
@@ -473,6 +529,51 @@ class MtgParser {
         return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
     }
 
+    getPlaneswalkerOracle() {
+        let pwEvents = mtgData.permanentEvents.filter(e => e.score <= 1 && e.score >= -1 && e.creatureOnly == undefined);
+        let pw2Events = mtgData.permanentEvents.filter(e => e.score >= 1 && e.score <= 2 && e.creatureOnly == undefined);
+        let pw3Events = mtgData.permanentEvents.filter(e => (e.score > 2 || (e.text.indexOf("(number") >= 0 && e.score >= 1)) && e.creatureOnly == undefined);
+
+        let plusEvent = pwEvents[this.random(0, pwEvents.length - 1)];
+        let plusCost = 3 * ((plusEvent.score + 3) / 6);
+
+        let isFirstStatic = false;
+        if (this.random(1, 10) == 10) {
+            isFirstStatic = true;
+            let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
+            plusEvent = staticEvent;
+            this.colorIdentity += plusEvent.colorIdentity;
+            plusCost = staticEvent.score;
+        }
+        else {
+            this.colorIdentity += plusEvent.colorIdentity;
+            plusCost = Math.min(3, Math.max(1, Math.ceil(plusCost * (plusCost < 0 ? 1.5 : 1) )));
+        }
+
+        let minus1Event = pw2Events[this.random(0, pw2Events.length - 1)];
+        let minus1Cost = minus1Event.score * 1.5;
+        minus1Cost = Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
+        this.colorIdentity += minus1Event.colorIdentity;
+
+        let minus2Event = pw3Events[this.random(0, pw3Events.length - 1)];
+        this.colorIdentity += minus2Event.colorIdentity;
+
+        let pushedMinus2EventText = minus2Event.text.replace(/\(number\)/g, "(number3)").replace(/\(number2\)/g, "(number3)").replace(/\(numbername\)/g, "(numbername3)").replace(/\(numbername2\)/g, "(numbername3)");
+        let parsedMinus2Text = this.parseSyntax(pushedMinus2EventText.toCamelCase());
+        let minus2Cost = Math.min(8, Math.max(4, Math.ceil(minus2Event.score * 1.5 + this.lastNumber / 4)));
+
+        let a1 = isFirstStatic ?
+            `${this.parseSyntax(plusEvent.text.toCamelCase())}.` :
+            `{+${plusCost}}: ${this.parseSyntax(plusEvent.text.toCamelCase())}.`;
+        let a2 = `{-${minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
+        let a3 = `{-${minus2Cost}}: ${parsedMinus2Text}.`;
+
+        let loyaltyScore = Math.max(2, Math.min(5, Math.min(minus2Cost, Math.floor(minus2Cost / (this.flipCoin() ? 1.3 : 2)))));
+        let loyalty = `{ ${loyaltyScore} }`;
+
+        return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + minus1Cost) / 2, firstPositive: plusEvent.score > 0 };
+    }
+
     getSpellAbility(rarity, type) {
         let eventSource = mtgData.instantSorceryEvents.filter(e => type !== "instant" ? e.instantOnly === undefined : true);
         let event = eventSource[this.random(0, eventSource.length - 1)];
@@ -544,6 +645,12 @@ class MtgParser {
                 text = text.replace("(numbername2)", number);
                 this.lastNumber += number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5;
             }
+            if (text.indexOf("(numbername3)") >= 0) {
+                moreThanOne = true;
+                let number = ["four", "five", "five", "six"][this.random(0, 3)];
+                text = text.replace("(numbername3)", number);
+                this.lastNumber += number === "four" ? 4 : number === "five" ? 5 : 6;
+            }
             if (text.indexOf("(number)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
                 moreThanOne = moreThanOne || number > 1;
@@ -552,8 +659,14 @@ class MtgParser {
             }
             if (text.indexOf("(number2)") >= 0) {
                 let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
-                moreThanOne = moreThanOne || number > 1;
+                moreThanOne = true;
                 text = text.replace("(number2)", number);
+                this.lastNumber += number;
+            }
+            if (text.indexOf("(number3)") >= 0) {
+                let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][this.random(0, 8)];
+                moreThanOne = true;
+                text = text.replace("(number3)", number);
                 this.lastNumber += number;
             }
 
@@ -597,7 +710,7 @@ class MtgParser {
             if (text.indexOf("(mana)") >= 0) {
                 let symbols = this.colorIdentity.split("");
                 let symbol = `{${symbols[this.random(0, this.colorIdentity.length - 1)]}}`;
-                if (this.flipCoin()) symbol += symbol;
+                if (this.flipCoin()) symbol += `{${symbols[this.random(0, this.colorIdentity.length - 1)]}}`;
                 text = text.replace("(mana)", symbol);
             }
 
@@ -662,6 +775,24 @@ class MtgParser {
         text = text.replace(/\{wu\}/g, this.emojis[26]);
         text = text.replace(/\{uw\}/g, this.emojis[26]);
 
+        text = text.replace(/\{zero\}/g, this.emojis[27]);
+        text = text.replace(/\{plus1\}/g, this.emojis[28]);
+        text = text.replace(/\{plus2\}/g, this.emojis[29]);
+        text = text.replace(/\{plus3\}/g, this.emojis[30]);
+        text = text.replace(/\{minus1\}/g, this.emojis[31]);
+        text = text.replace(/\{minus2\}/g, this.emojis[32]);
+        text = text.replace(/\{minus3\}/g, this.emojis[33]);
+        text = text.replace(/\{minus4\}/g, this.emojis[34]);
+        text = text.replace(/\{minus5\}/g, this.emojis[35]);
+        text = text.replace(/\{minus6\}/g, this.emojis[36]);
+        text = text.replace(/\{minus7\}/g, this.emojis[37]);
+        text = text.replace(/\{minus8\}/g, this.emojis[38]);
+
+        text = text.replace(/\{pw_2\}/g, this.emojis[39]);
+        text = text.replace(/\{pw_3\}/g, this.emojis[40]);
+        text = text.replace(/\{pw_4\}/g, this.emojis[41]);
+        text = text.replace(/\{pw_5\}/g, this.emojis[42]);
+
         return text;
     }
 
@@ -676,13 +807,32 @@ class MtgParser {
         colorCount[2].count = colorIdentity.split("").filter(c => c === "b").length;
         colorCount[3].count = colorIdentity.split("").filter(c => c === "r").length;
         colorCount[4].count = colorIdentity.split("").filter(c => c === "g").length;
-        let maxList = colorCount.sort((a, b) => a.count > b.count ? -1 : a.count === b.count ? 0 : 1);
-        let max = maxList[0].count;
+        let sortedList = colorCount.sort((a, b) => a.count > b.count ? -1 : a.count === b.count ? 0 : 1);
+        let max = sortedList[0].count;
 
         if (colorIdentity === "wubrg") {
             return colorCount[this.random(0, 4)].c;
         }
-        return colorCount.filter(c => c.count === max).map(c => c.c).join("");
+
+        let maxes = colorCount.filter(c => c.count === max);
+
+        // better distribution of mana.
+        if (maxes.length === 1) {
+            if (sortedList.length > 1 && this.random(1, 6) == 6) return maxes[0].c + sortedList[1].c;
+            return maxes[0].c;
+        }
+        if (maxes.length === 2) {
+            if (sortedList.length > 2 && this.random(1, 6) == 6) return maxes[0].c + maxes[1].c + sortedList[2].c;
+            return maxes[0].c + maxes[1].c;
+        }
+        if (maxes.length >= 3) {
+            if (this.random(1, 8) == 8) return maxes[0].c + maxes[1].c;
+            if (this.random(1, 8) == 8) return maxes[1].c + maxes[2].c;
+            if (this.random(1, 8) == 8) return maxes[0].c + maxes[2].c;
+            // else use all colors.
+        }
+
+        return maxes.map(c => c.c).join("");
     }
 
     getManacostFromCmc(cmc, colorString) {
@@ -806,6 +956,16 @@ class MtgParser {
         return name.toCamelCase()
             + mtgData.creatureNames.adjectives[this.random(0, mtgData.creatureNames.adjectives.length - 1)].toCamelCase()
             + " " + mtgData.creatureNames.nouns[this.random(0, mtgData.creatureNames.nouns.length - 1)].toCamelCase();
+    }
+
+    getPlaneswalkerName() {
+        let name = mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
+        if (this.flipCoin() || this.flipCoin()) {
+            name += " " + mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
+        } else if (this.flipCoin()) {
+            name += " " + mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
+        }
+        return name;
     }
 
     getInstantSorceryName() {
