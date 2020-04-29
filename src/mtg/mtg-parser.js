@@ -960,10 +960,13 @@ class MtgParser {
 
     getPlaneswalkerName() {
         let name = mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
-        if (this.flipCoin() || this.flipCoin()) {
-            name += " " + mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
-        } else if (this.flipCoin()) {
-            name += " " + mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
+        if (this.random(1, 3) == 3) {
+            return name.toCamelCase()
+                + mtgData.creatureNames.adjectives[this.random(0, mtgData.creatureNames.adjectives.length - 1)].toCamelCase()
+                + " " + mtgData.creatureNames.nouns[this.random(0, mtgData.creatureNames.nouns.length - 1)].toCamelCase();
+        }
+        else if (this.random(1, 3) == 3) {
+            return name + " " + mtgData.planeswalkerNames.names[this.random(0, mtgData.planeswalkerNames.names.length - 1)];
         }
         return name;
     }
