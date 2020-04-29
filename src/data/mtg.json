@@ -1404,7 +1404,8 @@
         {
             "text": "put (numbername) +1/+1 counter(s) on (self)",
             "score": 0.6,
-            "colorIdentity": "g"
+            "colorIdentity": "g",
+            "creatureOnly": true
         },
         {
             "text": "untap (self)",
@@ -1450,7 +1451,8 @@
         {
             "text": "destroy (self)",
             "score": -1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "you lose (number) life",
@@ -2407,7 +2409,7 @@
             "score": 0.2
         },
         {
-            "text": "creatures your opponents lose (keyword) until end of turn",
+            "text": "creatures your opponents control lose (keyword) until end of turn",
             "colorIdentity": "wu",
             "score": 0
         },
