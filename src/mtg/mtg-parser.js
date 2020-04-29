@@ -535,7 +535,7 @@ class MtgParser {
         let pw3Events = mtgData.permanentEvents.filter(e => (e.score > 2 || (e.text.indexOf("(number") >= 0 && e.score >= 1)) && e.creatureOnly == undefined);
 
         let plusEvent = pwEvents[this.random(0, pwEvents.length - 1)];
-        let plusCost = 3 * ((plusEvent.score + 3) / 6);
+        let plusCost = (plusEvent.score + 1) * 3 / 2;
 
         let isFirstStatic = false;
         if (this.random(1, 10) == 10) {
@@ -543,11 +543,11 @@ class MtgParser {
             let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
             plusEvent = staticEvent;
             this.colorIdentity += plusEvent.colorIdentity;
-            plusCost = staticEvent.score;
+            plusCost = staticEvent.score * 1.5;
         }
         else {
             this.colorIdentity += plusEvent.colorIdentity;
-            plusCost = Math.min(3, Math.max(1, Math.ceil(plusCost * (plusCost < 0 ? 1.5 : 1) )));
+            plusCost = Math.min(3, Math.max(1, Math.ceil(plusCost)));
         }
 
         let minus1Event = pw2Events[this.random(0, pw2Events.length - 1)];
