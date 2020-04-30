@@ -1608,12 +1608,14 @@
         {
             "text": "put a (keyword) counter on another target creature",
             "score": 1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "put a (keyword) counter on another target creature",
             "score": 1,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
         },
         {
             "text": "put the top (numbername) cards of your library into your graveyard",
@@ -1918,22 +1920,22 @@
             "nofollowup": true
         },
         {
-            "text": "tap target creature",
+            "text": "up to one target creature",
             "colorIdentity": "wu",
             "score": 0
         },
         {
-            "text": "tap target (color) creature",
+            "text": "tap up to one target (color) creature",
             "colorIdentity": "wu",
             "score": 0
         },
         {
-            "text": "tap target (subtype) creature",
+            "text": "tap up to one target (subtype) creature",
             "colorIdentity": "wu",
             "score": 0
         },
         {
-            "text": "tap target (permanent)",
+            "text": "tap up to one target (permanent)",
             "colorIdentity": "wu",
             "score": 0.5
         },
