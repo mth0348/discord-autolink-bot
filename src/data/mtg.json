@@ -1616,11 +1616,6 @@
             "colorIdentity": "wubrg"
         },
         {
-            "text": "put a (keyword) counter on (other)target (subtype) creature",
-            "score": 0.9,
-            "colorIdentity": "wubrg"
-        },
-        {
             "text": "put the top (numbername) cards of your library into your graveyard",
             "score": -0.5,
             "colorIdentity": "ub"
@@ -1818,6 +1813,30 @@
             "text": "reveal the top X cards from your library, where X is the number of instant and sorcery cards in your graveyard. Put those cards into your hand",
             "score": 5,
             "colorIdentity": "r",
+            "nofollowup": true
+        },
+        {
+            "text": "reveal the top (number) cards from your library, Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "nofollowup": true
+        },
+        {
+            "text": "Look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.2,
+            "colorIdentity": "uug",
+            "nofollowup": true
+        },
+        {
+            "text": "Look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 2.2,
+            "colorIdentity": "ug",
+            "nofollowup": true
+        },
+        {
+            "text": "Look at the top (number3) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.5,
+            "colorIdentity": "ug",
             "nofollowup": true
         },
         {
@@ -2060,12 +2079,12 @@
             "score": 1.2
         },
         {
-            "text": "(name) deals (number2) damage to each (subtype) creature target opponent controls",
+            "text": "(name) deals (number2) damage to each creature target opponent controls",
             "colorIdentity": "rr",
             "score": 1
         },
         {
-            "text": "(name) deals (number2) damage to each non-(subtype) creature target opponent controls",
+            "text": "(name) deals (number2) damage to each creature target opponent controls",
             "colorIdentity": "rr",
             "score": 2
         },
@@ -2120,12 +2139,12 @@
             "score": 0.9
         },
         {
-            "text": "return target non-(subtype) creature to its owner's hand",
+            "text": "return target creature to its owner's hand",
             "colorIdentity": "u",
             "score": 0.8
         },
         {
-            "text": "return target (subtype) creature to its owner's hand",
+            "text": "return target creature to its owner's hand",
             "colorIdentity": "u",
             "score": 0.5
         },
@@ -2185,9 +2204,14 @@
             "score": 1
         },
         {
-            "text": "tap all non-(subtype) creatures target opponent controls",
+            "text": "tap all creatures target opponent controls",
             "colorIdentity": "u",
             "score": 2.5
+        },
+        {
+            "text": "tap all (permanent)s target opponent controls",
+            "colorIdentity": "u",
+            "score": 3.1
         },
         {
             "text": "untap target creature you control",
@@ -2220,7 +2244,7 @@
             "score": 2.2
         },
         {
-            "text": "tap all non-(subtype) creatures you control",
+            "text": "tap all creatures you control",
             "colorIdentity": "u",
             "score": -2
         },
