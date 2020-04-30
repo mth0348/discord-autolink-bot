@@ -1,0 +1,123 @@
+{
+    "start": {
+        "id": "BEGINNING",
+        "title": "The beginning",
+        "text": "You are in your garden, drinking a Salvoy herb tea and enjoying the peaceful afternoon. The birds are chirping and the sun is glistening on your pond.",
+        "act": 1,
+        "options": [
+            {
+                "id": "BEGINNING_2",
+                "text": "Continue"
+            }
+        ]
+    },
+    "actions": [
+        {
+            "id": "BEGINNING_2",
+            "text": "Suddenly, Mika, one of your best friends, bursts through the gates. \"(name), the crystal has been stolen!\", she expresses in distress. \"Can you help us? I mean, given your expertise as a (job)!\".",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"Wait, what happened exactly?\"",
+                    "id": "BEGINNING_3_1"
+                },
+                {
+                    "text": "*Ignore her*",
+                    "id": "BEGINNING_3_2"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_3_1",
+            "text": "\"The ominous blue crystal, from which kyral energy is absorbed to empower our mages, was taken from us! I think the Galbari are behind this...\"",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"Why do you think that?\"",
+                    "id": "BEGINNING_4_1"
+                },
+                {
+                    "text": "\"The Galbari could never do such a thing!\"",
+                    "id": "BEGINNING_4_2"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_3_2",
+            "text": "\"Come on, (name), we need YOU!\". She desperately tries to convince you to follow her.",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "*Follow her*",
+                    "id": "BEGINNING_3_1"
+                },
+                {
+                    "text": "*Ignore her*",
+                    "id": "END2"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_4_1",
+            "text": "Mika raises her left eyebrow in suspicion. \"For starters, we have been at war with those *creatures* for quite some time now. Also, in the wrong hands, this crystal could have a devastating impact on the tides in our battles.\"",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"Okay, how can I help?\"",
+                    "id": "BEGINNING_5_1"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_4_2",
+            "text": "Mika leans her head to the side. Her arms are crossed. \"Do you really think so?.\"",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"Let's just say we don't know yet.\"",
+                    "id": "BEGINNING_4_2_1"
+                },
+                {
+                    "text": "No, you are right. It probably was the Galbari people.",
+                    "id": "BEGINNING_4_2_1"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_4_2_1",
+            "text": "*She approves your statment and resumes the discussion.*",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "*Continue*",
+                    "id": "BEGINNING_5_1"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_1",
+            "text": "\"Let's go. We need to get to the castle keep. The king has urgent news about the theft.\" Mika moves towards your garden door, which still stands open from when she entered.",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "*Follow her*",
+                    "id": "END"
+                },
+                {
+                    "text": "*Stay in your garden*",
+                    "id": "END2"
+                }
+            ]
+        },
+        {
+            "id": "END",
+            "text": "Congratulations. You reclaimed the crystal and completed the game!",
+            "options": []
+        },
+        {
+            "id": "END2",
+            "text": "This game is nothing for lazy people! You are an adventurer. Man up and take the job!",
+            "options": []
+        }
+    ]
+}

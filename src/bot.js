@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const CsgoNadeParser = require('./csgo/csgo-parser.js')
 const GeneralParser = require('./general/general-parser.js')
 const MtgParser = require('./mtg/mtg-parser.js')
+const MinigameParser = require('./minigame/minigame-parser.js')
 const config = require('./../config.json');
 
 class DrunkenBot {
@@ -21,6 +22,9 @@ class DrunkenBot {
         this.mtgParser = new MtgParser(this.client);
         console.log('Listening for mtg commands...');
 
+        this.minigameParser = new MinigameParser(this.client);
+        console.log('Listening for minigame commands...');
+
         this.registerCommandParsers();
     }
 
@@ -37,6 +41,9 @@ class DrunkenBot {
     
                 if (this.mtgParser.isCommandAllowed(message)) {
                     this.mtgParser.startWorkflow(message);
+    
+                if (this.minigameParser.isCommandAllowed(message)) {
+                    this.minigameParser.startWorkflow(message);
                 }
             }
             catch (e) {
