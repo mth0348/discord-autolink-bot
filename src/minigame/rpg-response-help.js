@@ -1,7 +1,7 @@
 class RpgHelpResonse {
     constructor(supportedCardTypes) {
         this.helpName = "Controls";
-        this.helpValue = "There will always be a description and some options to choose from. Click on the corresponding emoji to answer the prompt. You have 120 seconds for each action and can only answer once!\n\nEmojis will look like this: 1️⃣, 2️⃣, 3️⃣, 4️⃣."
+        this.helpValue = "There will always be a description and some options to choose from. Click on the corresponding emoji to answer the prompt. You have 3 minutes for each action and can only answer once!\n\nEmojis will look like this: 1️⃣, 2️⃣, 3️⃣, 4️⃣."
     }
 
     isHelp() {

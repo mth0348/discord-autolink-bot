@@ -29,7 +29,7 @@ class RpgResponse {
 
     getDescription() {
         if (this.jobIcons) {
-            return `${this.text.toCamelCase()}\n\n🏹 : Huntsman\n🗡️ : Warrior\n⚒️ : Blacksmith`;
+            return `${this.text.toCamelCase()}\n\n🏹 : Huntsman\n⚔ : Warrior\n🧙‍♂️ : Wizard\n🪕 : Bard`;
         }
 
         let t = `${this.text.toCamelCase()}\n\n`;

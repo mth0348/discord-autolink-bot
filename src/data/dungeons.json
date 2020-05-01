@@ -2,34 +2,44 @@
     "start": {
         "id": "BEGINNING",
         "title": "The beginning",
-        "text": "You are in your garden, drinking a Salvoy herb tea and enjoying the peaceful afternoon. The birds are chirping and the sun is glistening on your pond.",
+        "text": "What a beautiful (weekday) afternoon!\n\nYou are in your garden, drinking a Salvoy herb tea and enjoying the peaceful ambience. The birds are chirping and the sun is glistening on your pond.",
         "act": 1,
         "options": [
             {
                 "id": "BEGINNING_2",
-                "text": "Continue"
+                "text": "*Continue*."
             }
         ]
     },
     "actions": [
         {
             "id": "BEGINNING_2",
-            "text": "Suddenly, Mika, one of your best friends, bursts through the gates. \"(name), the crystal has been stolen!\", she expresses in distress. \"Can you help us? I mean, given your expertise as a (job)!\".",
+            "text": "Suddenly, `Mika`, one of your best friends, bursts through the gates!",
+            "options": [
+                {
+                    "text": "\"Huh?..\"",
+                    "id": "BEGINNING_2_2"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_2_2",
+            "text": "\"(name), the crystal has been stolen!\", she expresses in distress. \"You have to help! You being the (job) and all, please!\".",
             "person": "Mika",
             "options": [
                 {
-                    "text": "\"Wait, what happened exactly?\"",
+                    "text": "\"Slow down. What happened exactly?\"",
                     "id": "BEGINNING_3_1"
                 },
                 {
-                    "text": "*Ignore her*",
+                    "text": "*Ignore her*.",
                     "id": "BEGINNING_3_2"
                 }
             ]
         },
         {
             "id": "BEGINNING_3_1",
-            "text": "\"The ominous blue crystal, from which kyral energy is absorbed to empower our mages, was taken from us! I think the Galbari are behind this...\"",
+            "text": "\"The mysterious blue crystal, from which kyral energy is absorbed to empower our mages, was taken from us! I think the Galbari are behind this...\"",
             "person": "Mika",
             "options": [
                 {
@@ -37,29 +47,29 @@
                     "id": "BEGINNING_4_1"
                 },
                 {
-                    "text": "\"The Galbari could never do such a thing!\"",
+                    "text": "\"The Galbari would never do such a thing!\"",
                     "id": "BEGINNING_4_2"
                 }
             ]
         },
         {
             "id": "BEGINNING_3_2",
-            "text": "\"Come on, (name), we need YOU!\". She desperately tries to convince you to follow her.",
+            "text": "\"Come on, (name), are you listening?!\". She desperately tries to gain your attention, waving her thin arms around.",
             "person": "Mika",
             "options": [
                 {
-                    "text": "*Follow her*",
+                    "text": "\"Okay, what is it?\"",
                     "id": "BEGINNING_3_1"
                 },
                 {
-                    "text": "*Ignore her*",
-                    "id": "END2"
+                    "text": "*Ignore her*.",
+                    "id": "ENDLAZY"
                 }
             ]
         },
         {
             "id": "BEGINNING_4_1",
-            "text": "Mika raises her left eyebrow in suspicion. \"For starters, we have been at war with those *creatures* for quite some time now. Also, in the wrong hands, this crystal could have a devastating impact on the tides in our battles.\"",
+            "text": "`Mika` raises her left eyebrow in suspicion. \"For starters, we have been at war with those *creatures* for quite some time now. Also, in the wrong hands, this crystal could have a devastating impact on the tides in our battles.\"",
             "person": "Mika",
             "options": [
                 {
@@ -70,7 +80,7 @@
         },
         {
             "id": "BEGINNING_4_2",
-            "text": "Mika leans her head to the side. Her arms are crossed. \"Do you really think so?.\"",
+            "text": "Mika leans her head to the side. Her arms are crossed. \"Do you really think so or are you just saying that to rile me?\"",
             "person": "Mika",
             "options": [
                 {
@@ -78,14 +88,14 @@
                     "id": "BEGINNING_4_2_1"
                 },
                 {
-                    "text": "No, you are right. It probably was the Galbari people.",
+                    "text": "\"No, you are right. It probably was the Galbari people.\"",
                     "id": "BEGINNING_4_2_1"
                 }
             ]
         },
         {
             "id": "BEGINNING_4_2_1",
-            "text": "*She approves your statment and resumes the discussion.*",
+            "text": "She approves your statment and resumes the discussion.",
             "person": "Mika",
             "options": [
                 {
@@ -96,16 +106,702 @@
         },
         {
             "id": "BEGINNING_5_1",
-            "text": "\"Let's go. We need to get to the castle keep. The king has urgent news about the theft.\" Mika moves towards your garden door, which still stands open from when she entered.",
+            "text": "\"Let's go. We need to get to the castle keep. The king has urgent news about the theft.\"\n`Mika` moves towards your garden door, which still stands open from when she entered.",
             "person": "Mika",
             "options": [
                 {
-                    "text": "*Follow her*",
-                    "id": "END"
+                    "text": "*Follow her*.",
+                    "id": "BEGINNING_5_2"
                 },
                 {
-                    "text": "*Stay in your garden*",
-                    "id": "END2"
+                    "text": "*Stay in your garden*.",
+                    "id": "ENDLAZY"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_2",
+            "text": "`Mika` hurries out the front gate and speeds into the alleys, taking the fastest route to the castle's keep.\nYou follow her.",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "BEGINNING_5_3"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_3",
+            "text": "Once arrived at the keep's drawbridge, two terribly tired looking guards stop you.",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "BEGINNING_5_4"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_4",
+            "text": "\"Halt, peasants!\" one exclaimed halfheartedly. \"No entry allowed without a permit.\"",
+            "person": "CastleGuard1",
+            "options": [
+                {
+                    "text": "\"We heard the king has information about the theft of the blue crystal.\"",
+                    "id": "BEGINNING_5_5"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_5",
+            "text": "\"Hm, that's about right, ey, isn't it `Lukas`?\" says the second guard, turning towards his colleague.",
+            "person": "CastleGuard2",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "BEGINNING_5_6"
+                }
+            ]
+        },
+        {
+            "id": "BEGINNING_5_6",
+            "text": "`Mika` exhales sharply, angered. \"Let us in already! I'm from the academy, my name is Mika and this here is my friend, (name)!\"",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "*Nod eagerly*.",
+                    "id": "KEEP_1"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_1",
+            "text": "The guards exchange uncomfortable looks, but eventually signal the gate master to lower the drawbridge.\n\nYou and `Mika` wait anxiously for the bridge to come down.",
+            "options": [
+                {
+                    "text": "*Enter the castle keep*.",
+                    "id": "KEEP_1_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_1_2",
+            "text": "The great royal hall is devoid of any furniture. Solid marble pillars every ten meters, with guards stationed at every single one of them. Only the king's throne is decorated with flowers.\nA couple of chandeliers hang down from black ceiling, bringing at least some light in the otherwise dark room.",
+            "options": [
+                {
+                    "text": "*Approach the king*.",
+                    "id": "KEEP_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2",
+            "text": "The king arises. \"Ah, Mika, you have returned. I see you found your *master tracker*?\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "To Mika: \"*Master tracker*?\"",
+                    "id": "KEEP_2_1"
+                },
+                {
+                    "text": "To the king: \"Most certainly! For it is I, master tracker (name)!\"",
+                    "id": "KEEP_2_2"
+                },
+                {
+                    "text": "*Remain silent.*",
+                    "id": "KEEP_2_3"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_1",
+            "text": "`Mika` blushes. \"Why yes, your expertise as a (job) makes you the perfect fit for this job. You are our best shot\", she says nervously.",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"That's true.\"",
+                    "id": "KEEP_2_2"
+                },
+                {
+                    "text": "\"There are probably more capable trackers out there.\"",
+                    "id": "KEEP_2_1_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_2",
+            "text": "\"Marvelous!\", exclaims king `Eral` in excitement. \"You, good person, shall find me the magical crystal that has gone missing.\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"What's in it for me?\"",
+                    "id": "KEEP_2_2_1"
+                },
+                {
+                    "text": "\"Yes, Sire!\"",
+                    "id": "KEEP_2_2_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_3",
+            "text": "\"Ha ha, I see you are a bit nervous!\". King `Eral`'s voice is deep and powerful. \"Are you up really for this task?\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"Yes.\"",
+                    "id": "KEEP_2_2"
+                },
+                {
+                    "text": "\"I guess so...\"",
+                    "id": "KEEP_2_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_1_2",
+            "text": "\"Nonsense!\", yells king `Eral`. \"A person with such experience as a (job) is a reproachless choice for this task.\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"I agree, Sire.\"",
+                    "id": "KEEP_2_2"
+                },
+                {
+                    "text": "\"If you insist...\"",
+                    "id": "KEEP_2_2"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_2_1",
+            "text": "\"Right down to the business, I like it. Eternal glory awaits you for completing this task. And a small amount of 200💰, of course.\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"I have more questions\".",
+                    "id": "KEEP_3"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_2_2_2",
+            "text": "\"Excellent\". The king `Eral` is convinced to have found the right person.",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"What's in it for me?\"",
+                    "id": "KEEP_2_2_1"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_3",
+            "text": "Ask away, (job).",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"What does the crystal look like?\"",
+                    "id": "KEEP_3_1"
+                },
+                {
+                    "text": "\"Any leads on where to start searching?\"",
+                    "id": "KEEP_3_2"
+                },
+                {
+                    "text": "\"Will I encounter hostilities?\"",
+                    "id": "KEEP_3_3"
+                },
+                {
+                    "text": "\"That's all.\"",
+                    "id": "KEEP_3_4"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_3_1",
+            "text": "The king scratches his long dark beard. \"Well I am no mage, but it is as large as an infant and looks vitreous and fragile, with a faint shimmer surrounding the crystal.\"",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"I have more questions.\"",
+                    "id": "KEEP_3"
+                },
+                {
+                    "text": "\"That's all.\"",
+                    "id": "KEEP_3_4"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_3_2",
+            "text": "The king enters a contemplative pose. \"According to the latest information, tracks have been spotted north and west from the city\", says king `Eral` after a couple of seconds.",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"I have more questions.\"",
+                    "id": "KEEP_3"
+                },
+                {
+                    "text": "\"That's all.\"",
+                    "id": "KEEP_3_4"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_3_3",
+            "text": "\"You very well might, (job). Galbari people are no joke, they pose a serious threat to this kingdom\". The king expresses concern.",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"I have more questions.\"",
+                    "id": "KEEP_3"
+                },
+                {
+                    "text": "\"That's all.\"",
+                    "id": "KEEP_3_4"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_3_4",
+            "text": "\"Alright then. Head out the city gate, then follow the trail either north or west, depending on where your tracking skills lead you.\"\nThe king gives you 30💰 for the journey.",
+            "person": "King",
+            "options": [
+                {
+                    "text": "\"Thank you.\"",
+                    "id": "KEEP_4"
+                }
+            ]
+        },
+        {
+            "id": "KEEP_4",
+            "text": "\"Unfortunately, I will not be able to accompany you, for I have urgencies from the academy to tend to. Good look, adventurer!\"",
+            "person": "Mika",
+            "options": [
+                {
+                    "text": "\"Thank you. Bye.\"",
+                    "id": "ROAD_1"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_1",
+            "text": "You head out the front door, cross the drawbridge and make your way to the city gates.\nThere aren't many people on the streets, only some beggars and homeless care to stay outside during those dark times.",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_2",
+            "text": "After some minutes, you arrive at the gate. The dirt road leads straight, but forks after some hundred meters. You move up to the direction sign which is posted at the road junction. It states:\n\n⬆️ Farmino Forest (North)\n⬅️ Hogum Hills (West)",
+            "options": [
+                {
+                    "text": "*Go north*.",
+                    "id": "ROAD_N"
+                },
+                {
+                    "text": "*Go west*.",
+                    "id": "ROAD_W"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N",
+            "text": "The path north leads you through a sparsely wooded forest. Dying trees are more common than healthy ones. The foliage is covered by fallen leaves, often partially rotting.\nApart from occasional animal noises, there isn't much liveliness to this grim place.",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_N_D1"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_D1",
+            "text": "It's getting darker. You are acustomed to traveling through the night, though. However, as `Mika` always says: \"Never skip a nap\".",
+            "options": [
+                {
+                    "text": "*Continue on the road*.",
+                    "id": "ROAD_N_1"
+                },
+                {
+                    "text": "*Setup a camp*.",
+                    "id": "ROAD_N_CAMP"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_1",
+            "text": "You venture deeper into the forest. Despite the lack of signs of life, you recognize a silhouette of a man in the distance, off the road. It looks like he is packing heavy load, with lots of bags. The man appears to be alone.",
+            "options": [
+                {
+                    "text": "*Approach the mysterious man*.",
+                    "id": "ROAD_N_HA"
+                },
+                {
+                    "text": "*Continue on the road*.",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA",
+            "text": "\"Approach, traveler, approach! Have a look at my wares\", yells the merchant.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "\"What do you have in stock?\"",
+                    "id": "ROAD_N_HA_1"
+                },
+                {
+                    "text": "\"You are running your business here, out in these woods?\"",
+                    "id": "ROAD_N_HA_2"
+                },
+                {
+                    "text": "*Leave the merchant*.",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_1",
+            "text": "\"Well for you, my dear, I have ...\nZimbaladong! Where are my manners?! I haven't introduced myself. They call me Jeff. And what's your name?",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "\"(name).\"",
+                    "id": "ROAD_N_HA_1_NAME1"
+                },
+                {
+                    "text": "\"Eugene.\"",
+                    "id": "ROAD_N_HA_1_NAME2"
+                },
+                {
+                    "text": "\"Graznock, the skull cracker.\"",
+                    "id": "ROAD_N_HA_1_NAME3"
+                },
+                {
+                    "text": "\"You don't need to know my name.\"",
+                    "id": "ROAD_N_HA_1_NAME4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_1_NAME1",
+            "text": "\"Ah, hi there, (name). Pleasure to meet you\", he says in a friendly tone.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_N_HA_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_1_NAME2",
+            "text": "\"Ah, hi there, Eugene. Pleasure to meet you\", he says in a friendly tone.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_N_HA_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_1_NAME3",
+            "text": "\"Oh my, that's a ferocious name. Pleasure to meet you nonetheless, Graznock\", he says in a friendly tone.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_N_HA_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_1_NAME4",
+            "text": "\"Oh, you are right, of course. No need for that. Anyway, pleasure to meet you, stranger\", he says in a friendly tone.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue*.",
+                    "id": "ROAD_N_HA_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_2",
+            "text": "He smiles. \"Well, you are a customer, right? So people *are* getting out here\". He seems confident.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "\"What do you have in stock?\"",
+                    "id": "ROAD_N_HA_1"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_3",
+            "text": "\"As I was saying, I offer the finest and most exquisite of all the strawberry cakes there are. For 15💰 it shall be yours.\"\n `Jeff` shows you a creatively decorated piece of cake.\n\nYou have: (cash)💰.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Buy it* (-15💰)",
+                    "id": "ROAD_N_HA_3_BUY"
+                },
+                {
+                    "text": "\"Can I try it first?\"",
+                    "id": "ROAD_N_HA_3_2"
+                },
+                {
+                    "text": "\"Can you try it first? I'm afraid it could be poisoned.\"",
+                    "id": "ROAD_N_HA_3_3"
+                },
+                {
+                    "text": "\"No thanks.\"",
+                    "id": "ROAD_N_HA_3_4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_3_BUY",
+            "text": "\"Here, it's all yours\". `Jeff` gives you the cake.\n\nInventory: +🍰",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "\"Thank you\". *Continue on the road.*",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_3_2",
+            "text": "`Jeff` is wiggling in excitement. \"Of course you can! Here\". He hands over a small portion of the cake.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Eat it.*",
+                    "id": "ROAD_N_HA_CAKE_1"
+                },
+                {
+                    "text": "*Throw it on the ground.*",
+                    "id": "ROAD_N_HA_CAKE_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_CAKE_2",
+            "text": "You can clearly see that `Jeff` becomes angry. His uneven head gets more red every second. \"Away with you, you ungrateful person!\", he yells.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue on the road.*",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_CAKE_1",
+            "text": "The cake sample tastes flavorful and refreshing. You sense a strong hint of strawberry. It's yummy.\n\nYou have: (cash)💰.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Buy it* (-15💰)",
+                    "id": "ROAD_N_HA_3_BUY",
+                    "condition": "this.cash >= 15"
+                },
+                {
+                    "text": "\"I don't want it.\"",
+                    "id": "ROAD_N_HA_3_4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_3_3",
+            "text": "\"You do not trust a local trader? In times like this, it's already difficult to make a living as a merchant.\"\nHe appears to be saddened by the thought of distrust. \"Would you recosnider?\"",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Buy it* (-15💰)",
+                    "id": "ROAD_N_HA_3_BUY",
+                    "condition": "this.cash >= 15"
+                },
+                {
+                    "text": "\"Okay, but I want to try it first.\"",
+                    "id": "ROAD_N_HA_3_2"
+                },
+                {
+                    "text": "\"No.\"",
+                    "id": "ROAD_N_HA_3_4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_HA_3_4",
+            "text": "\"Okay then, farewell\". `Jeff` waves goodbye as you return to the road.",
+            "person": "Merchant",
+            "options": [
+                {
+                    "text": "*Continue on the road.*",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_CAMP",
+            "text": "Inbetween some bushes and foliage, you settle down and set up a camp. You keep yourself warm at the campfire.",
+            "options": [
+                {
+                    "text": "*Sleep.*",
+                    "id": "ROAD_N_NIGHT"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_NIGHT",
+            "text": "*Crack*! *Crunch*! You wake up in the middle of the night.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_N_NIGHT_ATTK"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_NIGHT_ATTK",
+            "type": "combat",
+            "person": "Goblins",
+            "text": "There are noises all around the camp. After a closer inspection of your surrounding, you find yourself in the middle of a Goblin ambush!\n\nGoblins: 5\nWin chance: average",
+            "options": [
+                {
+                    "text": "*Engage in combat.*",
+                    "id": "ROAD_N_NIGHT_FIGHT"
+                },
+                {
+                    "text": "*Try to escape.*",
+                    "id": "ROAD_N_NIGHT_FLEE"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_NIGHT_FIGHT",
+            "text": "Success! After a tough fight, you emerge as the victor. Bloodied and weary of the combat, you scavenge the battlefield for loot. You do indeed find a magic scroll, with the potential of summoning a fireball.\n\nInventory: +🔥",
+            "options": [
+                {
+                    "text": "*Resume journey on the road.*",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_NIGHT_FLEE",
+            "text": "Success! You can barely escape the wickedness of a wild Goblin pack. After a much needed rest, you make your way back to the path.",
+            "options": [
+                {
+                    "text": "*Resume journey on the road.*",
+                    "id": "ROAD_N_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_N_2",
+            "text": "You continue on the path through the forest. The longer you walk, the less trees you see. Eventually you exit the woods.\nIn front of you lies an open gras field and in the distance, along the road, you can spot a bridge.",
+            "options": [
+                {
+                    "text": "*Continue on the road.*",
+                    "id": "ROAD_BRIDGE"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE",
+            "text": "As you approach the bridge, you hear a something gnarling and snarling under the bridge.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_BRIDGE_1"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_1",
+            "text": "\"WUUAAAAHHHH!!\" Out from under the bridge jumps a huge troll! He stands three meters tall and blocks the way across the bridge.",
+            "person": "Troll",
+            "options": [
+                {
+                    "text": "*Confront the troll.*",
+                    "id": "ROAD_BRIDGE_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_2",
+            "text": "\"PAY PASSAGE FEE, TINY HUMAN, OR I SMASH\", prompts the troll. He certainly does not try to appear angry, though the volume of his voice is defening.",
+            "person": "Troll",
+            "options": [
+                {
+                    "text": "\"How much do I have to give you?\"",
+                    "id": "ROAD_BRIDGE_2_2"
+                },
+                {
+                    "text": "\"Are you hungry for a cake?\" (show him 🍰)",
+                    "id": "ROAD_BRIDGE_2_3",
+                    "condition": "this.hasCake"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_2_2",
+            "text": "The troll answers: \"I NEED 30💰, OR I CANNOT LET PASS HUMAN\".\n\nYou have: (cash)💰",
+            "person": "Troll",
+            "options": [
+                {
+                    "text": "*Buy passage* (-30💰)",
+                    "id": "ROAD_BRIDGE_BUY",
+                    "condition": "this.cash >= 30"
+                },
+                {
+                    "text": "\"I don't have this amount of money\"",
+                    "id": "ROAD_BRIDGE_2_4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_2_3",
+            "text": "The troll says: \"NO HUNGRY FOR CAKE, IT IS MONEY ME WANTS\".\n\nYou have: (cash)💰",
+            "person": "Troll",
+            "options": [
+                {
+                    "text": "*Buy passage* (-30💰)",
+                    "id": "ROAD_BRIDGE_BUY",
+                    "condition": "this.cash >= 30"
+                },
+                {
+                    "text": "\"I don't have this amount of money.\"",
+                    "id": "ROAD_BRIDGE_2_4"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_2_4",
+            "text": "\"NO MONEY NO PASS\", exclaims the troll. You stand neither a chance in battle nor in negotiation and must accept your defeat.",
+            "person": "Troll",
+            "options": [
+                {
+                    "text": "*Avoid troll and continue journey southwest from here.*",
+                    "id": "ROAD_W_TRACKS"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_BRIDGE_BUY",
+            "text": "The troll accepts your fee and lets you cross the bridge. With a lighter purse, you continue your adventure down the road leading north.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_TR"
                 }
             ]
         },
@@ -115,7 +811,7 @@
             "options": []
         },
         {
-            "id": "END2",
+            "id": "ENDLAZY",
             "text": "This game is nothing for lazy people! You are an adventurer. Man up and take the job!",
             "options": []
         }
