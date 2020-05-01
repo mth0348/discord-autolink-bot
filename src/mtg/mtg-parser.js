@@ -482,7 +482,7 @@ class MtgParser {
 
         this.colorIdentity += event.colorIdentity;
 
-        let isReplacement = [false, false, false, true][this.random(0, 3)] && condition.replacementText.length > 0;
+        let isReplacement = false;// TODO: [false, false, false, true][this.random(0, 3)] && condition.replacementText.length > 0;
         if (isReplacement) {
             return { text: `${this.parseSyntax(condition.replacementText, condition.context)}, instead ${this.parseSyntax(event.text)}.`, score: event.score };
         }
