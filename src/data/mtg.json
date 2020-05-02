@@ -1913,7 +1913,7 @@
             "nofollowup": true
         },
         {
-            "text": "up to one target creature",
+            "text": "tap up to one target creature",
             "colorIdentity": "wu",
             "score": 0
         },
@@ -1930,17 +1930,17 @@
         {
             "text": "tap up to one target (permanent)",
             "colorIdentity": "wu",
-            "score": 0.5
+            "score": 0
         },
         {
             "text": "tap up to (numbername) target (permanent)s",
             "colorIdentity": "wu",
-            "score": 1
+            "score": 0.8
         },
         {
             "text": "tap up to (numbername2) target (permanent)s",
             "colorIdentity": "wu",
-            "score": 1.4
+            "score": 1.2
         }
     ],
     "permanentStatics": [
