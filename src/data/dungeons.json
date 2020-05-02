@@ -63,7 +63,7 @@
                 },
                 {
                     "text": "*Ignore her*.",
-                    "id": "ENDLAZY"
+                    "id": "END_LAZY"
                 }
             ]
         },
@@ -115,7 +115,7 @@
                 },
                 {
                     "text": "*Stay in your garden*.",
-                    "id": "ENDLAZY"
+                    "id": "END_LAZY"
                 }
             ]
         },
@@ -273,11 +273,11 @@
         },
         {
             "id": "KEEP_2_2_1",
-            "text": "\"Right down to the business, I like it. Eternal glory awaits you for completing this task. And a small amount of 200💰, of course.\"",
+            "text": "\"Right down to the business, I like it. Eternal glory awaits you for completing this task.\n\nOh, and a not-so-small amount of 200💰, of course!\"",
             "person": "King",
             "options": [
                 {
-                    "text": "\"I have more questions\".",
+                    "text": "\"I have more questions.\"",
                     "id": "KEEP_3"
                 }
             ]
@@ -318,7 +318,7 @@
         },
         {
             "id": "KEEP_3_1",
-            "text": "The king scratches his long dark beard. \"Well I am no mage, but it is as large as an infant and looks vitreous and fragile, with a faint shimmer surrounding the crystal.\"",
+            "text": "The king scratches his long dark beard. \"Well I am no mage, but it is about as large as bear cub and looks vitreous and fragile, with a faint shimmer surrounding the crystal.\"",
             "person": "King",
             "options": [
                 {
@@ -333,7 +333,7 @@
         },
         {
             "id": "KEEP_3_2",
-            "text": "The king enters a contemplative pose. \"According to the latest information, tracks have been spotted north and west from the city\", says king `Eral` after a couple of seconds.",
+            "text": "The king enters a contemplative pose. \"According to the latest information, tracks have been spotted north and west from the city\", says king `Eral` after a couple of seconds. \"You might find that they are hiding somewhere and are avoiding public places, those cowards!\"",
             "person": "King",
             "options": [
                 {
@@ -363,7 +363,7 @@
         },
         {
             "id": "KEEP_3_4",
-            "text": "\"Alright then. Head out the city gate, then follow the trail either north or west, depending on where your tracking skills lead you.\"\nThe king gives you 30💰 for the journey.",
+            "text": "\"Alright then. Head out the city gate, then follow the trail either north or west, depending on where your tracking skills lead you.\"\nThe king gives you some coins for the journey.\n\nInventory: +30💰",
             "person": "King",
             "options": [
                 {
@@ -388,7 +388,7 @@
             "text": "You head out the front door, cross the drawbridge and make your way to the city gates.\nThere aren't many people on the streets, only some beggars and homeless care to stay outside during those dark times.",
             "options": [
                 {
-                    "text": "*Continue*.",
+                    "text": "*Continue.*",
                     "id": "ROAD_2"
                 }
             ]
@@ -398,11 +398,11 @@
             "text": "After some minutes, you arrive at the gate. The dirt road leads straight, but forks after some hundred meters. You move up to the direction sign which is posted at the road junction. It states:\n\n⬆️ Farmino Forest (North)\n⬅️ Hogum Hills (West)",
             "options": [
                 {
-                    "text": "*Go north*.",
+                    "text": "*Go north.*",
                     "id": "ROAD_N"
                 },
                 {
-                    "text": "*Go west*.",
+                    "text": "*Go west.*",
                     "id": "ROAD_W"
                 }
             ]
@@ -426,7 +426,7 @@
                     "id": "ROAD_N_1"
                 },
                 {
-                    "text": "*Setup a camp*.",
+                    "text": "*Set up a camp*.",
                     "id": "ROAD_N_CAMP"
                 }
             ]
@@ -620,7 +620,7 @@
         },
         {
             "id": "ROAD_N_HA_3_3",
-            "text": "\"You do not trust a local trader? In times like this, it's already difficult to make a living as a merchant.\"\nHe appears to be saddened by the thought of distrust. \"Would you recosnider?\"",
+            "text": "\"You do not trust a local trader? In times like this, it's already difficult to make a living as a merchant.\"\nHe appears to be saddened by the thought of distrust. \"Would you reconsider?\"",
             "person": "Merchant",
             "options": [
                 {
@@ -673,11 +673,12 @@
             "id": "ROAD_N_NIGHT_ATTK",
             "type": "combat",
             "person": "Goblins",
-            "text": "There are noises all around the camp. After a closer inspection of your surrounding, you find yourself in the middle of a Goblin ambush!\n\nGoblins: 5\nWin chance: average",
+            "text": "There are noises all around the camp. After a closer inspection of your surrounding, you find yourself in the middle of a Goblin ambush!\n\nGoblins: 5\nWin chance: average/high",
             "options": [
                 {
                     "text": "*Engage in combat.*",
-                    "id": "ROAD_N_NIGHT_FIGHT"
+                    "id": "ROAD_N_NIGHT_FIGHT",
+                    "condition": "if (this.random(1,4) == 1) step.options[i].id = 'ROAD_N_NIGHT_FIGHTL'; true"
                 },
                 {
                     "text": "*Try to escape.*",
@@ -696,8 +697,18 @@
             ]
         },
         {
+            "id": "ROAD_N_NIGHT_FIGHTL",
+            "text": "Failed! You killed some of the Goblins, but there are still too many.",
+            "options": [
+                {
+                    "text": "*Try to escape.*",
+                    "id": "ROAD_N_NIGHT_FLEE"
+                }
+            ]
+        },
+        {
             "id": "ROAD_N_NIGHT_FLEE",
-            "text": "Success! You can barely escape the wickedness of a wild Goblin pack. After a much needed rest, you make your way back to the path.",
+            "text": "Success! You manage to barely escape the wickedness of a wild Goblin pack. After a much needed rest, you make your way back to the path.",
             "options": [
                 {
                     "text": "*Resume journey on the road.*",
@@ -727,6 +738,7 @@
         },
         {
             "id": "ROAD_BRIDGE_1",
+            "title": "The Bridge",
             "text": "\"WUUAAAAHHHH!!\" Out from under the bridge jumps a huge troll! He stands three meters tall and blocks the way across the bridge.",
             "person": "Troll",
             "options": [
@@ -763,7 +775,7 @@
                     "condition": "this.cash >= 30"
                 },
                 {
-                    "text": "\"I don't have this amount of money\"",
+                    "text": "\"I don't have this amount of money.\"",
                     "id": "ROAD_BRIDGE_2_4"
                 }
             ]
@@ -801,17 +813,780 @@
             "options": [
                 {
                     "text": "*Continue.*",
-                    "id": "GALBARI_TR"
+                    "id": "GALBARI_N_TR"
                 }
             ]
         },
         {
-            "id": "END",
+            "id": "GALBARI_N_TR",
+            "text": "As you continue walking north, the land looks more and more arid and abandoned. The ground is no longer grass but sand and gravel. There are weird rock formations scattered around the place. The only trees you can see are some dark, parched ones.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_N_TR_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_2",
+            "text": "After some time, you can spot another person walking on the road. in the opposite direction you are walking. You figure this person to be a traveler, for he or she has many camping items hanging from his backpack.",
+            "options": [
+                {
+                    "text": "*Approach.*",
+                    "id": "GALBARI_N_TR_3"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_3",
+            "text": "\"Good day to you, Sir!\", he says. \"Are you also a traveler?\"\n\nHis horns and unhuman skin tone are clear indicator that he is a Galbari.",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"Did you steal a blue magical crystal?\"",
+                    "id": "GALBARI_N_TR_3_1"
+                },
+                {
+                    "text": "\"No, I'm on a secret mission.\"",
+                    "id": "GALBARI_N_TR_3_2"
+                },
+                {
+                    "text": "\"Yes.\"",
+                    "id": "GALBARI_N_TR_3_3"
+                },
+                {
+                    "text": "\"No.\"",
+                    "id": "GALBARI_N_TR_3_3"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_3_1",
+            "text": "\"Blimey, what an accusation!\" The Galbari traveler is shocked by the amount of mistrust. \"I most certainly have not.\"",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"Sorry. I am looking for the crystal. It could have been anyone who stole it.\"",
+                    "id": "GALBARI_N_TR_3_1_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_3_1_2",
+            "text": "\"Ah, don't sweat it! A detective at work, nothing to blame here.\nI haven't seen the crystal your describing, unfortunately.\"",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_N_TR_4"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_3_2",
+            "text": "\"Oooh, terrific! I love it\", he answers friendly.\n\nHis face suddenly expresses concern.",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"What is it?\"",
+                    "id": "GALBARI_N_TR_4"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_3_3",
+            "text": "\"Alright then\", he answers friendly.\n\nHis face suddenly expresses concern.",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"What is it?\"",
+                    "id": "GALBARI_N_TR_4"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_4",
+            "text": "He puts one of his hands on his stomach. \"Not to sound needy, but I haven't eaten in two days, and I could really go for some food right now.\", he says.\n\"Do you happen to have a spare 🍰?\"",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"What do I get in return?\"",
+                    "id": "GALBARI_N_TR_4_1"
+                },
+                {
+                    "text": "\"No\"",
+                    "id": "GALBARI_N_TR_4_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_4_1",
+            "text": "He rubs his chin, when suddenly his eyes widen and he starts smiling. \"I can give you the exact location of the Galbari hideout. Plus if you tell them my name, they will certainly let you in.\"",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "*Give cake* (-🍰)",
+                    "id": "GALBARI_N_TR_5",
+                    "condition": "this.hasCake"
+                },
+                {
+                    "text": "*Use fireball as intimidation* (-🔥)",
+                    "id": "GALBARI_N_TR_4_3",
+                    "condition": "this.hasFireball"
+                },
+                {
+                    "text": "\"I don't have any food, sorry.\"",
+                    "id": "GALBARI_N_TR_4_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_4_2",
+            "text": "\"That's a pitty. Well, I wish you a good day, then.\" He continues his journey and paces off.\"",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_N_TR_6"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_4_3",
+            "text": "\"AAARRGGGGHHH!\"\n\n\"What an evil being you are! Using magic to intimidate a lone traveler...\"\n\n\".Alright, alright, I will tell you. My name is Sylvip, they will let you in if you tell them I sent you.\"\n\n`Sylvip` gives you a detailed description of where to find the hideout.",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"Wasn't so hard, was it?\"",
+                    "id": "GALBARI_N_TR_6"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_5",
+            "text": "\"Delightful, many thanks, stranger!\" *Nom, nom, nom...*\n\n\"As a 'thank you' I shall tell you the exact location of the hideout of the Galbari people. Tell them 'Sylvip sent you', they will let you in.\"\n\n`Sylvip` gives you a detailed description of where to find the hideout.",
+            "person": "Traveler",
+            "options": [
+                {
+                    "text": "\"Thank you.\"",
+                    "id": "GALBARI_N_TR_6"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_N_TR_6",
+            "text": "You move away from the Galbari traveler and continue your path on the road. Some time later, you find yourself in a densly wooded area. This would make a good hideout location. They must be in here somewhere. You comb your way through the foliage.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID",
+            "title": "The Hideout",
+            "act": 2,
+            "text": "After a considerable amount of time later, you find the entrance to the Galbari hideout. It is well hidden, with leaves and vines covering the wooden walls. There are a couple of soldiers standing guard at the gate.",
+            "options": [
+                {
+                    "text": "*Approach them.*",
+                    "id": "GALBARI_HID_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_2",
+            "person": "GalbariGuard1",
+            "text": "\"Halt!\", one of the guards yells. \"What are you doing here?\", she asks.",
+            "options": [
+                {
+                    "text": "\"Sylvip sent me.\"",
+                    "id": "GALBARI_HID_IN",
+                    "condition": "this.isFriendlyForced"
+                },
+                {
+                    "text": "\"I'm a humble (job) and need a roof over my head for the night. Can you let me in?\"",
+                    "id": "GALBARI_HID_FRIENDLY_HM",
+                    "condition": "this.jobId == 1"
+                },
+                {
+                    "text": "\"I'm a humble (job) and need a roof over my head for the night. Can you let me in?\"",
+                    "id": "GALBARI_HID_ENEMY_WA",
+                    "condition": "this.jobId == 2"
+                },
+                {
+                    "text": "\"I'm a humble (job) and need a roof over my head for the night. Can you let me in?\"",
+                    "id": "GALBARI_HID_ENEMY_WZ",
+                    "condition": "this.jobId == 3"
+                },
+                {
+                    "text": "\"I'm a humble (job) and need a roof over my head for the night. Can you let me in?\"",
+                    "id": "GALBARI_HID_FRIENDLY_BD",
+                    "condition": "this.jobId == 4"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN",
+            "person": "GalbariGuard2",
+            "text": "\"Ah, yes, Sylvip. A good fellow, he is. Come on in, then.\" The second guard opens the gates for you and lets you pass.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID_IN_DIS"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_FRIENDLY_HM",
+            "person": "GalbariGuard2",
+            "text": "\"Ooh, a huntsman, right? I love it. Having an understanding of nature and being a careful hunter, that's what it's all about.\"\n\nYou clearly win favor with the Galbari guards. They let you pass.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID_IN_DIS"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_FRIENDLY_BD",
+            "person": "GalbariGuard2",
+            "text": "\"A bard, out here? Wonderful! I bet you can play some party songs. Please join us later at the campfire, when it gets dark. I want to hear some music!\"\n\nYou clearly win favor with the Galbari guards. They let you pass.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID_IN_DIS"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_ENEMY_WA",
+            "person": "GalbariGuard2",
+            "text": "\"What?! A warrior? We hate the whole plate-armored rabble, with their oversized weapons! You will never enter this camp alive!\"\n\nYou clearly lost favor with the Galbari guards. Prepare to fight.\n\nGalbari guards: 3\nWin chance: average",
+            "options": [
+                {
+                    "text": "*Engage in combat.*",
+                    "id": "GALBARI_HID_ENEMY_COMBAT_WIN",
+                    "condition": "if (this.random(1,3) == 1) step.options[i].id = 'END_DIE'; true"
+                },
+                {
+                    "text": "*Use fireball* (-🔥)",
+                    "id": "GALBARI_HID_ENEMY_COMBAT_WIN_FB",
+                    "condition": "this.hasFireball"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_ENEMY_WZ",
+            "person": "GalbariGuard2",
+            "text": "\"What?! A wizard? We hate the whole robe-wearing rabble, with their pointy hats! You will never enter this camp alive!\"\n\nYou clearly lost favor with the Galbari guards. Prepare to fight.\n\nGalbari guards: 3\nWin chance: average",
+            "options": [
+                {
+                    "text": "*Engage in combat.*",
+                    "id": "GALBARI_HID_ENEMY_COMBAT_WIN",
+                    "condition": "if (this.random(1,3) == 1) step.options[i].id = 'END_DIE'; true"
+                },
+                {
+                    "text": "*Use fireball* (-🔥)",
+                    "id": "GALBARI_HID_ENEMY_COMBAT_WIN_FB",
+                    "condition": "this.hasFireball"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_ENEMY_COMBAT_WIN_FB",
+            "text": "Success! You bested those Galbari guards. You can now enter the camp and continue your quest unhindered.",
+            "options": [
+                {
+                    "text": "*Enter the hideout.*",
+                    "id": "GALBARI_HID_IN_DIS"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_ENEMY_COMBAT_WIN",
+            "text": "Success! You bested those Galbari guards. You can now enter the camp and continue your quest unhindered.",
+            "options": [
+                {
+                    "text": "*Enter the hideout.*",
+                    "id": "GALBARI_HID_IN_COMB"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_COMB",
+            "text": "You made it inside. A quick tour around the camp gives you a good overview of the place. There is no one else here.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID_IN_COMB_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_DIS",
+            "text": "You made it inside. A quick tour around the camp gives you a good overview of the place. The three guards appear to be the only weaponized Galbari.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID_IN_DIS_2"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_COMB_2",
+            "text": "You check the insides of all tents. There it is! The crystal!",
+            "options": [
+                {
+                    "text": "*Grab it.*",
+                    "id": "GALBARI_HID_IN_COMB_3"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_DIS_2",
+            "text": "You check the insides of all tents. There it is! The crystal!",
+            "options": [
+                {
+                    "text": "*Grab it in stealth.*",
+                    "id": "GALBARI_HID_IN_DIS_3"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_DIS_3",
+            "text": "You got it! Now the only thing you have to do is get out of here. Some sort of distraction would work best, in order to avoid combat.",
+            "options": [
+                {
+                    "text": "*Use fireball as distraction* (-🔥)",
+                    "id": "GALBARI_HID_IN_DIS_FIRE",
+                    "condition": "this.hasFireball"
+                },
+                {
+                    "text": "*Use bell as distraction* (-🔔)",
+                    "id": "GALBARI_HID_IN_DIS_BELL",
+                    "condition": "this.hasBell"
+                },
+                {
+                    "text": "*Don't use a distraction. Engage in combat.*",
+                    "id": "GALBARI_HID_IN_DIS_COMBAT"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_COMB_3",
+            "text": "You got it! Now the only thing you have to do is get out of here. Easy, now that all guards are dead.",
+            "options": [
+                {
+                    "text": "*Return to the castle.*",
+                    "id": "RETURN_1"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_DIS_FIRE",
+            "text": "You choose to use the obtained fireball scroll to create a distraction. You ignite the tent and sneak out.\nAfter some time, think black smoke emerges from the tent, followed by hissing red flames.\n\nAll of the guards speed towards the *accident* and try to contain the fire.\n\nThis is your chance!",
+            "options": [
+                {
+                    "text": "*Run for the gate.*",
+                    "id": "GALBARI_HID_OUT"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_IN_DIS_BELL",
+            "text": "You choose to use the obtained bell to create a distraction. You sneak out the tent and throw the bell over the walls as far as you can.\nAt that moment, all the guards speed towards the *strange* noise to investigate. They leave the gate unmanned.\n\nThis is your chance!",
+            "options": [
+                {
+                    "text": "*Run for the gate.*",
+                    "id": "GALBARI_HID_OUT"
+                }
+            ]
+        },
+        {
+            "id": "GALBARI_HID_OUT",
+            "text": "You made it out! The guards didn't notice your escape!",
+            "options": [
+                {
+                    "text": "*Return to the castle.*",
+                    "id": "RETURN_1"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_1",
+            "text": "You begin your journey back to the castle. It is a long way to home.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "RETURN_2"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_2",
+            "text": "It is getting dark and you are tired from the events of today.",
+            "options": [
+                {
+                    "text": "*Set up a camp.*",
+                    "id": "RETURN_2_1"
+                },
+                {
+                    "text": "*Continue through the night.*",
+                    "id": "RETURN_2_2"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_2_1",
+            "text": "You set up a camp and lay yourself next to the crackling fire. It is warm and cozy. You take deep and peaceful slumber.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "RETURN_3"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_2_2",
+            "text": "What's a little walk through the night after all that happened today? You continue on the road back to the castle.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "RETURN_3"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_3",
+            "text": "You arrived at the city gates and make your way to the drawbridge. The two guards are still looking tired. However, they recognize you immediately and wave from afar.",
+            "options": [
+                {
+                    "text": "*Approach.*",
+                    "id": "RETURN_4"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_4",
+            "person": "CastleGuard1",
+            "text": "\"Welcome back, adventurer! Were you able to retrieve the crystal?\", one asks.",
+            "options": [
+                {
+                    "text": "\"Yes!\"",
+                    "id": "RETURN_4_1"
+                },
+                {
+                    "text": "\"I only speak to the king.\"",
+                    "id": "RETURN_4_2"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_4_1",
+            "person": "CastleGuard2",
+            "text": "\"Brilliant, ey, Lukas! Told you so!\", exclaims the other guard to `Lukas`.\n\nThe drawbridge is lowered and you can go inside.",
+            "options": [
+                {
+                    "text": "*Enter the keep.*",
+                    "id": "RETURN_5"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_4_2",
+            "person": "CastleGuard2",
+            "text": "\"Ey, Lukas! Private affairs, mate! Leave the man be, this is a royal matter, eh!\", exclaims the other guard to `Lukas`.\n\nThe drawbridge is lowered and you can go inside.",
+            "options": [
+                {
+                    "text": "*Enter the keep.*",
+                    "id": "RETURN_5"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_5",
+            "text": "You enter the royal hall. `Mika` is sitting on the floor next the to throne, reading a book, and the king seems to be brooding over something.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "RETURN_6"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_6",
+            "person": "Mika",
+            "text": "\"Ha, there you are!\" `Mika` jumps up and joins you. \"I knew you could do it!\"",
+            "options": [
+                {
+                    "text": "*Approach the king.*",
+                    "id": "RETURN_7"
+                }
+            ]
+        },
+        {
+            "id": "RETURN_7",
+            "person": "King",
+            "text": "\"My god, you really did it! A proper lad, you are. Here are 200💰! We shall never forget what you did for this kingdom!\"",
+            "options": [
+                {
+                    "text": "*Bathe in eternal glory.*",
+                    "id": "END_WIN"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W",
+            "text": "You decide to go west. The area is grassy, but looks arid. The plants have a yellowish, dry color. \nWhile walking, you are wondering about why the Galbari have horns...",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_2",
+            "text": "It's getting darker. You are acustomed to traveling through the night, though. However, as `Mika` always says: \"Never skip a nap\".",
+            "options": [
+                {
+                    "text": "*Set up a camp.*",
+                    "id": "ROAD_W_CAMP"
+                },
+                {
+                    "text": "*Continue through the night.*",
+                    "id": "ROAD_W_BND"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_CAMP",
+            "text": "You follow `Mika`'s advise and set up a tent and start a camp fire. The night sky is clear and you can see thousands of shiny white dots, scattered across the black void above you.",
+            "options": [
+                {
+                    "text": "*Sleep.*",
+                    "id": "ROAD_W_CAMP_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_CAMP_2",
+            "text": "You wake up the next morning. A fresh breeze grazes your sleepy face.",
+            "options": [
+                {
+                    "text": "*Continue journey.*",
+                    "id": "ROAD_W_TRACKS"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND",
+            "text": "It is an unusually dark sky tonight. As you walk down the road, you can hear some noise coming from your right side.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_BND_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_2",
+            "type": "combat",
+            "person": "Bandits",
+            "text": "In fact, you spot a torch-light in the near distance, casting shadows of two men... Bandits!\nThey charge at you, now screamingly.\n\nBandits: 2\nWin chance: average/high",
+            "options": [
+                {
+                    "text": "*Engage in combat.*",
+                    "id": "ROAD_W_BND_COMBAT_WIN",
+                    "condition": "if (this.random(1,4) == 1) step.options[i].id = 'ROAD_W_BND_COMBAT_LOSE'; true"
+                },
+                {
+                    "text": "*Try to escape.*",
+                    "id": "ROAD_W_BND_COMBAT_FLEE"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_COMBAT_WIN",
+            "text": "Success! You showed those two depredators who the boss is. You scavenge the corpses for loot. You do indeed find a pickaxe, amongst otherwise useless items.\n\nInventory: +⛏️",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_BND_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_COMBAT_LOSE",
+            "text": "Failed! You stand defeated. They took some of your money.\n\nInventory: -15💰",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_BND_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_COMBAT_FLEE",
+            "text": "Success! You barely manage to escape those two depredators. It is now time for a much needed rest.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_BND_W"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_W",
+            "text": "The next morning, you figure that during the escape from the bandits, you must have drifted north instead of west.\n\nYou can see that the road ahead leads to a bridge.",
+            "options": [
+                {
+                    "text": "*Continue on the road.*",
+                    "id": "ROAD_BRIDGE"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_BND_3",
+            "text": "The next morning, you continue on your path to find and recover the crystal.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_TRACKS"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS",
+            "text": "The road you walk on is uneven and not well cared for.\n\nThere! At last, you find some Galbari footprints!",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_TRACKS_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_2",
+            "text": "The footprints are leading forward for some time, until eventually, they split into two pairs of tracks. One goes right, off road, and the other continues straight.",
+            "options": [
+                {
+                    "text": "*Follow the road.*",
+                    "id": "ROAD_W_TRACKS_ROAD"
+                },
+                {
+                    "text": "*Follow right tracks.*",
+                    "id": "ROAD_W_TRACKS_RIGHT"
+                }                
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_RIGHT",
+            "text": "You choose to follow the set of prints that lead off the road, into some thicket. As you struggle through the foliage, you spot a distant cave entrance, barricated with wooden planks.",
+            "options": [
+                {
+                    "text": "*Approach the entrance.*",
+                    "id": "ROAD_W_TRACKS_CAVE"
+                },
+                {
+                    "text": "*Return back to the road.*",
+                    "id": "ROAD_W_TRACKS_ROAD_OUT"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_CAVE",
+            "text": "The planks are only loosely attached to a wooden frame surrounding the cave entrance. You figure it must be an old Galbari mine. It looks deep and dark.",
+            "options": [
+                {
+                    "text": "*Enter the mine.*",
+                    "id": "ROAD_W_TRACKS_MINE"
+                },
+                {
+                    "text": "*Return back to the road.*",
+                    "id": "ROAD_W_TRACKS_ROAD_OUT"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_MINE",
+            "text": "You make your way into the mine. You wish you had a lantern, everything is quite dark. Only occasional air shafts bring some light into the cave\n\nAfter some minutes, you reach a dead-end. A big boulder blocks the path.\nIt appears, that you could use some sort of tool to remove the blockage, though.",
+            "options": [
+                {
+                    "text": "*Use pickaxe* (⛏️)",
+                    "id": "ROAD_W_TRACKS_MINE_PA",
+                    "condition": "this.hasPickaxe"
+                },
+                {
+                    "text": "I don't have any tools. *Return back to the road.*",
+                    "id": "ROAD_W_TRACKS_ROAD_OUT"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_MINE_PA",
+            "text": "What a cake-walk! With that pickaxe, you make pebble stone out of that boulder.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_TRACKS_MINE_PA_2"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_MINE_PA_2",
+            "text": "Well, the cave ends here, but the effort was not for naught: You see a treasure chest at the end of the cave!",
+            "options": [
+                {
+                    "text": "*Open chest.*",
+                    "id": "ROAD_W_TRACKS_MINE_PA_3"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_MINE_PA_3",
+            "text": "Wow! A bell! This would make a great tool for distraction!\n\nInventory: +🔔",
+            "options": [
+                {
+                    "text": "*Return back to the road.*",
+                    "id": "ROAD_W_TRACKS_ROAD_OUT"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_ROAD_OUT",
+            "text": "You return back from the cave to the main road and continue to follow the other set of tracks.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "ROAD_W_TRACKS_ROAD"
+                }
+            ]
+        },
+        {
+            "id": "ROAD_W_TRACKS_ROAD",
+            "text": "The trail of footprints leads into a densly wooded area. This would make a good hideout location. They must be in here somewhere. You comb your way through the foliage.",
+            "options": [
+                {
+                    "text": "*Continue.*",
+                    "id": "GALBARI_HID"
+                }
+            ]
+        },
+        {
+            "id": "END_DIE",
+            "text": "Ooof! You died in combat. Better luck next time!",
+            "options": []
+        },
+        {
+            "id": "END_WIN",
             "text": "Congratulations. You reclaimed the crystal and completed the game!",
             "options": []
         },
         {
-            "id": "ENDLAZY",
+            "id": "END_LAZY",
             "text": "This game is nothing for lazy people! You are an adventurer. Man up and take the job!",
             "options": []
         }

@@ -25,6 +25,7 @@ class MinigameParser {
         this.people = {
             // females
             Mika: "https://i.imgur.com/o9cTKvR.png",
+            GalbariGuard1: "https://i.imgur.com/hb8tfSc.png", // r2
             a: "https://i.imgur.com/DOfB0N8.png", // r2
             b: "https://i.imgur.com/i9g7noK.png",
             c: "https://i.imgur.com/Xl9VKTE.png",
@@ -44,7 +45,6 @@ class MinigameParser {
             q: "https://i.imgur.com/Xqi3YN8.png",
             r: "https://i.imgur.com/cAQICE7.png",
             s: "https://i.imgur.com/pTWzKwH.png",
-            t: "https://i.imgur.com/hb8tfSc.png", // r2
             u: "https://i.imgur.com/qDHzpL8.png", // r2
             v: "https://i.imgur.com/hNs914N.png", // r2
             w: "https://i.imgur.com/F8RgWzg.png",
@@ -62,6 +62,9 @@ class MinigameParser {
             CastleGuard2: "https://i.imgur.com/TimUtYO.png",
             King: "https://i.imgur.com/GxdX7su.png",
             Merchant: "https://i.imgur.com/vmJG8x5.png",
+            Traveler: "https://i.imgur.com/ihXEpE1.png", // r2
+            GalbariGuard2: "https://i.imgur.com/BCxTK7f.png", // r2
+            m99: "https://i.imgur.com/5aldlgv.png", // r2
             m1: "https://i.imgur.com/0zjPxy6.png",
             m3: "https://i.imgur.com/zWAapOc.png",
             m6: "https://i.imgur.com/hgiqtwI.png",
@@ -69,8 +72,6 @@ class MinigameParser {
             m8: "https://i.imgur.com/QG7MKlV.png",
             m9: "https://i.imgur.com/4sSfXvz.png",
             m10: "https://i.imgur.com/uSilpnX.png",
-            m11: "https://i.imgur.com/BCxTK7f.png", // r2
-            m12: "https://i.imgur.com/5aldlgv.png", // r2
             m13: "https://i.imgur.com/hWvq2kY.png",
             m14: "https://i.imgur.com/ptHAaoP.png",
             m14: "https://i.imgur.com/elLtxAg.png",
@@ -94,12 +95,12 @@ class MinigameParser {
             m32: "https://i.imgur.com/oERtWUB.png",
             m33: "https://i.imgur.com/P7TnpW3.png",
             m34: "https://i.imgur.com/WX2yeTY.png",
-            m35: "https://i.imgur.com/ihXEpE1.png", // r2
             m36: "https://i.imgur.com/Voiy6GY.png",
             m37: "https://i.imgur.com/zbhRLiE.png",
 
             Troll: "https://i.pinimg.com/564x/06/98/79/06987967a8ad88b49aefc15a0acebb29.jpg",
             Goblins: "https://i.pinimg.com/564x/a9/3f/e2/a93fe22c1bfb6a807fca545984191cd1.jpg",
+            Bandits: "https://i.pinimg.com/564x/ce/90/3a/ce903ab64b11390de2a8d9293037cd26.jpg",
         };
     }
 
@@ -126,8 +127,9 @@ class MinigameParser {
             this.hasCake = args[2][2] === "1";
             this.hasPickaxe = args[2][3] === "1";
             this.hasBell = args[2][4] === "1";
-            let act = parseInt(args[2][5]);
-            this.cash = parseInt(args[2].substring(6));
+            this.isFriendlyForced = args[2][5] === "1";
+            let act = parseInt(args[2][6]);
+            this.cash = parseInt(args[2].substring(7));
             this.job = this.getJobById(this.jobId);
 
             let jumptoStep = id === "BEGINNING" ? dungeons.start : dungeons.actions.filter(a => a.id === id)[0];
@@ -190,6 +192,10 @@ class MinigameParser {
             c++;
         }
 
+        if (step.options.length === 0) {
+            this.reportGameEnd(message, step.id);
+        }
+
         this.discordHelper.richEmbedMessage(message, response, function (embed) {
             if (response.options.length === 0) return;
             if (response.options.length >= 1) embed.react(self.emoji_one);
@@ -236,9 +242,12 @@ class MinigameParser {
                     let c = self.hasCake ? "1" : "0";
                     let pa = self.hasPickaxe ? "1" : "0";
                     let b = self.hasBell ? "1" : "0";
-
-                    let command = `!play jumpto ${stepId};${self.name};${self.jobId}${fb}${c}${pa}${b}${response.act}${self.cash}`;
+                    let ff = self.isFriendlyForced ? "1" : "0";
+                  
+                    let command = `!play jumpto ${stepId};${self.name};${self.jobId}${fb}${c}${pa}${b}${ff}${response.act}${self.cash}`;
                     message.channel.send("Sorry, there was some issue. You can resume your playthrough with the following command, though:\n" + command);
+
+                    self.reportError(message, e, command);
                 });
         });
     }
@@ -278,6 +287,10 @@ class MinigameParser {
 
                     self.cash = 30;
                     self.job = self.getJobById(self.jobId);
+
+                    // report playthrough to measure how many people play the game.
+                    self.reportGameStart(message, self);
+
                     self.sendStep(message, dungeons.start);
 
                 }).catch(e => console.log(e));
@@ -321,15 +334,54 @@ class MinigameParser {
             this.hasCake = true;
             this.cash -= 15;
         }
+        if (step.id === "ROAD_N_NIGHT_FIGHT") {
+            this.hasFirespell = true;
+        }
         else if (step.id === "ROAD_BRIDGE_BUY") {
             this.cash -= 30;
         }
-        else if (step.id === "XXX") {
+        else if (step.id === "GALBARI_N_TR_5") {
+            this.hasCake = false;
+            this.isFriendlyForced = true;
+        }
+        else if (step.id === "GALBARI_N_TR_4_3" || step.id === "GALBARI_HID_IN_DIS_FIRE" || step.id === "GALBARI_HID_ENEMY_COMBAT_WIN_FB") {
+            this.hasFirespell = false;
+        }
+        else if (step.id === "GALBARI_HID_IN_DIS_BELL") {
+            this.hasBell = false;
+        }
+        else if (step.id === "ROAD_W_BND_COMBAT_LOSE") {
+            this.cash -= 15;
+        }
+        else if (step.id === "ROAD_W_BND_COMBAT_WIN") {
             this.hasPickaxe = true;
         }
         else if (step.id === "XXX") {
             this.hasBell = true;
+            this.hasPickaxe = true;
         }
+        else if (step.id === "RETURN_7") {
+            this.cash += 200;
+        }
+    }
+
+    random(minInclusive, maxInclusive) {
+        return minInclusive + Math.floor(Math.random() * (maxInclusive + 1));
+    }
+
+    reportGameStart(message, context) {
+        let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+        reportChannel.send(`TextAdventure: ${message.channel.recipient.username} started a session as a '${context.job}' called '${context.name}'.`);
+    }
+
+    reportGameEnd(message, stepId) {
+        let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+        reportChannel.send(`TextAdventure: ${message.channel.recipient.username} finished the game at step '${stepId}'.`);
+    }
+
+    reportError(message, text, command) {
+        let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+        reportChannel.send(`TextAdventure: ${message.channel.recipient.username} found a bug: \n${text}\n${command}.`);
     }
 }
 
