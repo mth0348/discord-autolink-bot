@@ -356,9 +356,8 @@ class MinigameParser {
         else if (step.id === "ROAD_W_BND_COMBAT_WIN") {
             this.hasPickaxe = true;
         }
-        else if (step.id === "XXX") {
+        else if (step.id === "ROAD_W_TRACKS_MINE_PA_3") {
             this.hasBell = true;
-            this.hasPickaxe = true;
         }
         else if (step.id === "RETURN_7") {
             this.cash += 200;
