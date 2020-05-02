@@ -123,7 +123,7 @@ class MinigameParser {
             let id = args[0];
             this.name = args[1];
             this.jobId = parseInt(args[2][0]);
-            this.hasFirespell = args[2][1] === "1";
+            this.hasFireball = args[2][1] === "1";
             this.hasCake = args[2][2] === "1";
             this.hasPickaxe = args[2][3] === "1";
             this.hasBell = args[2][4] === "1";
@@ -238,7 +238,7 @@ class MinigameParser {
                     }
 
                 }).catch(e => {
-                    let fb = self.hasFirespell ? "1" : "0";
+                    let fb = self.hasFireball ? "1" : "0";
                     let c = self.hasCake ? "1" : "0";
                     let pa = self.hasPickaxe ? "1" : "0";
                     let b = self.hasBell ? "1" : "0";
@@ -335,7 +335,7 @@ class MinigameParser {
             this.cash -= 15;
         }
         if (step.id === "ROAD_N_NIGHT_FIGHT") {
-            this.hasFirespell = true;
+            this.hasFireball = true;
         }
         else if (step.id === "ROAD_BRIDGE_BUY") {
             this.cash -= 30;
@@ -345,7 +345,7 @@ class MinigameParser {
             this.isFriendlyForced = true;
         }
         else if (step.id === "GALBARI_N_TR_4_3" || step.id === "GALBARI_HID_IN_DIS_FIRE" || step.id === "GALBARI_HID_ENEMY_COMBAT_WIN_FB") {
-            this.hasFirespell = false;
+            this.hasFireball = false;
         }
         else if (step.id === "GALBARI_HID_IN_DIS_BELL") {
             this.hasBell = false;
