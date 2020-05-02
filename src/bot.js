@@ -43,9 +43,9 @@ class DrunkenBot {
                     this.mtgParser.startWorkflow(message);
                 }
                 
-                // if (this.minigameParser.isCommandAllowed(message)) {
-                //     this.minigameParser.startWorkflow(message);
-                // }
+                if (this.minigameParser.isCommandAllowed(message)) {
+                    this.minigameParser.startWorkflow(message);
+                }
             }
             catch (e) {
                 console.warn(e);
