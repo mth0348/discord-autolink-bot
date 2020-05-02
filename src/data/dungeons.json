@@ -1170,7 +1170,8 @@
                 },
                 {
                     "text": "*Don't use a distraction. Engage in combat.*",
-                    "id": "GALBARI_HID_IN_DIS_COMBAT"
+                    "id": "GALBARI_HID_ENEMY_COMBAT_WIN",
+                    "condition": "if (this.random(1,3) == 1) step.options[i].id = 'END_DIE'; true"
                 }
             ]
         },
