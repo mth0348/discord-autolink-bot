@@ -549,7 +549,8 @@
             "options": [
                 {
                     "text": "*Buy it* (-15💰)",
-                    "id": "ROAD_N_HA_3_BUY"
+                    "id": "ROAD_N_HA_3_BUY",
+                    "condition": "this.cash >= 15"
                 },
                 {
                     "text": "\"Can I try it first?\"",
@@ -1100,7 +1101,7 @@
             "options": [
                 {
                     "text": "*Enter the hideout.*",
-                    "id": "GALBARI_HID_IN_DIS"
+                    "id": "GALBARI_HID_IN_COMB"
                 }
             ]
         },
