@@ -22,6 +22,12 @@ class MinigameParser {
         // female imgur album: https://imgur.com/a/w7x4eGG
         // male imgur album: https://imgur.com/a/fZ1bfpd
 
+        this.hasFireball = false;
+        this.hasCake =false;
+        this.hasPickaxe = false;
+        this.hasBell = false;
+        this.isFriendlyForced = false;
+
         this.people = {
             // females
             Mika: "https://i.imgur.com/o9cTKvR.png",

@@ -44,6 +44,7 @@ class DrunkenBot {
                 }
                 
                 if (this.minigameParser.isCommandAllowed(message)) {
+                    this.minigameParser = new MinigameParser(this.client);
                     this.minigameParser.startWorkflow(message);
                 }
             }
