@@ -759,7 +759,11 @@
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature",
+                "instant",
+                "sorcery",
+                "artifact",
+                "enchantment"
             ]
         },
         {
@@ -1391,8 +1395,18 @@
     "permanentEvents": [
         {
             "text": "(self) deals (number) damage to any target",
-            "score": 1,
+            "score": 0.5,
             "colorIdentity": "rr"
+        },
+        {
+            "text": "you may put a land card from your hand onto the battlefield tapped",
+            "score": 1,
+            "colorIdentity": "g"
+        },
+        {
+            "text": "you may put a land card from your hand onto the battlefield",
+            "score": 1,
+            "colorIdentity": "g"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on (self)",
@@ -1402,7 +1416,13 @@
         },
         {
             "text": "untap (self)",
-            "score": 0.6,
+            "score": 0.2,
+            "colorIdentity": "wubrg",
+            "creatureOnly": true
+        },
+        {
+            "text": "untap target permanent",
+            "score": 0.2,
             "colorIdentity": "wubrg",
             "creatureOnly": true
         },
@@ -1425,6 +1445,26 @@
             "text": "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
             "score": 0.4,
             "colorIdentity": "rr"
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature target (player) controls",
+            "colorIdentity": "rr",
+            "score": 4
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature",
+            "colorIdentity": "rr",
+            "score": 2
+        },
+        {
+            "text": "(name) deals (number2) damage to each (subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damage to each non-(subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1
         },
         {
             "text": "draw a card",
@@ -1647,6 +1687,31 @@
         },
         {
             "text": "return target (permanent) card from a graveyard to the battlefield under your control",
+            "score": 3.4,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return up to (numbername) target (type) card(s) from your graveyard to your hand",
+            "score": 0.7,
+            "colorIdentity": "bg"
+        },
+        {
+            "text": "return target creature card from your graveyard to the battlefield under your control tapped",
+            "score": 2.8,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target creature card from a graveyard to the battlefield under your control tapped",
+            "score": 3.0,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from your graveyard to the battlefield under your control tapped",
+            "score": 3.0,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from a graveyard to the battlefield under your control tapped",
             "score": 3.4,
             "colorIdentity": "wbg"
         },
@@ -2035,6 +2100,11 @@
             "text": "discard a (type) card",
             "colorIdentity": "wubrg",
             "score": 7
+        },
+        {
+            "text": "tap (numbername) (other) untapped creatures you control",
+            "colorIdentity": "wubrg",
+            "score": 10
         }
     ],
     "instantSorceryEvents": [
@@ -2064,22 +2134,12 @@
             "score": 1.5
         },
         {
-            "text": "(name) deals (number2) damage to each creature target opponent controls",
+            "text": "(name) deals (number2) damage to each creature target (player) controls",
             "colorIdentity": "rr",
-            "score": 2
+            "score": 4
         },
         {
             "text": "(name) deals (number2) damage to each creature",
-            "colorIdentity": "rr",
-            "score": 1.2
-        },
-        {
-            "text": "(name) deals (number2) damage to each creature target opponent controls",
-            "colorIdentity": "rr",
-            "score": 1
-        },
-        {
-            "text": "(name) deals (number2) damage to each creature target opponent controls",
             "colorIdentity": "rr",
             "score": 2
         },
@@ -2120,7 +2180,7 @@
         },
         {
             "text": "draw a card",
-            "colorIdentity": "u",
+            "colorIdentity": "ug",
             "score": 1
         },
         {

@@ -359,7 +359,7 @@ class MtgParser {
                     keyword = keyword.replace(", ", "");
                 }
 
-                if (ability.length > 0) {
+                if (secondAbility.length > 0) {
                     // overwrite 2nd ability if any is present.
                     secondAbility = sAbility.text;
                 } else {
@@ -1024,7 +1024,7 @@ class MtgParser {
         let overwriteAbility = false;
 
         if (keyword === undefined || keyword === null) {
-            return { text: "", ability: "", secondAbility: "" };
+            return { text: "", ability: "", overwriteAbility: false };
         }
 
         let score = keyword.score;
@@ -1041,7 +1041,7 @@ class MtgParser {
             let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
             let event1 = positiveEvents[this.random(0, positiveEvents.length - 1)];
             let event2 = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            ability = `choose one:\n  • ${event1.name.toCamelCase()}\n  • ${event2.name.toCamelCase()}`;
+            ability = `Choose one:\n  • ${event1.name.toCamelCase()}\n  • ${event2.name.toCamelCase()}`;
             overwriteAbility = true;
             score += (event1.score + event2.score) / 2;
             this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
