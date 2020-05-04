@@ -53,7 +53,11 @@ class DiscordHelper {
     }
 
     checkRolePermissions(message, allowedRoles) {
-        let memberRoles = message.member.roles.cache;
+        // allow webhook bots / hard-exclude T-Bot.
+        if (message.author.disriminator === "0000" || message.author.id === "706950877696622635")
+            return true;
+
+         let memberRoles = message.member.roles.cache;
         for (let i = 0; i < allowedRoles.length; i++) {
             const allowedRole = allowedRoles[i];
 
