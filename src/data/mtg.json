@@ -2415,22 +2415,50 @@
         {
             "text": "target attacking creature gets +(number)/+0 until end of turn",
             "colorIdentity": "r",
-            "score": 0.5
+            "score": 0.5,
+            "instantOnly": true
         },
         {
             "text": "target attacking creature gets +(number2)/+0 until end of turn",
             "colorIdentity": "r",
-            "score": 0.5
+            "score": 0.5,
+            "instantOnly": true
         },
         {
             "text": "target attacking creature gets +(number2)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "r",
-            "score": 1.2
+            "score": 1.2,
+            "instantOnly": true
         },
         {
             "text": "target attacking creature gets +(number2)/+(number2) and gains (keyword) until end of turn",
             "colorIdentity": "rg",
-            "score": 1.7
+            "score": 1.7,
+            "instantOnly": true
+        },
+        {
+            "text": "target blocking creature gets +(number)/+0 until end of turn",
+            "colorIdentity": "wrg",
+            "score": 0.5,
+            "instantOnly": true
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+0 until end of turn",
+            "colorIdentity": "wrg",
+            "score": 0.5,
+            "instantOnly": true
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "wrg",
+            "score": 1.2,
+            "instantOnly": true
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+(number2) and gains (keyword) until end of turn",
+            "colorIdentity": "wrg",
+            "score": 1.7,
+            "instantOnly": true
         },
         {
             "text": "switch target creature's power and toughness until end of turn",
