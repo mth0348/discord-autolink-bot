@@ -536,25 +536,30 @@ class MtgParser {
 
         let plusEvent = pwEvents[this.random(0, pwEvents.length - 1)];
         let plusCost = Math.abs(plusEvent.score) * 1.5;
+        plusCost = Math.min(3, Math.max(1, Math.ceil(plusCost)));
+        this.colorIdentity += plusEvent.colorIdentity;
+
+        let minus1Event = pw2Events[this.random(0, pw2Events.length - 1)];
+        let minus1Cost = minus1Event.score * 1.5;
+        minus1Cost = Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
 
         let isFirstStatic = false;
         if (this.random(1, 10) == 10) {
             isFirstStatic = true;
             let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
             staticEvent.text = staticEvent.text.replace("3", "2"); /* don't allow +3 */
-            plusEvent = staticEvent;
-            this.colorIdentity += plusEvent.colorIdentity;
-            plusCost = staticEvent.score * 1.5;
-        }
-        else {
-            this.colorIdentity += plusEvent.colorIdentity;
-            plusCost = Math.min(3, Math.max(1, Math.ceil(plusCost)));
-        }
+            
+            // replace second with first, and first with static.
+            minus1Event = plusEvent;
+            minus1Cost = plusCost;
 
-        let minus1Event = pw2Events[this.random(0, pw2Events.length - 1)];
-        let minus1Cost = minus1Event.score * 1.5;
-        minus1Cost = Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
-        this.colorIdentity += minus1Event.colorIdentity;
+            plusEvent = staticEvent;
+            plusCost = Math.min(3, Math.max(1, Math.ceil(staticEvent.score * 1.5)));
+
+            this.colorIdentity += staticEvent.colorIdentity;
+        } else{
+            this.colorIdentity += minus1Event.colorIdentity;
+        }
 
         let minus2Event = pw3Events[this.random(0, pw3Events.length - 1)];
         this.colorIdentity += minus2Event.colorIdentity;
