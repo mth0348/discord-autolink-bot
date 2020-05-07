@@ -375,7 +375,7 @@ class MtgParser {
         }
 
         let rarityScore = rarity / 6;
-        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarityScore;
+        totalScore += (this.lastNumber > 0 ? this.lastNumber / 4 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarityScore;
         this.log.push("rarity:\t\t-" + rarityScore);
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));

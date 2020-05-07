@@ -2016,12 +2016,12 @@
             "score": 1
         },
         {
-            "text": "destroy target creature with no converted mana cost (number2) or less",
+            "text": "destroy target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
             "score": 1.3
         },
         {
-            "text": "destroy target creature with no converted mana cost (number3) or higher",
+            "text": "destroy target creature with converted mana cost (number3) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
         },
@@ -2031,12 +2031,12 @@
             "score": 1
         },
         {
-            "text": "exile target creature with no converted mana cost (number2) or less",
+            "text": "exile target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
             "score": 1.3
         },
         {
-            "text": "exile target creature with no converted mana cost (number3) or higher",
+            "text": "exile target creature with converted mana cost (number3) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
         }
