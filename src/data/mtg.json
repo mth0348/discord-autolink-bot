@@ -1792,16 +1792,6 @@
             "colorIdentity": "wubrg"
         },
         {
-            "text": "you may counter target spell",
-            "score": 1.2,
-            "colorIdentity": "u"
-        },
-        {
-            "text": "you may counter target (type/counterable) spell",
-            "score": 1,
-            "colorIdentity": "u"
-        },
-        {
             "text": "remove up to (numbername) counter(s) from target permanent",
             "score": 0.5,
             "colorIdentity": "wubrg"
