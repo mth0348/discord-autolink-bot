@@ -112,19 +112,24 @@ class MtgParser {
         this.lastNumberCount = 0;
         this.colorIdentity = "";
 
-        switch (cardType) {
-            case "creature":
-                this.createCreatureCard(message);
-                break;
-            case "instant":
-                this.createInstantCard(message);
-                break;
-            case "sorcery":
-                this.createSorceryCard(message);
-                break;
-            case "planeswalker":
-                this.createPlaneswalkerCard(message);
-                break;
+        try {
+            switch (cardType) {
+                case "creature":
+                    this.createCreatureCard(message);
+                    break;
+                case "instant":
+                    this.createInstantCard(message);
+                    break;
+                case "sorcery":
+                    this.createSorceryCard(message);
+                    break;
+                case "planeswalker":
+                    this.createPlaneswalkerCard(message);
+                    break;
+            }
+        } catch (e) {
+            let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+            reportChannel.send(`MtG: crashed with: \n${e}`);
         }
 
         this.log.push(`cardname:\t${this.card.name}`);
@@ -168,7 +173,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "instant");
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -244,7 +249,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "sorcery");
 
         // evaluate cmc.
-        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -368,7 +373,7 @@ class MtgParser {
         }
 
         let rarityScore = rarity / 6;
-        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarityScore;
+        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarityScore;
         this.log.push("rarity:\t\t-" + rarityScore);
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
@@ -547,7 +552,7 @@ class MtgParser {
             isFirstStatic = true;
             let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
             staticEvent.text = staticEvent.text.replace("3", "2"); /* don't allow +3 */
-            
+
             // replace second with first, and first with static.
             minus1Event = plusEvent;
             minus1Cost = plusCost;
@@ -556,7 +561,7 @@ class MtgParser {
             plusCost = Math.min(3, Math.max(1, Math.ceil(staticEvent.score * 1.5)));
 
             this.colorIdentity += staticEvent.colorIdentity;
-        } else{
+        } else {
             this.colorIdentity += minus1Event.colorIdentity;
         }
 
