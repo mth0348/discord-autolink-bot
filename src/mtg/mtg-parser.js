@@ -12,9 +12,9 @@ class MtgParser {
         this.client = client;
         this.discordHelper = new DiscordHelper();
 
-        this.colors = ["white", "blue", "black", "red", "green"];
-        this.powers = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 7, 8];
-        this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 7, 8];
+        this.colors = ["white", "blue", "black", "red", "green", "colorless"];
+        this.powers = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 9, 10];
+        this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 9, 10];
 
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
         this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
@@ -108,6 +108,8 @@ class MtgParser {
         this.log = [];
         this.log.push(`--- Creating new ${cardType} card... ---`);
 
+        this.lastNumber = 0;
+        this.lastNumberCount = 0;
         this.colorIdentity = "";
 
         switch (cardType) {
@@ -154,7 +156,6 @@ class MtgParser {
     }
 
     createInstantCard(message) {
-        this.lastNumber = 0;
 
         let name = this.getInstantSorceryName();
         this.card = new MtgCard();
@@ -167,7 +168,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "instant");
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 4 : this.lastNumber > 0 ? this.lastNumber / 3 : 1) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -195,7 +196,6 @@ class MtgParser {
     }
 
     createPlaneswalkerCard(message) {
-        this.lastNumber = 0;
 
         let name = this.getPlaneswalkerName();
         this.card = new MtgCard();
@@ -232,7 +232,6 @@ class MtgParser {
     }
 
     createSorceryCard(message) {
-        this.lastNumber = 0;
 
         let name = this.getInstantSorceryName();
         this.card = new MtgCard();
@@ -245,7 +244,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "sorcery");
 
         // evaluate cmc.
-        let totalScore = -0.2 + oracle.score + (this.lastNumber > 5 ? this.lastNumber / 3 : this.lastNumber > 0 ? this.lastNumber / 2 : 1) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -368,9 +367,9 @@ class MtgParser {
             }
         }
 
-        let rarityScore = -rarity / 4;
-        totalScore += rarityScore;
-        this.log.push("rarity:\t\t" + rarityScore);
+        let rarityScore = rarity / 6;
+        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0,this.lastNumberCount-1)) - rarityScore;
+        this.log.push("rarity:\t\t-" + rarityScore);
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
 
@@ -531,7 +530,7 @@ class MtgParser {
 
     getPlaneswalkerOracle() {
         let pwEvents = mtgData.permanentEvents.filter(e => e.score <= 1 && e.score >= -1 && e.creatureOnly == undefined);
-        let pw2Events = mtgData.permanentEvents.filter(e => e.score >= 1 && e.score <= 2 && e.creatureOnly == undefined);
+        let pw2Events = mtgData.permanentEvents.filter(e => e.score >= 1 && e.score <= 1.5 && e.creatureOnly == undefined);
         let pw3Events = mtgData.permanentEvents.filter(e => (e.score > 2 || (e.text.indexOf("(number") >= 0 && e.score >= 1)) && e.creatureOnly == undefined);
 
         let plusEvent = pwEvents[this.random(0, pwEvents.length - 1)];
@@ -643,37 +642,43 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
                 text = text.replace("(numbername)", number);
-                this.lastNumber += number === "two" ? 2 : 3;
+                this.lastNumber = max(this.lastNumber, number === "two" ? 2 : 3);
+                this.lastNumberCount++;
             }
             if (text.indexOf("(numbername2)") >= 0) {
                 moreThanOne = true;
                 let number = ["two", "two", "three", "three", "three", "four", "five"][this.random(0, 6)];
                 text = text.replace("(numbername2)", number);
-                this.lastNumber += number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5;
+                this.lastNumber = max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
+                this.lastNumberCount++;
             }
             if (text.indexOf("(numbername3)") >= 0) {
                 moreThanOne = true;
                 let number = ["four", "five", "five", "six"][this.random(0, 3)];
                 text = text.replace("(numbername3)", number);
-                this.lastNumber += number === "four" ? 4 : number === "five" ? 5 : 6;
+                this.lastNumber = max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
+                this.lastNumberCount++;
             }
             if (text.indexOf("(number)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
                 moreThanOne = moreThanOne || number > 1;
                 text = text.replace("(number)", number);
-                this.lastNumber += number;
+                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumberCount++;
             }
             if (text.indexOf("(number2)") >= 0) {
                 let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
                 moreThanOne = true;
                 text = text.replace("(number2)", number);
-                this.lastNumber += number;
+                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumberCount++;
             }
             if (text.indexOf("(number3)") >= 0) {
                 let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][this.random(0, 8)];
                 moreThanOne = true;
                 text = text.replace("(number3)", number);
-                this.lastNumber += number;
+                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumberCount++;
             }
 
             if (text.indexOf("(keyword)") >= 0) {
@@ -707,10 +712,19 @@ class MtgParser {
                 useN = type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
             }
+            if (text.indexOf("(permanent)") >= 0) {
+                let type = mtgData.permanentTypes[this.random(0, mtgData.permanentTypes.length - 1)];
+                useN = useN || type === "enchantment" || type === "artifact";
+                text = text.replace("(permanent)", type);
+            }
 
             if (text.indexOf("(type/counterable)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)]
-                text = text.replace("(type/counterable)", type.replace("land", "creature"));
+                text = text.replace("(type/counterable)", type.replace("land", "noncreature"));
+            }
+            if (text.indexOf("(type|color)") >= 0) {
+                let type = this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)];
+                text = text.replace("(type|color)", type.replace("land", "noncreature"));
             }
 
             if (text.indexOf("(mana)") >= 0) {
@@ -721,12 +735,10 @@ class MtgParser {
             }
 
             text = text.replace("(player)", this.random(0, 1) === 1 ? "player" : "opponent");
-            text = text.replace("(permanent)", mtgData.permanentTypes[this.random(0, mtgData.permanentTypes.length - 1)]);
             text = text.replace(/\(name\)/g, this.card.name);
             text = text.replace("(s)", moreThanOne ? "s" : "");
             text = text.replace("(n)", useN ? "n" : "");
             text = text.replace("(color)", this.colors[this.random(0, this.colors.length - 1)]);
-            text = text.replace("(type|color)", this.random(0, 1) === 1 ? this.colors[this.random(0, this.colors.length - 1)] : mtgData.types[this.random(0, mtgData.types.length - 1)]);
         }
 
         return text;
