@@ -173,7 +173,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "instant");
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -249,7 +249,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "sorcery");
 
         // evaluate cmc.
-        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -373,7 +373,7 @@ class MtgParser {
         }
 
         let rarityScore = rarity / 6;
-        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (max(0, this.lastNumberCount - 1)) - rarityScore;
+        totalScore += (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarityScore;
         this.log.push("rarity:\t\t-" + rarityScore);
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
@@ -647,42 +647,42 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
                 text = text.replace("(numbername)", number);
-                this.lastNumber = max(this.lastNumber, number === "two" ? 2 : 3);
+                this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : 3);
                 this.lastNumberCount++;
             }
             if (text.indexOf("(numbername2)") >= 0) {
                 moreThanOne = true;
                 let number = ["two", "two", "three", "three", "three", "four", "five"][this.random(0, 6)];
                 text = text.replace("(numbername2)", number);
-                this.lastNumber = max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
+                this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
                 this.lastNumberCount++;
             }
             if (text.indexOf("(numbername3)") >= 0) {
                 moreThanOne = true;
                 let number = ["four", "five", "five", "six"][this.random(0, 3)];
                 text = text.replace("(numbername3)", number);
-                this.lastNumber = max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
+                this.lastNumber = Math.max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
                 this.lastNumberCount++;
             }
             if (text.indexOf("(number)") >= 0) {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
                 moreThanOne = moreThanOne || number > 1;
                 text = text.replace("(number)", number);
-                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
             }
             if (text.indexOf("(number2)") >= 0) {
                 let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
                 moreThanOne = true;
                 text = text.replace("(number2)", number);
-                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
             }
             if (text.indexOf("(number3)") >= 0) {
                 let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][this.random(0, 8)];
                 moreThanOne = true;
                 text = text.replace("(number3)", number);
-                this.lastNumber = max(this.lastNumber, number);
+                this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
             }
 
