@@ -129,7 +129,7 @@ class MtgParser {
             }
         } catch (e) {
             let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
-            reportChannel.send(`MtG: crashed with: \n${e}`);
+            reportChannel.send(`MtG: crashed with: \n${e}\n${e.stack}.`);
 
             throw e;
         }
