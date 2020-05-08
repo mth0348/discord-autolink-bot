@@ -167,6 +167,7 @@ class MtgParser {
         let name = this.getInstantSorceryName();
         this.card = new MtgCard();
         this.card.name = name;
+        this.card.subtype = this.random(1, 20) == 20 ? "Arcane" : undefined;
 
         let rarity = [1, 1, 2, 2, 2, 3, 3, 4][this.random(0, 7)]; // 1 = common, 4 = mythic
         let rarityText = this.getRarity(rarity);
@@ -192,7 +193,6 @@ class MtgParser {
         this.log.push("manacost:\t" + manacost);
 
         this.card.type = "Instant";
-        this.card.subtype = undefined;
         this.card.power = undefined;
         this.card.color = color;
         this.card.cost = this.resolveManaSymbols(manacost);
@@ -243,6 +243,7 @@ class MtgParser {
         let name = this.getInstantSorceryName();
         this.card = new MtgCard();
         this.card.name = name;
+        this.card.subtype = this.random(1, 20) == 20 ? "Arcane" : undefined;
 
         let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
         let rarityText = this.getRarity(rarity);
@@ -268,7 +269,6 @@ class MtgParser {
         this.log.push("manacost:\t" + manacost);
 
         this.card.type = "Sorcery";
-        this.card.subtype = undefined;
         this.card.power = undefined;
         this.card.color = color;
         this.card.cost = this.resolveManaSymbols(manacost);
@@ -308,19 +308,31 @@ class MtgParser {
         // decide triggered abilities.
         let ability = "";
         let secondAbility = "";
-        let hasAbility = [0, 0, 1, 1, 1, 2, 2][this.random(0, 6)];
+        let hasAbility = [0, 1, 1, 1, 2, 2, 2][this.random(0, 6)];
 
         if (hasAbility >= 1 || rarity >= 4) {
-            let ability1 = this.getTriggeredAbility();
-            totalScore += ability1.score;
-            this.log.push("ability 1:\t" + ability1.score);
-            ability = ability1.text;
+            let isFirstStatic = this.random(1,6) == 6;
+            let abilityScore = 0;
+
+            if (isFirstStatic) {
+                let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
+                ability = this.parseSyntax(staticEvent.text).replace("3", "2").toCamelCase() + "."; /* don't allow +3 */
+                abilityScore = staticEvent.score;
+                this.colorIdentity += staticEvent.colorIdentity;
+            } else {
+                let ability1 = this.getTriggeredAbility();
+                ability = ability1.text;
+                abilityScore = ability1.score;
+            }
+
+            totalScore += abilityScore;
+            this.log.push("ability static:\t" + abilityScore);
 
             // TODO: verify if this is necessary.
-            if (ability1.score > 1.0) {
+            if (abilityScore > 1.0) {
                 rarity = Math.max(rarity + 1, 4);
             }
-            if (ability1.score < -1.0) {
+            if (abilityScore < -1.0) {
                 rarity = Math.min(rarity - 1, 1);
             }
         }
@@ -547,7 +559,7 @@ class MtgParser {
 
         let minus1Event = pw2Events[this.random(0, pw2Events.length - 1)];
         let minus1Cost = minus1Event.score * 1.5;
-        minus1Cost = Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
+        minus1Cost = 0 - Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
 
         let isFirstStatic = false;
         if (this.random(1, 10) == 10) {
@@ -572,13 +584,13 @@ class MtgParser {
 
         let pushedMinus2EventText = minus2Event.text.replace(/\(number\)/g, "(number3)").replace(/\(number2\)/g, "(number3)").replace(/\(numbername\)/g, "(numbername3)").replace(/\(numbername2\)/g, "(numbername3)");
         let parsedMinus2Text = this.parseSyntax(pushedMinus2EventText.toCamelCase());
-        let minus2Cost = Math.min(8, Math.max(4, Math.ceil(minus2Event.score * 1.5 + this.lastNumber / 4)));
+        let minus2Cost = 0 - Math.min(9, Math.max(4, Math.ceil(minus2Event.score * 1.5 + this.lastNumber / 4)));
 
         let a1 = isFirstStatic ?
             `${this.parseSyntax(plusEvent.text.toCamelCase())}.` :
             `{+${plusCost}}: ${this.parseSyntax(plusEvent.text.toCamelCase())}.`;
-        let a2 = `{-${minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
-        let a3 = `{-${minus2Cost}}: ${parsedMinus2Text}.`;
+        let a2 = `{${minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
+        let a3 = `{${minus2Cost}}: ${parsedMinus2Text}.`;
 
         let loyaltyScore = Math.max(2, Math.min(5, Math.min(minus2Cost, Math.floor(minus2Cost / (this.flipCoin() ? 1.3 : 2)))));
         let loyalty = `{ ${loyaltyScore} }`;
@@ -650,6 +662,7 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
                 text = text.replace("(numbername)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : 3);
                 this.lastNumberCount++;
             }
@@ -657,6 +670,7 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "three", "three", "three", "four", "five"][this.random(0, 6)];
                 text = text.replace("(numbername2)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
                 this.lastNumberCount++;
             }
@@ -664,6 +678,7 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["four", "five", "five", "six"][this.random(0, 3)];
                 text = text.replace("(numbername3)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
                 this.lastNumberCount++;
             }
@@ -671,22 +686,43 @@ class MtgParser {
                 let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
                 moreThanOne = moreThanOne || number > 1;
                 text = text.replace("(number)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
+            }
+            if (text.indexOf("(!number)") >= 0) {
+                let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][this.random(0, 8)];
+                text = text.replace("(!number)", number);
+                text = text.replace("(samenumber)", number);
+                // ignore lastNumber increase.
             }
             if (text.indexOf("(number2)") >= 0) {
                 let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
                 moreThanOne = true;
                 text = text.replace("(number2)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
+            }
+            if (text.indexOf("(!number2)") >= 0) {
+                let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][this.random(0, 12)];
+                text = text.replace("(!number2)", number);
+                text = text.replace("(samenumber)", number);
+                // ignore lastNumber increase.
             }
             if (text.indexOf("(number3)") >= 0) {
                 let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][this.random(0, 8)];
                 moreThanOne = true;
                 text = text.replace("(number3)", number);
+                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number);
                 this.lastNumberCount++;
+            }
+            if (text.indexOf("(!number3)") >= 0) {
+                let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][this.random(0, 8)];
+                text = text.replace("(!number3)", number);
+                text = text.replace("(samenumber)", number);
+                // ignore lastNumber increase.
             }
 
             if (text.indexOf("(keyword)") >= 0) {
@@ -699,10 +735,16 @@ class MtgParser {
                 text = text.replace("(subtype)", subtype);
             }
 
-            if (text.indexOf("(other)") >= 0 && this.card.subtype !== undefined && this.card.subtype.indexOf(subtype) >= 0) {
-                text = text.replace("(other)", "another ");
+            if (text.indexOf("(another)") >= 0 && this.card.subtype !== undefined && this.card.subtype.indexOf(subtype) >= 0) {
+                text = text.replace("(another)", "another ");
             } else {
-                text = text.replace("(other)", "");
+                text = text.replace("(another)", "");
+            }
+
+            if (text.indexOf("(other creatures)") >= 0 && this.card.type.toLowerCase() === "creature") {
+                text = text.replace("(other creatures)", "other creatures");
+            } else {
+                text = text.replace("(other creatures)", "creatures");
             }
 
             if (text.indexOf("(self)") >= 0) {
@@ -864,7 +906,7 @@ class MtgParser {
     getManacostFromCmc(cmc, colorString) {
 
         if (colorString.length === 0) {
-            return `{${cmc}}`;
+            return `{${Math.min(9, cmc)}}`;
         }
 
         let manacost = "";
@@ -880,7 +922,7 @@ class MtgParser {
                     manacost = `{${color}}{${color}}`;
                 }
                 else {
-                    manacost = `{${cmc - 1}}{${color}}`;
+                    manacost = `{${Math.min(9, cmc - 1)}}{${color}}`;
                 }
             } else if (cmc === 3) {
                 let threeSymbols = this.random(1, 4) === 4;
@@ -896,13 +938,13 @@ class MtgParser {
             } else if (cmc > 3) {
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
-                    return `{${cmc - 2}}{${color}}{${color}}`;
+                    return `{${Math.min(9, cmc - 2)}}{${color}}{${color}}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
-                    return `{${cmc - 3}}{${color}}{${color}}{${color}}`;
+                    return `{${Math.min(9, cmc - 3)}}{${color}}{${color}}{${color}}`;
 
-                manacost = `{${cmc - 1}}{${color}}`;
+                manacost = `{${Math.min(9, cmc - 1)}}{${color}}`;
             }
         }
 
@@ -929,18 +971,18 @@ class MtgParser {
                 let fourSymbols = this.random(0, 3); // 0 = none, 1 = first symbol twice, 2 = second symbol twice, 3 = both symbol twice.
                 switch (fourSymbols) {
                     case 0:
-                        manacost = `{${cmc - 2}}{${color[0]}}{${color[1]}}`;
+                        manacost = `{${Math.min(9, cmc - 2)}}{${color[0]}}{${color[1]}}`;
                         break;
                     case 1:
-                        manacost = `{${cmc - 3}}{${color[0]}}{${color[0]}}{${color[1]}}`;
+                        manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[0]}}{${color[1]}}`;
                         break;
                     case 2:
-                        manacost = `{${cmc - 3}}{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[1]}}{${color[1]}}`;
                         break;
                     case 3:
                         manacost = `{${color[0]}}{${color[0]}}{${color[1]}}{${color[1]}}`;
                         if (cmc > 4) {
-                            manacost = `{${cmc - 4}}${manacost}`;
+                            manacost = `{${Math.min(9, cmc - 4)}}${manacost}`;
                         }
                         break;
                 }
@@ -957,7 +999,7 @@ class MtgParser {
             } else if (cmc === 3) {
                 manacost = `{${color[0]}}{${color[1]}}{${color[2]}}`;
             } else if (cmc > 3) {
-                manacost = `{${cmc - 3}}{${color[0]}}{${color[1]}}{${color[2]}}`;
+                manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[1]}}{${color[2]}}`;
             }
         }
 
@@ -1105,7 +1147,7 @@ class MtgParser {
             if (both) {
                 score += 2;
                 ability = `Choose one or both:\n   • ${event1.text.toCamelCase()}.\n   • ${event2.text.toCamelCase()}`;
-                
+
             } else {
                 score += 1;
                 ability = `Choose one:\n   • ${event1.text.toCamelCase()}.\n   • ${event2.text.toCamelCase()}`;
@@ -1126,6 +1168,9 @@ class MtgParser {
         }
         if (keyword.name === "Miracle") {
             score -= 1.5;
+        }
+        if (keyword.name === "Splice onto Arcane") {
+            this.card.subtype = "Arcane";
         }
 
         score = Math.max(1, score);

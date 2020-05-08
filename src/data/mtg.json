@@ -1390,6 +1390,11 @@
             "text": "Whenever a creature an opponent controls becomes tapped",
             "replacementText": "",
             "context": "creature"
+        },
+        {
+            "text": "Whenever a +1/+1 counter is put on (self)",
+            "replacementText": "",
+            "context": "creature"
         }
     ],
     "permanentEvents": [
@@ -1838,13 +1843,13 @@
             "creatureOnly": true
         },
         {
-            "text": "(self) gets +(number)/+(number) until end of turn",
+            "text": "(self) gets +(number)/+(samenumber) until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg",
             "creatureOnly": true
         },
         {
-            "text": "(self) gets +(number2)/+(number2) until end of turn",
+            "text": "(self) gets +(number2)/+(samenumber) until end of turn",
             "score": 1,
             "colorIdentity": "wubrg",
             "creatureOnly": true
@@ -1960,14 +1965,19 @@
             "score": 2
         },
         {
-            "text": "scry (number)",
-            "score": 0,
-            "colorIdentity": "wubrg"
+            "text": "scry (number3)",
+            "colorIdentity": "wubrg",
+            "score": 2
         },
         {
             "text": "scry (number2)",
-            "score": 0.2,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "score": 0.2
+        },
+        {
+            "text": "scry (number)",
+            "colorIdentity": "wubrg",
+            "score": 0
         },
         {
             "text": "proliferate, then proliferate again",
@@ -2021,7 +2031,7 @@
             "score": 1.3
         },
         {
-            "text": "destroy target creature with converted mana cost (number3) or higher",
+            "text": "destroy target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
         },
@@ -2036,29 +2046,74 @@
             "score": 1.3
         },
         {
-            "text": "exile target creature with converted mana cost (number3) or higher",
+            "text": "exile target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 1
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 3
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 5.5
         }
     ],
     "permanentStatics": [
         {
-            "text": "creatures you control have (keyword)",
+            "text": "(other creatures) you control have (keyword)",
             "colorIdentity": "wubrg",
             "score": 1.2
         },
         {
-            "text": "creatures you control have (keyword) and (keyword)",
+            "text": "(other creatures) you control have (keyword) and (keyword)",
             "colorIdentity": "wubrg",
             "score": 1.8
         },
         {
-            "text": "creatures you control get -(number)/-(number)",
+            "text": "(other creatures) you control get -(number)/-(number)",
             "colorIdentity": "bb",
             "score": -4
         },
         {
-            "text": "creatures you control get +(number)/+(number)",
+            "text": "(other creatures) you control get +(number)/+(samenumber)",
             "colorIdentity": "wwbg",
             "score": 4
         },
@@ -2070,17 +2125,142 @@
         {
             "text": "creatures you don't control get -2/-2",
             "colorIdentity": "bb",
-            "score": 6
+            "score": 5
         },
         {
-            "text": "creatures you don't control get -(number)/-(number)",
+            "text": "(other creatures) you don't control get -(number)/-(number)",
             "colorIdentity": "bb",
             "score": 6
         },
         {
-            "text": "creatures you control get +1/+1 and have (keyword)",
+            "text": "(other creatures) you control get +1/+1 and have (keyword)",
             "colorIdentity": "wubrg",
             "score": 4.2
+        },
+        {
+            "text": "you can't lose and game and your opponents can't win the game",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "you can't lose and game and your opponents can't win the game",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "you can't win and game and your opponents can't lose the game",
+            "colorIdentity": "wubrg",
+            "score": -4
+        },
+        {
+            "text": "skip your draw step",
+            "colorIdentity": "wubrg",
+            "score": -4
+        },
+        {
+            "text": "(other creatures) you control lose (keyword)",
+            "colorIdentity": "wubrg",
+            "score": -5
+        },
+        {
+            "text": "creatures you control can't have counters placed on them",
+            "colorIdentity": "gg",
+            "score": 3
+        },
+        {
+            "text": "You can't get poison counters",
+            "colorIdentity": "wwbbgg",
+            "score": 2
+        },
+        {
+            "text": "You may cast nonland cards with (keyword) from your graveyard",
+            "colorIdentity": "wubrg",
+            "score": 2.5
+        },
+        {
+            "text": "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead",
+            "colorIdentity": "uu",
+            "score": 4.2
+        },
+        {
+            "text": "If you would gain life, you gain twice that much life instead",
+            "colorIdentity": "www",
+            "score": 3.5
+        },
+        {
+            "text": "If an opponent would draw a card except the first on he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card",
+            "colorIdentity": "uubb",
+            "score": 3.5
+        },
+        {
+            "text": "If an opponent would draw two or more cards, instead you and that player each draw a card",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "If you would gain life, you gain that much life plus (number) instead",
+            "colorIdentity": "www",
+            "score": 2
+        },
+        {
+            "text": "Whenever an opponent would gain life, you gain that much life instead",
+            "colorIdentity": "wwwbbb",
+            "score": 4
+        },
+        {
+            "text": "Whenever an opponent would lose life, that player loses that much life plus (number) instead",
+            "colorIdentity": "bbb",
+            "score": 3.5
+        },
+        {
+            "text": "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead",
+            "colorIdentity": "rrr",
+            "score": 4
+        },
+        {
+            "text": "If a source you control would deal damage to a permanent or player, it deals that much damage plus (number) to that permanent or player instead",
+            "colorIdentity": "rrr",
+            "score": 2.8
+        },
+        {
+            "text": "If you would draw a card while you have no cards in hand, instead draw two cards and lose (number) life",
+            "colorIdentity": "bbb",
+            "score": 1.5
+        },
+        {
+            "text": "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead",
+            "colorIdentity": "ggb",
+            "score": 3.5
+        },
+        {
+            "text": "(other creatures) you control enter the battlefield with an additional +1/+1 counter on it",
+            "colorIdentity": "ggg",
+            "score": 3.5
+        },
+        {
+            "text": "whenever damage would be dealt to you, prevent all but (number) of that damage",
+            "colorIdentity": "wwww",
+            "score": 4
+        },
+        {
+            "text": "whenever damage would be dealt to you, prevent (number) of that damage",
+            "colorIdentity": "wwww",
+            "score": 3
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number2)/(samenumber) (color) (subtype) creature tokens are created instead",
+            "colorIdentity": "wwgg",
+            "score": 4
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number2)/(samenumber) (color) (subtype) creature tokens with (keyword) are created instead",
+            "colorIdentity": "wwgg",
+            "score": 4.5
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number3)/(samenumber) (color) (subtype) creature tokens with (keyword) are created instead",
+            "colorIdentity": "ggg",
+            "score": 6
         }
     ],
     "permanentActivatedCosts": [
@@ -2135,7 +2315,7 @@
             "score": 7
         },
         {
-            "text": "tap (numbername) (other) untapped creatures you control",
+            "text": "tap (numbername) (another) untapped creatures you control",
             "colorIdentity": "wubrg",
             "score": 10
         }
@@ -2202,9 +2382,14 @@
             "score": 3.1
         },
         {
+            "text": "scry (number3)",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
             "text": "scry (number2)",
             "colorIdentity": "wubrg",
-            "score": 0
+            "score": 0.2
         },
         {
             "text": "scry (number)",
@@ -2257,12 +2442,12 @@
             "score": 1
         },
         {
-            "text": "destroy target creature with no converted mana cost (number2) or less",
+            "text": "destroy target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
             "score": 1.3
         },
         {
-            "text": "destroy target creature with no converted mana cost (number3) or higher",
+            "text": "destroy target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
         },
@@ -2272,12 +2457,12 @@
             "score": 1
         },
         {
-            "text": "exile target creature with no converted mana cost (number2) or less",
+            "text": "exile target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
             "score": 1.3
         },
         {
-            "text": "exile target creature with no converted mana cost (number3) or higher",
+            "text": "exile target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
             "score": 1.8
         },
@@ -2389,6 +2574,18 @@
             "instantOnly": true
         },
         {
+            "text": "prevent the next (number3) damage that would be dealt to you",
+            "colorIdentity": "w",
+            "score": 2,
+            "instantOnly": true
+        },
+        {
+            "text": "prevent the next (number3) damage that would be dealt to creatures you control",
+            "colorIdenity": "w",
+            "score": 2,
+            "instantOnly": true
+        },
+        {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
             "score": -0.2,
@@ -2406,7 +2603,7 @@
         },
         {
             "text": "counter target spell",
-            "colorIdentity": "u",
+            "colorIdentity": "uuu",
             "score": 2.5,
             "instantOnly": true
         },
@@ -2461,7 +2658,7 @@
             "score": 1.2
         },
         {
-            "text": "up to (numbername) target creatures each get +(number2)/+(number2) until end of turn",
+            "text": "up to (numbername) target creatures each get +(number2)/+(samenumber) until end of turn",
             "colorIdentity": "wg",
             "score": 1.2
         },
@@ -2471,7 +2668,7 @@
             "score": 1.3
         },
         {
-            "text": "up to (numbername) target creatures each get +(number)/-(number) until end of turn",
+            "text": "up to (numbername) target creatures each get +(number)/-(samenumber) until end of turn",
             "colorIdentity": "b",
             "score": 1.1
         },
@@ -2504,7 +2701,7 @@
             "instantOnly": true
         },
         {
-            "text": "target attacking creature gets +(number2)/+(number2) and gains (keyword) until end of turn",
+            "text": "target attacking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "rg",
             "score": 1.7,
             "instantOnly": true
@@ -2528,7 +2725,7 @@
             "instantOnly": true
         },
         {
-            "text": "target blocking creature gets +(number2)/+(number2) and gains (keyword) until end of turn",
+            "text": "target blocking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "wrg",
             "score": 1.7,
             "instantOnly": true
@@ -2564,19 +2761,49 @@
             "score": 1.5
         },
         {
-            "text": "create a (number)/(number) (subtype) creature token",
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token",
             "colorIdentity": "r",
             "score": 1
         },
         {
-            "text": "create a (number)/(number) (subtype) creature token with (keyword)",
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword)",
             "colorIdentity": "wubrg",
             "score": 1
         },
         {
-            "text": "create a (number)/(number) (subtype) creature token with (keyword) and (keyword)",
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
             "colorIdentity": "wubgr",
             "score": 1
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 3
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubgr",
+            "score": 5
         },
         {
             "text": "creatures with (keyword) can't block this turn",
@@ -2629,18 +2856,6 @@
         {
             "text": "destroy all creatures",
             "score": 3.2,
-            "colorIdentity": "wb",
-            "nofollowup": true
-        },
-        {
-            "text": "you lose the game",
-            "score": -6.0,
-            "colorIdentity": "br",
-            "nofollowup": true
-        },
-        {
-            "text": "you win the game",
-            "score": 6.0,
             "colorIdentity": "wb",
             "nofollowup": true
         }
