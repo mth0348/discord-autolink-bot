@@ -562,14 +562,14 @@ class MtgParser {
         minus1Cost = 0 - Math.min(3, Math.max(1, Math.ceil(minus1Cost)));
 
         let isFirstStatic = false;
-        if (this.random(1, 10) == 10) {
+        if (this.random(1, 8) == 8) {
             isFirstStatic = true;
             let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
             staticEvent.text = staticEvent.text.replace("3", "2"); /* don't allow +3 */
 
             // replace second with first, and first with static.
             minus1Event = plusEvent;
-            minus1Cost = plusCost;
+            minus1Cost = "+" + plusCost;
 
             plusEvent = staticEvent;
             plusCost = Math.min(3, Math.max(1, Math.ceil(staticEvent.score * 1.5)));
