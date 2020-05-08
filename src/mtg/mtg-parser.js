@@ -569,7 +569,7 @@ class MtgParser {
 
             // replace second with first, and first with static.
             minus1Event = plusEvent;
-            minus1Cost = "+" + plusCost;
+            minus1Cost = plusCost;
 
             plusEvent = staticEvent;
             plusCost = Math.min(3, Math.max(1, Math.ceil(staticEvent.score * 1.5)));
@@ -589,8 +589,8 @@ class MtgParser {
         let a1 = isFirstStatic ?
             `${this.parseSyntax(plusEvent.text.toCamelCase())}.` :
             `{+${plusCost}}: ${this.parseSyntax(plusEvent.text.toCamelCase())}.`;
-        let a2 = `{${minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
-        let a3 = `{${minus2Cost}}: ${parsedMinus2Text}.`;
+        let a2 = `{${minus1Cost > 0 ? `+${minus1Cost}` : minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
+        let a3 = `{${minus2Cost > 0 ? `+${minus2Cost}` : minus2Cost}}: ${parsedMinus2Text}.`;
 
         let loyaltyScore = Math.max(2, Math.min(5, Math.min(minus2Cost, Math.floor(minus2Cost / (this.flipCoin() ? 1.3 : 2)))));
         let loyalty = `{ ${loyaltyScore} }`;
