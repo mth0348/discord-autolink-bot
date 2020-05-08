@@ -311,13 +311,13 @@ class MtgParser {
         let hasAbility = [0, 1, 1, 1, 2, 2, 2][this.random(0, 6)];
 
         if (hasAbility >= 1 || rarity >= 4) {
-            let isFirstStatic = this.random(1,6) == 6;
+            let isFirstStatic = this.random(1, 6) == 6;
             let abilityScore = 0;
 
             if (isFirstStatic) {
                 let staticEvent = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
                 ability = this.parseSyntax(staticEvent.text).replace("3", "2").toCamelCase() + "."; /* don't allow +3 */
-                abilityScore = staticEvent.score;
+                abilityScore = staticEvent.score * this.random(3, 4) / 4;
                 this.colorIdentity += staticEvent.colorIdentity;
             } else {
                 let ability1 = this.getTriggeredAbility();
