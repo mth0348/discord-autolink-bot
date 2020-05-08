@@ -592,7 +592,7 @@
         {
             "name": "Storm",
             "hasCost": false,
-            "score": 1.2,
+            "score": 1.5,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [

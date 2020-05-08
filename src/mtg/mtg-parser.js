@@ -129,7 +129,7 @@ class MtgParser {
             }
         } catch (e) {
             let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
-            reportChannel.send(`MtG: crashed with: \n${e}\n${e.stack}.`);
+            reportChannel.send(`MtG: crashed with: \n${e.stack}.`);
 
             throw e;
         }
@@ -175,7 +175,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "instant");
 
         // evaluate cmc.
-        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
+        let totalScore = 0.4 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 3 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -251,7 +251,7 @@ class MtgParser {
         let oracle = this.getSpellAbility(rarity, "sorcery");
 
         // evaluate cmc.
-        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 2.5 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
+        let totalScore = -0.2 + oracle.score + (this.lastNumber > 0 ? this.lastNumber / 3 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarity / 6;
         let cmc = Math.max(1, Math.ceil(totalScore));
         if (oracle.isComplicated) {
             rarity = Math.max(2, rarity);
@@ -525,7 +525,7 @@ class MtgParser {
                 keywordcost = `{t}, ${keywordcost}`;
         }
         else {
-            keywordcost = this.getManacostFromCmc(cost, color);
+            keywordcost = this.getManacostFromCmc(cost, (this.random(1, 5) == 5 ? "" : color));
             if (tapSymbol)
                 keywordcost = `${keywordcost !== "" ? keywordcost + ", " : ""}{t}`;
         }
@@ -623,9 +623,10 @@ class MtgParser {
             if (sKeyword.text.length > 0) {
                 if (sKeyword.ability.length > 0 && sKeyword.overwriteAbility) {
                     oracleText = sKeyword.ability.toCamelCase();
+                    score = sKeyword.score;
                 }
                 else if (sKeyword.ability.length > 0 && !sKeyword.overwriteAbility) {
-                    oracleText += `\n\n${sKeyword.ability.toCamelCase()}`;
+                    oracleText += `.\n\n${sKeyword.ability.toCamelCase()}`;
                 }
                 oracleText = `${sKeyword.text}\n\n${oracleText.toCamelCase()}`;
             }
@@ -861,6 +862,11 @@ class MtgParser {
     }
 
     getManacostFromCmc(cmc, colorString) {
+
+        if (colorString.length === 0) {
+            return `{${cmc}}`;
+        }
+
         let manacost = "";
         let color = colorString.split("");
 
@@ -1048,32 +1054,71 @@ class MtgParser {
         let overwriteAbility = false;
 
         if (keyword === undefined || keyword === null) {
-            return { text: "", ability: "", overwriteAbility: false };
+            return { text: "", ability: "", overwriteAbility: false, score: 0 };
         }
 
         let score = keyword.score;
+        let costOverride = 0;
 
         if (keyword.name === "Kicker") {
             let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
             let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            ability = event.name;
+            ability = "If (name) was kicked, " + event.text;
             score += event.score;
+            costOverride = score * 3 / this.random(3, 6);
             this.colorIdentity += event.colorIdentity;
         }
 
         if (keyword.name === "Entwine") {
-            let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
-            let event1 = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            let event2 = positiveEvents[this.random(0, positiveEvents.length - 1)];
-            ability = `Choose one:\n  • ${event1.name.toCamelCase()}\n  • ${event2.name.toCamelCase()}`;
+            let positiveEvents1 = mtgData.permanentEvents.filter(e => e.score >= 0 && e.creatureOnly == undefined);
+            let event1 = positiveEvents1[this.random(0, positiveEvents1.length - 1)];
+
+            let positiveEvents2 = mtgData.permanentEvents.filter(e => e.score >= 0 && Math.abs(e.score - event1.score) < 1 && e.creatureOnly == undefined && e.text != event1.text)
+            let event2 = positiveEvents2[this.random(0, positiveEvents2.length - 1)];
+
+            if (event2 == undefined)
+                event2 = positiveEvents1[this.random(0, positiveEvents1.length - 1)];
+
+            ability = `Choose one:\n   • ${event1.text.toCamelCase()}.\n   • ${event2.text.toCamelCase()}`;
             overwriteAbility = true;
-            score += (event1.score + event2.score) / 2;
+            score = Math.floor(Math.max(event1.score, event2.score));
+            costOverride = (event1.score + event2.score) + this.random(3, 6) / 3;
             this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
+        }
+
+        // make "chose one or both" card out of it.
+        else if (this.random(1, 12) === 12) {
+            let positiveEvents1 = mtgData.permanentEvents.filter(e => e.score >= 0 && e.creatureOnly == undefined);
+            let event1 = positiveEvents1[this.random(0, positiveEvents1.length - 1)];
+
+            let positiveEvents2 = mtgData.permanentEvents.filter(e => e.score >= 0 && Math.abs(e.score - event1.score) < 1 && e.creatureOnly == undefined && e.text != event1.text)
+            let event2 = positiveEvents2[this.random(0, positiveEvents2.length - 1)];
+
+            if (event2 == undefined)
+                event2 = positiveEvents1[this.random(0, positiveEvents1.length - 1)];
+
+            overwriteAbility = true;
+            score = Math.max(event1.score, event2.score);
+            this.colorIdentity = event1.colorIdentity + event2.colorIdentity; /* yes, overwrite color identity. */
+
+            let both = this.flipCoin();
+            if (both) {
+                score += 2;
+                ability = `Choose one or both:\n   • ${event1.text.toCamelCase()}.\n   • ${event2.text.toCamelCase()}`;
+                
+            } else {
+                score += 1;
+                ability = `Choose one:\n   • ${event1.text.toCamelCase()}.\n   • ${event2.text.toCamelCase()}`;
+            }
+
+            score = Math.max(1, score);
+            this.card.color = this.getColorFromIdentity(this.colorIdentity);
+            return { text: keywordName, ability: ability, overwriteAbility: overwriteAbility, score: score };
         }
 
         if (keyword.name === "Overload") {
             if (oracleText.indexOf("target") < 0)
-                return { text: "", ability: "", overwriteAbility: overwriteAbility };
+                return { text: "", ability: "", overwriteAbility: false, score: 0 };
             score += 1.5;
         }
         if (keyword.name === "Spectacle") {
@@ -1092,12 +1137,12 @@ class MtgParser {
         let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(keyword.nameExtension)}` : keyword.name;
 
         if (keyword.hasCost) {
-            let cost = 2 / rarity + score * this.random(2, 3) / 3;
+            let cost = costOverride > 0 ? costOverride : (2 / rarity + score * this.random(2, 3) / 3);
             let keywordcost = this.getManacostFromCmc(Math.max(1, Math.floor(cost)), this.card.color);
-            return { text: `${keywordName}${keyword.nameExtension.length > 0 ? ' -' : ''} ${keywordcost}`, ability: ability, overwriteAbility: overwriteAbility };
+            return { text: `${keywordName}${keyword.nameExtension.length > 0 ? ' -' : ''} ${keywordcost}`, ability: ability, overwriteAbility: overwriteAbility, score: score };
         }
 
-        return { text: keywordName, ability: ability, overwriteAbility: overwriteAbility };
+        return { text: keywordName, ability: ability, overwriteAbility: overwriteAbility, score: score };
     }
 }
 
