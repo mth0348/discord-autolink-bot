@@ -1558,6 +1558,11 @@
             "colorIdentity": "wubrg"
         },
         {
+            "text": "each opponent draws (numbername) cards",
+            "score": -2.2,
+            "colorIdentity": "wubrg"
+        },
+        {
             "text": "target (player) sacrifices a creature",
             "score": 1.2,
             "colorIdentity": "wbr"
@@ -1569,8 +1574,8 @@
         },
         {
             "text": "target (player) sacrifices two creatures",
-            "score": 2.1,
-            "colorIdentity": "wbr"
+            "score": 3,
+            "colorIdentity": "wwbb"
         },
         {
             "text": "target (player) sacrifices a(n) (permanent)",
@@ -1579,7 +1584,7 @@
         },
         {
             "text": "target (player) sacrifices two (permanent)s",
-            "score": 2.4,
+            "score": 3.2,
             "colorIdentity": "wbr"
         },
         {
@@ -1867,31 +1872,49 @@
             "creatureOnly": true
         },
         {
-            "text": "reveal the top X cards from your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
             "nofollowup": true
         },
         {
-            "text": "reveal the top X cards from your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.2,
             "colorIdentity": "ug",
             "nofollowup": true
         },
         {
-            "text": "reveal the top X cards from your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "text": "reveal the top X cards of your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
             "nofollowup": true
         },
         {
-            "text": "reveal the top X cards from your library, where X is the number of instant and sorcery cards in your graveyard. Put those cards into your hand",
+            "text": "reveal the top X cards of your library, where X is the number of (type) cards in your graveyard. Put those cards into your hand",
             "score": 5,
-            "colorIdentity": "r",
+            "colorIdentity": "uurr",
             "nofollowup": true
         },
         {
-            "text": "reveal the top (number) cards from your library, Put one of those cards into your hand and the rest into your graveyard",
+            "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "uu",
+            "nofollowup": true
+        },
+        {
+            "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "nofollowup": true
+        },
+        {
+            "text": "look at the top X cards of your library, where X is the number of (color|type) creatures you control. You may put (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "nofollowup": true
+        },
+        {
+            "text": "reveal the top (number) cards of your library, Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
             "nofollowup": true
@@ -2537,8 +2560,13 @@
             "score": 3
         },
         {
-            "text": "tap all (subtype) creatures you control",
-            "colorIdentity": "u",
+            "text": "sacrifice a creature",
+            "colorIdentity": "wubrg",
+            "score": -1
+        },
+        {
+            "text": "sacrifice a (permanent)",
+            "colorIdentity": "wubrg",
             "score": -1
         },
         {
@@ -2554,12 +2582,12 @@
         {
             "text": "tap all creatures you control",
             "colorIdentity": "u",
-            "score": -2
+            "score": -1
         },
         {
             "text": "tap all (permanent)s you control",
             "colorIdentity": "u",
-            "score": -2
+            "score": -1
         },
         {
             "text": "prevent the next (number2) damage that would be dealt to you",
@@ -2580,6 +2608,26 @@
             "instantOnly": true
         },
         {
+            "text": "discard a card",
+            "colorIdentity": "bbrr",
+            "score": -1
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "bbrr",
+            "score": -2.5
+        },
+        {
+            "text": "you lose (number2) life",
+            "colorIdentity": "bb",
+            "score": -1.2
+        },
+        {
+            "text": "put the top (numbername2) cards of your library into your graveyard",
+            "score": -0.5,
+            "colorIdentity": "ubg"
+        },
+        {
             "text": "prevent the next (number3) damage that would be dealt to creatures you control",
             "colorIdenity": "w",
             "score": 2,
@@ -2588,7 +2636,7 @@
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
-            "score": -0.2,
+            "score": 0,
             "instantOnly": true
         },
         {
