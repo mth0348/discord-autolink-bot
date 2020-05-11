@@ -1102,6 +1102,8 @@ class MtgParser {
         let score = keyword.score;
         let costOverride = 0;
 
+        let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(keyword.nameExtension)}` : keyword.name;
+        
         if (keyword.name === "Kicker") {
             let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
             let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
@@ -1178,8 +1180,6 @@ class MtgParser {
         // update color.
         this.colorIdentity += keyword.colorIdentity;
         this.card.color = this.getColorFromIdentity(this.colorIdentity);
-
-        let keywordName = keyword.nameExtension.length > 0 ? `${keyword.name} ${this.parseSyntax(keyword.nameExtension)}` : keyword.name;
 
         if (keyword.hasCost) {
             let cost = costOverride > 0 ? costOverride : (2 / rarity + score * this.random(2, 3) / 3);
