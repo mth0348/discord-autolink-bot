@@ -386,8 +386,8 @@ class MtgParser {
             }
         }
 
-        let rarityScore = rarity / 6;
-        totalScore += -0.5 + (this.lastNumber > 0 ? this.lastNumber / 4 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarityScore;
+        let rarityScore = rarity / 4;
+        totalScore += -1 + (this.lastNumber > 0 ? this.lastNumber / 4 : 0) + (Math.max(0, this.lastNumberCount - 1)) - rarityScore;
         this.log.push("rarity:\t\t-" + rarityScore);
         this.log.push("\t\t---");
         this.log.push("TOTAL score:\t" + (Math.round((totalScore + Number.EPSILON) * 100) / 100));
@@ -592,10 +592,10 @@ class MtgParser {
         let a2 = `{${minus1Cost > 0 ? `+${minus1Cost}` : minus1Cost}}: ${this.parseSyntax(minus1Event.text.toCamelCase())}.`;
         let a3 = `{${minus2Cost > 0 ? `+${minus2Cost}` : minus2Cost}}: ${parsedMinus2Text}.`;
 
-        let loyaltyScore = Math.max(2, Math.min(5, Math.min(minus2Cost, Math.floor(minus2Cost / (this.flipCoin() ? 1.3 : 2)))));
+        let loyaltyScore = Math.max(2, Math.min(6, Math.min(minus2Cost, Math.floor(minus2Cost / (this.flipCoin() ? 1.3 : 2)))));
         let loyalty = `{ ${loyaltyScore} }`;
 
-        return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + minus1Cost) / 2, firstPositive: plusEvent.score > 0 };
+        return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + minus1Cost) / 1.5, firstPositive: plusEvent.score > 0 };
     }
 
     getSpellAbility(rarity, type) {
