@@ -13,8 +13,8 @@ class MtgParser {
         this.discordHelper = new DiscordHelper();
 
         this.colors = ["white", "blue", "black", "red", "green", "colorless"];
-        this.powers = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 9, 10];
-        this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 9, 10];
+        this.powers = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 9, 10];
+        this.toughnesses = [1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 9, 10];
 
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
         this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
@@ -212,7 +212,7 @@ class MtgParser {
         this.card.subtype = name.split(" ")[0].replace(",", "");
 
         let oracle = this.getPlaneswalkerOracle();
-        let cmc = Math.max(2, Math.ceil(oracle.score));
+        let cmc = Math.max(2, Math.ceil(oracle.score + 0.5));
 
         let color = this.getColorFromIdentity(this.colorIdentity);
         let manacost = this.getManacostFromCmc(cmc, color);
@@ -298,17 +298,17 @@ class MtgParser {
         this.log.push("score calculation:");
 
         let power = this.powers[this.random(0, this.powers.length - 1)];
-        totalScore += power / 2;
+        totalScore += power / 2.5;
         this.log.push("power :\t\t" + (power / 2));
 
-        let toughness = this.toughnesses[this.random(0, this.toughnesses.length - 1)];
+        let toughness = this.random(1,5) == 5 ? power : this.toughnesses[this.random(0, this.toughnesses.length - 1)];
         totalScore += toughness / 3; /* less weight than power */
         this.log.push("toughness:\t " + (toughness / 2));
 
         // decide triggered abilities.
         let ability = "";
         let secondAbility = "";
-        let hasAbility = [0, 1, 1, 1, 2, 2, 2][this.random(0, 6)];
+        let hasAbility = [0, 0, 1, 1, 1, 1, 2, 2][this.random(0, 7)];
 
         if (hasAbility >= 1 || rarity >= 4) {
             let isFirstStatic = this.random(1, 6) == 6;
@@ -320,7 +320,7 @@ class MtgParser {
                 abilityScore = staticEvent.score * this.random(3, 4) / 4;
                 this.colorIdentity += staticEvent.colorIdentity;
             } else {
-                let ability1 = this.getTriggeredAbility();
+                let ability1 = this.flipCoin() ? this.getActivatedAbility(rarity) : this.getTriggeredAbility();
                 ability = ability1.text;
                 abilityScore = ability1.score;
             }
