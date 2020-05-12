@@ -1951,7 +1951,7 @@
         },
         {
             "text": "destroy all (permanent)s",
-            "score": 3.5,
+            "score": 5,
             "colorIdentity": "wbg",
             "nofollowup": true
         },
@@ -1963,7 +1963,7 @@
         },
         {
             "text": "destroy all creatures",
-            "score": 3.1,
+            "score": 4,
             "colorIdentity": "wb",
             "nofollowup": true
         },
