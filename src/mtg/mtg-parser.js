@@ -595,7 +595,7 @@ class MtgParser {
         let loyaltyScore = Math.max(2, Math.min(6, Math.min(Math.abs(minus2Cost), Math.floor(Math.abs(minus2Cost) / (this.flipCoin() ? 1.3 : 2)))));
         let loyalty = `{ ${loyaltyScore} }`;
 
-        return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + Math.abs(minus1Cost)) / 1.5, firstPositive: plusEvent.score > 0 };
+        return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + Math.abs(minus1Cost)) / 1.8, firstPositive: plusEvent.score > 0 };
     }
 
     getSpellAbility(rarity, type) {
