@@ -662,7 +662,6 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "two", "two", "two", "three", "three"][this.random(0, 6)];
                 text = text.replace("(numbername)", number);
-                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : 3);
                 this.lastNumberCount++;
             }
@@ -670,7 +669,6 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["two", "two", "three", "three", "three", "four", "five"][this.random(0, 6)];
                 text = text.replace("(numbername2)", number);
-                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
                 this.lastNumberCount++;
             }
@@ -678,7 +676,6 @@ class MtgParser {
                 moreThanOne = true;
                 let number = ["four", "five", "five", "six"][this.random(0, 3)];
                 text = text.replace("(numbername3)", number);
-                text = text.replace("(samenumber)", number);
                 this.lastNumber = Math.max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
                 this.lastNumberCount++;
             }
