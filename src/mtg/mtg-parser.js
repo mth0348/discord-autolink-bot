@@ -648,7 +648,7 @@ class MtgParser {
     }
 
     parseSyntax(text, context) {
-        let maxDepth = 10;
+        let maxDepth = 20;
         let depth = 0;
 
         let selfCount = 0;
