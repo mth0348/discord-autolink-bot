@@ -9,7 +9,8 @@ class MtgHelpResponse {
         this.helpValue3 = "!mtg\n"
                         + "!mtg creature\n"
                         + "!mtg instant\n"
-                        + "!mtg sorcery\n";
+                        + "!mtg sorcery\n"
+                        + "!mtg enchantment\n";
     }
 
     isHelp() {
