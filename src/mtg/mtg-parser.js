@@ -87,7 +87,7 @@ class MtgParser {
         this.thumbsup = message.guild.emojis.cache.find(e => e.name === 'thumbsup::skin-tone-1');
         this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
-        let validInputs = ["creature", "instant", "sorcery", "planeswalker"];
+        let validInputs = ["creature", "instant", "sorcery", "planeswalker", "enchantment"];
         let cardType = validInputs[this.random(0, validInputs.length - 1)];
 
         if (message.content == "!mtg help") {
@@ -110,6 +110,7 @@ class MtgParser {
 
         this.lastNumber = 0;
         this.lastNumberCount = 0;
+        this.lastAbilityScore = 0;
         this.colorIdentity = "";
 
         try {
@@ -125,6 +126,9 @@ class MtgParser {
                     break;
                 case "planeswalker":
                     this.createPlaneswalkerCard(message);
+                    break;
+                case "enchantment":
+                    this.createEnchantmentCard(message);
                     break;
             }
         } catch (e) {
@@ -202,6 +206,40 @@ class MtgParser {
         this.sendCard(message);
     }
 
+    createEnchantmentCard(message) {
+
+        let name = this.getEnchantmentName();
+        this.card = new MtgCard();
+        this.card.name = name;
+        this.card.type = "Enchantment";
+        let isLegendary = [false, false, false, false, false, true][this.random(0, 5)];
+        this.card.supertype = isLegendary ? "Legendary" : undefined;
+        let rarity = [1, 1, 2, 2, 3][this.random(0, 4)]; // 1 = common, 4 = mythic
+        this.rarityNumber = rarity;
+        this.card.rarity = this.getRarity(rarity);
+
+        let oracle = this.getEnchantmentOracle();
+        let cmc = Math.max(1, Math.ceil(oracle.score));
+
+        let color = this.getColorFromIdentity(this.colorIdentity);
+        let manacost = this.getManacostFromCmc(cmc, color);
+
+        this.log.push("lastNumber:\t" + this.lastNumber);
+        this.log.push("o-score:\t" + oracle.score);
+        this.log.push("cmc:\t\t" + cmc);
+        this.log.push("coloridentity:\t" + this.colorIdentity);
+        this.log.push("color:\t\t" + color);
+        this.log.push("manacost:\t" + manacost);
+
+        this.card.power = undefined;
+        this.card.color = color;
+        this.card.cost = this.resolveManaSymbols(manacost);
+        this.card.oracle = this.resolveManaSymbols(oracle.text.toCamelCase());
+        this.card.flavor = "";
+
+        this.sendCard(message);
+    }
+
     createPlaneswalkerCard(message) {
 
         let name = this.getPlaneswalkerName();
@@ -227,7 +265,6 @@ class MtgParser {
         let rarity = oracle.firstPositive ? 4 : 3; // 1 = common, 4 = mythic
         let rarityText = this.getRarity(rarity);
         this.card.rarity = rarityText;
-
 
         this.card.power = undefined;
         this.card.color = color;
@@ -494,7 +531,7 @@ class MtgParser {
         return { name: text, score: selected.score };
     }
 
-    getTriggeredAbility(keywords) {
+    getTriggeredAbility() {
         let condition = mtgData.permanentConditions[this.random(0, mtgData.permanentConditions.length - 1)];
         let event = mtgData.permanentEvents[this.random(0, mtgData.permanentEvents.length - 1)];
 
@@ -514,14 +551,16 @@ class MtgParser {
         return { text: `${this.parseSyntax(condition.text, condition.context)}, ${this.parseSyntax(event.text, condition.context)}.`, score: event.score };
     }
 
-    getActivatedAbility(rarity) {
-        let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0);
+    getActivatedAbility(rarity, forceNoTapSymbol, forceNoCreature) {
+        let positiveEvents = mtgData.permanentEvents.filter(e => e.score > 0 && (forceNoCreature === true ? !e.creatureOnly : true));
         let event = positiveEvents[this.random(0, positiveEvents.length - 1)];
 
-        let cost = 2 / rarity + event.score * this.random(1, 2);
+        if (rarity === undefined || rarity === "") rarity = 2;
+        let cost = 2 / rarity + event.score;
         cost = Math.max(1, Math.floor(cost));
 
         let tapSymbol = this.flipCoin() || cost > 2.0;
+        tapSymbol = tapSymbol && forceNoTapSymbol === undefined;
         let keywordcost = "";
 
         this.colorIdentity += event.colorIdentity;
@@ -530,7 +569,7 @@ class MtgParser {
         let color = this.getColorFromIdentity(event.colorIdentity);
 
         if ([false, false, false, true][this.random(0, 3)]) {
-            let activated = this.getActivatedCost(Math.min(6, cost), color);
+            let activated = this.getActivatedCost(Math.min(6, cost), color, forceNoCreature);
             keywordcost = activated.text.toCamelCase();
             //event.score += (cost - activated.score);
             if (tapSymbol)
@@ -598,6 +637,71 @@ class MtgParser {
         return { text: `${a1}\n\n${a2}\n\n${a3}\n\n${loyalty}`, score: (loyaltyScore + plusCost + Math.abs(minus1Cost)) / 1.8, firstPositive: plusEvent.score > 0 };
     }
 
+    getEnchantmentOracle() {
+        let isAura = this.flipCoin();
+
+        if (isAura) {
+            // TODO: Currently, only Creature auras are supported.
+            let type = mtgData.auratargets[this.random(0, mtgData.auratargets.length - 1)];
+            this.auraType = type;
+            this.card.subtype = "Aura";
+
+            let allowedType = this.auraType === "creature" ? "creature" : "permanent";
+            let enchantmentEffects = mtgData.enchantmentEffects.filter(e => e.auraType === allowedType);
+            
+            let hasSecondEffect = this.flipCoin();
+            let firstEffect = enchantmentEffects[this.random(0, enchantmentEffects.length - 1)];
+            if (firstEffect.onlyOnce) 
+                enchantmentEffects = enchantmentEffects.filter(e => e.onlyOnce === undefined || e.onlyOnce === false);
+            if (firstEffect.isForOpponent) 
+                enchantmentEffects = enchantmentEffects.filter(e => e.isForOpponent === true);
+            let secondEffect = enchantmentEffects[this.random(0, enchantmentEffects.length - 1)];
+
+            this.colorIdentity = firstEffect.colorIdentity;
+            let controlScore = 0;
+
+            let oracle = `Enchant ${type}\n\n`;
+            if (this.random(0, 10) === 10) {
+                oracle += `You control enchanted ${type}.\n\n`;
+                this.colorIdentity += "uuu";
+                controlScore = 3.5;
+            }
+            oracle += `Enchanted ${type} ${this.parseSyntax(firstEffect.text)}`;
+
+            if (hasSecondEffect)
+            {
+                oracle += ` and ${this.parseSyntax(secondEffect.text)}`;
+                this.colorIdentity += secondEffect.colorIdentity;
+            }
+
+            let firstEffectScore  = firstEffect.score;
+            let secondEffectScore = secondEffect.score;
+
+            return { text: oracle + ".", score: (firstEffectScore + (hasSecondEffect ? secondEffectScore : 0)) + (this.lastAbilityScore / 2) + (this.lastNumber / 6) + (this.lastNumberCount / 4) + controlScore };
+
+        } else {
+            // Non-aura enchantments.
+            this.card.subtype = undefined;
+
+            let effect = mtgData.permanentStatics[this.random(0, mtgData.permanentStatics.length - 1)];
+            let score = effect.score;
+            let oracle = `${this.parseSyntax(effect.text)}`;
+
+            this.colorIdentity = effect.colorIdentity;
+
+            let hasAbility = this.random(1, 4) === 4;
+            if (hasAbility)
+            {
+                let ability = this.getActivatedAbility(this.rarityNumber, true, true);
+                let abilityText = ability.text.replace(/\.$/g, '');
+                oracle += `.\n\n${this.parseSyntax(abilityText)}`;
+                score += ability.score;
+            }
+
+            return { text: oracle + ".", score: score + (this.lastNumber / 6) + (this.lastNumberCount / 4) };
+        }
+    }
+
     getSpellAbility(rarity, type) {
         let eventSource = mtgData.instantSorceryEvents.filter(e => type !== "instant" ? e.instantOnly === undefined : true);
         let event = eventSource[this.random(0, eventSource.length - 1)];
@@ -648,7 +752,7 @@ class MtgParser {
     }
 
     parseSyntax(text, context) {
-        let maxDepth = 20;
+        let maxDepth = 30;
         let depth = 0;
 
         let selfCount = 0;
@@ -781,11 +885,29 @@ class MtgParser {
                 text = text.replace("(mana)", symbol);
             }
 
+            if (text.indexOf("(ability)") >= 0) {
+                let cardname = this.card.name;
+                this.card.name = "enchanted creature";
+
+                let isTriggered = this.flipCoin();
+                let ability = undefined;
+                if (isTriggered) {
+                    ability = this.getTriggeredAbility();
+                } else {
+                    ability = this.getActivatedAbility(this.rarityNumber);
+                }
+                this.lastAbilityScore = ability.score;
+
+                text = text.replace("(ability)", `"${ability.text.replace(/\.$/g, '')}"`);
+                this.card.name = cardname;
+            }
+
             text = text.replace("(player)", this.random(0, 1) === 1 ? "player" : "opponent");
             text = text.replace(/\(name\)/g, this.card.name);
             text = text.replace("(s)", moreThanOne ? "s" : "");
             text = text.replace("(n)", useN ? "n" : "");
             text = text.replace("(color)", this.colors[this.random(0, this.colors.length - 1)]);
+            text = text.replace("(auratype)", this.auraType);
         }
 
         return text;
@@ -1003,10 +1125,11 @@ class MtgParser {
         return manacost;
     }
 
-    getActivatedCost(cost, color) {
+    getActivatedCost(cost, color, forceNoCreature) {
         let costs = mtgData.permanentActivatedCosts.filter(e =>
             color.split("").some(c => e.colorIdentity.indexOf(c) >= 0) /* same color */
-            && cost <= e.score); /* score of activatedcost = "value" of ability */
+            && cost <= e.score /* score of activatedcost = "value" of ability */
+            && (forceNoCreature === true ? !e.creatureOnly : true));
 
         if (costs.length <= 0)
             return "";
@@ -1046,6 +1169,13 @@ class MtgParser {
         return name.toCamelCase()
             + mtgData.spellNames.adjectives[this.random(0, mtgData.spellNames.adjectives.length - 1)].toCamelCase()
             + " " + mtgData.spellNames.nouns[this.random(0, mtgData.spellNames.nouns.length - 1)].toCamelCase();
+    }
+
+    getEnchantmentName() {
+        let name = "";
+        return name.toCamelCase()
+            + mtgData.spellNames.adjectives[this.random(0, mtgData.spellNames.adjectives.length - 1)].toCamelCase()
+            + " " + mtgData.enchantmentNames.nouns[this.random(0, mtgData.enchantmentNames.nouns.length - 1)].toCamelCase();
     }
 
     hasSpecialPermanentKeywords(keywords) {

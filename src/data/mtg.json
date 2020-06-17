@@ -8,6 +8,9 @@
         "enchantment",
         "permanent"
     ],
+    "auratargets": [
+        "creature"
+    ],
     "permanentTypes": [
         "creature",
         "artifact",
@@ -2310,7 +2313,8 @@
         {
             "text": "put a -1/-1 counter on (self)",
             "colorIdentity": "bg",
-            "score": 7
+            "score": 7,
+            "creatureOnly": true
         },
         {
             "text": "pay (number) life",
@@ -2906,6 +2910,202 @@
             "score": 3.2,
             "colorIdentity": "wb",
             "nofollowup": true
+        }
+    ],
+    "enchantmentEffects": [
+        {
+            "text": "gets +(number)/+(number)",
+            "score": 1,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number2)/+(number2)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number3)/+(number3)",
+            "score": 3.5,
+            "colorIdentity": "g",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +X/+0 for each (permanent) you control",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +X/+X for each (subtype) creature you control",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "can block as though it had flying",
+            "score": 0.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can block creatures with unblockable as though they didn't have unblockable",
+            "score": 0.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "gets -(number)/-(number)",
+            "score": 1,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(number)",
+            "score": 2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(number)",
+            "score": 3.5,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number)/-0",
+            "score": 1,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-0",
+            "score": 2,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-0",
+            "score": 3,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number)/-(number)",
+            "score": 1,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(number2)",
+            "score": 2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(number3)",
+            "score": 3.5,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +1/+1 for each artifact and/or enchantment you control",
+            "score": 1.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "has (keyword)",
+            "score": 1.2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (keyword) and (keyword)",
+            "score": 2.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "loses (keyword)",
+            "score": 1.2,
+            "isForOpponent": true,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "loses indestructible",
+            "score": 0.5,
+            "isForOpponent": true,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "can't be blocked",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can't be blocked by more than (numbername) creature(s)",
+            "score": 2,
+            "colorIdentity": "rg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can't be the target of spells or abilities",
+            "score": 1.5,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "can't be the target of spells or abilities your opponents control",
+            "score": 1.5,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
         }
     ],
     "planeswalkerNames": {
@@ -3715,7 +3915,7 @@
             "tormented",
             "merciless",
             "merciful",
-            "delirous",
+            "delirious",
             "incidious",
             "fragile",
             "destructive",
@@ -3925,6 +4125,119 @@
             "vengeance",
             "lash",
             "winds"
+        ]
+    },
+    "enchantmentNames": {
+        "nouns": [
+            "defense",
+            "resolution",
+            "fortification",
+            "shield",
+            "barricade",
+            "stand",
+            "offense",
+            "solidarity",
+            "act",
+            "energy",
+            "flame",
+            "fire",
+            "ice",
+            "blossom",
+            "blessing",
+            "faith",
+            "fever",
+            "fury",
+            "hand",
+            "sigil",
+            "cover",
+            "sphere",
+            "cover",
+            "pool",
+            "knowledge",
+            "ambition",
+            "strength",
+            "power",
+            "tar",
+            "mantle",
+            "rock",
+            "stone",
+            "restraints",
+            "darkness",
+            "glorification",
+            "colossification",
+            "veil",
+            "mask",
+            "shroud",
+            "presence",
+            "authority",
+            "rest",
+            "membrane",
+            "bond",
+            "conscience",
+            "wisdom",
+            "umbra",
+            "cloak",
+            "shadow",
+            "ward",
+            "obsession",
+            "curiosity",
+            "exhaustion",
+            "reflection",
+            "favor",
+            "weight",
+            "stance",
+            "vigor",
+            "hold",
+            "spell",
+            "casting",
+            "divinity",
+            "mastery",
+            "resonance",
+            "layer",
+            "enlightmenment",
+            "vines",
+            "radiance",
+            "proportions",
+            "storm",
+            "snare",
+            "armor",
+            "intellect",
+            "ideal",
+            "presence",
+            "divinity",
+            "mark",
+            "form",
+            "embrace",
+            "demise",
+            "adaptation",
+            "mutation",
+            "deformity",
+            "arc",
+            "shackles",
+            "field",
+            "possession",
+            "touch",
+            "wings",
+            "spectacle",
+            "paradise",
+            "plating",
+            "coating",
+            "aegis",
+            "war paint",
+            "infestation",
+            "guide",
+            "transformation",
+            "boon",
+            "magemark",
+            "zendikon",
+            "punishment",
+            "ward",
+            "cover",
+            "growth",
+            "gains",
+            "wrapping",
+            "clutches",
+            "bubble"
         ]
     }
 }
