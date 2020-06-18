@@ -581,8 +581,6 @@ class MtgParser {
                 keywordcost = `${keywordcost !== "" ? keywordcost + ", " : ""}{t}`;
         }
 
-        this.colorIdentity += event.colorIdentity;
-
         return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
     }
 
@@ -762,6 +760,7 @@ class MtgParser {
         let depth = 0;
 
         let selfCount = 0;
+        let useN = false;
 
         while (text.indexOf("(") >= 0) {
             depth++;
@@ -839,6 +838,8 @@ class MtgParser {
             let subtype = "";
             if (text.indexOf("(subtype)") >= 0) {
                 subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)];
+                let firstLetter = subtype[0].toLowerCase();
+                useN = useN || firstLetter === "a" || firstLetter === "e" || firstLetter === "i" || firstLetter === "o" || firstLetter === "u";
                 text = text.replace("(subtype)", subtype);
             }
 
@@ -863,10 +864,9 @@ class MtgParser {
                 }
             }
 
-            let useN = false;
             if (text.indexOf("(type)") >= 0) {
                 let type = mtgData.types[this.random(0, mtgData.types.length - 1)];
-                useN = type === "enchantment" || type === "artifact";
+                useN = useN || type === "enchantment" || type === "artifact";
                 text = text.replace("(type)", type);
             }
             if (text.indexOf("(permanent)") >= 0) {
