@@ -661,10 +661,16 @@ class MtgParser {
             let controlScore = 0;
 
             let oracle = `Enchant ${type}\n\n`;
-            if (this.random(0, 10) === 10) {
-                oracle += `You control enchanted ${type}.\n\n`;
+            if (this.random(0, 15) === 15) {
+                oracle += `You control enchanted ${type}`;
                 this.colorIdentity += "uuu";
                 controlScore = 3.5;
+
+                if (this.flipCoin()) {
+                    return { text: oracle + ".", score: controlScore };
+                } else {
+                    oracle += ".\n\n";
+                }
             }
             oracle += `Enchanted ${type} ${this.parseSyntax(firstEffect.text)}`;
 
