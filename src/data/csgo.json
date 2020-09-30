@@ -367,8 +367,7 @@
         "location": "quad",
         "source": "https://youtu.be/pbr2hjg6SDI"
     },
-    
-        {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -376,8 +375,7 @@
         "location": "a site rug",
         "source": "https://youtu.be/_zZoMXoRk6k"
     },
- 
-              {
+    {
         "description": "",
         "map": "anubis",
         "side": "ct",
@@ -385,7 +383,7 @@
         "location": "top mid",
         "source": "https://youtu.be/ppSFxB56ae8"
     },
-                  {
+    {
         "description": "",
         "map": "anubis",
         "side": "ct",
@@ -393,7 +391,7 @@
         "location": "a upper",
         "source": "https://youtu.be/hCvqJK11bBo"
     },
-                      {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -401,7 +399,7 @@
         "location": "b site alley",
         "source": "https://youtu.be/-TDnpfSRRWs"
     },
-                          {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -409,7 +407,7 @@
         "location": "connector b site",
         "source": "https://youtu.be/RK-2n9-p4z0"
     },
-                             {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -417,7 +415,7 @@
         "location": "heaven a site",
         "source": "https://youtu.be/hrQSRA5T8oA"
     },
-                                 {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -425,7 +423,7 @@
         "location": "palace b site",
         "source": "https://youtu.be/oo0rElhoKDM"
     },
-                                          {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -433,7 +431,7 @@
         "location": "palace b site",
         "source": "https://youtu.be/il_NREzebqw"
     },
-                                     {
+    {
         "description": "",
         "map": "anubis",
         "side": "t",
@@ -441,8 +439,7 @@
         "location": "walkway a mid",
         "source": "https://youtu.be/x2DwgaEsDss"
     },
-   
-                                         {
+    {
         "description": "",
         "map": "anubis",
         "side": "ct",
@@ -450,7 +447,7 @@
         "location": "a long entrance",
         "source": "https://youtu.be/SzcTI1Q4JVI"
     },
-                                             {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -458,7 +455,7 @@
         "location": "green A3",
         "source": "https://youtu.be/lc-FnkfKRng"
     },
-                                                 {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -466,7 +463,7 @@
         "location": "ticket",
         "source": "https://youtu.be/DuRV7erpCnE"
     },
-                                                     {
+    {
         "description": "Thrown from B",
         "map": "train",
         "side": "t",
@@ -474,7 +471,7 @@
         "location": "hell",
         "source": "https://youtu.be/vRF9cEpePWE"
     },
-                                                         {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -482,8 +479,7 @@
         "location": "ebox",
         "source": "https://youtu.be/UX_bRWxbvi0"
     },
-
-                                                                 {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -491,8 +487,7 @@
         "location": "bombtrain red",
         "source": "https://youtu.be/XNCCO8k1z44"
     },
-    
-                                                                     {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -500,15 +495,15 @@
         "location": "bombtrain red",
         "source": "https://youtu.be/0swjRl_SwaA"
     },
-                                                                 {
+    {
         "description": "",
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector a",
+        "location": "connector a site",
         "source": "https://youtu.be/gRjzLxlKrbA"
     },
-                                                                         {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -516,7 +511,7 @@
         "location": "connector sidewalk",
         "source": "https://youtu.be/gY-K8kEAUSw"
     },
-                                                                                     {
+    {
         "description": "run throw",
         "map": "train",
         "side": "t",
@@ -524,7 +519,7 @@
         "location": "connector sidewalk",
         "source": "https://youtu.be/DoC3fU89ios"
     },
-                                                                             {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -532,9 +527,7 @@
         "location": "sidewalk b",
         "source": "https://youtu.be/AnpKQOaJsSg"
     },
-
-    
-                                                                                    {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -542,7 +535,7 @@
         "location": "sidewalk close",
         "source": "https://youtu.be/QPMH3dH6aXo"
     },
-                                                                                        {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -550,7 +543,7 @@
         "location": "summit",
         "source": "https://youtu.be/Hz_8I5WzGBY"
     },
-                                                                                             {
+    {
         "description": "",
         "map": "train",
         "side": "t",
@@ -558,5 +551,4 @@
         "location": "catwalk",
         "source": "https://youtu.be/IRlLhj8Zmpg"
     }
-    
 ]
