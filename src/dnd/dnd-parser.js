@@ -47,6 +47,7 @@ class DndParser {
         }
 
         let color = '';
+        let title = '';
         let resultText = '';
 
         for (var i = 0; i < repeatCount; i++) {
@@ -67,14 +68,17 @@ class DndParser {
             if (i < repeatCount - 1) {
                 resultText += '\r\n';
             }
+
+            title = this.getLabel(diceRoll / diceSize);
         }
 
         if (repeatCount > 1) {
             color = '#dddddd';
+            title = 'Mass roll';
         }
 
         // actually send message.
-        const simpleResponse = new SimpleResponse(this.getLabel(diceRoll / diceSize), resultText, color);
+        const simpleResponse = new SimpleResponse(title, resultText, color);
         simpleResponse.footer = `D${diceSize}`;
         this.discordHelper.embedMessage(message, simpleResponse);
 
