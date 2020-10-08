@@ -97,7 +97,7 @@ class DndParser {
 
     getLabel(percentage) {
         if (percentage <= 0.1) {
-            return 'Ridiculous!';
+            return 'Ridiculously terrible!';
         }
         if (percentage <= 0.2) {
             return 'Disasterous!';
