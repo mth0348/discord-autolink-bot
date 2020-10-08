@@ -499,7 +499,7 @@ class MtgParser {
     }
 
     random(minInclusive, maxInclusive) {
-        return minInclusive + Math.floor(Math.random() * (maxInclusive + 1));
+        return minInclusive + Math.floor(Math.random() * ((maxInclusive - minInclusive) + 1));
     }
 
     getRarity(rarityFactor) {
