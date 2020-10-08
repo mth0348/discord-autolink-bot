@@ -33,11 +33,13 @@ class DndParser {
         repeatCount = Math.min(10, Math.max(1, repeatCount));
 
         // validate and set maximum dice roll.
-        const diceSize = parseInt(message.content.substring(2));
+        let diceSize = parseInt(message.content.substring(2));
         if (isNaN(diceSize)) {
             message.channel.send(`"${message.content.substring(2)}" is not an number. Please use something like "!d6" or "!d10"...`)
             return;
         }
+        diceSize = Math.min(100, Math.max(1, diceSize));
+
 
         if (diceSize < 1) {
             message.channel.send(`Your number must be higher than one. Please use something like "!d6" or "!d10"...`)
