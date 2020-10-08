@@ -10,8 +10,7 @@ class DndParser {
 
     isCommandAllowed(message) {
         let isDiceCommand = this.discordHelper.checkIsRegexCommand(message, `\\${config.prefix}(d|D)\\d*`);
-        let isVoteCommand = this.discordHelper.checkIsCommand(message, `${config.prefix}(v|v)ote`);
-        if (isDiceCommand || isVoteCommand) {
+        if (isDiceCommand) {
             let isDirectMessage = message.channel.type === "dm";
             let isAllowedInChannel = this.discordHelper.checkChannelPermissions(message, config.channelPermissions.dnd);
             let isAllowedRole = this.discordHelper.checkRolePermissions(message, config.rolePermissions.dnd);
@@ -21,7 +20,6 @@ class DndParser {
     }
 
     startWorkflow(message) {
-
         // validate and set maximum dice roll.
         const diceSize = parseInt(message.content.substring(2));
         if (isNaN(diceSize)) {
