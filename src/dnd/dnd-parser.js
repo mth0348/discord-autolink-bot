@@ -38,6 +38,11 @@ class DndParser {
             return;
         }
 
+        if (diceSize < 1) {
+            message.channel.send(`Your number must be higher than one. Please use something like "!d6" or "!d10"...`)
+            return;
+        }
+
         for (var i = 0; i < repeatCount; i++) {
             
             // handle dice roll.
