@@ -9,13 +9,13 @@ class DndParser {
     }
 
     isCommandAllowed(message) {
-        let isDiceCommand = this.discordHelper.checkIsRegexCommand(message, `\\${config.prefix}(d|D)\\d*`);
+        let isDiceCommand = this.discordHelper.checkIsRegexCommand(message, `^\\${config.prefix}(d|D)\\d*`);
         if (isDiceCommand) {
             let isDirectMessage = message.channel.type === "dm";
             if (isDirectMessage) {
                 return true;
             }
-            
+
             let isAllowedInChannel = this.discordHelper.checkChannelPermissions(message, config.channelPermissions.dnd);
             let isAllowedRole = this.discordHelper.checkRolePermissions(message, config.rolePermissions.dnd);
             return isAllowedInChannel && isAllowedRole;
