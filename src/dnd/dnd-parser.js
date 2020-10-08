@@ -26,7 +26,7 @@ class DndParser {
     startWorkflow(message) {
         // first evaluate how many times it should print out a random rumber. Default is 1.
         const indexOfSpace = message.content.indexOf(` `);
-        let repeatCount = parseInt(message.content.substring(2, indexOfSpace - 2));
+        let repeatCount = parseInt(message.content.substring(indexOfSpace + 1));
         if (isNaN(repeatCount) || repeatCount === -1) {
             repeatCount = 1;
         }
@@ -43,6 +43,9 @@ class DndParser {
             return;
         }
 
+        let color = '';
+        let resultText = '';
+
         for (var i = 0; i < repeatCount; i++) {
             
             // handle dice roll.
@@ -51,17 +54,28 @@ class DndParser {
             const critFailure = diceRoll == 1;
 
             // handle visuals.
-            const color = critSuccess ? '#FFFF00' : critFailure ? '#FF0000' : '#dddddd';
+            color = critSuccess ? '#FFFF00' : critFailure ? '#FF0000' : '#dddddd';
             const emoji = critSuccess ? '🌟' : critFailure ? '💥' : '';
             
             const result = `**${diceRoll}** ${emoji}`;
 
-            // display result.        
-            const simpleResponse = new SimpleResponse(this.getLabel(diceRoll / diceSize), `${message.author.username} rolls a ${result.trim()}`, color);
-            simpleResponse.footer = `D${diceSize}`;
-            this.discordHelper.embedMessage(message, simpleResponse);
+            // add result to display text.
+            resultText += `${message.author.username} rolls a ${result.trim()}`;       
+            if (i < repeatCount - 1) {
+                resultText += '\r\n';
+            }
         }
 
+        if (repeatCount > 1) {
+            color = '#dddddd';
+        }
+
+        // actually send message.
+        const simpleResponse = new SimpleResponse(this.getLabel(diceRoll / diceSize), resultText, color);
+        simpleResponse.footer = `D${diceSize}`;
+        this.discordHelper.embedMessage(message, simpleResponse);
+
+        // delete input message if possible.
         if (message.channel.type !== "dm") {
             message.delete({});
         }
