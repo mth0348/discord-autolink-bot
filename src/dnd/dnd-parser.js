@@ -9,7 +9,7 @@ class DndParser {
     }
 
     isCommandAllowed(message) {
-        let isDiceCommand = this.discordHelper.checkIsRegexCommand(message, `^\\${config.prefix}(d|D)\\d*`);
+        let isDiceCommand = this.discordHelper.checkIsRegexCommand(message, `^\\${config.prefix}(d|D)\\d*\\s{0,1}\\d*$`);
         if (isDiceCommand) {
             let isDirectMessage = message.channel.type === "dm";
             if (isDirectMessage) {
