@@ -84,8 +84,6 @@ class MtgParser {
 
     startWorkflow(message) {
         this.getEmojis(message);
-        this.thumbsup = message.guild.emojis.cache.find(e => e.name === 'thumbsup::skin-tone-1');
-        this.thumbsdown = message.guild.emojis.cache.find(e => e.name === 'thumbsdown::skin-tone-1');
 
         let validInputs = ["creature", "instant", "sorcery", "planeswalker", "enchantment"];
         let cardType = validInputs[this.random(0, validInputs.length - 1)];
