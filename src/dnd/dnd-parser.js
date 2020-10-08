@@ -47,7 +47,9 @@ class DndParser {
         simpleResponse.footer = `D${diceSize}`;
         this.discordHelper.embedMessage(message, simpleResponse);
 
-        message.delete({});
+        if (message.channel.type !== "dm") {
+            message.delete({});
+        }
     }
 
     random(inclusiveMin, inclusiveMax) {
