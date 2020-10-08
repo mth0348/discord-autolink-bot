@@ -38,7 +38,7 @@ class DndParser {
             message.channel.send(`"${message.content.substring(2)}" is not an number. Please use something like "!d6" or "!d10"...`)
             return;
         }
-        diceSize = Math.min(100, Math.max(1, diceSize));
+        diceSize = Math.min(100, Math.max(2, diceSize));
 
 
         if (diceSize < 1) {
