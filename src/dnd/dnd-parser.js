@@ -30,6 +30,7 @@ class DndParser {
         if (isNaN(repeatCount) || repeatCount === -1) {
             repeatCount = 1;
         }
+        repeatCount = Math.min(10, Math.max(1, repeatCount));
 
         // validate and set maximum dice roll.
         const diceSize = parseInt(message.content.substring(2));
