@@ -68,6 +68,9 @@ class DndParser {
             if (i < repeatCount - 1) {
                 resultText += '\r\n';
             }
+            if (repeatCount > 1) {
+                resultText = `${(i + 1)}) ` + resultText;
+            }
 
             title = this.getLabel(diceRoll / diceSize);
         }
