@@ -24,6 +24,13 @@ class DndParser {
     }
 
     startWorkflow(message) {
+        // first evaluate how many times it should print out a random rumber. Default is 1.
+        const indexOfSpace = message.content.indexOf(` `);
+        let repeatCount = parseInt(message.content.substring(2, indexOfSpace - 2));
+        if (isNaN(repeatCount) || repeatCount === -1) {
+            repeatCount = 1;
+        }
+
         // validate and set maximum dice roll.
         const diceSize = parseInt(message.content.substring(2));
         if (isNaN(diceSize)) {
@@ -31,21 +38,24 @@ class DndParser {
             return;
         }
 
-        // handle dice roll.
-        const diceRoll = this.random(1, diceSize);
-        const critSuccess = diceRoll == diceSize;
-        const critFailure = diceRoll == 1;
+        for (var i = 0; i < repeatCount; i++) {
+            
+            // handle dice roll.
+            const diceRoll = this.random(1, diceSize);
+            const critSuccess = diceRoll == diceSize;
+            const critFailure = diceRoll == 1;
 
-        // handle visuals.
-        const color = critSuccess ? '#FFFF00' : critFailure ? '#FF0000' : '#dddddd';
-        const emoji = critSuccess ? '🌟' : critFailure ? '💥' : '';
-        
-        const result = `**${diceRoll}** ${emoji}`;
+            // handle visuals.
+            const color = critSuccess ? '#FFFF00' : critFailure ? '#FF0000' : '#dddddd';
+            const emoji = critSuccess ? '🌟' : critFailure ? '💥' : '';
+            
+            const result = `**${diceRoll}** ${emoji}`;
 
-        // display result.        
-        const simpleResponse = new SimpleResponse(this.getLabel(diceRoll / diceSize), `${message.author.username} rolls a ${result.trim()}`, color);
-        simpleResponse.footer = `D${diceSize}`;
-        this.discordHelper.embedMessage(message, simpleResponse);
+            // display result.        
+            const simpleResponse = new SimpleResponse(this.getLabel(diceRoll / diceSize), `${message.author.username} rolls a ${result.trim()}`, color);
+            simpleResponse.footer = `D${diceSize}`;
+            this.discordHelper.embedMessage(message, simpleResponse);
+        }
 
         if (message.channel.type !== "dm") {
             message.delete({});
