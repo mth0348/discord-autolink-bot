@@ -4,6 +4,7 @@ const CsgoNadeParser = require('./csgo/csgo-parser.js')
 const GeneralParser = require('./general/general-parser.js')
 const MtgParser = require('./mtg/mtg-parser.js')
 const MinigameParser = require('./minigame/minigame-parser.js')
+const DndParser = require('./dnd/dnd-parser.js')
 const config = require('./../config.json');
 
 class DrunkenBot {
@@ -14,13 +15,16 @@ class DrunkenBot {
         console.log('DrunKenBot started.');
 
         this.csgoNadeParser = new CsgoNadeParser(this.client);
-        console.log('Listening for csgo nades commands...');
+        console.log('Listening for CSGO nades commands...');
 
         this.generalParser = new GeneralParser(this.client);
         console.log('Listening for general commands...');
 
         this.mtgParser = new MtgParser(this.client);
-        console.log('Listening for mtg commands...');
+        console.log('Listening for MtG commands...');
+
+        this.dndParser = new DndParser(this.client);
+        console.log('Listening for DnD commands...');
 
         this.minigameParser = new MinigameParser(this.client);
         console.log('Listening for minigame commands...');
@@ -46,6 +50,10 @@ class DrunkenBot {
                 if (this.minigameParser.isCommandAllowed(message)) {
                     this.minigameParser = new MinigameParser(this.client);
                     this.minigameParser.startWorkflow(message);
+                }
+    
+                if (this.dndParser.isCommandAllowed(message)) {
+                    this.dndParser.startWorkflow(message);
                 }
             }
             catch (e) {

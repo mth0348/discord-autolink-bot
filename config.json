@@ -4,6 +4,12 @@
 		"general": [
 			"dev-playground"
 		],
+		"dnd": [
+			"dnd-lads",
+			"dnd-bubus",
+			"general",
+			"dev-playground"
+		],
 		"csgo": [
 			"cs-go",
 			"dev-playground"
@@ -15,6 +21,11 @@
 	},
 	"rolePermissions": {
 		"general": [
+			"Bot-Developer"
+		],
+		"dnd": [
+			"DnD Lads",
+			"DnD Bubus",
 			"Bot-Developer"
 		],
 		"csgo": [

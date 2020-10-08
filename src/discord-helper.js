@@ -31,6 +31,9 @@ class DiscordHelper {
             .setColor(response.getColor())
             .setTitle(response.getTitle())
             .setDescription(response.getDescription())
+            
+        if (response.footer)
+            embed.setFooter(response.footer);
 
         message.channel.send(embed);
     }
@@ -39,6 +42,11 @@ class DiscordHelper {
     //region PERMISSION HANDLING
     checkIsCommand(message, command) {
         return message.content.startsWith(command);
+    }
+
+    checkIsRegexCommand(message, command) {
+        const regex = RegExp(command);
+        return regex.test(message.content);
     }
 
     checkChannelPermissions(message, allowedChannels) {
