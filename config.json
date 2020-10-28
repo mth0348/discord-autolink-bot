@@ -5,9 +5,9 @@
 			"dev-playground"
 		],
 		"dnd": [
+			"random",
 			"dnd-lads",
 			"dnd-bubus",
-			"general",
 			"dev-playground"
 		],
 		"csgo": [
