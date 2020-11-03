@@ -58,7 +58,8 @@ class DrunkenBot {
     
                 if (this.dndParser.isCommandAllowed(message)) {
                     this.dndParser.startWorkflow(message);
-
+                }
+                
                 if (this.huntParser.isCommandAllowed(message)) {
                     this.huntParser.startWorkflow(message);
                 }
