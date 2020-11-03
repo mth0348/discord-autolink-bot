@@ -83,6 +83,11 @@ class HuntShowdownParser {
             secondaries = primaries;
         }
 
+        // ensure primaries are always set.
+        if (primaries.length <= 0) {
+            primaries = secondaries;
+        }
+
         // choose a loadout.
         let primary = primaries[this.random(0, primaries.length - 1)];
         let secondary = secondaries[this.random(0, secondaries.length - 1)];

@@ -42,24 +42,24 @@ class DrunkenBot {
                 if (this.csgoNadeParser.isCommandAllowed(message)) {
                     this.csgoNadeParser.startWorkflow(message);
                 }
-    
+
                 if (this.generalParser.isCommandAllowed(message)) {
                     this.generalParser.startWorkflow(message);
                 }
-    
+
                 if (this.mtgParser.isCommandAllowed(message)) {
                     this.mtgParser.startWorkflow(message);
                 }
-                
+
                 if (this.minigameParser.isCommandAllowed(message)) {
                     this.minigameParser = new MinigameParser(this.client);
                     this.minigameParser.startWorkflow(message);
                 }
-    
+
                 if (this.dndParser.isCommandAllowed(message)) {
                     this.dndParser.startWorkflow(message);
                 }
-                
+
                 if (this.huntParser.isCommandAllowed(message)) {
                     this.huntParser.startWorkflow(message);
                 }
@@ -68,7 +68,7 @@ class DrunkenBot {
                 console.warn(e);
                 message.channel.send("Oops, something went wrong, sorry. Please try again...")
             }
-            
+
         });
     }
 }
