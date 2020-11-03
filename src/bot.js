@@ -5,6 +5,7 @@ const GeneralParser = require('./general/general-parser.js')
 const MtgParser = require('./mtg/mtg-parser.js')
 const MinigameParser = require('./minigame/minigame-parser.js')
 const DndParser = require('./dnd/dnd-parser.js')
+const HuntShowdownParser = require('./hunt-showdown/huntshowdown-parser.js')
 const config = require('./../config.json');
 
 class DrunkenBot {
@@ -28,6 +29,9 @@ class DrunkenBot {
 
         this.minigameParser = new MinigameParser(this.client);
         console.log('Listening for minigame commands...');
+
+        this.huntParser = new HuntShowdownParser(this.client);
+        console.log('Listening for Hunt Showdown commands...');
 
         this.registerCommandParsers();
     }
@@ -54,6 +58,9 @@ class DrunkenBot {
     
                 if (this.dndParser.isCommandAllowed(message)) {
                     this.dndParser.startWorkflow(message);
+
+                if (this.huntParser.isCommandAllowed(message)) {
+                    this.huntParser.startWorkflow(message);
                 }
             }
             catch (e) {

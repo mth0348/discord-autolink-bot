@@ -17,6 +17,11 @@
 		"mtg": [
 			"magic-the-gathering",
 			"dev-playground"
+		],
+		"huntShowdown": [
+			"random",
+			"hunt-showdown",
+			"dev-playground"
 		]
 	},
 	"rolePermissions": {
@@ -37,6 +42,10 @@
 			"Bot-Developer"
 		],
 		"minigame": [
+			"DrunKen",
+			"Bot-Developer"
+		],
+		"huntShowdown": [
 			"DrunKen",
 			"Bot-Developer"
 		]
