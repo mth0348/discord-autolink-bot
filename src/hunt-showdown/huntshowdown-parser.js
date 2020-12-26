@@ -26,7 +26,7 @@ class HuntShowdownParser {
 
     startWorkflow(message) {
         // handle help command.
-        if (message.content == `${config.prefix}loadout help`) {
+        if (message.content.toLowerCase() == `${config.prefix}loadout help`) {
             let helpText = `Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. Add 'price' argument followed by a number to limit the maximum price the loadout should cost, or add 'rank' to limit the loadout to a certain maximum rank:\n\n`;
             helpText += `${config.prefix}loadout\n`;
             helpText += `${config.prefix}loadout price 200\n`;

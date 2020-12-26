@@ -41,7 +41,7 @@ class DiscordHelper {
 
     //region PERMISSION HANDLING
     checkIsCommand(message, command) {
-        return message.content.startsWith(command);
+        return message.content.toLowerCase().startsWith(command.toLowerCase());
     }
 
     checkIsRegexCommand(message, command) {

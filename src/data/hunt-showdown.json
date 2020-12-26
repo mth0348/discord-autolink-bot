@@ -246,6 +246,13 @@
             "slots": 3
         },
         {
+            "name": "Winfield M1873 Musket Bayonet",
+            "price": 137,
+            "unlock": "Unlock Winfield M1873 Swift and earn 2500XP with any Winfield M1873 variant",
+            "actualUnlock": 42,
+            "slots": 3
+        },
+        {
             "name": "Winfield M1873C",
             "price": 41,
             "unlock": "Rank 1",
@@ -339,7 +346,14 @@
         {
             "name": "Nagant M1895 Precision",
             "price": 29,
-            "unlock": "Unlock Nagant M1895 and then earn 100XP with any Nagant M1895 variant ",
+            "unlock": "Unlock Nagant M1895 and then earn 100XP with any Nagant M1895 variant",
+            "actualUnlock": 1,
+            "slots": 2
+        },
+        {
+            "name": "Nagant M1895 Precision Deadeye",
+            "price": 42,
+            "unlock": "Unlock Nagant M1895 Silencer and then earn 100XP with any Nagant M1895 variant",
             "actualUnlock": 1,
             "slots": 2
         },
@@ -474,7 +488,7 @@
             "unlock": "Rank 12",
             "price": 18,
             "actualUnlock": 12,
-            "slots": 2
+            "slots": 1
         },
         {
             "name": "Cavalery Saber",
