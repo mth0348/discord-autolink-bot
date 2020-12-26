@@ -36,7 +36,8 @@ class HuntShowdownParser {
             helpText += `Use 'novariants', 'nv' or '-v' to exclude weapon variants, like so:\n`;
             helpText += `${config.prefix}loadout rank 15 nv\n\n`;
             helpText += `Use 'quartermaster' or 'qm' to allow a large primary slot weapon along a medium slot secondary weapon, like so:\n`;
-            helpText += `${config.prefix}loadout qm nv rank 10`;
+            helpText += `${config.prefix}loadout qm nv rank 10\n\n`;
+            helpText += `(v1.1)`;
             const response = new SimpleResponse('Hunt Showdown Loadouts', helpText, '#222222');
             this.discordHelper.embedMessage(message, response);
             return;
