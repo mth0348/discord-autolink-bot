@@ -267,6 +267,27 @@
             "slots": 3
         },
         {
+            "name": "Winfield M1873C Vandal",
+            "price": 35,
+            "unlock": "Unlock Winfield M1873C Marksman and earn 500XP with any Winfield M1873C variant",
+            "actualUnlock": 1,
+            "slots": 2
+        },
+        {
+            "name": "Winfield M1873C Vandal Striker",
+            "price": 39,
+            "unlock": "Unlock Winfield M1873C Vandal and earn 750XP with any Winfield M1873C variant",
+            "actualUnlock": 1,
+            "slots": 2
+        },
+        {
+            "name": "Winfield M1873C Vandal Deadeye",
+            "price": 45,
+            "unlock": "Unlock Winfield M1873C Vandal Striker and earn 1000XP with any Winfield M1873C variant",
+            "actualUnlock": 1,
+            "slots": 2
+        },
+        {
             "name": "Winfield M1873C Silencer",
             "price": 55,
             "unlock": "Unlock Winfield M1873C and then earn 250XP with any Winfield M1873C variant",
