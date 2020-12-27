@@ -38,8 +38,7 @@ class HuntShowdownParser {
     startWorkflow(message) {
         // handle help command.
         if (message.content.toLowerCase() == `${config.prefix}loadout help`) {
-            let helpText = `*Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. There are many options to narrow down possible loadouts, like the estimated difficulty for example.\n`;
-            helpText += `Per default, the generator estimates that weapon variants are unlocked at a higher level than the base weapon and uses that estimate to filter the rank.*\n`;
+            let helpText = `*Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. There are many options to narrow down possible loadouts, like the estimated difficulty or a price range. Here are some example commands:*\n`;
             helpText += `\`${config.prefix}loadout\`\n`;
             helpText += `\`${config.prefix}loadout price 200\`\n`;
             helpText += `\`${config.prefix}loadout rank 44\`\n`;
@@ -65,8 +64,9 @@ class HuntShowdownParser {
             helpText += `\`${config.prefix}loadout maxrank 10 hard\`\n`;
             helpText += `\`${config.prefix}loadout minprice 300 nv medium\`\n\n`;
             helpText += `**Level Estimation**\n`;
-            helpText += `*Use 'exact', 'base' 'comparebase' or 'e' to compare the unlock rank with the base weapon instead of the variant, like so:*\n`;
-            helpText += `\`${config.prefix}loadout base\`\n`;
+            helpText += `*Use 'exact', 'base' 'comparebase' or 'e' to compare the unlock rank with the base weapon instead of the variant, like so:\n`;
+            helpText += `Per default, it is estimated that weapon variants are unlocked at a higher level than the base weapon and uses that estimate to filter the rank.*\n`;
+            helpText += `\`${config.prefix}loadout base maxrank 10\`\n`;
             helpText += `\`${config.prefix}loadout rank 20-40\` ( would not include Uppercut)\n`;
             helpText += `\`${config.prefix}loadout rank 20-40 exact\` (would include Uppercut)\n\n`;
             helpText += `**Variants**\n`;
