@@ -40,7 +40,8 @@ class HuntShowdownParser {
     }
 
     startWorkflow(message) {
-        this.log.push(`MESSAGE`);
+        this.log.push(`===MESSAGE===`);
+        this.log.push(`user: ${message.author}`);
         this.log.push(`text: ${message.content}`);
 
         // handle help command.
@@ -165,7 +166,7 @@ class HuntShowdownParser {
                 }
             }
 
-            this.log.push(`INDEXES`);
+            this.log.push(`===INDEXES===`);
             this.log.push(`minPriceIndex: ${minPriceIndex}`);
             this.log.push(`maxPriceIndex: ${maxPriceIndex}`);
             this.log.push(`minRankIndex: ${minRankIndex}`);
@@ -173,7 +174,7 @@ class HuntShowdownParser {
             this.log.push(`difficultyIndex: ${difficultyIndex}`);
         }
 
-        this.log.push(`VARS`);
+        this.log.push(`===VARS===`);
         this.log.push(`minPrice: ${minPrice}`);
         this.log.push(`maxPrice: ${maxPrice}`);
         this.log.push(`minDifficulty: ${minDifficulty}`);
@@ -252,7 +253,7 @@ class HuntShowdownParser {
             }
         }
 
-        this.log.push(`WEAPONS`);
+        this.log.push(`===WEAPONS===`);
         this.log.push(`search depth: ${depth}`);
         this.log.push(`primaries: ${primaries.length}`);
         this.log.push(`secondaries: ${secondaries.length}`);
