@@ -23,9 +23,7 @@ class DiscordHelper {
             if (response.helpName6) embed.addField(response.helpName6, response.helpValue6);
         }
 
-        if (followup != undefined) {
-            message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
-        }
+        message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
     }
 
     embedMessage(message, response, followup) {
@@ -37,11 +35,7 @@ class DiscordHelper {
         if (response.footer)
             embed.setFooter(response.footer);
 
-        if (followup != undefined) {
-            message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
-        }
-
-        message.channel.send(embed);
+        message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
     }
     //endregion
 
