@@ -158,9 +158,15 @@ class HuntShowdownParser {
                     maxDifficulty = specificDifficulty * 2;
                 }
             }
+
+            this.log.push(`INDEXES`);
+            this.log.push(`minPriceIndex: ${minPriceIndex}`);
+            this.log.push(`maxPriceIndex: ${maxPriceIndex}`);
+            this.log.push(`minRankIndex: ${minRankIndex}`);
+            this.log.push(`maxRankIndex: ${maxRankIndex}`);
+            this.log.push(`difficultyIndex: ${difficultyIndex}`);
         }
 
-        // fill log.
         this.log.push(`VARS`);
         this.log.push(`minPrice: ${minPrice}`);
         this.log.push(`maxPrice: ${maxPrice}`);
@@ -171,12 +177,6 @@ class HuntShowdownParser {
         this.log.push(`noVariants: ${noVariants}`);
         this.log.push(`quartermaster: ${quartermaster}`);
         this.log.push(`useExact: ${useExact}`);
-        this.log.push(`INDEXES`);
-        this.log.push(`minPriceIndex: ${minPriceIndex}`);
-        this.log.push(`maxPriceIndex: ${maxPriceIndex}`);
-        this.log.push(`minRankIndex: ${minRankIndex}`);
-        this.log.push(`maxRankIndex: ${maxRankIndex}`);
-        this.log.push(`difficultyIndex: ${difficultyIndex}`);
 
         // Validate
         if (minPrice > maxPrice) {
@@ -206,6 +206,8 @@ class HuntShowdownParser {
             this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "There are not enough match results for your loadout request.", "#882222"));
             return;
         }
+
+        this.log.push(`slotSize: ${slotSize}`);
 
         if (slotSize === 3 || quartermaster) {
             primaries = matchWeapons.filter(m => m.slots === 3);
@@ -245,6 +247,7 @@ class HuntShowdownParser {
         }
 
         this.log.push(`WEAPONS`);
+        this.log.push(`search depth: ${depth}`);
         this.log.push(`primaries: ${primaries.length}`);
         this.log.push(`secondaries: ${secondaries.length}`);
         this.log.push(`primary: ${primary !== undefined ? primary.name : 'undefined'}`);
