@@ -116,6 +116,7 @@ class HuntShowdownParser {
             minRank = this.tryGetInt(args, minRankIndex) || minRank;
             minPrice = this.tryGetInt(args, minPriceIndex) || minPrice;
 
+
             // handle max price range.
             if (maxPriceIndex >= 0) {
                 const maxPriceText = args[maxPriceIndex + 1];
@@ -157,6 +158,24 @@ class HuntShowdownParser {
                 }
             }
         }
+
+        // fill log.
+        this.log.push(`VARS`);
+        this.log.push(`minPrice: ${minPrice}`);
+        this.log.push(`maxPrice: ${maxPrice}`);
+        this.log.push(`minDifficulty: ${minDifficulty}`);
+        this.log.push(`maxDifficulty: ${maxDifficulty}`);
+        this.log.push(`minRank: ${minRank}`);
+        this.log.push(`maxRank: ${maxRank}`);
+        this.log.push(`noVariants: ${noVariants}`);
+        this.log.push(`quartermaster: ${quartermaster}`);
+        this.log.push(`useExact: ${useExact}`);
+        this.log.push(`INDEXES`);
+        this.log.push(`minPriceIndex: ${minPriceIndex}`);
+        this.log.push(`maxPriceIndex: ${maxPriceIndex}`);
+        this.log.push(`minRankIndex: ${minRankIndex}`);
+        this.log.push(`maxRankIndex: ${maxRankIndex}`);
+        this.log.push(`difficultyIndex: ${difficultyIndex}`);
 
         // Validate
         if (minPrice > maxPrice) {
@@ -224,7 +243,12 @@ class HuntShowdownParser {
             }
         }
 
+        this.log.push(`WEAPONS`);
+        this.log.push(`primary: ${primary?.name}`);
+        this.log.push(`secondary: ${secondary?.name}`);
+
         if (primary === undefined || secondary === undefined) {
+            console.log(this.log.join("\n"));
             this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.", "#882222"));
             return;
         } 
