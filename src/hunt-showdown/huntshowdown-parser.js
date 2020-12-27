@@ -37,6 +37,9 @@ class HuntShowdownParser {
     }
 
     startWorkflow(message) {
+        this.log.push(`MESSAGE`);
+        this.log.push(`text: ${message.content}`);
+
         // handle help command.
         if (message.content.toLowerCase() == `${config.prefix}loadout help`) {
             let helpText = `*Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. There are many options to narrow down possible loadouts, like the estimated difficulty or a price range. Here are some example commands:*\n`;
