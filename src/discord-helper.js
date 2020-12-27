@@ -23,10 +23,12 @@ class DiscordHelper {
             if (response.helpName6) embed.addField(response.helpName6, response.helpValue6);
         }
 
-        message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
+        if (followup != undefined) {
+            message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
+        }
     }
 
-    embedMessage(message, response) {
+    embedMessage(message, response, followup) {
         const embed = new Discord.MessageEmbed()
             .setColor(response.getColor())
             .setTitle(response.getTitle())
@@ -34,6 +36,10 @@ class DiscordHelper {
             
         if (response.footer)
             embed.setFooter(response.footer);
+
+        if (followup != undefined) {
+            message.channel.send(embed).then(e => {if (followup != undefined) followup(e); });
+        }
 
         message.channel.send(embed);
     }
