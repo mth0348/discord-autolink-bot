@@ -5,6 +5,9 @@
             "price": 199,
             "unlock": "Rank 78",
             "actualUnlock": 78,
+            "estimatedUnlock": 78,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -12,6 +15,9 @@
             "price": 100,
             "unlock": "Rank 18",
             "actualUnlock": 18,
+            "estimatedUnlock": 18,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -19,6 +25,9 @@
             "price": 73,
             "unlock": "Unlock Hand Crossbow Poison and then earn 1500XP with any Hand Crossbow variant",
             "actualUnlock": 4,
+            "estimatedUnlock": 20,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -26,6 +35,9 @@
             "price": 130,
             "unlock": "Unlock Crossbow and then earn 2000XP with any Hand Crossbow variant",
             "actualUnlock": 4,
+            "estimatedUnlock": 60,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -33,6 +45,9 @@
             "price": 150,
             "unlock": "Unlock Crossbow Explosive and then earn 2000XP with any Hand Crossbow variant",
             "actualUnlock": 4,
+            "estimatedUnlock": 60,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -40,6 +55,9 @@
             "price": 600,
             "unlock": "Rank 82",
             "actualUnlock": 82,
+            "estimatedUnlock": 82,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -47,6 +65,9 @@
             "price": 397,
             "unlock": "Rank 52",
             "actualUnlock": 52,
+            "estimatedUnlock": 52,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -54,6 +75,9 @@
             "price": 437,
             "unlock": "Unlock Lebel 1886 Talon and then earn 3000XP with any Lebel 1886 variant",
             "actualUnlock": 52,
+            "estimatedUnlock": 70,
+            "difficulty": 2,
+            "scopeVariant": 2,
             "slots": 3
         },
         {
@@ -61,6 +85,9 @@
             "price": 422,
             "unlock": "Unlock Lebel 1886 and then earn 2000XP with any Lebel 1886 variant",
             "actualUnlock": 52,
+            "estimatedUnlock": 70,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -68,6 +95,9 @@
             "price": 122,
             "unlock": "Rank 16",
             "actualUnlock": 16,
+            "estimatedUnlock": 16,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -75,13 +105,9 @@
             "price": 145,
             "unlock": "Unlock Martini-Henry IC1 and then earn 1000XP with any Martini-Henry IC1 variant",
             "actualUnlock": 16,
-            "slots": 3
-        },
-        {
-            "name": "Martini-Henry IC1 Marksman",
-            "price": 173,
-            "unlock": "Unlock Martini-Henry IC1 Riposte and then earn XP with any Martini-Henry IC1 variant",
-            "actualUnlock": 16,
+            "estimatedUnlock": 50,
+            "difficulty": 2,
+            "scopeVariant": 1,
             "slots": 3
         },
         {
@@ -89,6 +115,19 @@
             "price": 164,
             "unlock": "Unlock Martini-Henry IC1 Deadeye and then earn 1500XP with any Martini-Henry IC1 variant",
             "actualUnlock": 16,
+            "estimatedUnlock": 60,
+            "difficulty": 1,
+            "scopeVariant": 0,
+            "slots": 3
+        },
+        {
+            "name": "Martini-Henry IC1 Marksman",
+            "price": 173,
+            "unlock": "Unlock Martini-Henry IC1 Riposte and then earn XP with any Martini-Henry IC1 variant",
+            "actualUnlock": 16,
+            "estimatedUnlock": 70,
+            "difficulty": 2,
+            "scopeVariant": 2,
             "slots": 3
         },
         {
@@ -96,6 +135,9 @@
             "price": 490,
             "unlock": "Rank 72",
             "actualUnlock": 72,
+            "estimatedUnlock": 72,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -103,6 +145,9 @@
             "price": 1250,
             "unlock": "Unlock Mosin-Nagant M1891 Sniper and then earn 5000XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
+            "estimatedUnlock": 100,
+            "difficulty": 0,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -110,6 +155,9 @@
             "price": 540,
             "unlock": "Unlock Mosin-Nagant M1891 Obrez and then earn 2000XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
+            "estimatedUnlock": 90,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -117,6 +165,9 @@
             "price": 550,
             "unlock": "Unlock Mosin-Nagant M1891 Obrez Mace and then earn 3000XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
+            "estimatedUnlock": 90,
+            "difficulty": 2,
+            "scopeVariant": 3,
             "slots": 3
         },
         {
@@ -124,6 +175,19 @@
             "price": 80,
             "unlock": "Unlock Nagant M1895 Officer Brawler and then earn 2000XP with any Nagant M1895 Officer variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 40,
+            "difficulty": 2,
+            "scopeVariant": 0,
+            "slots": 3
+        },
+        {
+            "name": "Nagant M1895 Officer Carbine Deadeye",
+            "price": 211,
+            "unlock": "Unlock Nagant M1895 Officer Carbine and then earn 2500XP with any Nagant M1895 Officer variant",
+            "actualUnlock": 1,
+            "estimatedUnlock": 55,
+            "difficulty": 3,
+            "scopeVariant": 1,
             "slots": 3
         },
         {
@@ -131,6 +195,9 @@
             "price": 1015,
             "unlock": "Rank 88",
             "actualUnlock": 88,
+            "estimatedUnlock": 88,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -138,6 +205,9 @@
             "price": 34,
             "unlock": "Rank 1",
             "actualUnlock": 1,
+            "estimatedUnlock": 1,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -145,6 +215,9 @@
             "price": 59,
             "unlock": "Unlock Romero 77 Handcannon and then earn 750XP with any Romero 77 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 20,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -152,6 +225,9 @@
             "price": 130,
             "unlock": "Rank 26",
             "actualUnlock": 26,
+            "estimatedUnlock": 26,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -159,6 +235,9 @@
             "price": 150,
             "unlock": "Unlock Sparks LRR and then earn 1000XP with any Sparks LRR variant",
             "actualUnlock": 26,
+            "estimatedUnlock": 45,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -166,6 +245,9 @@
             "price": 199,
             "unlock": "Unlock Sparks LRR Silencer and then earn 3000XP with any Sparks LRR variant",
             "actualUnlock": 26,
+            "estimatedUnlock": 65,
+            "difficulty": 2,
+            "scopeVariant": 3,
             "slots": 3
         },
         {
@@ -173,6 +255,9 @@
             "price": 188,
             "unlock": "Rank 58",
             "actualUnlock": 58,
+            "estimatedUnlock": 58,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -180,6 +265,9 @@
             "price": 223,
             "unlock": "Unlock Specter 1882 Compact and then earn 2000XP with any Specter 1882 variant",
             "actualUnlock": 58,
+            "estimatedUnlock": 80,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -187,6 +275,9 @@
             "price": 38,
             "unlock": "Rank 1",
             "actualUnlock": 1,
+            "estimatedUnlock": 1,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -194,6 +285,9 @@
             "price": 73,
             "unlock": "Unlock Springfield 1866 and then earn 250XP with any Springfield 1866 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 30,
+            "difficulty": 2,
+            "scopeVariant": 2,
             "slots": 3
         },
         {
@@ -201,13 +295,9 @@
             "price": 105,
             "unlock": "Rank 6",
             "actualUnlock": 6,
-            "slots": 3
-        },
-        {
-            "name": "Vetterli 71 Karabiner Bayonet",
-            "price": 155,
-            "unlock": "Unlock Vetterli 71 Karabiner Deadeye and then earn750XP with any Vetterli 71 Karabiner variant",
-            "actualUnlock": 6,
+            "estimatedUnlock": 6,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -215,6 +305,19 @@
             "price": 130,
             "unlock": "Unlock Vetterli 71 Karabiner and then earn 500XP with any Vetterli 71 Karabiner variant",
             "actualUnlock": 6,
+            "estimatedUnlock": 50,
+            "difficulty": 2,
+            "scopeVariant": 1,
+            "slots": 3
+        },
+        {
+            "name": "Vetterli 71 Karabiner Bayonet",
+            "price": 155,
+            "unlock": "Unlock Vetterli 71 Karabiner Deadeye and then earn750XP with any Vetterli 71 Karabiner variant",
+            "actualUnlock": 6,
+            "estimatedUnlock": 55,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -222,6 +325,9 @@
             "price": 75,
             "unlock": "Rank 42",
             "actualUnlock": 42,
+            "estimatedUnlock": 42,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -229,13 +335,9 @@
             "price": 80,
             "unlock": "Unlock Winfield M1873 and then earn 1000XP with any Winfield M1873 variant",
             "actualUnlock": 42,
-            "slots": 3
-        },
-        {
-            "name": "Winfield M1873 Swift",
-            "price": 128,
-            "unlock": "Unlock Winfield M1873 Talon and then earn 2000XP with any Winfield M1873 variant",
-            "actualUnlock": 42,
+            "estimatedUnlock": 65,
+            "difficulty": 3,
+            "scopeVariant": 4,
             "slots": 3
         },
         {
@@ -243,6 +345,19 @@
             "price": 100,
             "unlock": "Unlock Winfield M1873 Aperture and then earn 1500XP with any Winfield M1873 variant",
             "actualUnlock": 42,
+            "estimatedUnlock": 70,
+            "difficulty": 1,
+            "scopeVariant": 0,
+            "slots": 3
+        },
+        {
+            "name": "Winfield M1873 Swift",
+            "price": 128,
+            "unlock": "Unlock Winfield M1873 Talon and then earn 2000XP with any Winfield M1873 variant",
+            "actualUnlock": 42,
+            "estimatedUnlock": 70,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -250,6 +365,9 @@
             "price": 137,
             "unlock": "Unlock Winfield M1873 Swift and earn 2500XP with any Winfield M1873 variant",
             "actualUnlock": 42,
+            "estimatedUnlock": 75,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -257,6 +375,19 @@
             "price": 41,
             "unlock": "Rank 1",
             "actualUnlock": 1,
+            "estimatedUnlock": 1,
+            "difficulty": 1,
+            "scopeVariant": 0,
+            "slots": 3
+        },
+        {
+            "name": "Winfield M1873C Silencer",
+            "price": 55,
+            "unlock": "Unlock Winfield M1873C and then earn 250XP with any Winfield M1873C variant",
+            "actualUnlock": 1,
+            "estimatedUnlock": 15,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 3
         },
         {
@@ -264,6 +395,9 @@
             "price": 56,
             "unlock": "Unlock Winfield M1873C Silencer and then earn 500XP with any Winfield M1873C variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 25,
+            "difficulty": 1,
+            "scopeVariant": 2,
             "slots": 3
         },
         {
@@ -271,6 +405,9 @@
             "price": 35,
             "unlock": "Unlock Winfield M1873C Marksman and earn 500XP with any Winfield M1873C variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 30,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -278,6 +415,9 @@
             "price": 39,
             "unlock": "Unlock Winfield M1873C Vandal and earn 750XP with any Winfield M1873C variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 35,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -285,20 +425,19 @@
             "price": 45,
             "unlock": "Unlock Winfield M1873C Vandal Striker and earn 1000XP with any Winfield M1873C variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 45,
+            "difficulty": 3,
+            "scopeVariant": 1,
             "slots": 2
-        },
-        {
-            "name": "Winfield M1873C Silencer",
-            "price": 55,
-            "unlock": "Unlock Winfield M1873C and then earn 250XP with any Winfield M1873C variant",
-            "actualUnlock": 1,
-            "slots": 3
         },
         {
             "name": "Bornheim No. 3 Match",
             "price": 224,
             "unlock": "Unlock Bornheim No. 3 Extended and then earn 2500XP with any Bornheim No. 3 variant",
             "actualUnlock": 30,
+            "estimatedUnlock": 70,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -306,6 +445,9 @@
             "price": 85,
             "unlock": "Unlock Caldwell Rival 78 and then earn 1000XP with any Caldwell Rival 78 variant",
             "actualUnlock": 18,
+            "estimatedUnlock": 35,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -313,6 +455,9 @@
             "price": 5,
             "unlock": "Rank 1",
             "actualUnlock": 1,
+            "estimatedUnlock": 1,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -320,6 +465,9 @@
             "price": 790,
             "unlock": "Unlock Dolch 96 and then earn 2000XP with any Dolch 96 variant",
             "actualUnlock": 68,
+            "estimatedUnlock": 90,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -327,6 +475,9 @@
             "price": 44,
             "unlock": "Rank 4",
             "actualUnlock": 4,
+            "estimatedUnlock": 4,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -334,6 +485,9 @@
             "price": 51,
             "unlock": "Unlock Hand Crossbow and then earn 1000XP with any Hand Crossbow variant",
             "actualUnlock": 4,
+            "estimatedUnlock": 25,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -341,6 +495,9 @@
             "price": 290,
             "unlock": "Unlock Mosin-Nagant M1891 and then earn 1500XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
+            "estimatedUnlock": 85,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -348,6 +505,9 @@
             "price": 350,
             "unlock": "Unlock Mosin-Nagant M1891 Sniper and then earn 2000XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
+            "estimatedUnlock": 95,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -355,13 +515,9 @@
             "price": 310,
             "unlock": "Unlock Mosin-Nagant M1891 Bayonet and then earn 2000XP with any Mosin-Nagant M1891 variant",
             "actualUnlock": 72,
-            "slots": 2
-        },
-        {
-            "name": "Nagant M1895 Deadeye",
-            "price": 42,
-            "unlock": "Unlock Nagant M1895 Silencer and then earn 750XP with any Nagant M1895 variant",
-            "actualUnlock": 72,
+            "estimatedUnlock": 95,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -369,6 +525,9 @@
             "price": 29,
             "unlock": "Unlock Nagant M1895 and then earn 100XP with any Nagant M1895 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 15,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -376,6 +535,9 @@
             "price": 42,
             "unlock": "Unlock Nagant M1895 Silencer and then earn 100XP with any Nagant M1895 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 50,
+            "difficulty": 3,
+            "scopeVariant": 1,
             "slots": 2
         },
         {
@@ -383,6 +545,9 @@
             "price": 26,
             "unlock": "Unlock Romero 77 and then earn 250XP with any Romero 77 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 20,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -390,6 +555,9 @@
             "price": 62,
             "unlock": "Unlock Romero 77 Talon and then earn 1000XP with any Romero 77 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 30,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -397,6 +565,9 @@
             "price": 164,
             "unlock": "Unlock Specter 1882 and then earn 1500XP with any Specter 1882 variant",
             "actualUnlock": 56,
+            "estimatedUnlock": 70,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -404,13 +575,9 @@
             "price": 33,
             "unlock": "Unlock Springfield 1866 Marksman and then earn 250XP with any Springfield 1866 variant",
             "actualUnlock": 1,
-            "slots": 2
-        },
-        {
-            "name": "Springfield 1866 Compact Deadeye",
-            "price": 46,
-            "unlock": "Unlock Springfield 1866 Compact Striker and then earn 1000XP with any Springfield 1866 variant",
-            "actualUnlock": 1,
+            "estimatedUnlock": 35,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
@@ -418,27 +585,19 @@
             "price": 56,
             "unlock": "Unlock Springfield 1866 Compact and then earn 500XP with any Springfield 1866 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 40,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 2
         },
         {
-            "name": "Winfield M1873C Vandal",
-            "price": 35,
-            "unlock": "Unlock Winfield M1873C Marksman and then earn 500XP with any WinfieldC variant",
+            "name": "Springfield 1866 Compact Deadeye",
+            "price": 46,
+            "unlock": "Unlock Springfield 1866 Compact Striker and then earn 1000XP with any Springfield 1866 variant",
             "actualUnlock": 1,
-            "slots": 2
-        },
-        {
-            "name": "Winfield M1873C Vandal Striker",
-            "price": 39,
-            "unlock": "Unlock Winfield M1873C Vandal and then earn 750XP with any WinfieldC variant",
-            "actualUnlock": 1,
-            "slots": 2
-        },
-        {
-            "name": "Winfield M1873C Vandal Deadeye",
-            "price": 45,
-            "unlock": "Unlock Winfield M1873C Vandal Striker and then earn 1000XP with any WinfieldC variant",
-            "actualUnlock": 1,
+            "estimatedUnlock": 50,
+            "difficulty": 3,
+            "scopeVariant": 1,
             "slots": 2
         },
         {
@@ -446,6 +605,9 @@
             "price": 201,
             "unlock": "Rank 30",
             "actualUnlock": 30,
+            "estimatedUnlock": 30,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -453,20 +615,29 @@
             "unlock": "Unlock Bornheim No. 3 and then earn 1500XP with any Bornheim No. 3 variant",
             "price": 306,
             "actualUnlock": 30,
+            "estimatedUnlock": 55,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 2
-        },
-        {
-            "name": "Caldwell Conversion Chain Pistol",
-            "price": 50,
-            "unlock": "Unlock Caldwell Conversion Pistol and then earn 1000XP with any Caldwell Conversion Pistol variant",
-            "actualUnlock": 22,
-            "slots": 1
         },
         {
             "name": "Caldwell Conversion Pistol",
             "price": 26,
             "unlock": "Rank 22",
             "actualUnlock": 22,
+            "estimatedUnlock": 22,
+            "difficulty": 2,
+            "scopeVariant": 0,
+            "slots": 1
+        },
+        {
+            "name": "Caldwell Conversion Chain Pistol",
+            "price": 50,
+            "unlock": "Unlock Caldwell Conversion Pistol and then earn 1000XP with any Caldwell Conversion Pistol variant",
+            "actualUnlock": 22,
+            "estimatedUnlock": 30,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -474,6 +645,9 @@
             "price": 275,
             "unlock": "Unlock Caldwell Conversion Chain Pistol and then earn 3000XP with any Caldwell Conversion Pistol variant",
             "actualUnlock": 40,
+            "estimatedUnlock": 55,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -481,6 +655,9 @@
             "price": 100,
             "unlock": "Rank 10",
             "actualUnlock": 10,
+            "estimatedUnlock": 10,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -488,6 +665,9 @@
             "price": 125,
             "unlock": "Unlock Caldwell Pax and then earn 2000XP with any Caldwell Pax variant",
             "actualUnlock": 10,
+            "estimatedUnlock": 30,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -495,6 +675,9 @@
             "price": 750,
             "unlock": "Rank 68",
             "actualUnlock": 68,
+            "estimatedUnlock": 68,
+            "difficulty": 1,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -502,6 +685,9 @@
             "price": 95,
             "unlock": "Rank 46",
             "actualUnlock": 46,
+            "estimatedUnlock": 46,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -509,6 +695,9 @@
             "unlock": "Rank 12",
             "price": 18,
             "actualUnlock": 12,
+            "estimatedUnlock": 12,
+            "difficulty": 3,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -516,13 +705,19 @@
             "unlock": "Rank 62",
             "price": 60,
             "actualUnlock": 62,
-            "slots": 2
+            "estimatedUnlock": 62,
+            "difficulty": 3,
+            "scopeVariant": 0,
+            "slots": 1
         },
         {
             "name": "Nagant M1895",
             "price": 24,
             "unlock": "Rank 1",
             "actualUnlock": 1,
+            "estimatedUnlock": 1,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -530,6 +725,9 @@
             "price": 66,
             "unlock": "Rank 36",
             "actualUnlock": 36,
+            "estimatedUnlock": 36,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -537,6 +735,9 @@
             "price": 80,
             "unlock": "Unlock Nagant M1895 Officer and then earn 1000XP with any Nagant M1895 Officer variant",
             "actualUnlock": 36,
+            "estimatedUnlock": 50,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         },
         {
@@ -544,6 +745,9 @@
             "price": 53,
             "unlock": "Unlock Nagant M1895 Precision and then earn 250XP with any Nagant M1895 variant",
             "actualUnlock": 1,
+            "estimatedUnlock": 20,
+            "difficulty": 2,
+            "scopeVariant": 0,
             "slots": 1
         }
     ]

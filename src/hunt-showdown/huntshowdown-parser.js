@@ -3,6 +3,17 @@ const { SimpleResponse, DiscordHelper } = require('../discord-helper.js');
 const config = require('../../config.json');
 const huntShowdownData = require('./../data/hunt-showdown.json');
 
+/* DATA TEMPLATE
+{
+    "name": <string>,
+    "price": <int>,
+    "unlock": <string> ("Rank XX" or "Unlock something.."),
+    "actualUnlock": <int>, (0-100)
+    "estimatedUnlock": <int>, (0-100)
+    "harshness": <int> (1-10)
+    "slots": <int> (1-3)
+},*/
+
 class HuntShowdownParser {
     constructor(client) {
         this.client = client;
@@ -27,41 +38,132 @@ class HuntShowdownParser {
     startWorkflow(message) {
         // handle help command.
         if (message.content.toLowerCase() == `${config.prefix}loadout help`) {
-            let helpText = `Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. Add 'price' argument followed by a number to limit the maximum price the loadout should cost, or add 'rank' to limit the loadout to a certain maximum rank:\n\n`;
+            let helpText = `*Enter '${config.prefix}loadout' to generate a random Hunt Showdown loadout. There are many options to narrow down possible loadouts, like the estimated difficulty for example.\n`;
+            helpText += `Per default, the generator estimates that weapon variants are unlocked at a higher level than the base weapon and uses that estimate to filter the rank.*\n`;
             helpText += `${config.prefix}loadout\n`;
             helpText += `${config.prefix}loadout price 200\n`;
             helpText += `${config.prefix}loadout rank 44\n`;
             helpText += `${config.prefix}loadout price 999 rank 10\n`;
-            helpText += `${config.prefix}loadout rank 2 price 100\n\n`;
-            helpText += `Use 'novariants', 'nv' or '-v' to exclude weapon variants, like so:\n`;
+            helpText += `${config.prefix}loadout rank 2 price 100 nv\n`;
+            helpText += `${config.prefix}loadout rank 90\n\n`;
+            helpText += `**Rank**\n`;
+            helpText += `*Use 'rank', 'minrank', 'maxrank', or 'unlock' to set a unlock rank, like so:*\n`;
+            helpText += `${config.prefix}loadout rank 50\n`;
+            helpText += `${config.prefix}loadout rank 20-50\n`;
+            helpText += `${config.prefix}loadout maxrank 20 minrank 1\n`;
+            helpText += `${config.prefix}loadout minrank 20 maxrank 90\n\n`;
+            helpText += `**Price**\n`;
+            helpText += `Use 'price', 'min', 'max', 'minprice' or 'maxprice' to set a specific price range, like so:\n`;
+            helpText += `${config.prefix}loadout min 200 max 500\n`;
+            helpText += `${config.prefix}loadout price 200-500\n`;
+            helpText += `${config.prefix}loadout maxprice 999 minprice 100\n\n`;
+            helpText += `**Difficulty**\n`;
+            helpText += `*Use 'difficulty X', 'easy' (1), 'medium' (2) or 'hard' (3) to further filter loadouts, like so:*\n`;
+            helpText += `${config.prefix}loadout easy\n`;
+            helpText += `${config.prefix}loadout difficulty 1\n`;
+            helpText += `${config.prefix}loadout maxrank 10 hard\n`;
+            helpText += `${config.prefix}loadout minprice 300 nv medium\n\n`;
+            helpText += `**Level Estimation**\n`;
+            helpText += `*Use 'exact', 'base' 'comparebase' or 'e' to compare the rank with the base weapon instead of the variant, like so:*\n`;
+            helpText += `${config.prefix}loadout base\n`;
+            helpText += `${config.prefix}loadout price 100-200 exact\n\n`;
+            helpText += `**Variants**\n`;
+            helpText += `Use 'novariants', 'nv' to completely exclude weapon variants, like so:\n`;
             helpText += `${config.prefix}loadout rank 15 nv\n\n`;
-            helpText += `Use 'quartermaster' or 'qm' to allow a large primary slot weapon along a medium slot secondary weapon, like so:\n`;
-            helpText += `${config.prefix}loadout qm nv rank 10\n\n`;
-            helpText += `(v1.1)`;
+            helpText += `**Quartermaster**\n`;
+            helpText += `*Use 'quartermaster' or 'qm' to allow a large primary slot weapon along a medium slot secondary weapon, like so:*\n`;
+            helpText += `${config.prefix}loadout qm nv rank 10`;
             const response = new SimpleResponse('Hunt Showdown Loadouts', helpText, '#222222');
+            response.footer = 'v.1.2';
             this.discordHelper.embedMessage(message, response);
             return;
         }
 
         // parse arguments.
-        let price = 9999;
-        let rank = 9999;
+        let minPrice = 0;
+        let maxPrice = 9999;
+        let minDifficulty = 0;
+        let maxDifficulty = 9999;
+        let minRank = 0;
+        let maxRank = 9999;
         let noVariants = false;
         let quartermaster = false;
+        let useExact = false;
         let args = message.content.toLowerCase().split(" ");
         if (args.length > 2) {
-            const priceIndex = args.indexOf("price");
-            const rankIndex = args.indexOf("rank");
-            const unlockIndex = args.indexOf("unlock");
+            const minPriceIndex = Math.max(args.indexOf("min"), args.indexOf("minprice"));
+            const maxPriceIndex = Math.max(args.indexOf("max"), args.indexOf("maxprice"), args.indexOf("price"));
+            const minRankIndex = Math.max(args.indexOf("minrank"), args.indexOf("minunlock"));
+            const maxRankIndex = Math.max(args.indexOf("rank"), args.indexOf("maxrank"), args.indexOf("unlock"), args.indexOf("maxunlock"));
+            const difficultyIndex = Math.max(args.indexOf("difficulty"), args.indexOf("d"), args.indexOf("diff"), args.indexOf("dif"));
+            useExact = args.indexOf("exact") >= 0;
+            useExact = useExact || args.indexOf("e") >= 0;
+            useExact = useExact || args.indexOf("exactrank") >= 0;
+            useExact = useExact || args.indexOf("real") >= 0;
+            useExact = useExact || args.indexOf("realrank") >= 0;
+            useExact = useExact || args.indexOf("base") >= 0;
+            useExact = useExact || args.indexOf("comparebase") >= 0;
             noVariants = args.indexOf("novariants") >= 0;
             noVariants = noVariants || args.indexOf("nv") >= 0;
-            noVariants = noVariants || args.indexOf("-variants") >= 0;
-            noVariants = noVariants || args.indexOf("-v") >= 0;
+            noVariants = noVariants || args.indexOf("novariants") >= 0;
             quartermaster = args.indexOf("quartermaster") >= 0;
             quartermaster = quartermaster || args.indexOf("qm") >= 0;
+            minDifficulty = args.indexOf("easy") >= 0 ? 1 : args.indexOf("medium") >= 0 ? 3 : args.indexOf("hard") >= 0 ? 5 : minDifficulty;
+            maxDifficulty = args.indexOf("easy") >= 0 ? 2 : args.indexOf("medium") >= 0 ? 4 : args.indexOf("hard") >= 0 ? 6 : maxDifficulty;
 
-            price = this.tryGetInt(args, priceIndex) || price;
-            rank = this.tryGetInt(args, rankIndex) || this.tryGetInt(args, unlockIndex) || rank;
+            minRank = this.tryGetInt(args, minRankIndex) || minRank;
+            minPrice = this.tryGetInt(args, minPriceIndex) || minPrice;
+
+            // handle max price range.
+            if (maxPriceIndex >= 0) {
+                const maxPriceText = args[maxPriceIndex + 1];
+                if (maxPriceText.indexOf("-") > 0 && maxPriceText.split("-").length == 2) {
+                    minPrice = this.tryParseInt(maxPriceText.split("-")[0]) || minPrice;
+                    maxPrice = this.tryParseInt(maxPriceText.split("-")[1]) || maxPrice;
+                } else {
+                    maxPrice = this.tryGetInt(args, maxPriceIndex) || maxPrice;
+                }
+            }
+
+            // handle max rank range.
+            if (maxRankIndex >= 0) {
+                const maxRankText = args[maxRankIndex + 1];
+                if (maxRankText.indexOf("-") > 0 && maxRankText.split("-").length == 2) {
+                    minRank = this.tryParseInt(maxRankText.split("-")[0]) || minRank;
+                    maxRank = this.tryParseInt(maxRankText.split("-")[1]) || maxRank;
+                } else {
+                    maxRank = this.tryGetInt(args, maxRankIndex) || maxRank;
+                }
+            }
+
+            // handle max difficulty range.
+            if (difficultyIndex >= 0) {
+                const difficultyText = args[difficultyIndex + 1];
+                if (difficultyText.indexOf("-") > 0 && difficultyText.split("-").length == 2) {
+                    minDifficulty = this.tryParseInt(difficultyText.split("-")[0]) || minRank;
+                    maxDifficulty = this.tryParseInt(difficultyText.split("-")[1]) || maxRank;
+
+                    minDifficulty = Math.min(3, Math.max(1, minDifficulty)) * 2 - 1;
+                    minDifficulty = Math.min(3, Math.max(1, maxDifficulty)) * 2;
+                }
+            } else {
+                const specificDifficulty = this.tryGetInt(args, difficultyIndex);
+                if (specificDifficulty) {
+                    specificDifficulty = Math.min(3, Math.max(1, specificDifficulty));
+                    minDifficulty = specificDifficulty * 2 - 1;
+                    maxDifficulty = specificDifficulty * 2;
+                }
+            }
+        }
+
+        // Validate
+        if (minPrice > maxPrice) {
+            this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Min price cannot be higher than max price.", "#882222"));
+            return;
+        }
+        if (minRank > maxRank) {
+            this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Min rank cannot be higher than max rank.", "#882222"));
+            return;
         }
 
         // find ideal loadout.
@@ -69,7 +171,14 @@ class HuntShowdownParser {
         let secondaries = [];
 
         let slotSize = this.random(1, 4) > 1 ? 3 : 2;
-        let matchWeapons = huntShowdownData.weapons.filter(w => w.actualUnlock <= rank && w.price <= price && (noVariants ? w.unlock.startsWith("Rank") : true));
+        let matchWeapons = huntShowdownData.weapons.filter(w => 
+            w.price >= minPrice && 
+            w.price <= maxPrice && 
+            (noVariants ? w.unlock.startsWith("Rank") : true) &&
+            w.difficulty >= Math.floor(minDifficulty / 2) &&
+            w.difficulty <= Math.ceil(maxDifficulty / 2) &&
+            (useExact ? w.actualUnlock : w.estimatedUnlock) >= minRank &&
+            (useExact ? w.actualUnlock : w.estimatedUnlock) <= maxRank);
 
         if (matchWeapons.length === 0) {
             this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "There are not enough match results for your loadout request.", "#882222"));
@@ -90,8 +199,33 @@ class HuntShowdownParser {
         }
 
         // choose a loadout.
-        let primary = primaries[this.random(0, primaries.length - 1)];
-        let secondary = secondaries[this.random(0, secondaries.length - 1)];
+        let hasFinished = false;
+        let depth = 0;
+        let primary = undefined;
+        let secondary = undefined;
+
+        while (!hasFinished && depth <= 20) {
+            depth++;
+
+            primary = primaries[this.random(0, primaries.length - 1)];
+
+            // adjust difficulty.
+            const tempSecondaries = secondaries.filter(s => 
+                s.difficulty >= minDifficulty - primary.difficulty &&
+                s.difficulty <= maxDifficulty - primary.difficulty);
+
+            if (secondaries.length > 0) {
+                secondary = tempSecondaries[this.random(0, tempSecondaries.length - 1)];
+                hasFinished = true;
+            } else {
+                // no matching sidearm, choose different primary...
+            }
+        }
+
+        if (primary === undefined || secondary === undefined) {
+            this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.", "#882222"));
+            return;
+        } 
 
         let title = "Here you go!";
         let resultText = `Your loadout is:**\n\n[${primary.slots}] ${primary.name}**\n**[${secondary.slots}] ${secondary.name}**\n`;
@@ -104,6 +238,16 @@ class HuntShowdownParser {
     tryGetInt(list, index) {
         if (index + 1 < list.length && index >= 0) {
             const parsed = parseInt(list[index + 1], 10);
+            if (!isNaN(parsed)) {
+                return parsed;
+            }
+        }
+        return undefined;
+    }
+
+    tryParseInt(number) {
+        if (number.length > 0) {
+            const parsed = parseInt(number, 10);
             if (!isNaN(parsed)) {
                 return parsed;
             }
