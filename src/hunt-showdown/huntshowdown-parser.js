@@ -17,6 +17,7 @@ const huntShowdownData = require('./../data/hunt-showdown.json');
 class HuntShowdownParser {
     constructor(client) {
         this.client = client;
+        this.log = [];
         this.discordHelper = new DiscordHelper();
     }
 
