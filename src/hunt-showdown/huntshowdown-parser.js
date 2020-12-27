@@ -244,6 +244,8 @@ class HuntShowdownParser {
         }
 
         this.log.push(`WEAPONS`);
+        this.log.push(`primaries: ${primaries.length}`);
+        this.log.push(`secondaries: ${secondaries.length}`);
         this.log.push(`primary: ${primary?.name}`);
         this.log.push(`secondary: ${secondary?.name}`);
 
