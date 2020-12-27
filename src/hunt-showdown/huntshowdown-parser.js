@@ -65,7 +65,7 @@ class HuntShowdownParser {
             helpText += `\`${config.prefix}loadout minprice 300 nv medium\`\n\n`;
             helpText += `**Level Estimation**\n`;
             helpText += `*Use 'exact', 'base' 'comparebase' or 'e' to compare the unlock rank with the base weapon instead of the variant, like so:\n`;
-            helpText += `Per default, it is estimated that weapon variants are unlocked at a higher level than the base weapon and uses that estimate to filter the rank.*\n`;
+            helpText += `Per default, it is estimated that weapon variants are unlocked at a higher level than the base weapon and that estimated unlock rank is used for comparison.*\n`;
             helpText += `\`${config.prefix}loadout base maxrank 10\`\n`;
             helpText += `\`${config.prefix}loadout rank 20-40\` ( would not include Uppercut)\n`;
             helpText += `\`${config.prefix}loadout rank 20-40 exact\` (would include Uppercut)\n\n`;
