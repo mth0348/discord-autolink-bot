@@ -246,9 +246,9 @@ class HuntShowdownParser {
         this.log.push(`WEAPONS`);
         this.log.push(`primaries: ${primaries.length}`);
         this.log.push(`secondaries: ${secondaries.length}`);
-        this.log.push(`primary: ${primary?.name}`);
-        this.log.push(`secondary: ${secondary?.name}`);
-
+        this.log.push(`primary: ${primary !== undefined ? primary.name : 'undefined'}`);
+        this.log.push(`secondary: ${secondary !== undefined ? secondary.name : 'undefined'}`);
+        
         if (primary === undefined || secondary === undefined) {
             console.log(this.log.join("\n"));
             this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.", "#882222"));
