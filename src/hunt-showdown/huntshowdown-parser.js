@@ -19,6 +19,9 @@ class HuntShowdownParser {
         this.client = client;
         this.log = [];
         this.discordHelper = new DiscordHelper();
+
+        this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
+        this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
     }
 
     isCommandAllowed(message) {
@@ -206,7 +209,7 @@ class HuntShowdownParser {
             (useExact ? w.actualUnlock : w.estimatedUnlock) <= maxRank);
 
         if (matchWeapons.length === 0) {
-            this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "There are not enough match results for your loadout request.", "#882222"));
+            this.throwNotFoundException(message);
             return;
         }
 
@@ -260,22 +263,7 @@ class HuntShowdownParser {
             console.log("Hunt Showdown: Failed to find a loadout.");
             console.log(this.log.join("\n"));
 
-            this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.\nIf you think your input should return a loadout, please report the incidient with '📢'.", "#882222"), function (embed) {
-                embed.react("📢");
-                embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
-                    .then(collected => {
-                        const reaction = collected.first();
-                        if (reaction === undefined) return;
-                        switch (reaction.emoji.name) {
-                            case "📢":
-                                // Report error.
-                                let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
-                                reportChannel.send(`Hunt Showdown: failed to find a loadout for ${message.url}`);
-                                reportChannel.send("Logs:\n" + this.log.join("\n"));
-                                return;
-                        }
-                    }).catch(e => this.log.push(e));
-            });
+            this.throwNotFoundException(message);
             return;
         } 
 
@@ -309,6 +297,25 @@ class HuntShowdownParser {
 
     random(inclusiveMin, inclusiveMax) {
         return inclusiveMin + Math.floor(Math.random() * Math.floor((inclusiveMax - inclusiveMin) + 1));
+    }
+
+    throwNotFoundException(message) {
+        this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.\nIf you think your input should return a loadout, please report the incidient with '📢'.", "#882222"), function (embed) {
+            embed.react("📢");
+            embed.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
+                .then(collected => {
+                    const reaction = collected.first();
+                    if (reaction === undefined) return;
+                    switch (reaction.emoji.name) {
+                        case "📢":
+                            // Report error.
+                            let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+                            reportChannel.send(`Hunt Showdown: failed to find a loadout for ${message.url}`);
+                            reportChannel.send("Logs:\n" + this.log.join("\n"));
+                            return;
+                    }
+                }).catch(e => this.log.push(e));
+        });
     }
 }
 
