@@ -235,7 +235,7 @@ class HuntShowdownParser {
         let primary = undefined;
         let secondary = undefined;
 
-        while (!hasFinished && depth <= 20) {
+        while (!hasFinished && depth < 20) {
             depth++;
 
             primary = primaries[this.random(0, primaries.length - 1)];
