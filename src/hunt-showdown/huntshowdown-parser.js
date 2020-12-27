@@ -248,9 +248,16 @@ class HuntShowdownParser {
         this.log.push(`secondaries: ${secondaries.length}`);
         this.log.push(`primary: ${primary !== undefined ? primary.name : 'undefined'}`);
         this.log.push(`secondary: ${secondary !== undefined ? secondary.name : 'undefined'}`);
-        
+
         if (primary === undefined || secondary === undefined) {
             console.log(this.log.join("\n"));
+
+            // Report error.
+            let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
+            reportChannel.send(`Hunt Showdown: failed to find a loadout for ${message.url}`);
+            reportChannel.send("Logs:\n" + this.log.join("\n"));
+
+
             this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.", "#882222"));
             return;
         } 
