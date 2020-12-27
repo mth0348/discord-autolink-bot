@@ -300,9 +300,10 @@ class HuntShowdownParser {
     }
 
     throwNotFoundException(message) {
+        const self = this;
         this.discordHelper.embedMessage(message, new SimpleResponse("Hunt Showdown Loadouts", "Sorry, I was unable to find a weapon loadout that matches your description. Please try again.\nIf you think your input should return a loadout, please report the incidient with '📢'.", "#882222"), function (embed) {
             embed.react("📢");
-            embed.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
+            embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
                 .then(collected => {
                     const reaction = collected.first();
                     if (reaction === undefined) return;
@@ -310,11 +311,10 @@ class HuntShowdownParser {
                         case "📢":
                             // Report error.
                             let reportChannel = message.client.channels.cache.find(c => c.name === "bot-reports");
-                            reportChannel.send(`Hunt Showdown: failed to find a loadout for ${message.url}`);
-                            reportChannel.send("Logs:\n" + this.log.join("\n"));
+                            reportChannel.send(`Hunt Showdown: failed to find a loadout for ${message.url}\nLogs:\n` + self.log.join("\n"));
                             return;
                     }
-                }).catch(e => this.log.push(e));
+                }).catch(e => self.log.push(e));
         });
     }
 }
