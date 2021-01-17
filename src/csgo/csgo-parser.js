@@ -12,7 +12,7 @@ class CsgoNadeParser {
         this.mapOptions = { keys: ['map'], threshold: 0.4 };
         this.typeOptions = { keys: ['type'], threshold: 0.4 };
         this.sideOptions = { keys: ['side'], threshold: 0 };
-        this.locationOptions = { keys: ['location'], threshold: 0.3, includeScore: true, distance: 35, minMatchCharLength: 0 };
+        this.locationOptions = { keys: ['location'], threshold: 0.4, includeScore: true, distance: 25, minMatchCharLength: 0 };
 
         this.discordHelper = new DiscordHelper();
         this.allowedChannels = config.channelPermissions.csgo;
