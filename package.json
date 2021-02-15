@@ -2,7 +2,7 @@
   "name": "discordautolinkbot",
   "version": "1.0.0",
   "description": "A discord bot which can output links based on input tags.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
