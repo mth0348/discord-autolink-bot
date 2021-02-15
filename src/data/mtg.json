@@ -2349,7 +2349,7 @@
             "score": 7
         },
         {
-            "text": "tap (numbername) (another) untapped creatures you control",
+            "text": "tap (numbername) untapped creatures you control",
             "colorIdentity": "wubrg",
             "score": 10
         }

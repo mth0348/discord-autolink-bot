@@ -58,6 +58,9 @@ export class MtgDataRepository {
             .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
             .map(k => new MtgKeyword(k));
 
+        if (list.length <= 0)
+            return [];
+
         let result: MtgKeyword[] = [Random.nextFromList(list)];
         for (let i = 1; i < count - 1; i++) {
             const reducedList = list.filter(f => result.every(r => f !== r));

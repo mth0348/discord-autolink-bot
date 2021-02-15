@@ -30,7 +30,7 @@ export class MtgCreatureGenerator {
         this.chooseArtwork(card);
         this.estimateCmc(card);
         this.resolveSyntax(card);
-        this.chooseManacost(card.cmc, card.color);
+        card.manacost = this.chooseManacost(card.cmc, card.color);
 
         // flavor text is chosen after an estimate of available space is done.
 
