@@ -2063,7 +2063,7 @@
         },
         {
             "text": "exile target creature with no counters on it",
-            "colorIdentity": "b",
+            "colorIdentity": "wbb",
             "score": 1
         },
         {
@@ -2078,7 +2078,7 @@
         },
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token",
-            "colorIdentity": "r",
+            "colorIdentity": "rg",
             "score": 1
         },
         {
@@ -2088,12 +2088,12 @@
         },
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 1
         },
         {
             "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
-            "colorIdentity": "r",
+            "colorIdentity": "rg",
             "score": 3
         },
         {
@@ -2103,12 +2103,12 @@
         },
         {
             "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 3
         },
         {
             "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
-            "colorIdentity": "r",
+            "colorIdentity": "rg",
             "score": 5
         },
         {
@@ -2118,7 +2118,7 @@
         },
         {
             "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 5.5
         }
     ],
@@ -2824,7 +2824,7 @@
         },
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 1
         },
         {
@@ -2839,12 +2839,12 @@
         },
         {
             "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 3
         },
         {
             "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
-            "colorIdentity": "r",
+            "colorIdentity": "rg",
             "score": 5
         },
         {
@@ -2854,7 +2854,7 @@
         },
         {
             "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
-            "colorIdentity": "wubgr",
+            "colorIdentity": "wubrg",
             "score": 5
         },
         {
@@ -3759,7 +3759,7 @@
             "mutant",
             "artificer",
             "oathsworn",
-            "journeymarn",
+            "journeyman",
             "bringer",
             "lawbringer",
             "infiltrator",
