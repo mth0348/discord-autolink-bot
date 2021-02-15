@@ -20,6 +20,8 @@ export class MtgDataRepository {
     }
 
     public getSubtypes(count: number): string[] {
+        if (count <= 0) return [];
+        
         const list = database.subtypes;
         let result: string[] = [ Random.nextFromList(list) ];
         for (let i = 1; i < count - 1; i++) {
@@ -30,11 +32,28 @@ export class MtgDataRepository {
     }
 
     public getKeywords(count: number): MtgKeyword[] {
+        if (count <= 0) return [];
+
         const list = database.keywords.map(k => new MtgKeyword(k));
         let result: MtgKeyword[] = [ Random.nextFromList(list) ];
         for (let i = 1; i < count - 1; i++) {
             const second = Random.nextFromList(list.filter(f => result.every(r => f !== r)));
             result.push(second);
+        }
+        return result;
+    }
+
+    public getKeywordsByColor(colors: string[], count: number): MtgKeyword[] {
+        if (count <= 0) return [];
+
+        const list = database.keywords.filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0)).map(k => new MtgKeyword(k));
+        let result: MtgKeyword[] = [ Random.nextFromList(list) ];
+        for (let i = 1; i < count - 1; i++) {
+            const reducedList = list.filter(f => result.every(r => f !== r));
+            if (reducedList.length > 0) {
+                const second = Random.nextFromList(reducedList);
+                result.push(second);
+            }
         }
         return result;
     }

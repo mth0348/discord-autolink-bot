@@ -1,7 +1,7 @@
 import { MtgAbility } from './MtgAbility';
-import { MtgAbilityType } from '../../../../dtos/mtg/MtgAbilityType';
-import { MtgPermanentActivatedCost } from '../MtgPermanentActivatedCost';
-import { MtgPermanentEvent } from '../MtgPermanentEvent';
+import { MtgAbilityType } from '../MtgAbilityType';
+import { MtgPermanentActivatedCost } from '../../../persistence/entities/mtg/MtgPermanentActivatedCost';
+import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanentEvent';
 
 export class MtgActivatedAbility implements MtgAbility {
 
@@ -15,5 +15,9 @@ export class MtgActivatedAbility implements MtgAbility {
         this.cost = cost;
         this.event = event;
     }
+
+    public getText() : string {
+        return this.cost.text + ": " + this.event.text;
+    }    
 
 }

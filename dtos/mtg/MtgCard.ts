@@ -26,7 +26,7 @@ export class MtgCard {
 
     public rarity: MtgCardRarity;
 
-    public oracle: MtgOracleText;
+    public oracle: MtgOracleText = new MtgOracleText();
 
     public flavorText: string;
     

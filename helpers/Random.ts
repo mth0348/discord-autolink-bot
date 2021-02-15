@@ -5,7 +5,7 @@ export class Random {
     }
 
     public static chance(number: number) : boolean {
-        return Random.next(1, 100) >= number * 100;
+        return Random.next(1, 100) <= number * 100;
     }
 
     public static flipCoin() : boolean {

@@ -6,6 +6,8 @@ import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgAbilityService } from '../MtgAbilityService';
 
+import fs = require("fs");
+
 export class MtgCreatureGenerator {
 
     constructor(private mtgDataRepository: MtgDataRepository, private mtgAbilityService: MtgAbilityService) {
@@ -20,15 +22,11 @@ export class MtgCreatureGenerator {
         card.name = card.name || this.mtgDataRepository.getCreatureName(card.isLegendary);
         card.flavorText = "Ain't that something to flip your biscuit...";
 
-        // first, choose power/toughness.
         this.choosePower(card);
         this.chooseToughness(card);
-
-        // second, choose keywords.
         this.chooseKeywords(card);
-
-        // third, choose abilities.
         this.chooseAbilities(card);
+        this.chooseArtwork(card);
 
         return card;
     }
@@ -41,15 +39,15 @@ export class MtgCreatureGenerator {
             { value: 3, chance: 0.03 }
         ], 0);
 
-        const keywords = this.mtgDataRepository.getKeywords(keywordCount);
+        const keywords = this.mtgDataRepository.getKeywordsByColor(card.color.toLowerCase().split(''), keywordCount);
         card.oracle.keywords = keywords;
     }
 
     private chooseAbilities(card: MtgCard) {
         const abilityCount = Random.complex([
-            { value: 0, chance: 0.40 },
-            { value: 1, chance: 0.40 },
-            { value: 2, chance: 0.20 }
+            { value: 0, chance: 0.00 }, // TODO
+            { value: 1, chance: 0.50 },
+            { value: 2, chance: 0.25 }
         ], 0);
 
         for (let i = 0; i < abilityCount; i++) {
@@ -59,8 +57,10 @@ export class MtgCreatureGenerator {
                 { value: MtgAbilityType.Static, chance: 0.20 }
             ], 0);
 
-            this.mtgAbilityService.addAbility(card, abilityType);
+            this.mtgAbilityService.generateAbility(card, abilityType);
         }
+
+        card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
     }
 
     private choosePower(card: MtgCard) {
@@ -89,5 +89,12 @@ export class MtgCreatureGenerator {
             { value: 8, chance: 0.05 }
         ], Random.next(1, 4));
         card.toughness = toughness;
+    }
+
+    private chooseArtwork(card: MtgCard) {
+        const artPath = "assets/img/mtg/cards/creature/";
+        const files = fs.readdirSync(artPath);
+        let randomArtworkFile = Random.nextFromList(files);
+        card.imageUrl = artPath + randomArtworkFile;
     }
 }

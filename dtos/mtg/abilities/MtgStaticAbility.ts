@@ -1,6 +1,6 @@
 import { MtgAbility } from './MtgAbility';
-import { MtgAbilityType } from '../../../../dtos/mtg/MtgAbilityType';
-import { MtgPermanentStatics } from '../MtgPermanentStatics';
+import { MtgAbilityType } from '../MtgAbilityType';
+import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
 
 export class MtgStaticAbility implements MtgAbility {
 
@@ -10,6 +10,10 @@ export class MtgStaticAbility implements MtgAbility {
 
     constructor(event: MtgPermanentStatics) {
         this.event = event;
+    }
+
+    public getText() : string {
+        return this.event.text;
     }
 
 }

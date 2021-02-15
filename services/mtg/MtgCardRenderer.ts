@@ -4,19 +4,20 @@ import { MessageAttachment } from "discord.js";
 import { ImageProvider } from '../../persistence/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
 import { StringHelper } from "../../helpers/StringHelper";
+import { MtgOracleTextWrapperService } from "./MtgOracleTextWrapperService";
+import { Random } from "../../helpers/Random";
 
 import Canvas = require("canvas");
-import { Random } from "../../helpers/Random";
 
 export class MtgCardRenderer {
 
     private canvas: Canvas.Canvas;
     private ctx: Canvas.CanvasRenderingContext2D;
     private card: MtgCard;
-    
+
     private lastWordWrapCount: number;
 
-    constructor(card: MtgCard) {
+    constructor(card: MtgCard, private mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
         this.card = card;
 
         this.canvas = Canvas.createCanvas(630, 880);
@@ -35,7 +36,7 @@ export class MtgCardRenderer {
         this.drawCardType();
         await this.drawCardArtwork();
         this.drawExpansionSymbol();
-        this.drawOracleText();
+        await this.drawOracleText();
         this.drawPowerToughness();
         this.drawCardNumber();
 
@@ -60,7 +61,7 @@ export class MtgCardRenderer {
     private drawCardTitle() {
         const cardTitle = this.card.name;
         this.ctx.font = `${cardTitle.length > 25 ? 34 : 38}px matrixbold`;
-        this.ctx.fillText(cardTitle, 55, 78, 585 - (this.card.manacost.length * 17));
+        this.ctx.fillText(cardTitle, 52, 78, 585 - (this.card.manacost.length * 17));
     }
 
     private async drawCardCost() {
@@ -69,7 +70,7 @@ export class MtgCardRenderer {
 
     private drawCardType() {
         this.ctx.font = '36px matrixbold';
-        this.ctx.fillText(this.card.getFullType(), 55, 530, 520);
+        this.ctx.fillText(this.card.getFullType(), 52, 530, 520);
     }
 
     private async drawCardArtwork() {
@@ -81,7 +82,7 @@ export class MtgCardRenderer {
         const expansionSymbol = ImageProvider.getImage(`assets/img/mtg/expansion/${this.card.rarity.toString()}.png`);
         this.ctx.drawImage(expansionSymbol, 542, 502, 35, 35);
     }
-    
+
     private drawPowerToughness() {
         if (!this.card.hasPowerToughness()) {
             return;
@@ -98,47 +99,28 @@ export class MtgCardRenderer {
         this.ctx.fillStyle = '#FFFFFF';
         this.ctx.fillText(Random.next(100, 999).toString(), 38, 833);
     }
-    
-    private drawOracleText() {
-        // let oracleFontSize = 28;
-        // let maxCharactersPerLine = 42;
-        // let lineOffset = 50;
 
-        // const totalOracleText = ability + secondAbility + keyword;
-        // const isLongOracle = totalOracleText.length > 120;
-        // const isVeryLongOracle = totalOracleText.length > 220;
-        // if (isLongOracle) {
-        //     oracleFontSize = 26;
-        //     maxCharactersPerLine = 45;
-        //     lineOffset = 45;
-        // }
-        // if (isVeryLongOracle) {
-        //     oracleFontSize = 23;
-        //     maxCharactersPerLine = 50;
-        //     lineOffset = 40;
-        // }
-        // const gapSize = isLongOracle ? 14 : 16;
-        // console.log(totalOracleText.length);
+    private async drawOracleText() {
+       
+        const preset = this.mtgOracleTextWrapperService.calculateTextWrapPreset(this.card.oracle);
+        const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllOracleText(this.card.oracle, preset);
 
-        // ctx.font = `${oracleFontSize}px mplantin`;
+        this.ctx.font = `${preset.fontSize}px mplantin`;
 
-        // const wrappedKeywordText = this.wordWrapText(keyword, maxCharactersPerLine);
-        // const wrappedAbilityText = this.wordWrapText(ability, maxCharactersPerLine);
-        // const abilityWordWrapCount = this.lastWordWrapCount;
-        // const wrappedAbility2Text = this.wordWrapText(secondAbility, maxCharactersPerLine);
+        const posX = 58;
+        const posY = 588;
 
-        // // render oracle text.
-        // let offset = 590;
-        // if (keyword.length > 0) {
-        //     ctx.fillText(wrappedKeywordText, 55, offset, 520);
-        //     offset += lineOffset;
-        // }
-        // ctx.fillText(wrappedAbilityText.replace(/X[^\s]{1}/g, "    "), 55, offset, 520);
-        // await this.overlaySymbols(ctx, wrappedAbilityText, gapSize, oracleFontSize, 55, offset);
-        
-        // offset += lineOffset + (15 * abilityWordWrapCount);
-        // ctx.fillText(wrappedAbility2Text.replace(/X[^\s]{1}/g, "    "), 55, offset, 520);
-        // await this.overlaySymbols(ctx, wrappedAbility2Text, gapSize, oracleFontSize, 55, offset);
+        for (let i = 0; i < wrappedTextLines.length; i++) {
+            const line = wrappedTextLines[i];
+
+            // make placeholder space for symbols.
+            const lineWithoutSymbols = line.replace(/X[^\s]{1}/g, "    ");
+            
+            const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;
+
+            this.ctx.fillText(lineWithoutSymbols, posX, posY + lineOffset, 520);
+            await this.overlaySymbols(line, preset.symbolGapSize, preset.fontSize, posX, posY + lineOffset);
+        }
     }
 
     private async overlaySymbols(text: string, gap: number, size: number, positionX: number, positionY: number, drawShadow: boolean = false) {
@@ -156,26 +138,6 @@ export class MtgCardRenderer {
 
             i = StringHelper.regexIndexOf(text, /X[^\s]{1}/g, i + 1);
         }
-    }
-
-    private wordWrapText(text: string, maxCharactersPerLine: number) {
-        this.lastWordWrapCount = 0;
-
-        let resultString = '';
-        let remainingWords = text.split(" ");
-        while (remainingWords.length > 0)
-        {
-            let nextWordLength = 0;
-            let line = "";
-            do {
-                line += remainingWords[0] + " ";
-                remainingWords.splice(0, 1);
-                nextWordLength = line.length + (remainingWords.length > 0 ? remainingWords[0].length : 0);
-            } while (nextWordLength < maxCharactersPerLine && remainingWords.length > 0);
-            resultString += line + "\r\n";
-            this.lastWordWrapCount++;
-        }
-        return resultString.trim().substring(0, resultString.length - 2);
     }
 
     private drawImageProp(img: Canvas.Image, x: number = 0, y: number = 0, w: number = this.canvas.width, h: number = this.canvas.height, offsetX: number = 0, offsetY: number = 0) {

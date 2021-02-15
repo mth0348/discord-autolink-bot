@@ -1,13 +1,13 @@
 export class MtgPermanentActivatedCost {
     public text: string;
-    public colorIdentity: string;
     public score: number;
-    public creatureOnly: boolean | undefined;
-    
+    public colorIdentity: string;
+    public restrictedTypes: string[] | undefined;
+
     constructor(data: any) {
         this.text = data.text;
-        this.colorIdentity = data.colorIdentity;
         this.score = data.score;
-        this.creatureOnly = data.creatureOnly;
+        this.colorIdentity = data.colorIdentity;
+        this.restrictedTypes = data.restrictedTypes;
     }
 }

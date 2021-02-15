@@ -2,11 +2,8 @@ import { MtgCard } from "../../dtos/mtg/MtgCard";
 import { MtgDataRepository } from "../../persistence/repositories/MtgDataRepository";
 import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
-import { Random } from '../../helpers/Random';
 import { MtgCreatureGenerator } from './generators/MtgCreatureGenerator';
 import { MtgAbilityService } from './MtgAbilityService';
-
-import fs = require("fs");
 
 export class MtgCardService {
 
@@ -27,32 +24,27 @@ export class MtgCardService {
         card.rarity = cardRarity;
         card.color = color;
 
+        // TODO Remove:
+        cardType = MtgCardType.Creature;
+
         switch (cardType) {
             case MtgCardType.Creature:
                 card = this.mtgCreatureGenerator.generate(card);
                 break;
-            case MtgCardType.Instant:
-                break;
-            case MtgCardType.Sorcery:
-                break;
-            case MtgCardType.Enchantment:
-                break;
-            case MtgCardType.Planeswalker:
-                break;
-            case MtgCardType.Land:
-                break;
+            // case MtgCardType.Instant:
+            //     break;
+            // case MtgCardType.Sorcery:
+            //     break;
+            // case MtgCardType.Enchantment:
+            //     break;
+            // case MtgCardType.Planeswalker:
+            //     break;
+            // case MtgCardType.Land:
+            //     break;
         }
-
-        // TODO move.
-        const artPath = "assets/img/mtg/cards/creature/";
-        const files = fs.readdirSync(artPath);
-        let randomArtworkFile = Random.nextFromList(files);
-        card.imageUrl = artPath + randomArtworkFile;
 
         // TODO remove:
         card.manacost = "X1XWXW";
-        card.power = 2;
-        card.toughness = 2;
 
         return card;
     }

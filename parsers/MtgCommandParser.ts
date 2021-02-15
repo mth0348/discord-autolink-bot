@@ -14,6 +14,7 @@ import { Resources } from '../helpers/Constants';
 import Canvas = require("canvas");
 import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
+import { MtgOracleTextWrapperService } from '../services/mtg/MtgOracleTextWrapperService';
 
 export class MtgCommandParser extends BaseCommandParser {
 
@@ -24,11 +25,13 @@ export class MtgCommandParser extends BaseCommandParser {
     private mtgCardService: MtgCardService;
 
     private paramConfigs: ParameterServiceConfig[];
+    private mtgOracleTextWrapperService: MtgOracleTextWrapperService;
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.mtg, ConfigProvider.current().rolePermissions.mtg);
 
         this.mtgCardService = new MtgCardService();
+        this.mtgOracleTextWrapperService = new MtgOracleTextWrapperService();
 
         this.paramConfigs = [
             new ParameterServiceConfig("type", "t", MtgCommandParser.AVAILABLE_TYPES),
@@ -55,7 +58,7 @@ export class MtgCommandParser extends BaseCommandParser {
         console.log(card);
 
         // render card.
-        const mtgCardRenderer = new MtgCardRenderer(card);
+        const mtgCardRenderer = new MtgCardRenderer(card, this.mtgOracleTextWrapperService);
         const renderedCard = await mtgCardRenderer.renderCard();
 
         message.channel.send('', renderedCard);

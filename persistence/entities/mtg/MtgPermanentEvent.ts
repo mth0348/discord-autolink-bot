@@ -2,12 +2,12 @@ export class MtgPermanentEvent {
    public text: string;
    public score: string;
    public colorIdentity: string;
-   public creatureOnly: boolean | undefined;
+   public restrictedTypes: string[] | undefined;
 
    constructor(data: any) {
       this.text = data.text;
       this.score = data.score;
       this.colorIdentity = data.colorIdentity;
-      this.creatureOnly = data.creatureOnly;
-  }
+      this.restrictedTypes = data.restrictedTypes;
+   }
 }

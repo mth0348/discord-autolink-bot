@@ -1,5 +1,5 @@
 export enum MtgAbilityType {
-    Activated = 0,
-    Triggered = 1,
-    Static = 2
+    Static = 0,
+    Activated = 1,
+    Triggered = 2
 }

@@ -1,7 +1,7 @@
 import { MtgAbility } from './MtgAbility';
-import { MtgAbilityType } from '../../../../dtos/mtg/MtgAbilityType';
-import { MtgPermanentEvent } from '../MtgPermanentEvent';
-import { MtgPermanentCondition } from '../MtgPermanentCondition';
+import { MtgAbilityType } from '../MtgAbilityType';
+import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanentEvent';
+import { MtgPermanentCondition } from '../../../persistence/entities/mtg/MtgPermanentCondition';
 
 export class MtgTriggeredAbility implements MtgAbility {
 
@@ -14,6 +14,10 @@ export class MtgTriggeredAbility implements MtgAbility {
     constructor(condition: MtgPermanentCondition, event: MtgPermanentEvent) {
         this.condition = condition;
         this.event = event;
+    }
+
+    public getText() : string {
+        return this.condition.text + ", " + this.event.text;
     }
 
 }

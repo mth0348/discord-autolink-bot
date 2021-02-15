@@ -1420,19 +1420,19 @@
             "text": "put (numbername) +1/+1 counter(s) on (self)",
             "score": 0.6,
             "colorIdentity": "g",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "untap (self)",
             "score": 0.2,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "untap target permanent",
             "score": 0.2,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "(self) deals (number) damage to target (player)",
@@ -1493,7 +1493,7 @@
             "text": "destroy (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "you lose (number) life",
@@ -1604,7 +1604,7 @@
             "text": "sacrifice (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "sacrifice a creature",
@@ -1655,13 +1655,7 @@
             "text": "put a (keyword) counter on another target creature",
             "score": 1,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
-        },
-        {
-            "text": "put a (keyword) counter on another target creature",
-            "score": 1,
-            "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "put the top (numbername) cards of your library into your graveyard",
@@ -1747,7 +1741,7 @@
             "text": "exile (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "each player exiles (numbername) cards from his or her hand",
@@ -1848,127 +1842,127 @@
             "text": "(self) gets +(number)/+0 until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "(self) gets +(number)/+(samenumber) until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "(self) gets +(number2)/+(samenumber) until end of turn",
             "score": 1,
             "colorIdentity": "wubrg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "(self) deals damage equal to its power to target creature",
             "score": 2.2,
             "colorIdentity": "rg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "(self) deals damage equal to its power to any target",
             "score": 2.6,
             "colorIdentity": "rg",
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.2,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (type) cards in your graveyard. Put those cards into your hand",
             "score": 5,
             "colorIdentity": "uurr",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "uu",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top X cards of your library, where X is the number of (color|type) creatures you control. You may put (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "reveal the top (number) cards of your library, Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.2,
             "colorIdentity": "uug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 2.2,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "look at the top (number3) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.5,
             "colorIdentity": "ug",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "draw X cards, where X is the number of (permanent)s you control",
             "score": 5,
             "colorIdentity": "u",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "proliferate, then destroy each nonland permanent with (numbername) or more counters on it",
             "score": 2,
             "colorIdentity": "b",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "destroy all (permanent)s",
             "score": 5,
             "colorIdentity": "wbg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "destroy each (permanent) target opponent controls",
             "score": 6.2,
             "colorIdentity": "wbg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "destroy all creatures",
             "score": 4,
             "colorIdentity": "wb",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "proliferate",
@@ -2009,7 +2003,7 @@
             "text": "proliferate, then proliferate again",
             "score": 1.2,
             "colorIdentity": "ubg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "tap up to one target creature",
@@ -2314,7 +2308,7 @@
             "text": "put a -1/-1 counter on (self)",
             "colorIdentity": "bg",
             "score": 7,
-            "creatureOnly": true
+            "restrictedTypes": [ "creature" ]
         },
         {
             "text": "pay (number) life",
@@ -2597,19 +2591,19 @@
             "text": "prevent the next (number2) damage that would be dealt to you",
             "colorIdentity": "w",
             "score": 0.2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "prevent the next (number2) damage that would be dealt to creatures you control",
             "colorIdenity": "w",
             "score": 0.2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "prevent the next (number3) damage that would be dealt to you",
             "colorIdentity": "w",
             "score": 2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "discard a card",
@@ -2635,13 +2629,13 @@
             "text": "prevent the next (number3) damage that would be dealt to creatures you control",
             "colorIdenity": "w",
             "score": 2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
             "score": 0,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "you and creatures you control gain hexproof until end of turn",
@@ -2657,7 +2651,7 @@
             "text": "counter target spell",
             "colorIdentity": "uuu",
             "score": 2.5,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target (player) loses (number) life and you gain (number) life",
@@ -2738,49 +2732,49 @@
             "text": "target attacking creature gets +(number)/+0 until end of turn",
             "colorIdentity": "r",
             "score": 0.5,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target attacking creature gets +(number2)/+0 until end of turn",
             "colorIdentity": "r",
             "score": 0.5,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target attacking creature gets +(number2)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "r",
             "score": 1.2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target attacking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "rg",
             "score": 1.7,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target blocking creature gets +(number)/+0 until end of turn",
             "colorIdentity": "wrg",
             "score": 0.5,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target blocking creature gets +(number2)/+0 until end of turn",
             "colorIdentity": "wrg",
             "score": 0.5,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target blocking creature gets +(number2)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "wrg",
             "score": 1.2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "target blocking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "wrg",
             "score": 1.7,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "switch target creature's power and toughness until end of turn",
@@ -2876,7 +2870,7 @@
             "text": "counter target (type/counterable) spell",
             "colorIdentity": "u",
             "score": 1.2,
-            "instantOnly": true
+            "restrictedTypes": [ "instant" ]
         },
         {
             "text": "tap target (permanent)",
@@ -2897,19 +2891,19 @@
             "text": "destroy all (permanent)s",
             "score": 3.6,
             "colorIdentity": "wbg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "destroy all (permanent)s target opponent controls",
             "score": 5.8,
             "colorIdentity": "wbg",
-            "nofollowup": true
+            "noFollowUp": true
         },
         {
             "text": "destroy all creatures",
             "score": 3.2,
             "colorIdentity": "wb",
-            "nofollowup": true
+            "noFollowUp": true
         }
     ],
     "enchantmentEffects": [
