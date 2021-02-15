@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "lib": [ "dom", "es2015" ],
+        "outDir": "dist"
+    }
+}
