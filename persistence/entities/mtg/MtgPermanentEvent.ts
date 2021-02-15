@@ -1,0 +1,13 @@
+export class MtgPermanentEvent {
+   public text: string;
+   public score: string;
+   public colorIdentity: string;
+   public creatureOnly: boolean | undefined;
+
+   constructor(data: any) {
+      this.text = data.text;
+      this.score = data.score;
+      this.colorIdentity = data.colorIdentity;
+      this.creatureOnly = data.creatureOnly;
+  }
+}

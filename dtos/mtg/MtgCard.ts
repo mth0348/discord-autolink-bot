@@ -1,5 +1,6 @@
 import { MtgCardRarity } from './MtgCardRarity';
 import { MtgCardType } from './MtgCardType';
+import { MtgOracleText } from './MtgOracleText';
 
 export class MtgCard {
     
@@ -9,11 +10,15 @@ export class MtgCard {
 
     public manacost: string;
 
+    public cmc: number;
+
     public type: MtgCardType;
 
     public subtype: string;
 
     public supertype: string;
+
+    public isLegendary: boolean;
 
     public power: number;
 
@@ -21,7 +26,7 @@ export class MtgCard {
 
     public rarity: MtgCardRarity;
 
-    public oracleText: string;
+    public oracle: MtgOracleText;
 
     public flavorText: string;
     

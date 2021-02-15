@@ -1,5 +1,6 @@
 import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
+import { StringHelper } from './StringHelper';
 
 export class EnumHelper {
 
@@ -8,11 +9,11 @@ export class EnumHelper {
     }
 
     public static toMtgCardRarity(enumString: string): MtgCardRarity {
-        return MtgCardRarity[enumString as keyof typeof MtgCardRarity];
+        return MtgCardRarity[StringHelper.toCamelCase(enumString) as keyof typeof MtgCardRarity];
     }
 
     public static toMtgCardType(enumString: string): MtgCardType {
-        return MtgCardType[enumString as keyof typeof MtgCardType];
+        return MtgCardType[StringHelper.toCamelCase(enumString) as keyof typeof MtgCardType];
     }
 
 }

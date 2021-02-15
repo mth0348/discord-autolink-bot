@@ -1,4 +1,4 @@
-export class Keyword {
+export class MtgKeyword {
     public name: string;
     public hasCost: boolean;
     public score: number;

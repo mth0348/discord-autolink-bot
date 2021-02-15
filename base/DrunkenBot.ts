@@ -3,6 +3,7 @@ import { MtgCommandParser } from "../parsers/MtgCommandParser";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
 import { ParameterService } from '../services/ParameterService';
+import { ImageProvider } from '../persistence/repositories/ImageProvider';
 
 export class DrunkenBot {
 
@@ -21,6 +22,8 @@ export class DrunkenBot {
         this.registeredParsers = [];
 
         this.registerCommandParsers();
+
+        ImageProvider.loadImageDatabase();
     }
 
     public startListening() : void {

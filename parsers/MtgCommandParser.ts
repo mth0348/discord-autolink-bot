@@ -12,6 +12,8 @@ import { ImageProvider } from '../persistence/repositories/ImageProvider';
 import { Resources } from '../helpers/Constants';
 
 import Canvas = require("canvas");
+import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
+import { MtgCardType } from '../dtos/mtg/MtgCardType';
 
 export class MtgCommandParser extends BaseCommandParser {
 
@@ -43,11 +45,10 @@ export class MtgCommandParser extends BaseCommandParser {
         // extract parameters.
         const parameters = this.parameterService.extractParameters(message.content, this.paramConfigs);
 
-        // construct default card.
-        const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? Random.nextFromList(MtgCommandParser.AVAILABLE_TYPES);
-        const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? Random.nextFromList(MtgCommandParser.AVAILABLE_RARITIES);
-        const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-
+        // setup global card settings.
+        const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? this.getRandomType();
+        const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? this.getRandomRarity();
+        const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor();
 
         // start card generation.
         const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), cardColor);
@@ -68,5 +69,22 @@ export class MtgCommandParser extends BaseCommandParser {
         Resources.MtgImageUrls.forEach(url => {
             ImageProvider.registerImageUrl(url.path);
         });
+
+        ImageProvider.registerImageUrl("assets/img/mtg/expansion/common.png");
+        ImageProvider.registerImageUrl("assets/img/mtg/expansion/uncommon.png");
+        ImageProvider.registerImageUrl("assets/img/mtg/expansion/rare.png");
+        ImageProvider.registerImageUrl("assets/img/mtg/expansion/mythic.png");
+    }
+
+    private getRandomType(): string {
+        return Random.nextFromList(Object.keys(MtgCardType));
+    }
+
+    private getRandomRarity(): string {
+        return Random.nextFromList(Object.keys(MtgCardRarity));
+    }
+
+    private getRandomColor(): string {
+        return Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
     }
 }

@@ -1,6 +1,6 @@
 export enum MtgCardRarity {
-    Common,
-    Uncommon,
-    Rare,
-    Mythic
+    Common = "Common",
+    Uncommon = "Uncommon",
+    Rare = "Rare",
+    Mythic = "Mythic"
 }

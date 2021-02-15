@@ -8,21 +8,21 @@ export class ImageProvider {
     private static registeredImageUrls: string[] = [];
 
     public static registerImageUrl(url: string) {
-        if (this.registeredImageUrls.indexOf(url) === -1)
-            this.registeredImageUrls.push(url);
+        if (this.registeredImageUrls.indexOf(url.toLowerCase()) === -1)
+            this.registeredImageUrls.push(url.toLowerCase());
     }
 
     public static loadImageDatabase() {
         this.registeredImageUrls.forEach(async url => {
-            if (!this.loadedImages.has(url) || this.loadedImages.get(url) === null) {
-                this.loadedImages.set(url, await Canvas.loadImage(url));
+            if (!this.loadedImages.has(url.toLowerCase()) || this.loadedImages.get(url.toLowerCase()) === null) {
+                this.loadedImages.set(url.toLowerCase(), await Canvas.loadImage(url.toLowerCase()));
             }
         });
     }
 
     public static getImage(url: string): object {
-        if (this.loadedImages.has(url)) {
-            return this.loadedImages.get(url);
+        if (this.loadedImages.has(url.toLowerCase())) {
+            return this.loadedImages.get(url.toLowerCase());
         }
         throw "image for " + url + " not found.";
     }

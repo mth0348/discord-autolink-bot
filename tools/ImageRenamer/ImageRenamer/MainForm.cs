@@ -63,7 +63,6 @@ namespace ImageRenamer
                 }
 
                 // load preview image without locking file.
-                Image img;
                 using (var bmpTemp = new Bitmap(nextFile))
                 {
                     PreviewPictureBox.Image = new Bitmap(bmpTemp);
