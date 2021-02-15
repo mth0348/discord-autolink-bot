@@ -1,4 +1,4 @@
-const DrunkenBot = require('./src/bot');
+import { DrunkenBot } from "./base/drunkenbot";
 
-// main.
-new DrunkenBot(process.env.TOKEN);
+// const bot = new DrunkenBot(process.env.TOKEN); /* PROD */
+bot.startListening();
