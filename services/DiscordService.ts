@@ -1,6 +1,4 @@
 import { Message, PartialMessage, TextChannel } from 'discord.js';
-
-import config = require('../config.json');
 import { StringHelper } from '../helpers/StringHelper';
 
 export class DiscordService {

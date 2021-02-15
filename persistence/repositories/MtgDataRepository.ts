@@ -1,7 +1,8 @@
 import { Random } from '../../helpers/Random';
 import { StringHelper } from '../../helpers/StringHelper';
-import database = require('../../src/data/mtg.json');
 import { Keyword } from '../entities/mtg/Keyword';
+
+import database = require('../../src/data/mtg.json');
 
 export class MtgDataRepository {
 
@@ -11,7 +12,7 @@ export class MtgDataRepository {
 
     public getPermanentTypes() : string[] {
         return database.permanentTypes;
-    }
+    } 
 
     public getSubtypes() : string[] {
         return database.subtypes;

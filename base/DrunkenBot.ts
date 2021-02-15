@@ -2,12 +2,12 @@ import { Client, Message, PartialMessage } from "discord.js";
 import { MtgCommandParser } from "../parsers/MtgCommandParser";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
-
-import config = require('../config.json');
+import { ParameterService } from '../services/ParameterService';
 
 export class DrunkenBot {
 
     private discordService: DiscordService;
+    private parameterService: ParameterService;
     private client: Client;
 
     private registeredParsers : ICommandParser[];
@@ -17,6 +17,7 @@ export class DrunkenBot {
         this.client.login(token);
 
         this.discordService = new DiscordService();
+        this.parameterService = new ParameterService();
         this.registeredParsers = [];
 
         this.registerCommandParsers();
@@ -45,7 +46,7 @@ export class DrunkenBot {
     }
 
     private registerCommandParsers() : void {
-        this.registeredParsers.push(new MtgCommandParser(this.discordService, config.channelPermissions.mtg, config.rolePermissions.mtg));
+        this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // csgoNadeParser
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser
         // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
