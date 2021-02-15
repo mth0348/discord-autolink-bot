@@ -38,6 +38,7 @@ class DrunkenBot {
 
     registerCommandParsers() {
         this.client.on('message', message => {
+            
             try {
                 if (this.csgoNadeParser.isCommandAllowed(message)) {
                     this.csgoNadeParser.startWorkflow(message);
@@ -48,6 +49,16 @@ class DrunkenBot {
                 }
 
                 if (this.mtgParser.isCommandAllowed(message)) {
+
+                    // ========= BEGIN MAINTENANCE ====================
+                    if (message.channel.name.toLowerCase() === "dev-playground")
+                        return;
+                    else {
+                        message.channel.send("**Maintenance**: The MtG module is currently under maintenance. You can still use other modules of the bot.");
+                        return;
+                    }
+                    // ========= END MAINTENANCE ====================
+
                     this.mtgParser.startWorkflow(message);
                 }
 
