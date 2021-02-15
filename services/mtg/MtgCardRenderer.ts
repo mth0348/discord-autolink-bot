@@ -3,9 +3,10 @@ import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MessageAttachment } from "discord.js";
 import { ImageProvider } from '../../persistence/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
-import { StringHelper } from "../../helpers/StringHelper";
+import { StringHelper } from '../../helpers/StringHelper';
 import { MtgOracleTextWrapperService } from "./MtgOracleTextWrapperService";
 import { Random } from "../../helpers/Random";
+import { MtgDataRepository } from '../../persistence/repositories/MtgDataRepository';
 
 import Canvas = require("canvas");
 
@@ -17,7 +18,7 @@ export class MtgCardRenderer {
 
     private lastWordWrapCount: number;
 
-    constructor(card: MtgCard, private mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
+    constructor(card: MtgCard, private mtgOracleTextWrapperService: MtgOracleTextWrapperService, private mtgDataRepository: MtgDataRepository) {
         this.card = card;
 
         this.canvas = Canvas.createCanvas(630, 880);
@@ -101,22 +102,50 @@ export class MtgCardRenderer {
     }
 
     private async drawOracleText() {
-       
+
         const preset = this.mtgOracleTextWrapperService.calculateTextWrapPreset(this.card.oracle);
         const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllOracleText(this.card.oracle, preset);
 
+        // Sneak in flavor text, if enough space.
+        if (Random.chance(1.0)) { // TODO adjust chance.
+            const maxFlavorTextLength = (preset.maxLines - wrappedTextLines.length - 1) * preset.maxCharactersPerLine;
+            const smallEnoughFlavorText = this.mtgDataRepository.getFlavorTextByLength(maxFlavorTextLength);
+            if (smallEnoughFlavorText !== null) {
+                wrappedTextLines.push("FT_LINE");
+                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, preset.maxCharactersPerLine)
+                flavorTextLines.forEach(f => wrappedTextLines.push("FT_" + f));
+            }
+        }
+
         this.ctx.font = `${preset.fontSize}px mplantin`;
 
-        const posX = 58;
-        const posY = 588;
+        // if there is enough space, leave some area free before oracle text starts.
+        const initialOffset = wrappedTextLines.length < 4 ? (40 - wrappedTextLines.length * 10) : 0;
+
+        const posX = 60;
+        const posY = 588 + initialOffset;
 
         for (let i = 0; i < wrappedTextLines.length; i++) {
-            const line = wrappedTextLines[i];
+            let line = wrappedTextLines[i];
 
+            const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;
+            const isFlavorText = StringHelper.startsWith(line, "FT_");
+            const isFlavorTextSeparator = StringHelper.startsWith(line, "FT_LINE");
+
+            if (isFlavorText) {
+                this.ctx.font = `${preset.fontSize}px mplantinitalic`;
+                if (isFlavorTextSeparator) {
+                    line = "";
+                    const symbol = await Canvas.loadImage(`assets/img/mtg/separator.png`);
+                    this.ctx.drawImage(symbol, 40, posY + lineOffset - 20, 540, 20);
+                    
+                } else {
+                    line = line.substring(3);
+                }
+            }
+            
             // make placeholder space for symbols.
             const lineWithoutSymbols = line.replace(/X[^\s]{1}/g, "    ");
-            
-            const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;
 
             this.ctx.fillText(lineWithoutSymbols, posX, posY + lineOffset, 520);
             await this.overlaySymbols(line, preset.symbolGapSize, preset.fontSize, posX, posY + lineOffset);

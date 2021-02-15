@@ -372,6 +372,19 @@
             ]
         },
         {
+            "name": "Hexproof from",
+            "hasCost": false,
+            "score": 1,
+            "nameExtension": "(types|color)",
+            "colorIdentity": "ubg",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment",
+                "land"
+            ]
+        },
+        {
             "name": "Indestructible",
             "hasCost": false,
             "score": 1.2,
@@ -408,7 +421,7 @@
             "name": "Protection from",
             "hasCost": false,
             "score": 1.2,
-            "nameExtension": "(type|color)",
+            "nameExtension": "(types|color)",
             "colorIdentity": "wubrg",
             "types": [
                 "creature"
@@ -4233,5 +4246,11 @@
             "clutches",
             "bubble"
         ]
-    }
+    },
+    "flavorTexts": [
+        "The fight is not over.",
+        "\"Power is power\" - Cersei",
+        "Public bots can be added by anyone. When unchecked, only you can join this bot to servers.",
+        "Public bots can be added by anyone."
+    ]
 }

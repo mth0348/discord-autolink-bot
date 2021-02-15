@@ -15,6 +15,7 @@ import Canvas = require("canvas");
 import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
 import { MtgOracleTextWrapperService } from '../services/mtg/MtgOracleTextWrapperService';
+import { MtgDataRepository } from '../persistence/repositories/MtgDataRepository';
 
 export class MtgCommandParser extends BaseCommandParser {
 
@@ -22,6 +23,7 @@ export class MtgCommandParser extends BaseCommandParser {
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
     public static AVAILABLE_COLORS = ["W", "U", "B", "R", "G"];
 
+    private mtgDataRepository: MtgDataRepository;
     private mtgCardService: MtgCardService;
 
     private paramConfigs: ParameterServiceConfig[];
@@ -30,7 +32,8 @@ export class MtgCommandParser extends BaseCommandParser {
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.mtg, ConfigProvider.current().rolePermissions.mtg);
 
-        this.mtgCardService = new MtgCardService();
+        this.mtgDataRepository = new MtgDataRepository();
+        this.mtgCardService = new MtgCardService(this.mtgDataRepository);
         this.mtgOracleTextWrapperService = new MtgOracleTextWrapperService();
 
         this.paramConfigs = [
@@ -58,7 +61,7 @@ export class MtgCommandParser extends BaseCommandParser {
         console.log(card);
 
         // render card.
-        const mtgCardRenderer = new MtgCardRenderer(card, this.mtgOracleTextWrapperService);
+        const mtgCardRenderer = new MtgCardRenderer(card, this.mtgOracleTextWrapperService, this.mtgDataRepository);
         const renderedCard = await mtgCardRenderer.renderCard();
 
         message.channel.send('', renderedCard);
@@ -67,6 +70,7 @@ export class MtgCommandParser extends BaseCommandParser {
     private initializeCardRendererData() {
         Canvas.registerFont('assets/fonts/MPLANTIN.ttf', { family: "mplantin" });
         Canvas.registerFont('assets/fonts/MPLANTIN-BOLD.ttf', { family: "mplantinbold" });
+        Canvas.registerFont('assets/fonts/MPLANTIN-ITALIC.ttf', { family: "mplantinitalic" });
         Canvas.registerFont('assets/fonts/MatrixBold.ttf', { family: "matrixbold" });
 
         Resources.MtgImageUrls.forEach(url => {

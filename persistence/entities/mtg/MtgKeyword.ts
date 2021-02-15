@@ -14,4 +14,14 @@ export class MtgKeyword {
         this.colorIdentity = data.colorIdentity;
         this.types = data.types;
     }
+
+    public parsedText: string;
+
+    getText(): string {
+        return this.name + " " + this.nameExtension + (this.hasCost ? " - (cost)" : "");
+    }
+
+    setParsedText(text: string): void {
+        this.parsedText = text;
+    }
 }

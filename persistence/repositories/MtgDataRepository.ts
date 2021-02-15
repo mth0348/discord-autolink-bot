@@ -2,14 +2,18 @@ import { Random } from '../../helpers/Random';
 import { StringHelper } from '../../helpers/StringHelper';
 import { MtgKeyword } from '../entities/mtg/MtgKeyword';
 import { MtgPermanentCondition } from '../entities/mtg/MtgPermanentCondition';
-
-import database = require('../../src/data/mtg.json');
 import { MtgPermanentEvent } from '../entities/mtg/MtgPermanentEvent';
 import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
 import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
 import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
 
+import database = require('../../src/data/mtg.json');
+
 export class MtgDataRepository {
+    public getFlavorTextByLength(maxCharacterLength: number): string {
+        return database.flavorTexts.sort(f => f.length).reverse().find(f => f.length < maxCharacterLength);
+
+    }
 
     public getTypes(): string[] {
         return database.types;
@@ -21,21 +25,9 @@ export class MtgDataRepository {
 
     public getSubtypes(count: number): string[] {
         if (count <= 0) return [];
-        
+
         const list = database.subtypes;
-        let result: string[] = [ Random.nextFromList(list) ];
-        for (let i = 1; i < count - 1; i++) {
-            const second = Random.nextFromList(list.filter(f => result.every(r => f !== r)));
-            result.push(second);
-        }
-        return result;
-    }
-
-    public getKeywords(count: number): MtgKeyword[] {
-        if (count <= 0) return [];
-
-        const list = database.keywords.map(k => new MtgKeyword(k));
-        let result: MtgKeyword[] = [ Random.nextFromList(list) ];
+        let result: string[] = [Random.nextFromList(list)];
         for (let i = 1; i < count - 1; i++) {
             const second = Random.nextFromList(list.filter(f => result.every(r => f !== r)));
             result.push(second);
@@ -47,7 +39,26 @@ export class MtgDataRepository {
         if (count <= 0) return [];
 
         const list = database.keywords.filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0)).map(k => new MtgKeyword(k));
-        let result: MtgKeyword[] = [ Random.nextFromList(list) ];
+        let result: MtgKeyword[] = [Random.nextFromList(list)];
+        for (let i = 1; i < count - 1; i++) {
+            const reducedList = list.filter(f => result.every(r => f !== r));
+            if (reducedList.length > 0) {
+                const second = Random.nextFromList(reducedList);
+                result.push(second);
+            }
+        }
+        return result;
+    }
+
+    public getKeywordsByColorAndType(colors: string[], type: string, count: number): MtgKeyword[] {
+        if (count <= 0) return [];
+
+        const list = database.keywords
+            .filter(k => k.types.some(t => t === type))
+            .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
+            .map(k => new MtgKeyword(k));
+
+        let result: MtgKeyword[] = [Random.nextFromList(list)];
         for (let i = 1; i < count - 1; i++) {
             const reducedList = list.filter(f => result.every(r => f !== r));
             if (reducedList.length > 0) {

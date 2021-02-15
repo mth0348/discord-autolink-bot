@@ -7,7 +7,7 @@ export class StringHelper {
         words.forEach((w, i) => {
             if (this.ignores.indexOf(w) === -1)
                 {
-                    words[i] = this.camelCaseWord(w);
+                    words[i] = this.capitalizeFirstChar(w);
                 }
             });
         return words.join(" ");
@@ -26,7 +26,7 @@ export class StringHelper {
         return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
     }
 
-    private static camelCaseWord(word: string) {
+    public static capitalizeFirstChar(word: string) {
         return word.substr(0, 1).toUpperCase() + word.substr(1);
     }
 

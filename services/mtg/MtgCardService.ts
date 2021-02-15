@@ -4,17 +4,16 @@ import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCreatureGenerator } from './generators/MtgCreatureGenerator';
 import { MtgAbilityService } from './MtgAbilityService';
+import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 
 export class MtgCardService {
 
-    private mtgDataRepository: MtgDataRepository
     private mtgCreatureGenerator: MtgCreatureGenerator;
-    private mtgAbilityService: MtgAbilityService;
 
-    constructor() {
-        this.mtgDataRepository = new MtgDataRepository();
-        this.mtgAbilityService = new MtgAbilityService(this.mtgDataRepository);
-        this.mtgCreatureGenerator = new MtgCreatureGenerator(this.mtgDataRepository, this.mtgAbilityService);
+    constructor(private mtgDataRepository: MtgDataRepository) {
+        const mtgAbilityService = new MtgAbilityService(mtgDataRepository);
+        const mtgSyntaxResolver = new MtgSyntaxResolver(mtgDataRepository);
+        this.mtgCreatureGenerator = new MtgCreatureGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver);
     }
 
     public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {
@@ -22,6 +21,7 @@ export class MtgCardService {
         let card = new MtgCard();
         card.type = cardType;
         card.rarity = cardRarity;
+        card.rarityScore = [ MtgCardRarity.Common, MtgCardRarity.Uncommon, MtgCardRarity.Rare, MtgCardRarity.Mythic ].indexOf(cardRarity) + 1;
         card.color = color;
 
         // TODO Remove:
@@ -42,9 +42,6 @@ export class MtgCardService {
             // case MtgCardType.Land:
             //     break;
         }
-
-        // TODO remove:
-        card.manacost = "X1XWXW";
 
         return card;
     }
