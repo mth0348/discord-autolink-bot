@@ -40,36 +40,36 @@ class DrunkenBot {
         this.client.on('message', async message => {
             try {
 
-                if (this.csgoNadeParser.isCommandAllowed(message)) {
-                    this.csgoNadeParser.startWorkflow(message);
-                }
+                // if (this.csgoNadeParser.isCommandAllowed(message)) {
+                //     this.csgoNadeParser.startWorkflow(message);
+                // }
 
-                if (this.generalParser.isCommandAllowed(message)) {
-                    this.generalParser.startWorkflow(message);
-                }
+                // if (this.generalParser.isCommandAllowed(message)) {
+                //     this.generalParser.startWorkflow(message);
+                // }
 
                 if (this.mtgParser.isCommandAllowed(message)) {
 
-                    // if (message.author.username !== "Telerik") {
-                    //     console.log("Debug Lock kicked in, user: " + message.author.username);
-                    //     message.channel.send("Bot runs in DEBUG mode. For now, only Mats is allowed to use the bot.");
-                    //     return;
-                    // }
+                    if (message.author.username !== "Telerik") {
+                        console.log("Debug Lock kicked in, user: " + message.author.username);
+                        message.channel.send("Bot runs in DEBUG mode. For now, only Mats is allowed to use the bot.");
+                        return;
+                    }
                     await this.mtgParser.startWorkflow(message);
                 }
 
-                if (this.minigameParser.isCommandAllowed(message)) {
-                    this.minigameParser = new MinigameParser(this.client);
-                    this.minigameParser.startWorkflow(message);
-                }
+                // if (this.minigameParser.isCommandAllowed(message)) {
+                //     this.minigameParser = new MinigameParser(this.client);
+                //     this.minigameParser.startWorkflow(message);
+                // }
 
-                if (this.dndParser.isCommandAllowed(message)) {
-                    this.dndParser.startWorkflow(message);
-                }
+                // if (this.dndParser.isCommandAllowed(message)) {
+                //     this.dndParser.startWorkflow(message);
+                // }
 
-                if (this.huntParser.isCommandAllowed(message)) {
-                    this.huntParser.startWorkflow(message);
-                }
+                // if (this.huntParser.isCommandAllowed(message)) {
+                //     this.huntParser.startWorkflow(message);
+                // }
             }
             catch (e) {
                 console.warn(e);
