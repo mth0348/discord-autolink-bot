@@ -37,8 +37,9 @@ class DrunkenBot {
     }
 
     registerCommandParsers() {
-        this.client.on('message', message => {
+        this.client.on('message', async message => {
             try {
+
                 if (this.csgoNadeParser.isCommandAllowed(message)) {
                     this.csgoNadeParser.startWorkflow(message);
                 }
@@ -48,7 +49,13 @@ class DrunkenBot {
                 }
 
                 if (this.mtgParser.isCommandAllowed(message)) {
-                    this.mtgParser.startWorkflow(message);
+
+                    // if (message.author.username !== "Telerik") {
+                    //     console.log("Debug Lock kicked in, user: " + message.author.username);
+                    //     message.channel.send("Bot runs in DEBUG mode. For now, only Mats is allowed to use the bot.");
+                    //     return;
+                    // }
+                    await this.mtgParser.startWorkflow(message);
                 }
 
                 if (this.minigameParser.isCommandAllowed(message)) {
@@ -66,7 +73,7 @@ class DrunkenBot {
             }
             catch (e) {
                 console.warn(e);
-                message.channel.send("Oops, something went wrong, sorry. Please try again...")
+                message.channel.send("Oops, something went wrong, sorry. Please try again...");
             }
 
         });
