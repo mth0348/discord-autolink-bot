@@ -1,4 +1,5 @@
 export class Random {
+
     static next(minInclusive: number, maxInclusive: number) : number {
         return minInclusive + Math.floor(Math.random() * ((maxInclusive - minInclusive) + 1));
     }
@@ -10,4 +11,9 @@ export class Random {
     static flipCoin() : boolean {
         return Random.next(0, 1) === 1;
     }
+
+    static nextFromList(list: any[]): any {
+        return list[Random.next(0, list.length - 1)];
+    }
+
 }

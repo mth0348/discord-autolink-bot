@@ -1,7 +1,7 @@
 import { MtgCardRarity } from './MtgCardRarity';
 import { MtgCardType } from './MtgCardType';
 
-export class MtgCardParams {
+export class MtgCard {
     
     public name: string;
 
@@ -24,6 +24,8 @@ export class MtgCardParams {
     public oracleText: string;
 
     public flavorText: string;
+    
+    public imageUrl: string;
 
     public getFullType() : string {
         return (this.supertype ? this.supertype + " " : "") + this.type + " — " + this.subtype;

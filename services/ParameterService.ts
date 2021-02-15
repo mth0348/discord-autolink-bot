@@ -1,6 +1,7 @@
 import { Parameter } from "../dtos/Parameter";
 import { ParameterServiceConfig } from '../dtos/ParameterServiceConfig';
 import { ConfigProvider } from '../helpers/ConfigProvider';
+import { StringHelper } from "../helpers/StringHelper";
 
 export class ParameterService {
 
@@ -19,10 +20,14 @@ export class ParameterService {
                 // find param with that name.
                 configs.forEach(config => {
                     const isNameMatch = this.isNameMatch(config, paramName);
-                    const isValueAllowed =this.isValueAllowed(config, paramValue);
+                    const isValueAllowed = this.isValueAllowed(config, paramValue);
 
                     if (isNameMatch && isValueAllowed) {
-                        result.push(new Parameter(config.parameterName, paramValue));
+                        // only add first of kind.
+                        if (!result.some(r => r.name === config.parameterName)) {
+                            result.push(new Parameter(config.parameterName, paramValue));
+                        }
+
                     }
                 });
 
@@ -32,16 +37,26 @@ export class ParameterService {
         return result;
     }
 
+    public tryGetParameterValue(parameterName: string, parameters: Parameter[]): string {
+        let foundParameter: Parameter;
+        parameters.forEach(p => {
+            if (StringHelper.isEqualIgnoreCase(p.name, parameterName)) {
+                foundParameter = p;
+            }
+        })
+        return foundParameter?.value;
+    }
+
     private isNameMatch(config: ParameterServiceConfig, paramName: string) {
-        return config.parameterName.toLowerCase() === paramName.toLowerCase()
-            || config.alternativeName.toLowerCase() === paramName.toLowerCase();
+        return StringHelper.isEqualIgnoreCase(config.parameterName, paramName)
+            || StringHelper.isEqualIgnoreCase(config.alternativeName, paramName);
     }
 
     private isValueAllowed(config: ParameterServiceConfig, paramValue: string) {
-        if (typeof config.validParameterValues === 'boolean') 
+        if (config.validParameterValues === null)
             return true;
 
-        return config.validParameterValues.some(c => c.toLowerCase() === paramValue.toLowerCase());
+        return config.validParameterValues.some(c => StringHelper.isEqualIgnoreCase(c, paramValue));
     }
 
 }

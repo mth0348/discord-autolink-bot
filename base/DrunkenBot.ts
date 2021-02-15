@@ -24,20 +24,21 @@ export class DrunkenBot {
     }
 
     public startListening() : void {
-        this.client.on('message', async message => {
+        this.client.on('message', message => {
 
-            this.registeredParsers.forEach(parser => {
+            this.registeredParsers.forEach(async parser => {
                 if (parser.isAllowedCommand(message)) {
-                    this.startWorkflow(parser, message);
+                    await this.startWorkflow(parser, message);
                 }
             });
 
         });
     }
 
-    private startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
+    private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
         try {
-            parser.execute(message);
+            if (message.author.username === "Telerik") // TODO REMOVE CHECK.
+                await parser.executeAsync(message);
         }
         catch (e) {
             console.warn(e);

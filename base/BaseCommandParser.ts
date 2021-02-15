@@ -24,7 +24,7 @@ export class BaseCommandParser implements ICommandParser {
         return false;
     }
 
-    execute(message: Message | PartialMessage): void {
+    async executeAsync(message: Message | PartialMessage): Promise<void> {
         
     }
 }

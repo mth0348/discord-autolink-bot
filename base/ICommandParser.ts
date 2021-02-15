@@ -4,5 +4,5 @@ export interface ICommandParser {
 
     isAllowedCommand(message: Message | PartialMessage) : boolean;
 
-    execute(message: Message | PartialMessage) : void;
+    executeAsync(message: Message | PartialMessage) : Promise<void>;
 }
