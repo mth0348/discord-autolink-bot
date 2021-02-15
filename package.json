@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mth0348/discord-autolink-bot#readme",
   "dependencies": {
+    "canvas": "^2.6.1",
     "discord.js": "^12.0.2",
     "fuse.js": "^5.0.9-beta"
   }
