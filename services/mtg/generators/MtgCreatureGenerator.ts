@@ -28,16 +28,19 @@ export class MtgCreatureGenerator {
         this.chooseAbilities(card);
         this.chooseArtwork(card);
 
+        this.estimateManacost(card);
+        // this.resolveSyntax(card);
+
         return card;
     }
 
     private chooseKeywords(card: MtgCard) {
         const keywordCount = Random.complex([
-            { value: 0, chance: 0.47 },
-            { value: 1, chance: 0.25 },
-            { value: 2, chance: 0.25 },
+            { value: 0, chance: 0.31 },
+            { value: 1, chance: 0.31 },
+            { value: 2, chance: 0.31 },
             { value: 3, chance: 0.03 }
-        ], 0);
+        ], 1);
 
         const keywords = this.mtgDataRepository.getKeywordsByColor(card.color.toLowerCase().split(''), keywordCount);
         card.oracle.keywords = keywords;
@@ -48,7 +51,7 @@ export class MtgCreatureGenerator {
             { value: 0, chance: 0.00 }, // TODO
             { value: 1, chance: 0.50 },
             { value: 2, chance: 0.25 }
-        ], 0);
+        ], 1);
 
         for (let i = 0; i < abilityCount; i++) {
             const abilityType = Random.complex([
@@ -89,6 +92,31 @@ export class MtgCreatureGenerator {
             { value: 8, chance: 0.05 }
         ], Random.next(1, 4));
         card.toughness = toughness;
+    }
+
+    private estimateManacost(card: MtgCard) {
+        let totalScore = 0;
+
+        totalScore += card.power / 2;
+        console.log("power: totalScore += " + card.power / 2);
+        totalScore += card.toughness / 2;
+        console.log("toughness: totalScore += " + card.toughness / 2);
+
+        card.oracle.keywords.forEach(k => { totalScore += k.score; console.log("keyword: totalScore += " + k.score); } );
+        card.oracle.abilities.forEach(a => { totalScore += a.getScore(); console.log("ability: totalScore += " + a.getScore()); });
+
+        console.log("totalScore = " + totalScore);
+
+        // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
+        const minCmcForReduction = 3;
+        const randomReduction = totalScore > minCmcForReduction ? Random.chance((totalScore - minCmcForReduction) / 10) ? 1 : 0 : 0;
+        console.log("random reduction = " + randomReduction);
+
+        const mythicReduction = card.rarity === MtgCardRarity.Mythic ? Random.chance(0.33) ? 0.5 : 0.25 : 0;
+        console.log("mythic reduction = " + mythicReduction);
+
+        card.cmc = Math.max(1, Math.min(9, Math.round(totalScore) - randomReduction - mythicReduction ));
+        console.log("cmc = " + card.cmc);
     }
 
     private chooseArtwork(card: MtgCard) {

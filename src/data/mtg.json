@@ -1746,22 +1746,22 @@
         {
             "text": "each player exiles (numbername) cards from his or her hand",
             "score": 0.4,
-            "colorIdentity": "br"
+            "colorIdentity": "bb"
         },
         {
             "text": "each opponent exiles (numbername) cards from his or her hand",
             "score": 3.1,
-            "colorIdentity": "b"
+            "colorIdentity": "bb"
         },
         {
             "text": "each player exiles a card from his or her hand",
             "score": 1.5,
-            "colorIdentity": "br"
+            "colorIdentity": "bb"
         },
         {
             "text": "each opponent exiles a card from his or her hand",
             "score": 0,
-            "colorIdentity": "b"
+            "colorIdentity": "bb"
         },
         {
             "text": "each player discards a card",
@@ -1771,7 +1771,7 @@
         {
             "text": "each opponent discards a card",
             "score": 1.5,
-            "colorIdentity": "b"
+            "colorIdentity": "bb"
         },
         {
             "text": "each player discards (numbername) cards",

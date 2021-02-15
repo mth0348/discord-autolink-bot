@@ -20,4 +20,8 @@ export class MtgTriggeredAbility implements MtgAbility {
         return this.condition.text + ", " + this.event.text;
     }
 
+    public getScore(): number {
+        return this.event.score;
+    }
+
 }

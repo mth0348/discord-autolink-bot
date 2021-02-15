@@ -16,8 +16,12 @@ export class MtgActivatedAbility implements MtgAbility {
         this.event = event;
     }
 
-    public getText() : string {
+    public getText(): string {
         return this.cost.text + ": " + this.event.text;
-    }    
+    }
+
+    public getScore(): number {
+        return this.event.score; // TODO: include cost in score
+    }
 
 }

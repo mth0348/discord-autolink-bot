@@ -6,8 +6,17 @@ import { MtgActivatedAbility } from '../../dtos/mtg/abilities/MtgActivatedAbilit
 import { MtgStaticAbility } from '../../dtos/mtg/abilities/MtgStaticAbility';
 import { MtgTriggeredAbility } from '../../dtos/mtg/abilities/MtgTriggeredAbility';
 import { StringHelper } from '../../helpers/StringHelper';
+import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
+import { Collection } from 'discord.js';
 
 export class MtgAbilityService {
+    
+    rarityScoreLUT: Collection<MtgCardRarity, number> = new Collection<MtgCardRarity, number>([
+        [ MtgCardRarity.Common, 2 ],
+        [ MtgCardRarity.Uncommon, 3 ],
+        [ MtgCardRarity.Rare, 5.5 ],
+        [ MtgCardRarity.Mythic, 9999 ]
+    ]);
 
     constructor(private mtgDataRepository: MtgDataRepository) {
     }
@@ -19,7 +28,8 @@ export class MtgAbilityService {
         const conditions = this.mtgDataRepository.getPermanentConditions();
 
         const statics = this.mtgDataRepository.getPermanentStatics()
-            .filter(a => colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+            .filter(a => colors.some(c => a.colorIdentity.indexOf(c) >= 0)
+                && a.score <= this.rarityScoreLUT.get(card.rarity));
         
         const costs = this.mtgDataRepository.getPermanentActivatedCosts()
             .filter(a => 
@@ -29,7 +39,8 @@ export class MtgAbilityService {
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
                 (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
+                && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         switch (abilityType) {
             case MtgAbilityType.Activated:

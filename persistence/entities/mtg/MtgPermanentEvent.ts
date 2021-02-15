@@ -1,6 +1,6 @@
 export class MtgPermanentEvent {
    public text: string;
-   public score: string;
+   public score: number;
    public colorIdentity: string;
    public restrictedTypes: string[] | undefined;
 

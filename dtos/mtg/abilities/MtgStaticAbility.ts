@@ -16,4 +16,8 @@ export class MtgStaticAbility implements MtgAbility {
         return this.event.text;
     }
 
+    public getScore() : number {
+        return this.event.score;
+    }
+
 }

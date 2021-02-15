@@ -6,4 +6,6 @@ export interface MtgAbility {
 
     getText(): string;
 
+    getScore(): number;
+
 }
