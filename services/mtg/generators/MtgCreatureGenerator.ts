@@ -101,27 +101,18 @@ export class MtgCreatureGenerator {
         let totalScore = 0;
 
         totalScore += card.power / 2;
-        console.log("power: totalScore += " + card.power / 2);
         totalScore += card.toughness / 2;
-        console.log("toughness: totalScore += " + card.toughness / 2);
 
         card.oracle.keywords.forEach(k => { totalScore += k.score; console.log("keyword: totalScore += " + k.score); });
         card.oracle.abilities.forEach(a => { totalScore += a.getScore(); console.log("ability: totalScore += " + a.getScore()); });
 
-        console.log("totalScore = " + totalScore);
-
         // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
         const minCmcForReduction = 3;
         const randomReduction = totalScore > minCmcForReduction ? Random.chance((totalScore - minCmcForReduction) / 10) ? 1 : 0 : 0;
-        console.log("random reduction = " + randomReduction);
-
         const mythicReduction = card.rarity === MtgCardRarity.Mythic ? Random.chance(0.33) ? 0.5 : 0.25 : 0;
-        console.log("mythic reduction = " + mythicReduction);
 
-        const roundedScore = Math.round(totalScore);
-        console.log("roundedScore = " + roundedScore);
-        card.cmc = Math.max(1, Math.min(9, roundedScore - randomReduction - mythicReduction));
-        console.log("cmc = " + card.cmc);
+        const roundedScore = Math.round(totalScore - randomReduction - mythicReduction);
+        card.cmc = Math.max(1, Math.min(9, roundedScore));
     }
 
     private chooseArtwork(card: MtgCard) {
