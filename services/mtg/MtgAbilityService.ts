@@ -25,51 +25,29 @@ export class MtgAbilityService {
 
     public generateAbility(card: MtgCard, abilityType: MtgAbilityType, restrictTypes: boolean = false) {
 
-        const colors = card.color.toLowerCase().split('');
-
-        const conditions = this.mtgDataRepository.getPermanentConditions();
-
-        const statics = this.mtgDataRepository.getPermanentStatics()
-            .filter(a => colors.some(c => a.colorIdentity.indexOf(c) >= 0)
-                && a.score <= this.rarityScoreLUT.get(card.rarity));
-
-        const costs = this.mtgDataRepository.getPermanentActivatedCosts()
-            .filter(a =>
-                (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
-
-        const events = this.mtgDataRepository.getPermanentEvents()
-            .filter(a =>
-                (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
-                && a.score <= this.rarityScoreLUT.get(card.rarity));
-
         switch (abilityType) {
             case MtgAbilityType.Activated:
                 this.generateActivatedAbility(card, restrictTypes);
                 break;
 
             case MtgAbilityType.Triggered:
-                const condition = Random.nextFromList(conditions);
-                const triggeredEvent = Random.nextFromList(events);
-                card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
+                this.generateTriggeredAbility(card, restrictTypes);
                 break;
 
             case MtgAbilityType.Static:
-                const staticEvent = Random.nextFromList(statics);
-                card.oracle.abilities.push(new MtgStaticAbility(staticEvent));
+                this.generateStaticAbility(card);
                 break;
         }
     }
 
-    generateActivatedAbility(card: MtgCard, restrictTypes: boolean) {
+    private generateActivatedAbility(card: MtgCard, restrictTypes: boolean) {
         const colors = card.color.toLowerCase().split('');
 
         const positiveEvents = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
                 a.score > 0
                 && (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const activatedEvent = Random.nextFromList(positiveEvents);
@@ -110,5 +88,32 @@ export class MtgAbilityService {
         }
 
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
+    }
+
+    private generateTriggeredAbility(card: MtgCard, restrictTypes: boolean) {
+        const colors = card.color.toLowerCase().split('');
+
+        const conditions = this.mtgDataRepository.getPermanentConditions();
+
+        const events = this.mtgDataRepository.getPermanentEvents()
+            .filter(a =>
+                (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && a.score <= this.rarityScoreLUT.get(card.rarity));
+
+        const condition = Random.nextFromList(conditions);
+        const triggeredEvent = Random.nextFromList(events);
+        card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
+    }
+
+    private generateStaticAbility(card: MtgCard) {
+        const colors = card.color.toLowerCase().split('');
+
+        const statics = this.mtgDataRepository.getPermanentStatics()
+            .filter(a => colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && a.score <= this.rarityScoreLUT.get(card.rarity));
+
+        const staticEvent = Random.nextFromList(statics);
+        card.oracle.abilities.push(new MtgStaticAbility(staticEvent));
     }
 }

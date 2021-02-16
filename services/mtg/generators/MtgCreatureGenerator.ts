@@ -183,7 +183,7 @@ export class MtgCreatureGenerator {
         Logger.log("Started card cost estimation:", LogType.CostEstimation);
 
         totalScore += card.power / 2;
-        totalScore += card.toughness / 2;
+        totalScore += card.toughness / 2.5;
 
         Logger.log("Power: " + card.power / 2, LogType.CostEstimation);
         Logger.log("Toughness: " + card.toughness / 2, LogType.CostEstimation);

@@ -23,7 +23,13 @@ export class MtgCommandParser extends BaseCommandParser {
 
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
-    public static AVAILABLE_COLORS = ["W", "U", "B", "R", "G", "WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG" ];
+    public static AVAILABLE_COLORS = [
+        "C",
+        "W", "U", "B", "R", "G", 
+        "WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG",
+        "WUB", "WUR", "WUG", "WBR", "WBG", "WRG", "UBR", "UBG", "URG", "BRG",
+        "WUBR", "WUBG", "WURG", "WBRG", "UBRG",
+        "WUBRG" ];
 
     private mtgDataRepository: MtgDataRepository;
     private mtgAbilityService: MtgAbilityService;

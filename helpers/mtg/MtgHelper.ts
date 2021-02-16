@@ -113,8 +113,8 @@ export class MtgHelper {
             }
         }
 
-        // More than two colors.
-        if (color.length >= 3) {
+        // Three colors.
+        if (color.length === 3) {
             if (cmc === 1) {
                 manacost = `${Random.nextFromList(color)}`;
             } else if (cmc === 2) {
@@ -124,6 +124,43 @@ export class MtgHelper {
                 manacost = `${color[0]}${color[1]}${color[2]}`;
             } else if (cmc > 3) {
                 manacost = `${Math.min(9, cmc - 3)}${color[0]}${color[1]}${color[2]}`;
+            }
+        }
+
+        // Four colors colors.
+        if (color.length === 4) {
+            if (cmc === 1) {
+                manacost = `${Random.nextFromList(color)}`;
+            } else if (cmc === 2) {
+                let rnd = Random.next(0, 2);
+                manacost = `${color[rnd]}${color[rnd + 1]}`;
+            } else if (cmc === 3) {
+                let rnd = Random.next(0, 1);
+                manacost = `${color[rnd]}${color[rnd + 1]}${color[rnd + 2]}`;
+            } else if (cmc === 4) {
+                manacost = `${color[0]}${color[1]}${color[2]}${color[3]}`;
+            } else if (cmc > 4) {
+                manacost = `${Math.min(9, cmc - 4)}${color[0]}${color[1]}${color[2]}${color[3]}`;
+            }
+        }
+
+        // Five colors colors.
+        if (color.length === 5) {
+            if (cmc === 1) {
+                manacost = `${Random.nextFromList(color)}`;
+            } else if (cmc === 2) {
+                let rnd = Random.next(0, 3);
+                manacost = `${color[rnd]}${color[rnd + 1]}`;
+            } else if (cmc === 3) {
+                let rnd = Random.next(0, 2);
+                manacost = `${color[rnd]}${color[rnd + 1]}${color[rnd + 2]}`;
+            } else if (cmc === 4) {
+                let rnd = Random.next(0, 1);
+                manacost = `${color[rnd]}${color[rnd + 1]}${color[rnd + 2]}${color[rnd + 3]}`;
+            } else if (cmc === 5) {
+                manacost = `${color[0]}${color[1]}${color[2]}${color[3]}${color[4]}`;
+            } else if (cmc > 4) {
+                manacost = `${Math.min(9, cmc - 5)}${color[0]}${color[1]}${color[2]}${color[3]}`;
             }
         }
 
