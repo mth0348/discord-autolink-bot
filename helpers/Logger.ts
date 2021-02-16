@@ -1,8 +1,11 @@
-export class Logger {
-    public static enabled: boolean;
+import { LogType } from "../dtos/LogType";
 
-    public static log(text: string) {
-        if (this.enabled) {
+export class Logger {
+
+    public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation];
+
+    public static log(text: string, type: LogType = LogType.Verbose) {
+        if (this.enabledTypes.some(t => t === type)) {
             console.log(text);
         }
     }

@@ -12,18 +12,16 @@ export class MtgHelper {
         ["7", 7],
         ["8", 8],
         ["9", 9],
-        ["w", 0],
-        ["u", 1],
-        ["b", 2],
-        ["r", 3],
-        ["g", 4],
+        ["w", 10],
+        ["u", 11],
+        ["b", 12],
+        ["r", 13],
+        ["g", 14],
     ]);
 
     public static sortWubrg(text: string): string {
-        return text.split('').sort((a, b) => { return this.wubrgLUT.get(a) - this.wubrgLUT.get(b); }).join("");
+        return text.toLowerCase().split('').sort((a, b) => { return this.wubrgLUT.get(a) - this.wubrgLUT.get(b); }).join("");
     }
-
-    
 
     public static getRandomManacost(cmc: number, colorString: string): string {
         const manacost = this.getRandomManacostWithoutX(cmc, colorString);

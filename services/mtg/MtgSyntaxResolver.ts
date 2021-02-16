@@ -5,6 +5,7 @@ import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { StringHelper } from '../../helpers/StringHelper';
+import { MtgParsable } from '../../dtos/mtg/abilities/MtgParsable';
 
 export class MtgSyntaxResolver {
 
@@ -13,17 +14,23 @@ export class MtgSyntaxResolver {
     constructor(private mtgDataRepository: MtgDataRepository) {
     }
 
-    public resolveSyntax(card: MtgCard) {
-        card.oracle.keywords.forEach(k => k.setParsedText(this.parseSyntax(k.getText(), card)));
-        card.oracle.abilities.forEach(a => a.setParsedText(this.parseSyntax(a.getText(), card, a.getContext()) + "."));
+    public resolveSyntax(card: MtgCard): void {
+        card.oracle.keywords.forEach(k => this.parseSyntax(k, card));
+        card.oracle.abilities.forEach(a => this.parseSyntax(a, card, true));
     }
 
-    public parseSyntax(text: string, card: MtgCard, context: string = "self") {
+    public parseSyntax(parsable: MtgParsable, card: MtgCard, addDot: boolean = false): void {
+
+        // this represents the amplitude of an ability when large numbers are used, like "draw 4 cards".
+        let parserValue = 0;
+
         let maxDepth = 30;
         let depth = 0;
 
         let selfCount = 0;
         let useN = false;
+
+        let text = parsable.getText(card);
 
         while (text.indexOf("(") >= 0) {
             depth++;
@@ -32,63 +39,57 @@ export class MtgSyntaxResolver {
             let moreThanOne = false;
             if (text.indexOf("(numbername)") >= 0) {
                 moreThanOne = true;
-                let number = ["two", "two", "two", "two", "two", "three", "three"][Random.next(0, 6)];
+                let number = Random.nextFromList(["two", "two", "two", "two", "two", "three", "three"]);
                 text = text.replace("(numbername)", number);
-                // this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : 3);
-                // this.lastNumberCount++;
+                parserValue = number === "two" ? 2 : 3;
             }
             if (text.indexOf("(numbername2)") >= 0) {
                 moreThanOne = true;
-                let number = ["two", "two", "three", "three", "three", "four", "five"][Random.next(0, 6)];
+                let number = Random.nextFromList(["two", "two", "three", "three", "three", "four", "five"]);
                 text = text.replace("(numbername2)", number);
-                // this.lastNumber = Math.max(this.lastNumber, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
-                // this.lastNumberCount++;
+                parserValue = Math.max(parserValue, number === "two" ? 2 : number === "three" ? 3 : number === "four" ? 4 : 5);
             }
             if (text.indexOf("(numbername3)") >= 0) {
                 moreThanOne = true;
-                let number = ["four", "five", "five", "six"][Random.next(0, 3)];
+                let number = Random.nextFromList(["four", "five", "five", "six"]);
                 text = text.replace("(numbername3)", number);
-                // this.lastNumber = Math.max(this.lastNumber, number === "four" ? 4 : number === "five" ? 5 : 6);
-                // this.lastNumberCount++;
+                parserValue = Math.max(parserValue, number === "four" ? 4 : number === "five" ? 5 : 6);
             }
             if (text.indexOf("(number)") >= 0) {
-                let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][Random.next(0, 8)];
+                let number = Random.nextFromList([1, 1, 1, 2, 2, 2, 2, 3, 3]);
                 moreThanOne = moreThanOne || number > 1;
                 text = text.replace("(number)", number.toString());
                 text = text.replace("(samenumber)", number.toString());
-                // this.lastNumber = Math.max(this.lastNumber, number);
-                // this.lastNumberCount++;
+                parserValue = Math.max(parserValue, number);
             }
             if (text.indexOf("(!number)") >= 0) {
-                let number = [1, 1, 1, 2, 2, 2, 2, 3, 3][Random.next(0, 8)].toString();
+                let number = Random.nextFromList([1, 1, 1, 2, 2, 2, 2, 3, 3]).toString();
                 text = text.replace("(!number)", number);
                 text = text.replace("(samenumber)", number);
                 // ignore lastNumber increase.
             }
             if (text.indexOf("(number2)") >= 0) {
-                let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][Random.next(0, 12)].toString();
+                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6]);
                 moreThanOne = true;
-                text = text.replace("(number2)", number);
-                text = text.replace("(samenumber)", number);
-                // this.lastNumber = Math.max(this.lastNumber, number);
-                // this.lastNumberCount++;
+                text = text.replace("(number2)", number.toString());
+                text = text.replace("(samenumber)", number.toString());
+                parserValue = Math.max(parserValue, number);
             }
             if (text.indexOf("(!number2)") >= 0) {
-                let number = [2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6][Random.next(0, 12)].toString();
+                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6]).toString();
                 text = text.replace("(!number2)", number);
                 text = text.replace("(samenumber)", number);
                 // ignore lastNumber increase.
             }
             if (text.indexOf("(number3)") >= 0) {
-                let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][Random.next(0, 8)].toString();
+                let number = Random.nextFromList([5, 5, 5, 6, 6, 6, 7, 8, 9]);
                 moreThanOne = true;
-                text = text.replace("(number3)", number);
-                text = text.replace("(samenumber)", number);
-                // this.lastNumber = Math.max(this.lastNumber, number);
-                // this.lastNumberCount++;
+                text = text.replace("(number3)", number.toString());
+                text = text.replace("(samenumber)", number.toString());
+                parserValue = Math.max(parserValue, number);
             }
             if (text.indexOf("(!number3)") >= 0) {
-                let number = [5, 5, 5, 6, 6, 6, 7, 8, 9][Random.next(0, 8)].toString();
+                let number = Random.nextFromList([5, 5, 5, 6, 6, 6, 7, 8, 9]).toString();
                 text = text.replace("(!number3)", number);
                 text = text.replace("(samenumber)", number);
                 // ignore lastNumber increase.
@@ -120,7 +121,7 @@ export class MtgSyntaxResolver {
             }
 
             if (text.indexOf("(self)") >= 0) {
-                if (context === "self" || selfCount > 0) {
+                if (parsable.getContext() === "self" || selfCount > 0) {
                     text = text.replace("(self)", "it");
                 } else {
                     selfCount++;
@@ -201,7 +202,8 @@ export class MtgSyntaxResolver {
             text = text.replace("(color)", Random.nextFromList(MtgSyntaxResolver.COLOR_NAMES));
         }
 
-        return text;
+        parsable.parsedText = StringHelper.capitalizeFirstChar(text.trim()) + (addDot ? "." : "");
+        parsable.parserValue = parserValue;
     }
 
 }

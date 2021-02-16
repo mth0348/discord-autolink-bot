@@ -1,11 +1,19 @@
-import { StringHelper } from '../../../helpers/StringHelper';
-export class MtgKeyword {
+import { MtgCard } from '../../../dtos/mtg/MtgCard';
+import { MtgParsable } from '../../../dtos/mtg/abilities/MtgParsable';
+import { Logger } from '../../../helpers/Logger';
+import { LogType } from '../../../dtos/LogType';
+
+export class MtgKeyword implements MtgParsable {
+
     public name: string;
     public hasCost: boolean;
     public score: number;
     public nameExtension: string;
     public colorIdentity: string;
     public types: string[];
+
+    public parsedText: string;
+    public parserValue: number;
 
     constructor(data: any) {
         this.name = data.name;
@@ -16,24 +24,25 @@ export class MtgKeyword {
         this.types = data.types;
     }
 
-    public parsedText: string;
+    public getScore(): number {
+        Logger.log("Keyword '" + this.name + "': " + this.score, LogType.CostEstimation)
+        return this.score;
+    }
 
-    getText(): string {
-        const costText = `(cost[s:${this.score},c:${this.colorIdentity}])`
+    public getText(card: MtgCard): string {
+        const costText = `(cost[s:${this.score},c:${card.color}])`
 
-        if (this.nameExtension.length > 0 && this.hasCost) 
+        if (this.nameExtension.length > 0 && this.hasCost)
             return this.name + " " + this.nameExtension + " - " + costText;
 
         if (this.nameExtension.length)
             return this.name + " " + this.nameExtension;
 
-        if (this.hasCost) 
+        if (this.hasCost)
             return this.name + " " + costText;
 
         return this.name;
     }
 
-    setParsedText(text: string): void {
-        this.parsedText = StringHelper.capitalizeFirstChar(text.trim());
-    }
+    public getContext() { return ""; }
 }

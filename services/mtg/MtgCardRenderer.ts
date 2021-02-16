@@ -4,9 +4,7 @@ import { MessageAttachment } from "discord.js";
 import { ImageProvider } from '../../persistence/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
 import { StringHelper } from '../../helpers/StringHelper';
-import { MtgOracleTextWrapperService } from "./MtgOracleTextWrapperService";
 import { Random } from "../../helpers/Random";
-import { MtgDataRepository } from '../../persistence/repositories/MtgDataRepository';
 
 import Canvas = require("canvas");
 
@@ -18,9 +16,7 @@ export class MtgCardRenderer {
     private ctx: Canvas.CanvasRenderingContext2D;
     private card: MtgCard;
 
-    private lastWordWrapCount: number;
-
-    constructor(card: MtgCard, private mtgOracleTextWrapperService: MtgOracleTextWrapperService, private mtgDataRepository: MtgDataRepository) {
+    constructor(card: MtgCard) {
         this.card = card;
 
         this.canvas = Canvas.createCanvas(630, 880);

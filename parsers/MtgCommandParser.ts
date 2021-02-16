@@ -50,9 +50,12 @@ export class MtgCommandParser extends BaseCommandParser {
 
         this.initializeCardRendererData();
 
+        console.log("|| - registered MtG parser.    ||");
     }
 
     public async executeAsync(message: Message | PartialMessage): Promise<void> {
+
+        console.log(`${message.author.username} requested an MtG card with: ` + message.content);
 
         // extract parameters.
         const parameters = this.parameterService.extractParameters(message.content, this.paramConfigs);
@@ -64,13 +67,14 @@ export class MtgCommandParser extends BaseCommandParser {
 
         // start card generation.
         const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), cardColor);
-        console.log(card);
 
         // render card.
-        const mtgCardRenderer = new MtgCardRenderer(card, this.mtgOracleTextWrapperService, this.mtgDataRepository);
+        const mtgCardRenderer = new MtgCardRenderer(card);
         const renderedCard = await mtgCardRenderer.renderCard();
 
         message.channel.send('', renderedCard);
+
+        console.log("Generated card: ", card);
     }
 
     private initializeCardRendererData() {

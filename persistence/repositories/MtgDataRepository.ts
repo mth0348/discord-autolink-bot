@@ -53,7 +53,7 @@ export class MtgDataRepository {
         if (count <= 0) return [];
 
         const list = database.keywords
-            .filter(k => k.types.some(t => t === type))
+            .filter(k => k.types.some(t => t === type.toLowerCase()))
             .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
             .map(k => new MtgKeyword(k));
 
@@ -107,7 +107,8 @@ export class MtgDataRepository {
     }
     
     public getCreatureFlavorText(maxCharacterLength: number): string {
-        return database.creatureTexts.flavors.sort(f => f.length).reverse().find(f => f.length < maxCharacterLength);
+        // sort descending by text length.
+        return database.creatureTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
     }
 
     public getPlaneswalkerName() {

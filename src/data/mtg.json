@@ -1489,7 +1489,7 @@
         },
         {
             "text": "draw a card",
-            "score": 1,
+            "score": 1.2,
             "colorIdentity": "wubrg"
         },
         {
@@ -2141,7 +2141,7 @@
             "score": 1.8
         },
         {
-            "text": "(other creatures) you control get -(number)/-(number)",
+            "text": "(other creatures) you control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
             "score": -4
         },
@@ -2161,7 +2161,7 @@
             "score": 5
         },
         {
-            "text": "(other creatures) you don't control get -(number)/-(number)",
+            "text": "(other creatures) you don't control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
             "score": 6
         },
@@ -2300,58 +2300,58 @@
         {
             "text": "sacrifice (self)",
             "colorIdentity": "wubrg",
-            "score": 10
+            "score": 5
         },
         {
             "text": "discard a card",
             "colorIdentity": "ubr",
-            "score": 7
+            "score": 2
         },
         {
             "text": "discard (numbername) cards",
             "colorIdentity": "ubr",
-            "score": 10
+            "score": 6
         },
         {
             "text": "tap another untapped creature you control",
             "colorIdentity": "wubrg",
-            "score": 5
+            "score": 1
         },
         {
             "text": "put a -1/-1 counter on (self)",
             "colorIdentity": "bg",
-            "score": 7,
+            "score": 4,
             "restrictedTypes": [ "creature" ]
         },
         {
             "text": "pay (number) life",
             "colorIdentity": "b",
-            "score": 7
+            "score": 2.5
         },
         {
             "text": "pay (number2) life",
             "colorIdentity": "b",
-            "score": 10
+            "score": 3.5
         },
         {
             "text": "discard your hand",
             "colorIdentity": "wubrg",
-            "score": 10
+            "score": 6
         },
         {
             "text": "sacrifice a (permanent)",
             "colorIdentity": "wubrg",
-            "score": 10
+            "score": 5
         },
         {
-            "text": "discard a (type) card",
+            "text": "discard a(n) (type) card",
             "colorIdentity": "wubrg",
-            "score": 7
+            "score": 2
         },
         {
             "text": "tap (numbername) untapped creatures you control",
             "colorIdentity": "wubrg",
-            "score": 10
+            "score": 5
         }
     ],
     "instantSorceryEvents": [

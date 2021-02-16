@@ -22,7 +22,8 @@ export class Random {
         let found = false;
         let foundValue = fallback;
 
-        chances.forEach(chanceSet => {
+        // sort descending by chance.
+        chances.sort((a, b) => b.chance - a.chance).forEach(chanceSet => {
             if (!found && Random.chance(chanceSet.chance)) {
                 found = true;
                 foundValue = chanceSet.value;

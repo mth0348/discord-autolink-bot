@@ -1,17 +1,14 @@
 import { MtgAbilityType } from '../MtgAbilityType';
+import { MtgParsable } from './MtgParsable';
 
-export interface MtgAbility {
+export interface MtgAbility extends MtgParsable {
     
     type: MtgAbilityType;
     
-    parsedText: string;
-
     getContext(): string;
 
     getScore(): number;
 
     getText(): string;
-
-    setParsedText(text: string): void;
 
 }

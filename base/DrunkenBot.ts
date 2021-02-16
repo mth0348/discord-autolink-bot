@@ -21,13 +21,19 @@ export class DrunkenBot {
         this.parameterService = new ParameterService();
         this.registeredParsers = [];
 
-        console.log("Registering command parsers...");
+        console.log("||=============================||");
+        console.log("||    DRUNKEN DISCORD BOT      ||");
+        console.log("||          by Mats            ||");
+        console.log("||=============================||");
+        console.log("");
+        console.log("||=== Parsers =================||");
         this.registerCommandParsers();
 
-        console.log("Loading image cache...");
         ImageProvider.loadImageDatabase();
 
+        console.log("||=============================||");
         console.log("BOT READY!");
+        console.log("");
     }
 
     public startListening() : void {

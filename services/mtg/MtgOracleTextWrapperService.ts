@@ -33,9 +33,14 @@ export class MtgOracleTextWrapperService {
     public wordWrapAllOracleText(oracle: MtgOracleText, preset: MtgOracleTextWrapPreset): any {
         const lines: string[] = [];
 
+        // only keywords WITHOUT cost.
         if (oracle.keywords.length > 0) {
-            const keywordText = oracle.keywords.map(k => k.parsedText).join(", ");
-            const keywordLines = this.wordWrapText(keywordText, preset.maxCharactersPerLine);
+            // separate with and without name extension as well.
+            let keywordTexts = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length > 0).map(k => k.parsedText);
+            keywordTexts.forEach(line => { lines.push(line.trim()); lines.push(""); });
+
+            let keywordText = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
+            let keywordLines = this.wordWrapText(keywordText, preset.maxCharactersPerLine);
             keywordLines.forEach(line => lines.push(line.trim()));
             lines.push("");
         }
@@ -44,16 +49,30 @@ export class MtgOracleTextWrapperService {
             const abilityText = oracle.abilities[0].parsedText;
             const ability1Lines = this.wordWrapText(abilityText, preset.maxCharactersPerLine);
             ability1Lines.forEach(line => lines.push(line.trim()));
+            lines.push("");
 
             if (oracle.abilities.length > 1) {
                 for (let i = 1; i < oracle.abilities.length; i++) {
-                    lines.push("");
                     const ability2Text = oracle.abilities[i].parsedText;
                     const ability2Lines = this.wordWrapText(ability2Text, preset.maxCharactersPerLine);
                     ability2Lines.forEach(line => lines.push(line.trim()));
+                    lines.push("");
                 }
             }
         }
+
+        // only keywords WITH cost.
+        if (oracle.keywords.length > 0) {
+            const keywordsWithCost = oracle.keywords.filter(k => k.hasCost).map(k => k.parsedText);
+            // only ever print 1.
+            if (keywordsWithCost.length === 1) {
+                lines.push(keywordsWithCost[0]);
+            }
+        }
+
+        // remove last line if empty.
+        if (lines.length > 0 && lines[lines.length - 1] === "") 
+            lines.splice(lines.length - 1, 1);
 
         return lines;
     }
