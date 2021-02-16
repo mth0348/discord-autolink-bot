@@ -36,13 +36,18 @@ export class MtgOracleTextWrapperService {
         // only keywords WITHOUT cost.
         if (oracle.keywords.some(k => !k.hasCost || k.isTop)) {
             // separate with and without name extension as well.
-            let keywordTexts = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length > 0).map(k => k.parsedText);
-            keywordTexts.forEach(line => { lines.push(line.trim()); lines.push(""); });
+            // special case: things like 'cumulative upkeep' have the isTop flag set to true, they should also be rendered at the top.
+            let nameExtendedKeywords = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length > 0).map(k => k.parsedText);
+            nameExtendedKeywords.forEach(line => { lines.push(line.trim()); });
+            if (nameExtendedKeywords.length > 0) {
+                lines.push("");
+            }
 
-            let keywordText = oracle.keywords.filter(k => (!k.hasCost || k.isTop) && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
-            let keywordLines = this.wordWrapText(keywordText, preset.maxCharactersPerLine);
-            keywordLines.forEach(line => lines.push(line.trim()));
-            lines.push("");
+            let regularKeywords = oracle.keywords.filter(k => (!k.hasCost || k.isTop) && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
+            if (regularKeywords.length > 0) {
+                lines.push(regularKeywords.trim());
+                lines.push("");
+            }
         }
 
         if (oracle.abilities.length > 0) {
@@ -71,7 +76,7 @@ export class MtgOracleTextWrapperService {
         }
 
         // remove last line if empty.
-        if (lines.length > 0 && lines[lines.length - 1] === "") 
+        if (lines.length > 0 && lines[lines.length - 1] === "")
             lines.splice(lines.length - 1, 1);
 
         return lines;
