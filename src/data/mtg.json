@@ -2607,8 +2607,8 @@
             "restrictedTypes": [ "instant" ]
         },
         {
-            "text": "prevent the next (number2) damage that would be dealt to creatures you control",
-            "colorIdenity": "w",
+            "text": "prevent all combat damage that would be dealt to creatures you control this turn",
+            "colorIdentity": "w",
             "score": 0.2,
             "restrictedTypes": [ "instant" ]
         },
@@ -2640,7 +2640,7 @@
         },
         {
             "text": "prevent the next (number3) damage that would be dealt to creatures you control",
-            "colorIdenity": "w",
+            "colorIdentity": "w",
             "score": 2,
             "restrictedTypes": [ "instant" ]
         },

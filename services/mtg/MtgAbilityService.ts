@@ -23,15 +23,30 @@ export class MtgAbilityService {
     constructor(private mtgDataRepository: MtgDataRepository) {
     }
 
-    public generateAbility(card: MtgCard, abilityType: MtgAbilityType, restrictTypes: boolean = false) {
+    public generateSpellAbility(card: MtgCard, requiredPositive: boolean = false) {
+
+        const colors = card.color.toLowerCase().split('');
+
+        const events = this.mtgDataRepository.getInstantSorceryEvents()
+            .filter(a =>
+                (!requiredPositive || a.score > 0)
+                && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && a.score <= this.rarityScoreLUT.get(card.rarity));
+
+        const spellEvent = Random.nextFromList(events);
+        card.oracle.abilities.push(new MtgStaticAbility(spellEvent));
+    }
+
+    public generateCreatureAbility(card: MtgCard, abilityType: MtgAbilityType) {
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
-                this.generateActivatedAbility(card, restrictTypes);
+                this.generateActivatedAbility(card);
                 break;
 
             case MtgAbilityType.Triggered:
-                this.generateTriggeredAbility(card, restrictTypes);
+                this.generateTriggeredAbility(card);
                 break;
 
             case MtgAbilityType.Static:
@@ -40,13 +55,13 @@ export class MtgAbilityService {
         }
     }
 
-    private generateActivatedAbility(card: MtgCard, restrictTypes: boolean) {
+    private generateActivatedAbility(card: MtgCard) {
         const colors = card.color.toLowerCase().split('');
 
         const positiveEvents = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
                 a.score > 0
-                && (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
+                && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
@@ -59,7 +74,7 @@ export class MtgAbilityService {
             // db.
             const costs = this.mtgDataRepository.getPermanentActivatedCosts()
                 .filter(a =>
-                    (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
+                    (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                     && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
 
             // sort descending by score.
@@ -78,7 +93,7 @@ export class MtgAbilityService {
             const tapSymbolText = useTapSymbol ? ", XT" : "";
 
             const cmc = Math.max(1, Math.min(6, Math.round(activatedEvent.score * Random.next(50, 80) / 100)));
-            const manacost = MtgHelper.getRandomManacost(cmc, activatedEvent.colorIdentity);
+            const manacost = MtgHelper.getManacost(cmc, activatedEvent.colorIdentity);
 
             cost = new MtgPermanentActivatedCost({
                 text: manacost + tapSymbolText,
@@ -90,14 +105,14 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
     }
 
-    private generateTriggeredAbility(card: MtgCard, restrictTypes: boolean) {
+    private generateTriggeredAbility(card: MtgCard) {
         const colors = card.color.toLowerCase().split('');
 
         const conditions = this.mtgDataRepository.getPermanentConditions();
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
-                (!restrictTypes || a.restrictedTypes.every(t => !StringHelper.isEqualIgnoreCase(t, card.type)))
+                (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
@@ -110,7 +125,8 @@ export class MtgAbilityService {
         const colors = card.color.toLowerCase().split('');
 
         const statics = this.mtgDataRepository.getPermanentStatics()
-            .filter(a => colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+            .filter(a =>
+                colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const staticEvent = Random.nextFromList(statics);

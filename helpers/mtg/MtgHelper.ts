@@ -23,7 +23,7 @@ export class MtgHelper {
         return text.toLowerCase().split('').sort((a, b) => { return this.wubrgLUT.get(a) - this.wubrgLUT.get(b); }).join("");
     }
 
-    public static getRandomManacost(cmc: number, colorString: string): string {
+    public static getManacost(cmc: number, colorString: string): string {
         const manacost = this.getRandomManacostWithoutX(cmc, colorString);
         return "X" + MtgHelper.sortWubrg(manacost).split("").join("X");
     }

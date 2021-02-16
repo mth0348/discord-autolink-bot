@@ -39,6 +39,12 @@ export class MtgStaticAbility implements MtgAbility {
         return finalScore;
     }
 
+    public combine(other: MtgStaticAbility) {
+        this.event.text += ", then " + other.event.text;
+        this.event.score += other.event.score;
+        this.event.colorIdentity += other.event.colorIdentity;
+    }
+
     public getContext(): string {
         return "";
     }

@@ -30,4 +30,8 @@ export class StringHelper {
         return word.substr(0, 1).toUpperCase() + word.substr(1);
     }
 
+    public static lowercaseFirstChar(word: string) {
+        return word.substr(0, 1).toLowerCase() + word.substr(1);
+    }
+
 }

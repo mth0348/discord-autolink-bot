@@ -40,7 +40,7 @@ export class MtgCard {
     public rendererPreset : MtgOracleTextWrapPreset;
 
     public getFullType() : string {
-        return (this.supertype ? this.supertype + " " : "") + this.type + " — " + this.subtype;
+        return (this.supertype ? this.supertype + " " : "") + this.type + (this.subtype ? (" — " + this.subtype) : "");
     }
 
     public hasPowerToughness() : boolean {

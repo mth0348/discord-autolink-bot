@@ -23,12 +23,10 @@ export class MtgCreatureGenerator {
     }
 
     public generate(card: MtgCard): MtgCard {
-        card.type = MtgCardType.Creature;
 
         card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
         card.supertype = card.isLegendary ? "Legendary" : "";
         card.name = card.name || this.mtgDataRepository.getCreatureName(card.isLegendary);
-        card.flavorText = "Ain't that something to flip your biscuit...";
 
         this.chooseSubtypes(card);
         this.chooseKeywords(card);
@@ -41,7 +39,7 @@ export class MtgCreatureGenerator {
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
-        card.manacost = MtgHelper.getRandomManacost(card.cmc, card.color);
+        card.manacost = MtgHelper.getManacost(card.cmc, card.color);
 
         return card;
     }
@@ -171,7 +169,7 @@ export class MtgCreatureGenerator {
                 { value: MtgAbilityType.Static, chance: 0.20 }
             ], 0);
 
-            this.mtgAbilityService.generateAbility(card, abilityType);
+            this.mtgAbilityService.generateCreatureAbility(card, abilityType);
         }
 
         card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
