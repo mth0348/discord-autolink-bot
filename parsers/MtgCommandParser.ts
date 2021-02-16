@@ -16,25 +16,31 @@ import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
 import { MtgOracleTextWrapperService } from '../services/mtg/MtgOracleTextWrapperService';
 import { MtgDataRepository } from '../persistence/repositories/MtgDataRepository';
+import { MtgSyntaxResolver } from '../services/mtg/MtgSyntaxResolver';
+import { MtgAbilityService } from '../services/mtg/MtgAbilityService';
 
 export class MtgCommandParser extends BaseCommandParser {
 
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
-    public static AVAILABLE_COLORS = ["W", "U", "B", "R", "G"];
+    public static AVAILABLE_COLORS = ["W", "U", "B", "R", "G", "WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG" ];
 
     private mtgDataRepository: MtgDataRepository;
+    private mtgAbilityService: MtgAbilityService;
+    private mtgSyntaxResolver: MtgSyntaxResolver;
+    private mtgOracleTextWrapperService: MtgOracleTextWrapperService;
     private mtgCardService: MtgCardService;
 
     private paramConfigs: ParameterServiceConfig[];
-    private mtgOracleTextWrapperService: MtgOracleTextWrapperService;
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.mtg, ConfigProvider.current().rolePermissions.mtg);
 
         this.mtgDataRepository = new MtgDataRepository();
-        this.mtgCardService = new MtgCardService(this.mtgDataRepository);
+        this.mtgAbilityService = new MtgAbilityService(this.mtgDataRepository);
+        this.mtgSyntaxResolver = new MtgSyntaxResolver(this.mtgDataRepository);
         this.mtgOracleTextWrapperService = new MtgOracleTextWrapperService();
+        this.mtgCardService = new MtgCardService(this.mtgDataRepository, this.mtgAbilityService, this.mtgSyntaxResolver, this.mtgOracleTextWrapperService);
 
         this.paramConfigs = [
             new ParameterServiceConfig("type", "t", MtgCommandParser.AVAILABLE_TYPES),

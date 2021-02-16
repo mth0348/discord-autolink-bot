@@ -37,7 +37,7 @@ export class MtgCardRenderer {
         this.drawCardType();
         await this.drawCardArtwork();
         this.drawExpansionSymbol();
-        await this.drawOracleText();
+        await this.drawOracleAndFlavorText();
         this.drawPowerToughness();
         this.drawCardNumber();
 
@@ -62,7 +62,7 @@ export class MtgCardRenderer {
     private drawCardTitle() {
         const cardTitle = this.card.name;
         this.ctx.font = `${cardTitle.length > 25 ? 34 : 38}px matrixbold`;
-        this.ctx.fillText(cardTitle, 52, 78, 585 - (this.card.manacost.length * 17));
+        this.ctx.fillText(cardTitle, 52, 78, 520 - (this.card.manacost.length * 17));
     }
 
     private async drawCardCost() {
@@ -101,32 +101,21 @@ export class MtgCardRenderer {
         this.ctx.fillText(Random.next(100, 999).toString(), 38, 833);
     }
 
-    private async drawOracleText() {
+    private async drawOracleAndFlavorText() {
 
-        const preset = this.mtgOracleTextWrapperService.calculateTextWrapPreset(this.card.oracle);
-        const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllOracleText(this.card.oracle, preset);
-
-        // Sneak in flavor text, if enough space.
-        if (Random.chance(1.0)) { // TODO adjust chance.
-            const maxFlavorTextLength = (preset.maxLines - wrappedTextLines.length - 1) * preset.maxCharactersPerLine;
-            const smallEnoughFlavorText = this.mtgDataRepository.getFlavorTextByLength(maxFlavorTextLength);
-            if (smallEnoughFlavorText !== null) {
-                wrappedTextLines.push("FT_LINE");
-                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, preset.maxCharactersPerLine)
-                flavorTextLines.forEach(f => wrappedTextLines.push("FT_" + f));
-            }
-        }
+        const preset = this.card.rendererPreset;
+        const oracleLines = this.card.wrappedOracleLines;
 
         this.ctx.font = `${preset.fontSize}px mplantin`;
 
         // if there is enough space, leave some area free before oracle text starts.
-        const initialOffset = wrappedTextLines.length < 4 ? (40 - wrappedTextLines.length * 10) : 0;
+        const initialOffset = oracleLines.length < 4 ? (40 - oracleLines.length * 10) : 0;
 
         const posX = 60;
         const posY = 588 + initialOffset;
 
-        for (let i = 0; i < wrappedTextLines.length; i++) {
-            let line = wrappedTextLines[i];
+        for (let i = 0; i < oracleLines.length; i++) {
+            let line = oracleLines[i];
 
             const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;
             const isFlavorText = StringHelper.startsWith(line, "FT_");

@@ -3115,7 +3115,7 @@
             "auraType": "creature"
         }
     ],
-    "planeswalkerNames": {
+    "planeswalkerTexts": {
         "names": [
             "Aegnor",
             "Aego",
@@ -3526,7 +3526,7 @@
             "Yrniela"
         ]
     },
-    "creatureNames": {
+    "creatureTexts": {
         "adjectives": [
             "furious",
             "sleeping",
@@ -3890,9 +3890,15 @@
             "one",
             "abomination",
             "condemnation"
+        ],
+        "flavors": [
+            "The fight is not over.",
+            "\"Power is power\" - Cersei",
+            "Public bots can be added by anyone. When unchecked, only you can join this bot to servers.",
+            "Public bots can be added by anyone."
         ]
     },
-    "spellNames": {
+    "spellTexts": {
         "adjectives": [
             "powerful",
             "blood-seeking",
@@ -4134,7 +4140,7 @@
             "winds"
         ]
     },
-    "enchantmentNames": {
+    "enchantmentTexts": {
         "nouns": [
             "defense",
             "resolution",
@@ -4246,11 +4252,5 @@
             "clutches",
             "bubble"
         ]
-    },
-    "flavorTexts": [
-        "The fight is not over.",
-        "\"Power is power\" - Cersei",
-        "Public bots can be added by anyone. When unchecked, only you can join this bot to servers.",
-        "Public bots can be added by anyone."
-    ]
+    }    
 }

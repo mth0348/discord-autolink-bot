@@ -1,6 +1,7 @@
 import { MtgCardRarity } from './MtgCardRarity';
 import { MtgCardType } from './MtgCardType';
 import { MtgOracleText } from './MtgOracleText';
+import { MtgOracleTextWrapPreset } from './MtgOracleTextWrapPreset';
 
 export class MtgCard {
     
@@ -33,6 +34,10 @@ export class MtgCard {
     public flavorText: string;
     
     public imageUrl: string;
+
+    public wrappedOracleLines: string[];
+
+    public rendererPreset : MtgOracleTextWrapPreset;
 
     public getFullType() : string {
         return (this.supertype ? this.supertype + " " : "") + this.type + " — " + this.subtype;

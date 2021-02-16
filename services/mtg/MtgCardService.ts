@@ -5,15 +5,17 @@ import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCreatureGenerator } from './generators/MtgCreatureGenerator';
 import { MtgAbilityService } from './MtgAbilityService';
 import { MtgSyntaxResolver } from './MtgSyntaxResolver';
+import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 
 export class MtgCardService {
 
     private mtgCreatureGenerator: MtgCreatureGenerator;
 
-    constructor(private mtgDataRepository: MtgDataRepository) {
-        const mtgAbilityService = new MtgAbilityService(mtgDataRepository);
-        const mtgSyntaxResolver = new MtgSyntaxResolver(mtgDataRepository);
-        this.mtgCreatureGenerator = new MtgCreatureGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver);
+    constructor(mtgDataRepository: MtgDataRepository,
+            mtgAbilityService: MtgAbilityService,
+            mtgSyntaxResolver: MtgSyntaxResolver,
+            mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
+        this.mtgCreatureGenerator = new MtgCreatureGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
     public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {

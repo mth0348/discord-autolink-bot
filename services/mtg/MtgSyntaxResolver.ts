@@ -144,6 +144,10 @@ export class MtgSyntaxResolver {
                 let type = Random.flipCoin() ? Random.nextFromList(MtgSyntaxResolver.COLOR_NAMES) : Random.nextFromList(this.mtgDataRepository.getTypes()) + "s";
                 text = text.replace("(types|color)", type);
             }
+            if (text.indexOf("(type|color)") >= 0) {
+                let type = Random.flipCoin() ? Random.nextFromList(MtgSyntaxResolver.COLOR_NAMES) : Random.nextFromList(this.mtgDataRepository.getTypes());
+                text = text.replace("(type|color)", type);
+            }
 
             if (text.indexOf("(mana)") >= 0) {
                 let symbol = "X" + Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);

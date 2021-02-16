@@ -10,10 +10,6 @@ import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
 import database = require('../../src/data/mtg.json');
 
 export class MtgDataRepository {
-    public getFlavorTextByLength(maxCharacterLength: number): string {
-        return database.flavorTexts.sort(f => f.length).reverse().find(f => f.length < maxCharacterLength);
-
-    }
 
     public getTypes(): string[] {
         return database.types;
@@ -93,9 +89,9 @@ export class MtgDataRepository {
     }
 
     public getCreatureName(isLegendary: boolean): string {
-        const name = database.creatureNames.names[Random.next(0, database.creatureNames.names.length - 1)] + ", ";
-        const adjective = database.creatureNames.adjectives[Random.next(0, database.creatureNames.adjectives.length - 1)] + " ";
-        const noun = database.creatureNames.nouns[Random.next(0, database.creatureNames.nouns.length - 1)]
+        const name = database.creatureTexts.names[Random.next(0, database.creatureTexts.names.length - 1)] + ", ";
+        const adjective = database.creatureTexts.adjectives[Random.next(0, database.creatureTexts.adjectives.length - 1)] + " ";
+        const noun = database.creatureTexts.nouns[Random.next(0, database.creatureTexts.nouns.length - 1)]
 
         if (isLegendary) {
             if (Random.chance(0.3)) {
@@ -106,12 +102,16 @@ export class MtgDataRepository {
             return StringHelper.toCamelCase(adjective + noun);
         }
     }
+    
+    public getCreatureFlavorText(maxCharacterLength: number): string {
+        return database.creatureTexts.flavors.sort(f => f.length).reverse().find(f => f.length < maxCharacterLength);
+    }
 
     public getPlaneswalkerName() {
-        const name = database.planeswalkerNames.names[Random.next(0, database.planeswalkerNames.names.length - 1)] + ", ";
-        const secondName = database.planeswalkerNames.names[Random.next(0, database.planeswalkerNames.names.length - 1)] + " ";
-        const adjective = database.creatureNames.adjectives[Random.next(0, database.creatureNames.adjectives.length - 1)] + " ";
-        const noun = database.creatureNames.nouns[Random.next(0, database.creatureNames.nouns.length - 1)]
+        const name = database.planeswalkerTexts.names[Random.next(0, database.planeswalkerTexts.names.length - 1)] + ", ";
+        const secondName = database.planeswalkerTexts.names[Random.next(0, database.planeswalkerTexts.names.length - 1)] + " ";
+        const adjective = database.creatureTexts.adjectives[Random.next(0, database.creatureTexts.adjectives.length - 1)] + " ";
+        const noun = database.creatureTexts.nouns[Random.next(0, database.creatureTexts.nouns.length - 1)]
 
         if (Random.chance(0.3)) {
             return StringHelper.toCamelCase(name + "the " + adjective);
@@ -123,15 +123,15 @@ export class MtgDataRepository {
     }
 
     public getInstantSorceryName() {
-        const adjective = database.spellNames.adjectives[Random.next(0, database.spellNames.adjectives.length - 1)] + " ";
-        const noun = database.spellNames.nouns[Random.next(0, database.spellNames.nouns.length - 1)];
+        const adjective = database.spellTexts.adjectives[Random.next(0, database.spellTexts.adjectives.length - 1)] + " ";
+        const noun = database.spellTexts.nouns[Random.next(0, database.spellTexts.nouns.length - 1)];
 
         return StringHelper.toCamelCase(adjective + noun);
     }
 
     public getEnchantmentName() {
-        const adjective = database.spellNames.adjectives[Random.next(0, database.spellNames.adjectives.length - 1)] + " ";
-        const noun = database.enchantmentNames.nouns[Random.next(0, database.enchantmentNames.nouns.length - 1)];
+        const adjective = database.spellTexts.adjectives[Random.next(0, database.spellTexts.adjectives.length - 1)] + " ";
+        const noun = database.enchantmentTexts.nouns[Random.next(0, database.enchantmentTexts.nouns.length - 1)];
 
         return StringHelper.toCamelCase(adjective + noun);
     }

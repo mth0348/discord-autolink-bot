@@ -32,7 +32,7 @@ export class MtgActivatedAbility implements MtgAbility {
     public parsedText: string;
 
     setParsedText(text: string): void {
-        this.parsedText = text;
+        this.parsedText = StringHelper.capitalizeFirstChar(text);
     }
 
 }
