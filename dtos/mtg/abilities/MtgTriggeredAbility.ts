@@ -32,7 +32,7 @@ export class MtgTriggeredAbility implements MtgAbility {
     public parsedText: string;
 
     setParsedText(text: string): void {
-        this.parsedText = StringHelper.capitalizeFirstChar(text);
+        this.parsedText = StringHelper.capitalizeFirstChar(text.trim());
     }
 
 }

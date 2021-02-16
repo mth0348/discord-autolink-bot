@@ -3,6 +3,7 @@ import { MtgDataRepository } from '../../persistence/repositories/MtgDataReposit
 import { Random } from '../../helpers/Random';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
+import { MtgColorPie } from '../../helpers/mtg/MtgColorPie';
 export class MtgSyntaxResolver {
 
     public static COLOR_NAMES = ["white", "blue", "black", "red", "green"];
@@ -150,18 +151,25 @@ export class MtgSyntaxResolver {
             }
 
             if (text.indexOf("(mana)") >= 0) {
-                let symbol = "X" + Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                if (Random.flipCoin()) symbol += "X" + Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                text = text.replace("(mana)", symbol);
+                let symbol = Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                text = text.replace("(mana)", "X" + MtgColorPie.sortWubrg(symbol).split("").join("X"));
+            }
+            if (text.indexOf("(mana2)") >= 0) {
+                let symbol = Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                text = text.replace("(mana2)", "X" + MtgColorPie.sortWubrg(symbol).split("").join("X"));
             }
 
             if (text.indexOf("(cost)") >= 0) {
                 let symbol = "";
-                if (Random.chance(0.5)) symbol += "X" + Random.next(1, 2);
-                if (Random.chance(0.4)) symbol += "X" + Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                if (Random.chance(0.4)) symbol += "X" + Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                if (symbol.length <= 0) symbol = "X2";
-                text = text.replace("(cost)", symbol);
+                if (Random.chance(0.5)) symbol += Random.next(1, 2);
+                if (Random.chance(0.4)) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                if (Random.chance(0.4)) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                if (symbol.length <= 0) symbol = "2";
+                text = text.replace("(cost)", "X" + MtgColorPie.sortWubrg(symbol).split("").join("X"));
             }
 
             // TODO Aura not yet supported.

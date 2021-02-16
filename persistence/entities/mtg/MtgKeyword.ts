@@ -1,3 +1,4 @@
+import { StringHelper } from '../../../helpers/StringHelper';
 export class MtgKeyword {
     public name: string;
     public hasCost: boolean;
@@ -22,6 +23,6 @@ export class MtgKeyword {
     }
 
     setParsedText(text: string): void {
-        this.parsedText = text;
+        this.parsedText = StringHelper.capitalizeFirstChar(text.trim());
     }
 }

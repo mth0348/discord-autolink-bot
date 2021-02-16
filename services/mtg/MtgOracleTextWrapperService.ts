@@ -34,7 +34,7 @@ export class MtgOracleTextWrapperService {
         const lines: string[] = [];
 
         if (oracle.keywords.length > 0) {
-            const keywordText = oracle.keywords.map(k => k.name).join(", ");
+            const keywordText = oracle.keywords.map(k => k.parsedText).join(", ");
             const keywordLines = this.wordWrapText(keywordText, preset.maxCharactersPerLine);
             keywordLines.forEach(line => lines.push(line.trim()));
             lines.push("");
