@@ -20,6 +20,10 @@ export class MtgStaticAbility implements MtgAbility {
         this.event = event;
     }
 
+    public getColorIdentity(): string {
+        return this.event.colorIdentity;
+    }
+
     public getText(): string {
         return StringHelper.capitalizeFirstChar(this.event.text);
     }

@@ -5,6 +5,8 @@ export interface MtgAbility extends MtgParsable {
     
     type: MtgAbilityType;
     
+    getColorIdentity(): string;
+
     getContext(): string;
 
     getScore(): number;

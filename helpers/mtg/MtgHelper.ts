@@ -1,7 +1,10 @@
 import { Collection } from 'discord.js';
+import { MtgCard } from '../../dtos/mtg/MtgCard';
 import { Random } from '../Random';
 import { StringHelper } from '../StringHelper';
+import { MtgOracleTextWrapperService } from '../../services/mtg/MtgOracleTextWrapperService';
 export class MtgHelper {
+
     private static numberSortLUT: any[] = [
         ["0", 0],
         ["1", 1],
@@ -87,6 +90,31 @@ export class MtgHelper {
     public static getManacost(cmc: number, colorString: string): string {
         const manacost = this.getRandomManacostWithoutX(cmc, colorString);
         return "X" + MtgHelper.sortWubrg(manacost).split("").join("X");
+    }
+
+    public static getDominantColor(card: MtgCard): string {
+
+        if (card.cmc >= card.color.length)
+            return card.color;
+
+        let colorIdentities = card.color;
+        card.oracle.keywords.forEach(k => colorIdentities += k.colorIdentity);
+        card.oracle.abilities.forEach(k => colorIdentities += k.getColorIdentity());
+        colorIdentities = colorIdentities.toLowerCase();
+
+        let colorCount = [{ c: "w", count: 0 }, { c: "u", count: 0 }, { c: "b", count: 0 }, { c: "r", count: 0 }, { c: "g", count: 0 }];
+        colorCount[0].count = colorIdentities.split("").filter(c => c === "w").length;
+        colorCount[1].count = colorIdentities.split("").filter(c => c === "u").length;
+        colorCount[2].count = colorIdentities.split("").filter(c => c === "b").length;
+        colorCount[3].count = colorIdentities.split("").filter(c => c === "r").length;
+        colorCount[4].count = colorIdentities.split("").filter(c => c === "g").length;
+
+        // sort by count descending.
+        colorCount.sort((a, b) => b.count - a.count);
+
+        const randomColorCount = Random.next(1, card.cmc);
+        const topColors = colorCount.slice(0, randomColorCount).map(c => c.c).join("");
+        return topColors;
     }
 
     private static getRandomManacostWithoutX(cmc: number, colorString: string): string {

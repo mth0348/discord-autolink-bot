@@ -5,7 +5,6 @@ import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanen
 import { StringHelper } from '../../../helpers/StringHelper';
 import { Random } from '../../../helpers/Random';
 import { Logger } from '../../../helpers/Logger';
-import { parse } from 'path';
 import { LogType } from '../../LogType';
 
 export class MtgActivatedAbility implements MtgAbility {
@@ -23,6 +22,10 @@ export class MtgActivatedAbility implements MtgAbility {
     constructor(cost: MtgPermanentActivatedCost, event: MtgPermanentEvent) {
         this.cost = cost;
         this.event = event;
+    }
+
+    public getColorIdentity(): string {
+        return this.cost.colorIdentity + this.event.colorIdentity;
     }
 
     public getText(): string {

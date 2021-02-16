@@ -48,9 +48,7 @@ export class MtgCardRenderer {
     }
 
     private drawCardBorder() {
-        const borderColor = StringHelper.removeDuplicateChars(this.card.manacost.replace(/[\d,X]/g, ""));
-
-        const colorMapping = borderColor.length <= 2 ? borderColor : "m";
+        const colorMapping = this.card.color.length <= 2 ? this.card.color : "m";
         const fileName = `IMAGEURL_BORDER_${colorMapping}${this.card.type === MtgCardType.Creature ? "_CREATURE" : ""}`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName)).path;

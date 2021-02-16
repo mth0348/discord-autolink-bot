@@ -39,6 +39,7 @@ export class MtgCreatureGenerator {
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
+        card.color = MtgHelper.getDominantColor(card);
         card.manacost = MtgHelper.getManacost(card.cmc, card.color);
 
         return card;
