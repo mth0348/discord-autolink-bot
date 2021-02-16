@@ -60,10 +60,6 @@ export class MtgInstantSorceryGenerator {
     }
 
     private chooseAbilities(card: MtgCard) {
-        if (card.rarity === MtgCardRarity.Common) {
-            return;
-        }
-
         const abilityCount = Random.complex([
             { value: 1, chance: 0.80 + (card.rarityScore <= 2 ? -0.2 : 0.0) },
             { value: 2, chance: 0.20 + (card.rarityScore <= 1 ? -1.0 : 0.2) },
