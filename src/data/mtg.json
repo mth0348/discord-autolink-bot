@@ -2474,42 +2474,42 @@
         {
             "text": "destroy target creature with no counters on it",
             "colorIdentity": "bb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "destroy target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "destroy target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "exile target creature with no counters on it",
             "colorIdentity": "wwwbb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "exile target creature with converted mana cost (number2) or less",
             "colorIdentity": "wwwbb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "exile target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwwbb",
-            "score": 1.6
+            "score": 1.8
         },
         {
             "text": "destroy target tapped creature",
             "colorIdentity": "wwbb",
-            "score": 1.4
+            "score": 1.8
         },
         {
             "text": "destroy target (color) creature",
             "colorIdentity": "wwbb",
-            "score": 1.4
+            "score": 1
         },
         {
             "text": "destroy target artifact, creature or planeswalker",
