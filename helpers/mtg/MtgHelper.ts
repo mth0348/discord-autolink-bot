@@ -80,7 +80,7 @@ export class MtgHelper {
     }
 
     public static isExactlyColor(text: string, color: string) {
-        const i = StringHelper.regexIndexOf(text, new RegExp(`^\d["${color.toLowerCase() + color.toUpperCase()}]+$`));
+        const i = StringHelper.regexIndexOf(text, new RegExp(`^[\d${color.toLowerCase() + color.toUpperCase()}]+$`));
         return i === 0;
     }
 

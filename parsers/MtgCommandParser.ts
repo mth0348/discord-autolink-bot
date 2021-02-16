@@ -25,11 +25,11 @@ export class MtgCommandParser extends BaseCommandParser {
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
     public static AVAILABLE_COLORS = [
         "C",
-        "W", "U", "B", "R", "G", 
+        "W", "U", "B", "R", "G",
         "WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG",
         "WUB", "WUR", "WUG", "WBR", "WBG", "WRG", "UBR", "UBG", "URG", "BRG",
         "WUBR", "WUBG", "WURG", "WBRG", "UBRG",
-        "WUBRG" ];
+        "WUBRG"];
 
     private mtgDataRepository: MtgDataRepository;
     private mtgAbilityService: MtgAbilityService;
@@ -100,7 +100,10 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private getRandomType(): string {
-        return Random.nextFromList(Object.keys(MtgCardType));
+
+        return Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature]);
+        // TODO support more types.
+        // return Random.nextFromList(Object.keys(MtgCardType));
     }
 
     private getRandomRarity(): string {
