@@ -3,5 +3,4 @@ export class MtgOracleTextWrapPreset {
     public maxCharactersPerLine: number;
     public maxLines: number;
     public lineDifInPixel: number;
-    public symbolGapSize: number;
 }

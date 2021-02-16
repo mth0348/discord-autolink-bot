@@ -12,6 +12,8 @@ import Canvas = require("canvas");
 
 export class MtgCardRenderer {
 
+    private static MANASYMBOL_PATTERN = /X[^\s]{1}/g;
+
     private canvas: Canvas.Canvas;
     private ctx: Canvas.CanvasRenderingContext2D;
     private card: MtgCard;
@@ -66,7 +68,7 @@ export class MtgCardRenderer {
     }
 
     private async drawCardCost() {
-        await this.overlaySymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 76, true);
+        await this.overlayManacostSymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 75);
     }
 
     private drawCardType() {
@@ -121,35 +123,53 @@ export class MtgCardRenderer {
             const isFlavorText = StringHelper.startsWith(line, "FT_");
             const isFlavorTextSeparator = StringHelper.startsWith(line, "FT_LINE");
 
-            if (isFlavorText) {
+            if (!isFlavorText) {
+                // make placeholder space for symbols.
+                const lineWithoutSymbols = line.replace(MtgCardRenderer.MANASYMBOL_PATTERN, "    ");
+
+                this.ctx.fillText(lineWithoutSymbols, posX, posY + lineOffset, 520);
+                await this.overlaySymbols(lineWithoutSymbols, line, preset.fontSize, posX, posY + lineOffset);
+            }
+            else {
+                // from here on, we can safely assume the rest is flavor text, so set font to italic.
                 this.ctx.font = `${preset.fontSize}px mplantinitalic`;
                 if (isFlavorTextSeparator) {
-                    line = "";
+                    // skip text if its a line.
                     const symbol = await Canvas.loadImage(`assets/img/mtg/separator.png`);
                     this.ctx.drawImage(symbol, 40, posY + lineOffset - 20, 540, 20);
-                    
                 } else {
                     line = line.substring(3);
+                    this.ctx.fillText(line, posX, posY + lineOffset, 520);
                 }
             }
-            
-            // make placeholder space for symbols.
-            const lineWithoutSymbols = line.replace(/X[^\s]{1}/g, "    ");
-
-            this.ctx.fillText(lineWithoutSymbols, posX, posY + lineOffset, 520);
-            await this.overlaySymbols(line, preset.symbolGapSize, preset.fontSize, posX, posY + lineOffset);
         }
     }
 
-    private async overlaySymbols(text: string, gap: number, size: number, positionX: number, positionY: number, drawShadow: boolean = false) {
+    private async overlaySymbols(lineWithoutSymbols: string, line: string, size: number, positionX: number, positionY: number) {
+       
+        let match;
+        let timesFound = 0;
+        while (match = MtgCardRenderer.MANASYMBOL_PATTERN.exec(line)) {
+            const i = match.index;
+            let measuredTextSoFar = this.ctx.measureText(lineWithoutSymbols.substring(0, i + timesFound));
+            const relativePosX = measuredTextSoFar.width;
+            timesFound += 2; /* account for two extra spaces that are added when clearing the text. */
+
+            const s = line.substring(i + 1, i + 2).toUpperCase();
+            const symbol = await Canvas.loadImage(`assets/img/mtg/symbols/mtg_${s}.png`);
+            this.ctx.drawImage(symbol, positionX + relativePosX, positionY + 5 - size, size, size);
+        }
+    }
+
+    private async overlayManacostSymbols(text: string, gap: number, size: number, positionX: number, positionY: number) {
 
         let i = StringHelper.regexIndexOf(text, /X[^\s]{1}/g);
         while (i >= 0) {
-            if (drawShadow) {
-                const shadowSymbol = await Canvas.loadImage(`assets/img/mtg/symbols/mtg_Shadow.png`);
-                this.ctx.drawImage(shadowSymbol, positionX + i * gap, positionY + 9 - size, size, size);
-            }
+            // draw drop shadow.
+            const shadowSymbol = await Canvas.loadImage(`assets/img/mtg/symbols/mtg_Shadow.png`);
+            this.ctx.drawImage(shadowSymbol, positionX + i * gap, positionY + 9 - size, size, size);
 
+            // draw symbol.
             const s = text.substring(i + 1, i + 2).toUpperCase();
             const symbol = await Canvas.loadImage(`assets/img/mtg/symbols/mtg_${s}.png`);
             this.ctx.drawImage(symbol, positionX + i * gap, positionY + 5 - size, size, size);

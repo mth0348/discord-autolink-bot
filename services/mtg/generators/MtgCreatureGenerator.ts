@@ -127,8 +127,8 @@ export class MtgCreatureGenerator {
         totalScore += card.power / 2;
         totalScore += card.toughness / 2;
 
-        card.oracle.keywords.forEach(k => { totalScore += k.score; console.log("keyword: totalScore += " + k.score); });
-        card.oracle.abilities.forEach(a => { totalScore += a.getScore(); console.log("ability: totalScore += " + a.getScore()); });
+        card.oracle.keywords.forEach(k => totalScore += k.score);
+        card.oracle.abilities.forEach(a => totalScore += a.getScore());
 
         // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
         const minCmcForReduction = 3;
