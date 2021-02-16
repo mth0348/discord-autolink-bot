@@ -12,7 +12,7 @@ export class Random {
         return Random.next(0, 1) === 1;
     }
 
-    public static nextFromList(list: any[]): any {
+    public static nextFromList<T>(list: T[]): T {
         return list[Random.next(0, list.length - 1)];
     }
 
