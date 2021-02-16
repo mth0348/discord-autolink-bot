@@ -1,7 +1,8 @@
 import { Collection } from 'discord.js';
 import { Random } from '../Random';
+import { StringHelper } from '../StringHelper';
 export class MtgHelper {
-    private static wubrgLUT = new Collection<string, number>([
+    private static numberSortLUT: any[] = [
         ["0", 0],
         ["1", 1],
         ["2", 2],
@@ -12,6 +13,10 @@ export class MtgHelper {
         ["7", 7],
         ["8", 8],
         ["9", 9],
+    ];
+
+    private static standardSortLUT = new Collection<string, number>([
+        ...MtgHelper.numberSortLUT,
         ["w", 10],
         ["u", 11],
         ["b", 12],
@@ -19,8 +24,64 @@ export class MtgHelper {
         ["g", 14],
     ]);
 
+    /* special sorts
+    1: brgw, br, gw, rgw, rw, rgwu  = brgwu
+    2: gwub, gu, gwu, rwb,          = rgwub
+    3: bgu, gur, urw,               = bgurw
+    */
+    private static brgwuSortLUT = new Collection<string, number>([
+        ...MtgHelper.numberSortLUT,
+        ["b", 10],
+        ["r", 11],
+        ["g", 12],
+        ["w", 13],
+        ["u", 14],
+    ]);
+    private static rgwubSortLUT = new Collection<string, number>([
+        ...MtgHelper.numberSortLUT,
+        ["r", 10],
+        ["g", 11],
+        ["w", 12],
+        ["u", 13],
+        ["b", 14],
+    ]);
+    private static bgurwSortLUT = new Collection<string, number>([
+        ...MtgHelper.numberSortLUT,
+        ["b", 10],
+        ["g", 11],
+        ["u", 12],
+        ["r", 13],
+        ["w", 14],
+    ]);
+
     public static sortWubrg(text: string): string {
-        return text.toLowerCase().split('').sort((a, b) => { return this.wubrgLUT.get(a) - this.wubrgLUT.get(b); }).join("");
+        let lut = this.standardSortLUT;
+
+        if (this.isExactlyColor(text, "br")
+            || this.isExactlyColor(text, "gw")
+            || this.isExactlyColor(text, "rw")
+            || this.isExactlyColor(text, "rgw")
+            || this.isExactlyColor(text, "rgwu")
+            || this.isExactlyColor(text, "brgw"))
+            lut = this.brgwuSortLUT;
+
+        if (this.isExactlyColor(text, "gu")
+            || this.isExactlyColor(text, "gwu")
+            || this.isExactlyColor(text, "rwb")
+            || this.isExactlyColor(text, "gwub"))
+            lut = this.rgwubSortLUT;
+
+        if (this.isExactlyColor(text, "bgu")
+            || this.isExactlyColor(text, "gur")
+            || this.isExactlyColor(text, "urw"))
+            lut = this.bgurwSortLUT;
+
+        return text.toLowerCase().split('').sort((a, b) => { return lut.get(a) - lut.get(b); }).join("");
+    }
+
+    public static isExactlyColor(text: string, color: string) {
+        const i = StringHelper.regexIndexOf(text, new RegExp(`^\d["${color.toLowerCase() + color.toUpperCase()}]+$`));
+        return i === 0;
     }
 
     public static getManacost(cmc: number, colorString: string): string {

@@ -87,7 +87,11 @@ export class MtgCreatureGenerator {
         const t = card.toughness;
 
         // ensure W/U can't have higher p than t, and R has increased chance to have more p than t.
-        if (card.color.toLowerCase() === "w" || card.color.toLowerCase() === "u") {
+        if (MtgHelper.isExactlyColor(card.color, "w") || MtgHelper.isExactlyColor(card.color, "u")) {
+            card.power = Math.min(p, t);
+            card.toughness = Math.max(p, t);
+        }
+        if ((card.color.indexOf("w") >= 0 || card.color.indexOf("u") >= 0) && Random.chance(0.3)) {
             card.power = Math.min(p, t);
             card.toughness = Math.max(p, t);
         }

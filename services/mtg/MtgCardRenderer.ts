@@ -48,7 +48,7 @@ export class MtgCardRenderer {
     }
 
     private drawCardBorder() {
-        const borderColor = this.card.manacost.replace(/[\d,X]/g, "");
+        const borderColor = StringHelper.removeDuplicateChars(this.card.manacost.replace(/[\d,X]/g, ""));
 
         const colorMapping = borderColor.length <= 2 ? borderColor : "m";
         const fileName = `IMAGEURL_BORDER_${colorMapping}${this.card.type === MtgCardType.Creature ? "_CREATURE" : ""}`;
@@ -144,7 +144,7 @@ export class MtgCardRenderer {
     }
 
     private async overlaySymbols(lineWithoutSymbols: string, line: string, size: number, positionX: number, positionY: number) {
-       
+
         let match;
         let timesFound = 0;
         while (match = MtgCardRenderer.MANASYMBOL_PATTERN.exec(line)) {
