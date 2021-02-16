@@ -19,7 +19,18 @@ export class MtgKeyword {
     public parsedText: string;
 
     getText(): string {
-        return this.name + " " + this.nameExtension + (this.hasCost ? " - (cost)" : "");
+        const costText = `(cost[s:${this.score},c:${this.colorIdentity}])`
+
+        if (this.nameExtension.length > 0 && this.hasCost) 
+            return this.name + " " + this.nameExtension + " - " + costText;
+
+        if (this.nameExtension.length)
+            return this.name + " " + this.nameExtension;
+
+        if (this.hasCost) 
+            return this.name + " " + costText;
+
+        return this.name;
     }
 
     setParsedText(text: string): void {

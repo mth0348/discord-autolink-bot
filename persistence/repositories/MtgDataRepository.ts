@@ -34,7 +34,11 @@ export class MtgDataRepository {
     public getKeywordsByColor(colors: string[], count: number): MtgKeyword[] {
         if (count <= 0) return [];
 
-        const list = database.keywords.filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0)).map(k => new MtgKeyword(k));
+        const list = database.keywords
+            .filter(k => k.hasCost) // TODO remvoe
+            .filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0))
+            .map(k => new MtgKeyword(k));
+
         let result: MtgKeyword[] = [Random.nextFromList(list)];
         for (let i = 1; i < count - 1; i++) {
             const reducedList = list.filter(f => result.every(r => f !== r));
@@ -50,6 +54,7 @@ export class MtgDataRepository {
         if (count <= 0) return [];
 
         const list = database.keywords
+            .filter(k => k.hasCost) // TODO remvoe
             .filter(k => k.types.some(t => t === type))
             .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
             .map(k => new MtgKeyword(k));

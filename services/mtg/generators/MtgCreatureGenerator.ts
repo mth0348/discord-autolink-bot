@@ -9,6 +9,7 @@ import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 
 import fs = require("fs");
+import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 
 export class MtgCreatureGenerator {
 
@@ -37,7 +38,7 @@ export class MtgCreatureGenerator {
         this.resolveSyntax(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
-        card.manacost = this.chooseManacost(card.cmc, card.color);
+        card.manacost = MtgHelper.getRandomManacost(card.cmc, card.color);
 
         return card;
     }
@@ -148,107 +149,5 @@ export class MtgCreatureGenerator {
 
     private resolveSyntax(card: MtgCard) {
         this.mtgSyntaxResolver.resolveSyntax(card);
-    }
-
-    private chooseManacost(cmc: number, colorString: string): string {
-        if (colorString.length === 0) {
-            return `X${Math.min(9, cmc)}`;
-        }
-
-        let manacost = "";
-        let color = colorString.split("");
-
-        // Mono color.
-        if (color.length === 1) {
-            if (cmc === 1) {
-                manacost = `X${color[0]}`;
-            } else if (cmc === 2) {
-                let twoSymbols = Random.flipCoin();
-                if (twoSymbols) {
-                    manacost = `X${color[0]}X${color[0]}`;
-                }
-                else {
-                    manacost = `X${Math.min(9, cmc - 1)}X${color[0]}`;
-                }
-            } else if (cmc === 3) {
-                let threeSymbols = Random.chance(0.25);
-                if (threeSymbols) {
-                    return `X${color[0]}X${color[0]}X${color[0]}`;
-                }
-
-                let twoSymbols = Random.flipCoin();
-                if (twoSymbols)
-                    return `X1X${color[0]}${color[0]}`;
-
-                return `X2X${color[0]}`;
-            } else if (cmc > 3) {
-                let twoSymbols = Random.flipCoin();
-                if (twoSymbols)
-                    return `X${Math.min(9, cmc - 2)}X${color[0]}X${color[0]}`;
-
-                let threeSymbols = Random.chance(0.25);
-                if (threeSymbols && cmc > 2)
-                    return `X${Math.min(9, cmc - 3)}X${color[0]}X${color[0]}X${color[0]}`;
-
-                manacost = `X${Math.min(9, cmc - 1)}X${color[0]}`;
-            }
-        }
-
-        // Two colors.
-        if (color.length === 2) {
-            if (cmc === 1) {
-                manacost = `X${color[0]}X${color[1]}`; // TODO zweites X wegnehmen
-            } else if (cmc === 2) {
-                manacost = `X${color[0]}X${color[1]}`;
-            } else if (cmc === 3) {
-                let threeSymbols = Random.next(0, 2); // 0 = none, 1 = first symbol twice, 2 = second symbol twice.
-                switch (threeSymbols) {
-                    case 0:
-                        manacost = `X1X${color[0]}X${color[1]}`;
-                        break;
-                    case 1:
-                        manacost = `X${color[0]}X${color[0]}X${color[1]}`;
-                        break;
-                    case 2:
-                        manacost = `X${color[0]}X${color[1]}X${color[1]}`;
-                        break;
-                }
-            } else if (cmc > 3) {
-                let fourSymbols = Random.next(0, 3); // 0 = none, 1 = first symbol twice, 2 = second symbol twice, 3 = both symbol twice.
-                switch (fourSymbols) {
-                    case 0:
-                        manacost = `X${Math.min(9, cmc - 2)}X${color[0]}X${color[1]}`;
-                        break;
-                    case 1:
-                        manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[0]}X${color[1]}`;
-                        break;
-                    case 2:
-                        manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[1]}X${color[1]}`;
-                        break;
-                    case 3:
-                        manacost = `X${color[0]}X${color[0]}X${color[1]}X${color[1]}`;
-                        if (cmc > 4) {
-                            manacost = `X${Math.min(9, cmc - 4)}${manacost}`;
-                        }
-                        break;
-                }
-            }
-        }
-
-        // More than two colors.
-        if (color.length >= 3) {
-            if (cmc === 1) {
-                manacost = `X${Random.nextFromList(color)}`;
-            } else if (cmc === 2) {
-                let rnd = Random.next(0, color.length - 2);
-                manacost = `X${color[rnd]}X${color[rnd + 1]}`;
-            } else if (cmc === 3) {
-                manacost = `X${color[0]}X${color[1]}X${color[2]}`;
-            } else if (cmc > 3) {
-                manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[1]}X${color[2]}`;
-            }
-        }
-
-        return manacost;
     }
 }
