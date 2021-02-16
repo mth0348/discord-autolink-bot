@@ -165,13 +165,14 @@ export class MtgSyntaxResolver {
                 text = text.replace("(mana2)", "X" + MtgHelper.sortWubrg(symbol).split("").join("X"));
             }
 
-            const costIndex = StringHelper.regexIndexOf(text, /\(cost\[s:\d+\.{0,1}\d*\,c:.+\]\)/g);
+            const costPattern = /\(cost\[s:-{0,1}\d+\.{0,1}\d*\,c:.+\]\)/g;
+            const costIndex = StringHelper.regexIndexOf(text, costPattern);
             if (costIndex >= 0) {
                 const score = text.substr(text.indexOf("s:") + 2, text.indexOf(",c:") - text.indexOf("s:") - 2);
                 const colors = text.substr(text.indexOf("c:") + 2, text.indexOf("]") - text.indexOf("c:") - 2);
 
                 let cost = MtgHelper.getRandomManacost(Math.max(1, Math.round(parseFloat(score) + Random.next(-1, 1))), colors);
-                text = cost;
+                text = text.replace(costPattern, cost);
             }
 
             // TODO Aura not yet supported.
