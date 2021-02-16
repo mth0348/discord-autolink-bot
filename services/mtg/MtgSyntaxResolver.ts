@@ -154,15 +154,15 @@ export class MtgSyntaxResolver {
             }
 
             if (text.indexOf("(mana)") >= 0) {
-                let symbol = Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                let symbol = Random.nextFromList(MtgCommandParser.BASIC_COLORS);
+                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.BASIC_COLORS);
                 text = text.replace("(mana)", "X" + MtgHelper.sortWubrg(symbol).split("").join("X"));
             }
             if (text.indexOf("(mana2)") >= 0) {
-                let symbol = Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
-                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+                let symbol = Random.nextFromList(MtgCommandParser.BASIC_COLORS);
+                symbol += Random.nextFromList(MtgCommandParser.BASIC_COLORS);
+                symbol += Random.nextFromList(MtgCommandParser.BASIC_COLORS);
+                if (Random.flipCoin()) symbol += Random.nextFromList(MtgCommandParser.BASIC_COLORS);
                 text = text.replace("(mana2)", "X" + MtgHelper.sortWubrg(symbol).split("").join("X"));
             }
 

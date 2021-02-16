@@ -7,6 +7,7 @@ export class MtgKeyword implements MtgParsable {
 
     public name: string;
     public hasCost: boolean;
+    public isTop: boolean;
     public score: number;
     public nameExtension: string;
     public colorIdentity: string;
@@ -18,6 +19,7 @@ export class MtgKeyword implements MtgParsable {
     constructor(data: any) {
         this.name = data.name;
         this.hasCost = data.hasCost;
+        this.isTop = data.isTop;
         this.score = data.score;
         this.nameExtension = data.nameExtension;
         this.colorIdentity = data.colorIdentity;

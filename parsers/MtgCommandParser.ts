@@ -23,13 +23,13 @@ export class MtgCommandParser extends BaseCommandParser {
 
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
-    public static AVAILABLE_COLORS = [
-        "C",
-        "W", "U", "B", "R", "G",
-        "WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG",
-        "WUB", "WUR", "WUG", "WBR", "WBG", "WRG", "UBR", "UBG", "URG", "BRG",
-        "WUBR", "WUBG", "WURG", "WBRG", "UBRG",
-        "WUBRG"];
+
+    public static COLORLESS = ["C"];
+    public static BASIC_COLORS = ["W", "U", "B", "R", "G"];
+    public static TWO_COLOR_PAIRS = ["WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG"];
+    public static THREE_COLOR_PAIRS = ["WUB", "WUR", "WUG", "WBR", "WBG", "WRG", "UBR", "UBG", "URG", "BRG"];
+    public static FOUR_COLOR_PAIRS = ["WUBR", "WUBG", "WURG", "WBRG", "UBRG"];
+    public static FIVE_COLORS = ["WUBRG"];
 
     private mtgDataRepository: MtgDataRepository;
     private mtgAbilityService: MtgAbilityService;
@@ -111,6 +111,15 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private getRandomColor(): string {
-        return Random.nextFromList(MtgCommandParser.AVAILABLE_COLORS);
+        const list = Random.complex([
+            { value: MtgCommandParser.COLORLESS, chance: 0.1 },
+            { value: MtgCommandParser.BASIC_COLORS, chance: 0.25 },
+            { value: MtgCommandParser.TWO_COLOR_PAIRS, chance: 0.30 },
+            { value: MtgCommandParser.THREE_COLOR_PAIRS, chance: 0.15 },
+            { value: MtgCommandParser.FOUR_COLOR_PAIRS, chance: 0.1 },
+            { value: MtgCommandParser.FIVE_COLORS, chance: 0.1 },
+        ], MtgCommandParser.BASIC_COLORS);
+
+        return Random.nextFromList(list);
     }
 }

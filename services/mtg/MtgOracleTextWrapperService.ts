@@ -34,12 +34,12 @@ export class MtgOracleTextWrapperService {
         const lines: string[] = [];
 
         // only keywords WITHOUT cost.
-        if (oracle.keywords.length > 0) {
+        if (oracle.keywords.some(k => !k.hasCost || k.isTop)) {
             // separate with and without name extension as well.
             let keywordTexts = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length > 0).map(k => k.parsedText);
             keywordTexts.forEach(line => { lines.push(line.trim()); lines.push(""); });
 
-            let keywordText = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
+            let keywordText = oracle.keywords.filter(k => (!k.hasCost || k.isTop) && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
             let keywordLines = this.wordWrapText(keywordText, preset.maxCharactersPerLine);
             keywordLines.forEach(line => lines.push(line.trim()));
             lines.push("");
@@ -62,7 +62,7 @@ export class MtgOracleTextWrapperService {
         }
 
         // only keywords WITH cost.
-        if (oracle.keywords.length > 0) {
+        if (oracle.keywords.some(k => k.hasCost)) {
             const keywordsWithCost = oracle.keywords.filter(k => k.hasCost).map(k => k.parsedText);
             // only ever print 1.
             if (keywordsWithCost.length === 1) {
