@@ -6,7 +6,11 @@ export class Logger {
 
     public static log(text: string, type: LogType = LogType.Verbose, args: any = undefined) {
         if (this.enabledTypes.some(t => t === type)) {
-            console.log(text, args);
+            if (args) {
+                console.log(text, args);
+            } else {
+                console.log(text);
+            }
         }
     }
 }

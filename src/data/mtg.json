@@ -1273,7 +1273,8 @@
         {
             "text": "When you cast this spell",
             "replacementText": "",
-            "context": "self"
+            "context": "self",
+            "restrictedTypes": ["artifact", "creature", "instant", "sorcery", "planeswalker", "enchantment"]
         },
         {
             "text": "Whenever another creature enters the battlefield",
@@ -1441,19 +1442,19 @@
             "text": "put (numbername) +1/+1 counter(s) on (self)",
             "score": 0.6,
             "colorIdentity": "g",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "untap (self)",
             "score": 0.2,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "untap target permanent",
             "score": 0.2,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "(self) deals (number) damage to target (player)",
@@ -1483,7 +1484,7 @@
         {
             "text": "(name) deals (number2) damage to each creature",
             "colorIdentity": "rr",
-            "score": 2
+            "score": 3
         },
         {
             "text": "(name) deals (number2) damage to each (subtype) creature",
@@ -1514,7 +1515,7 @@
             "text": "destroy (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "you lose (number) life",
@@ -1625,7 +1626,7 @@
             "text": "sacrifice (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "sacrifice a creature",
@@ -1634,27 +1635,27 @@
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target creature",
-            "score": 1.1,
+            "score": 1.8,
             "colorIdentity": "gr"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target creature",
-            "score": 1.1,
+            "score": 1.8,
             "colorIdentity": "gr"
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target creature",
-            "score": 1.1,
+            "score": 1.8,
             "colorIdentity": "gr"
         },
         {
             "text": "put (numbername2) +1/+1 counter(s) on target creature",
-            "score": 1.3,
+            "score": 2.4,
             "colorIdentity": "gr"
         },
         {
             "text": "put (numbername2) +1/+1 counter(s) on target creature",
-            "score": 1.3,
+            "score": 2.4,
             "colorIdentity": "gr"
         },
         {
@@ -1664,7 +1665,7 @@
         },
         {
             "text": "put (numbername) -1/-1 counter(s) on target creature",
-            "score": 1.2,
+            "score": 1.8,
             "colorIdentity": "b"
         },
         {
@@ -1674,9 +1675,9 @@
         },
         {
             "text": "put a (keyword) counter on another target creature",
-            "score": 1,
+            "score": 1.4,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "put the top (numbername) cards of your library into your graveyard",
@@ -1695,17 +1696,17 @@
         },
         {
             "text": "return target (type) card from your graveyard to your hand",
-            "score": 0.7,
+            "score": 1,
             "colorIdentity": "bg"
         },
         {
             "text": "return target creature card from your graveyard to the battlefield under your control",
-            "score": 2.8,
+            "score": 3.5,
             "colorIdentity": "wbg"
         },
         {
             "text": "return target creature card from a graveyard to the battlefield under your control",
-            "score": 3.2,
+            "score": 4,
             "colorIdentity": "wbg"
         },
         {
@@ -1720,32 +1721,32 @@
         },
         {
             "text": "return up to (numbername) target (type) card(s) from your graveyard to your hand",
-            "score": 0.7,
+            "score": 2.2,
             "colorIdentity": "bg"
         },
         {
             "text": "return target creature card from your graveyard to the battlefield under your control tapped",
-            "score": 3.2,
-            "colorIdentity": "wbg"
-        },
-        {
-            "text": "return target creature card from a graveyard to the battlefield under your control tapped",
             "score": 3.5,
             "colorIdentity": "wbg"
         },
         {
+            "text": "return target creature card from a graveyard to the battlefield under your control tapped",
+            "score": 4,
+            "colorIdentity": "wbg"
+        },
+        {
             "text": "return target (permanent) card from your graveyard to the battlefield under your control tapped",
-            "score": 3.0,
+            "score": 4.5,
             "colorIdentity": "wbg"
         },
         {
             "text": "return target (permanent) card from a graveyard to the battlefield under your control tapped",
-            "score": 3.4,
+            "score": 4.5,
             "colorIdentity": "wbg"
         },
         {
             "text": "exile target (permanent)",
-            "score": 2.2,
+            "score": 2.5,
             "colorIdentity": "wb"
         },
         {
@@ -1762,7 +1763,7 @@
             "text": "exile (self)",
             "score": -1,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "each player exiles (numbername) cards from his or her hand",
@@ -1781,12 +1782,12 @@
         },
         {
             "text": "each opponent exiles a card from his or her hand",
-            "score": 0.1,
+            "score": 0.3,
             "colorIdentity": "bb"
         },
         {
             "text": "each player discards a card",
-            "score": 0.1,
+            "score": 0.3,
             "colorIdentity": "wubrg"
         },
         {
@@ -1863,31 +1864,31 @@
             "text": "(self) gets +(number)/+0 until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "(self) gets +(number)/+(samenumber) until end of turn",
             "score": 0.5,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "(self) gets +(number2)/+(samenumber) until end of turn",
             "score": 1,
             "colorIdentity": "wubrg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "(self) deals damage equal to its power to target creature",
             "score": 2.2,
             "colorIdentity": "rg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "(self) deals damage equal to its power to any target",
             "score": 2.6,
             "colorIdentity": "rg",
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
@@ -1926,7 +1927,7 @@
             "noFollowUp": true
         },
         {
-            "text": "look at the top X cards of your library, where X is the number of (color|type) creatures you control. You may put up to (numbername) of those cards into your hand",
+            "text": "look at the top X cards of your library, where X is the number of (type|color) creatures you control. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
             "noFollowUp": true
@@ -2152,37 +2153,37 @@
             "text": "(other creatures) you control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
             "score": -4,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "(other creatures) you control get +(number)/+(samenumber)",
             "colorIdentity": "wwbg",
             "score": 4,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "creatures you don't control get -1/-1",
             "colorIdentity": "bb",
             "score": 4,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "creatures you don't control get -2/-2",
             "colorIdentity": "bb",
             "score": 5,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "(other creatures) you don't control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
             "score": 6,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "(other creatures) you control get +1/+1 and have (keyword)",
             "colorIdentity": "wubrg",
             "score": 4.2,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "you can't lose the game and your opponents can't win the game",
@@ -2193,7 +2194,7 @@
             "text": "you can't lose the game and your opponents can't win the game",
             "colorIdentity": "wubrg",
             "score": 5,
-            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
         },
         {
             "text": "you can't win the game and your opponents can't lose the game",
@@ -2361,7 +2362,7 @@
             "text": "put a -1/-1 counter on (self)",
             "colorIdentity": "bg",
             "score": 4,
-            "restrictedTypes": [ "creature" ]
+            "restrictedTypes": ["creature"]
         },
         {
             "text": "pay (number) life",
@@ -2649,19 +2650,19 @@
             "text": "prevent the next (number2) damage that would be dealt to you",
             "colorIdentity": "w",
             "score": 0.2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "prevent all combat damage that would be dealt to creatures you control this turn",
             "colorIdentity": "w",
             "score": 0.2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "prevent the next (number3) damage that would be dealt to you",
             "colorIdentity": "w",
             "score": 2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "discard a card",
@@ -2687,13 +2688,13 @@
             "text": "prevent the next (number3) damage that would be dealt to creatures you control",
             "colorIdentity": "w",
             "score": 2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
             "score": 0.1,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "you and creatures you control gain hexproof until end of turn",
@@ -2709,7 +2710,7 @@
             "text": "counter target spell",
             "colorIdentity": "uuu",
             "score": 2.5,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target (player) loses (number) life and you gain (number) life",
@@ -2790,49 +2791,49 @@
             "text": "target attacking creature gets +(number)/+0 until end of turn",
             "colorIdentity": "r",
             "score": 0.5,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target attacking creature gets +(number2)/+0 until end of turn",
             "colorIdentity": "r",
             "score": 0.5,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target attacking creature gets +(number2)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "r",
             "score": 1.2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target attacking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "rg",
             "score": 1.7,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target blocking creature gets +(number)/+0 until end of turn",
             "colorIdentity": "wrg",
             "score": 0.5,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target blocking creature gets +(number2)/+0 until end of turn",
             "colorIdentity": "wrg",
             "score": 0.5,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target blocking creature gets +(number2)/+0 and gains (keyword) until end of turn",
             "colorIdentity": "wrg",
             "score": 1.2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "target blocking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
             "colorIdentity": "wrg",
             "score": 1.7,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "switch target creature's power and toughness until end of turn",
@@ -2928,7 +2929,7 @@
             "text": "counter target (type/counterable) spell",
             "colorIdentity": "u",
             "score": 1.2,
-            "restrictedTypes": [ "instant" ]
+            "restrictedTypes": ["instant"]
         },
         {
             "text": "tap target (permanent)",
@@ -3937,10 +3938,61 @@
             "condemnation"
         ],
         "flavors": [
-            "The fight is not over.",
-            "\"Power is power\" - Cersei",
-            "Public bots can be added by anyone. When unchecked, only you can join this bot to servers.",
-            "Public bots can be added by anyone."
+            "Greatness at any cost.",
+            "Every victorious warrior draws his strength from the highest source; his love.",
+            "Warriors want a worthy opponent.",
+            "There is no redress in fighting the pathetic.",
+            "I am someone to fear, not hunt.",
+            "A warrior never worries about his fear.",
+            "Victory is reserved for those who are willing to pay it’s price.",
+            "From ashes I come, to ashes I go",
+            "What is life compared to death?",
+            "The more you sweat in training, the less you will bleed in battle.",
+            "The bravest warriors know when to retreat.",
+            "Nobody can hurt me without my permission.",
+            "\"Courage is victory\" - Malakhir",
+            "With faith on our side, all battles shall be won.",
+            "Wisdom is strength.",
+            "Knowledge is power.",
+            "Power is power.",
+            "It is easier to fight for one’s principles than to live up to them.",
+            "People who fight fire with fire usually end up with ashes.",
+            "\"The supreme art of war is to subdue the enemy without fighting.\" – Sun Tzu",
+            "Supreme excellence consists in breaking the enemy’s resistance without fighting.",
+            "\"I can eat up to a thousand bananas a day, how much can you handle?\" - a monkey, probably",
+            "No battle is worth fighting except the last one.",
+            "Rise above the shadow.",
+            "We create monsters and then we can't control them.",
+            "A monster is not dangerous. Not as long as it's asleep...",
+            "Those monsters are just like us, but uglier.",
+            "Good blood, bad blood.",
+            "Beastiality at its best.",
+            "A monster, even in the eyes of the gods.",
+            "Good or evil, a monster is a monster.",
+            "They linger in the shadows and stalk their prey from afar.",
+            "Swift and deadly. One strike from this beast and you are out.",
+            "You don't have to imagine what a walking killing machine would look like. Just look at this fellow!",
+            "What on earth is this?",
+            "Do you also wonder what it eats?",
+            "Do you also wonder what it eats? - That's right, humans!",
+            "No human is ever safe from those hainous monsters.",
+            "\"Death and destruction, that's what those beasts have brought upon us.\" - Farmer",
+            "They are known to eat their victims alive.",
+            "Such a rare sight. Beautiful, but rather deadly.",
+            "No sword will save you from that!",
+            "Its skin is hard, its teeth are sharp. Don't go close.",
+            "For many sailors, this is what they see last before they die.",
+            "It may look harmless, but don't trust a book by its cover.",
+            "Don't judge a book by its cover.",
+            "This species is rarely encountered alone.",
+            "Its daily menu consits of basiliks, dragons, and other big lizards.",
+            "It wishes for a more pleasant meal, like some basilik, dragon, or any other big lizard.",
+            "It hungers for blood.",
+            "They usually come in numbers. Most town are overwhelmed by their sheer force.",
+            "Humans have fought those bastards for over centuries. The battle is not yet won...",
+            "And so the fight begins...",
+            "\"I would rather eat a broom than fight this ugly brute.\" - Broomeater Joe",
+            "\"I would rather fight a broom than eat this ugly brute.\" - Broomfighter Sven"
         ]
     },
     "spellTexts": {
@@ -4180,6 +4232,49 @@
             "vengeance",
             "lash",
             "winds"
+        ],
+        "flavors": [
+            "Magic becomes art when it has nothing to hide.",
+            "Never ever doubt in magic.",
+            "Magic is not a practice.",
+            "Real magic is not about gaining power over others: it is about gaining power over yourself.",
+            "Magic is believing in yourself, if you can do that, you can make anything happen.",
+            "The real secret of magic lies in the performance.",
+            "Effective magic is transcendent nature.",
+            "A little magic can take you a long way.",
+            "And where does magic come from?",
+            "Those who don't believe in magic will never find it.",
+            "There is no magic in magic, it's all in the details.",
+            "Boom goes the dynamite!",
+            "\"Take that, you scoundrel!\" - Lorelai",
+            "\"In your face!\" - Jace Beleren",
+            "The loss of magic is the denial of unlimited possibility.",
+            "Unlimited power!",
+            "\"This may look like an experiment, but trust me, I know what I'm doing...\" - Joe",
+            "In the eye of the storm, you are safe. Don't step out of it.",
+            "Don't do this at home.",
+            "Abominations have no right to exist.",
+            "Cleansing this planet from impurity will be the wizards' greatest achievement.",
+            "\"You shall not pass!\" - Gandalf",
+            "\"Courage is victory\" - Malakhir",
+            "In times of need, look for a purple star at night. It will guide you and grant you strength.",
+            "The chain is only as strong as its weakest link.",
+            "Putting an end this suffering is merciful, nothing else.",
+            "\"Rest assured, this spell will go well.\" - Dave (died)",
+            "And so the fight begins...",
+            "Good or evil, a monster is a monster.",
+            "Knowledge is power.",
+            "Power is power.",
+            "Wisdom is strength.",
+            "With faith on our side, all battles shall be won.",
+            "People who fight fire with fire usually end up with ashes.",
+            "The worlds are at peace only when all evil has been cleansed from them.",
+            "Such savagery is not tolerated here.",
+            "Savagery is a sin and must be punished.",
+            "\"Filth like you should never have left its lair!\" - Aurius",
+            "There is more where that came from...",
+            "Defense is the best offense. Though, not all the time. Actually never. ATTACK!",
+            "Defense is the best offense."
         ]
     },
     "enchantmentTexts": {
@@ -4294,5 +4389,245 @@
             "clutches",
             "bubble"
         ]
-    }  
+    },
+    "landTexts": {
+        "adjectives": [
+            "forgotten",
+            "deserted",
+            "abandoned",
+            "lost",
+            "hidden",
+            "mischievous",
+            "secret",
+            "misty",
+            "coastal",
+            "icy",
+            "dangerous",
+            "perilous",
+            "poisonous",
+            "protected",
+            "empty",
+            "fallen",
+            "corrupted",
+            "delirious",
+            "divine",
+            "shattering",
+            "arid",
+            "ironbreak",
+            "shatterstone",
+            "sandy",
+            "mirrored",
+            "phantasmal",
+            "distant",
+            "solitary",
+            "churchway",
+            "ivory",
+            "ebony",
+            "woodmere",
+            "gallem",
+            "desolate",
+            "wailing",
+            "greenmer",
+            "granite",
+            "voiceless",
+            "faraway",
+            "prolan",
+            "scarlet",
+            "crimson",
+            "stokegus",
+            "witmond",
+            "faymond",
+            "celestine",
+            "elestine",
+            "drowned",
+            "watery",
+            "adamantine",
+            "winderberg",
+            "hinterland",
+            "clay",
+            "crushing",
+            "bainrock",
+            "palestone",
+            "white-iron",
+            "black-iron",
+            "talmond",
+            "greymond",
+            "saintberg",
+            "driftwood",
+            "sandstone",
+            "varenstino",
+            "lestead",
+            "bloomsend",
+            "flamestoked",
+            "haunted",
+            "lifeless",
+            "faldover",
+            "minneshall",
+            "silver"
+        ],
+        "descriptors": [
+            "grove",
+            "mesa",
+            "canyon",
+            "valley",
+            "city",
+            "fortress",
+            "cave",
+            "caves",
+            "cavern",
+            "caverns",
+            "wood",
+            "woods",
+            "lair",
+            "desert",
+            "mountains",
+            "shrubland",
+            "cliffs",
+            "coast",
+            "wetland",
+            "taiga",
+            "plains",
+            "moors",
+            "volcano",
+            "settlement",
+            "nest",
+            "temple",
+            "shrine",
+            "abyss",
+            "chasm",
+            "bluffs",
+            "gorge"
+        ],
+        "names": [
+            "Viddall",
+            "Aruer",
+            "Adur",
+            "Shoeus",
+            "Vornir",
+            "Eeyr",
+            "Dhisaos",
+            "Atia",
+            "Oohr",
+            "Isius",
+            "Qhivmos",
+            "Ises",
+            "Dhyznos",
+            "Oaris",
+            "Ias",
+            "Vadall",
+            "Ases",
+            "Udaris",
+            "Zoxtris",
+            "Xilir",
+            "Vurara",
+            "Guses",
+            "Etdite",
+            "Qhydon",
+            "Zatris",
+            "Xunos",
+            "Nidtris",
+            "Phaen",
+            "Ronarin",
+            "Uzris",
+            "Dolin",
+            "Ermis",
+            "Xadses",
+            "Yros",
+            "Ymtis",
+            "Amos",
+            "Tedis",
+            "Thyzdite"
+        ],
+        "nouns": [
+            "greatness",
+            "adventure",
+            "doom",
+            "power",
+            "menace",
+            "darkness",
+            "banishment",
+            "blossom",
+            "boon",
+            "condemnation",
+            "death",
+            "life",
+            "damnation",
+            "demise",
+            "enlightmenment",
+            "danger",
+            "favor",
+            "gods",
+            "fire",
+            "ice",
+            "magic",
+            "greed",
+            "growth",
+            "guidance",
+            "horror",
+            "impurity",
+            "judgement",
+            "knowledge",
+            "wisdom",
+            "legends",
+            "malevolence",
+            "mastery",
+            "monsters",
+            "mutation",
+            "paradise",
+            "punishment",
+            "reflection",
+            "resolution",
+            "peace",
+            "revenge",
+            "revelry",
+            "shackles",
+            "shadow",
+            "slaughter",
+            "solidarity",
+            "solitude",
+            "strength",
+            "weakness",
+            "treasure",
+            "vengeance",
+            "vigor",
+            "war"
+        ],
+        "flavors": [
+            "Life is like a landscape.",
+            "Study nature, love nature, stay close to nature. It will never fail you.",
+            "Choose only one master: nature.",
+            "Leave the road, take the trails.",
+            "By discovering nature, you discover yourself.",
+            "Nature is pleased with simplicity.",
+            "The clearest way into the Universe is through a forest wilderness.",
+            "Adopt the pace of nature. Her secret is patience.",
+            "Darkness grows in the shadows.",
+            "Once a place of power, now only a mere shadow of its former glory.",
+            "There are always flowers for those who want to see them.",
+            "Architectural perfection",
+            "\"You made this? I made this.\" - Bob the builder",
+            "Any landscape is a condition of the spirit.",
+            "A place of power, it's gotta be.",
+            "\"Medallion's humming!\" - Geralt",
+            "Not all who wander are lost.",
+            "A fortress is of no use to cowards.",
+            "Different roads sometimes lead to the same castle.",
+            "You make kingdoms and castles on your own.",
+            "There is no rules of architecture for a castle in the clouds.",
+            "Don't be afraid to walk the longer road.",
+            "The key to victory is a strategical place for your stronghold.",
+            "What a sight to behold.",
+            "They say knowledge protect you better than castles. This begs to differ.",
+            "Your home is your castle.",
+            "Have fun storming the castle!",
+            "This place has withstood the rebirth of the Universe, do you think your petty army can tear it down?",
+            "\"If you are ever going to build something, build this!\" - Don",
+            "They don't have to know about the secret entrance.",
+            "Did you know that there is a secret entrance?",
+            "This is not a place to live, it is a place to fight.",
+            "\"Don't deny it, this is way cooler than your stinking hobbit hole!\" - Frodo, after living here",
+            "If a castle gets destroyed, you just build a new one.",
+            "Better positioned than Kings Landing."
+        ]
+    }
 }

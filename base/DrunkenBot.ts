@@ -1,4 +1,4 @@
-import { Client, Message, PartialMessage } from "discord.js";
+import { Client, Message, PartialMessage, TextChannel } from "discord.js";
 import { MtgCommandParser } from "../parsers/MtgCommandParser";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
@@ -11,7 +11,7 @@ export class DrunkenBot {
     private parameterService: ParameterService;
     private client: Client;
 
-    private registeredParsers : ICommandParser[];
+    private registeredParsers: ICommandParser[];
 
     constructor(token: string) {
         this.client = new Client();
@@ -36,7 +36,7 @@ export class DrunkenBot {
         console.log("");
     }
 
-    public startListening() : void {
+    public startListening(): void {
         this.client.on('message', message => {
 
             this.registeredParsers.forEach(async parser => {
@@ -50,8 +50,10 @@ export class DrunkenBot {
 
     private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
         try {
-            if (message.author.username === "Telerik") // TODO REMOVE CHECK.
+            // TODO REMOVE CHECK.
+            if (message.author.username === "Telerik" && (message.channel as TextChannel).name.toLowerCase() === "dev-playground") {
                 await parser.executeAsync(message);
+            }
         }
         catch (e) {
             console.warn(e);
@@ -59,7 +61,7 @@ export class DrunkenBot {
         }
     }
 
-    private registerCommandParsers() : void {
+    private registerCommandParsers(): void {
         this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // csgoNadeParser
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser

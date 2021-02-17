@@ -12,7 +12,7 @@ export class MtgStaticAbility implements MtgAbility {
 
     public parsedText: string;
 
-    public parserValue: number;
+    public parserValue: number = 0;
 
     public event: MtgPermanentStatics;
 

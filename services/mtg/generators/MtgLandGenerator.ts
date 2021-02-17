@@ -4,12 +4,9 @@ import { Random } from '../../../helpers/Random';
 import { MtgAbilityService } from '../MtgAbilityService';
 import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
-import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
-import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
-import { isatty } from 'tty';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
 
 export class MtgLandGenerator extends MtgBaseGenerator {
@@ -24,8 +21,8 @@ export class MtgLandGenerator extends MtgBaseGenerator {
 
     public generate(card: MtgCard): MtgCard {
 
-        card.subtype = Random.chance(0.05) ? "Arcane" : undefined;
-        card.name = card.name || this.mtgDataRepository.getInstantSorceryName();
+        card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
+        card.name = card.name || this.mtgDataRepository.getLandName(card.isLegendary);
 
         this.chooseAbilities(card);
         this.chooseArtwork(card, "land");
@@ -52,7 +49,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
                 { value: 1, chance: 0.80 },
             ], 0);
         }
-        if (card.rarity === MtgCardRarity.Common || card.rarity === MtgCardRarity.Uncommon) {
+        if (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic) {
             abilityCount = Random.complex([
                 { value: 1, chance: 0.50 },
                 { value: 2, chance: 0.50 + ((entersTapped || hasManaAbility) ? -1.0 : 0.0) }
@@ -76,11 +73,10 @@ export class MtgLandGenerator extends MtgBaseGenerator {
         }
 
         // decide to add mana abilities.
-        if (hasManaAbility) {
+        if (hasManaAbility || abilityCount === 0) {
             // enters tapped allows for more colored mana abilities.
-            if (entersTapped) {
-                this.mtgAbilityService.generateManaAbility(card);
-            }
+            const colorsAllowed = entersTapped ? 5 : Random.next(0, 1);
+            this.mtgAbilityService.generateManaAbility(card, colorsAllowed);
         }
 
         // actually add rest of the abilities.
@@ -91,9 +87,9 @@ export class MtgLandGenerator extends MtgBaseGenerator {
 
     private generateAbility(card: MtgCard, abilityType: MtgAbilityType) {
 
-        const isRequiredPositive = card.oracle.abilities.reduce((a, b) => a += b.getScore(), 0) <= 0;
-        const minScore = isRequiredPositive ? 0 : -99;
-        const maxScore = 2;
+        const scoreSoFar = card.oracle.abilities.length > 0 ? card.oracle.abilities.reduce((a, b) => a += b.getScore(), 0) : 0;
+        const minScore = scoreSoFar <= 0 ? scoreSoFar : -99;
+        const maxScore = Math.max(1, 1 - scoreSoFar);
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
@@ -107,6 +103,18 @@ export class MtgLandGenerator extends MtgBaseGenerator {
             case MtgAbilityType.Static:
                 this.mtgAbilityService.generateStaticAbility(card, minScore, maxScore);
                 break;
+        }
+    }
+    
+    private chooseFlavorText(card: MtgCard) {
+        if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
+            const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
+            const smallEnoughFlavorText = this.mtgDataRepository.getLandFlavorText(maxFlavorTextLength);
+            if (smallEnoughFlavorText !== undefined && smallEnoughFlavorText !== null) {
+                card.wrappedOracleLines.push("FT_LINE");
+                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, card.rendererPreset.maxCharactersPerLine)
+                flavorTextLines.forEach(f => card.wrappedOracleLines.push("FT_" + f));
+            }
         }
     }
 }

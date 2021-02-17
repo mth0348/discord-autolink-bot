@@ -66,9 +66,11 @@ export class MtgCardRenderer {
         this.ctx.font = `${cardTitle.length > 25 ? 34 : 38}px matrixbold`;
 
         // check is necessary, lands have no manacost.
+        let offsetRight = 0;
         if (this.card.manacost.length > 0) {
-            this.ctx.fillText(cardTitle, 52, 78, 520 - (this.card.manacost.length * 17));
+            offsetRight = this.card.manacost.length * 17;
         }
+        this.ctx.fillText(cardTitle, 52, 78, 520 - offsetRight);
     }
 
     private async drawCardCost() {

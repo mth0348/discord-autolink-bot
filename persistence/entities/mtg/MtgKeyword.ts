@@ -14,7 +14,7 @@ export class MtgKeyword implements MtgParsable {
     public types: string[];
 
     public parsedText: string;
-    public parserValue: number;
+    public parserValue: number = 0;
 
     constructor(data: any) {
         this.name = data.name;

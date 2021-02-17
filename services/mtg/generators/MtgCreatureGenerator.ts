@@ -180,4 +180,16 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
                 break;
         }
     }
+    
+    private chooseFlavorText(card: MtgCard) {
+        if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
+            const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
+            const smallEnoughFlavorText = this.mtgDataRepository.getCreatureFlavorText(maxFlavorTextLength);
+            if (smallEnoughFlavorText !== undefined && smallEnoughFlavorText !== null) {
+                card.wrappedOracleLines.push("FT_LINE");
+                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, card.rendererPreset.maxCharactersPerLine)
+                flavorTextLines.forEach(f => card.wrappedOracleLines.push("FT_" + f));
+            }
+        }
+    }
 }

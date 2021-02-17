@@ -13,6 +13,7 @@ import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanentStatics';
 import { isatty } from 'tty';
 import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
+import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 
 export class MtgAbilityService {
 
@@ -27,8 +28,7 @@ export class MtgAbilityService {
     }
 
     public generateSpellAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99) {
-
-        const colors = card.color.toLowerCase().split('');
+        const colors = this.getColors(card);
 
         const events = this.mtgDataRepository.getInstantSorceryEvents()
             .filter(a =>
@@ -42,7 +42,7 @@ export class MtgAbilityService {
     }
 
     public generateLandEtbAbility(card: MtgCard) {
-        const colors = card.color.toLowerCase().split('');
+        const colors = this.getColors(card);
 
         const isRegularTapped = Random.chance(0.8);
         if (isRegularTapped) {
@@ -66,18 +66,20 @@ export class MtgAbilityService {
             const etbEvent = new MtgPermanentStatics({
                 colorIdentity: chosenCost.colorIdentity,
                 text: "as (self) enters the battlefield, you may " + chosenCost.text + ". If you don't, (self) enters the battlefield tapped",
-                score: -chosenCost.score / 2
+                score: 1 - chosenCost.score / 6
             });
             card.oracle.abilities.push(new MtgStaticAbility(etbEvent));
 
         }
     }
 
-    public generateManaAbility(card: MtgCard) {
+    public generateManaAbility(card: MtgCard, collorsAllowed: number) {
         let colorString = "";
 
-        if (card.color.length === 1)
-            colorString = "X" + card.color;
+        if (collorsAllowed === 0)
+            colorString = "XC";
+        else if (card.color.length === 1 || collorsAllowed === 1)
+            colorString = "X" + Random.nextFromList(card.color.split(""));
         else if (card.color.length === 2)
             colorString = "X" + card.color.split("").join(" or X");
         else if (card.color.length > 2)
@@ -95,21 +97,24 @@ export class MtgAbilityService {
             colorIdentity: card.color
         });
 
+        // overwrite color, as the printed mana symbols predict the land cards border.
+        card.color = MtgHelper.sortWubrg(colorString.replace(/[X,\sor]*/g, ""));
+
         card.oracle.abilities.push(new MtgActivatedAbility(cost, event));
     }
 
 
     public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99) {
-        const colors = card.color.toLowerCase().split('');
+        const colors = this.getColors(card);
 
-        const positiveEvents = this.mtgDataRepository.getPermanentEvents()
+        const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
                 a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
-        const activatedEvent = Random.nextFromList(positiveEvents);
+        const activatedEvent = Random.nextFromList(events);
 
         let cost = null;
 
@@ -150,9 +155,10 @@ export class MtgAbilityService {
     }
 
     public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
-        const colors = card.color.toLowerCase().split('');
+        const colors = this.getColors(card);
 
-        const conditions = this.mtgDataRepository.getPermanentConditions();
+        const conditions = this.mtgDataRepository.getPermanentConditions()
+            .filter(c => c.restrictedTypes == undefined || c.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)));
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
@@ -167,7 +173,7 @@ export class MtgAbilityService {
     }
 
     public generateStaticAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
-        const colors = card.color.toLowerCase().split('');
+        const colors = this.getColors(card);
 
         const statics = this.mtgDataRepository.getPermanentStatics()
             .filter(a =>
@@ -178,5 +184,9 @@ export class MtgAbilityService {
 
         const staticEvent = Random.nextFromList(statics);
         card.oracle.abilities.push(new MtgStaticAbility(staticEvent));
+    }
+
+    private getColors(card: MtgCard): string[] {
+        return MtgHelper.isExactlyColor(card.color, "c") ? MtgCommandParser.BASIC_COLORS : card.color.toLowerCase().split('');
     }
 }

@@ -13,7 +13,7 @@ export class MtgTriggeredAbility implements MtgAbility {
 
     public parsedText: string;
 
-    public parserValue: number;
+    public parserValue: number = 0;
 
     public condition: MtgPermanentCondition;
 

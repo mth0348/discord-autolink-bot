@@ -29,7 +29,7 @@ export class MtgHelper {
 
     /* special sorts
     1: brgw, br, gw, rgw, rw, rgwu  = brgwu
-    2: gwub, gu, gwu, rwb,          = rgwub
+    2: gwub, gu, gwu, rwb, wu       = rgwub
     3: bgu, gur, urw,               = bgurw
     */
     private static brgwuSortLUT = new Collection<string, number>([
@@ -69,6 +69,7 @@ export class MtgHelper {
             lut = this.brgwuSortLUT;
 
         if (this.isExactlyColor(text, "gu")
+            || this.isExactlyColor(text, "wu")
             || this.isExactlyColor(text, "gwu")
             || this.isExactlyColor(text, "rwb")
             || this.isExactlyColor(text, "gwub"))

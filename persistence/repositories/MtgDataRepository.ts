@@ -6,11 +6,11 @@ import { MtgPermanentEvent } from '../entities/mtg/MtgPermanentEvent';
 import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
 import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
 import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
-import { MtgStaticAbility } from '../../dtos/mtg/abilities/MtgStaticAbility';
 
 import database = require('../../src/data/mtg.json');
 
 export class MtgDataRepository {
+
     public getTypes(): string[] {
         return database.types;
     }
@@ -79,9 +79,9 @@ export class MtgDataRepository {
     }
 
     public getCreatureName(isLegendary: boolean): string {
-        const name = database.creatureTexts.names[Random.next(0, database.creatureTexts.names.length - 1)] + ", ";
-        const adjective = database.creatureTexts.adjectives[Random.next(0, database.creatureTexts.adjectives.length - 1)] + " ";
-        const noun = database.creatureTexts.nouns[Random.next(0, database.creatureTexts.nouns.length - 1)]
+        const name = Random.nextFromList(database.creatureTexts.names) + ", ";
+        const adjective = Random.nextFromList(database.creatureTexts.adjectives) + " ";
+        const noun = Random.nextFromList(database.creatureTexts.nouns);
 
         if (isLegendary) {
             if (Random.chance(0.3)) {
@@ -93,16 +93,45 @@ export class MtgDataRepository {
         }
     }
 
+    public getLandName(isLegendary: boolean): string {
+        const name = Random.nextFromList(database.landTexts.names) + ", ";
+        const adjective = Random.nextFromList(database.landTexts.adjectives) + " ";
+        const noun = Random.nextFromList(database.landTexts.nouns);
+        const descriptor = Random.nextFromList(database.landTexts.descriptors);
+
+        if (isLegendary) {
+            return StringHelper.toCamelCase(name + adjective + descriptor);
+        }
+
+        if (Random.chance(0.5)) {
+            /* "mountains of wisdom" */
+            return StringHelper.capitalizeFirstChar(descriptor) + " of " + StringHelper.capitalizeFirstChar(noun);
+        }
+
+        /* "misty mountains" */
+        return StringHelper.toCamelCase(adjective + descriptor);
+    }
+
     public getCreatureFlavorText(maxCharacterLength: number): string {
         // sort descending by text length.
         return database.creatureTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
     }
 
+    public getLandFlavorText(maxCharacterLength: number): string {
+        // sort descending by text length.
+        return database.landTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
+    }
+
+    public getSpellFlavorText(maxCharacterLength: number): string {
+        // sort descending by text length.
+        return database.spellTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
+    }
+
     public getPlaneswalkerName() {
-        const name = database.planeswalkerTexts.names[Random.next(0, database.planeswalkerTexts.names.length - 1)] + ", ";
-        const secondName = database.planeswalkerTexts.names[Random.next(0, database.planeswalkerTexts.names.length - 1)] + " ";
-        const adjective = database.creatureTexts.adjectives[Random.next(0, database.creatureTexts.adjectives.length - 1)] + " ";
-        const noun = database.creatureTexts.nouns[Random.next(0, database.creatureTexts.nouns.length - 1)]
+        const name = Random.nextFromList(database.planeswalkerTexts.names) + ", ";
+        const secondName = Random.nextFromList(database.planeswalkerTexts.names) + " ";
+        const adjective = Random.nextFromList(database.creatureTexts.adjectives) + " ";
+        const noun = Random.nextFromList(database.creatureTexts.nouns);
 
         if (Random.chance(0.3)) {
             return StringHelper.toCamelCase(name + "the " + adjective);
@@ -114,15 +143,15 @@ export class MtgDataRepository {
     }
 
     public getInstantSorceryName() {
-        const adjective = database.spellTexts.adjectives[Random.next(0, database.spellTexts.adjectives.length - 1)] + " ";
-        const noun = database.spellTexts.nouns[Random.next(0, database.spellTexts.nouns.length - 1)];
+        const adjective = Random.nextFromList(database.spellTexts.adjectives) + " ";
+        const noun = Random.nextFromList(database.spellTexts.nouns);
 
         return StringHelper.toCamelCase(adjective + noun);
     }
 
     public getEnchantmentName() {
-        const adjective = database.spellTexts.adjectives[Random.next(0, database.spellTexts.adjectives.length - 1)] + " ";
-        const noun = database.enchantmentTexts.nouns[Random.next(0, database.enchantmentTexts.nouns.length - 1)];
+        const adjective = Random.nextFromList(database.spellTexts.adjectives) + " ";
+        const noun = Random.nextFromList(database.enchantmentTexts.nouns);
 
         return StringHelper.toCamelCase(adjective + noun);
     }

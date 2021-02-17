@@ -4,10 +4,10 @@ import { Random } from '../../../helpers/Random';
 import { MtgAbilityService } from '../MtgAbilityService';
 import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
-
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
+import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
 
 export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
 
@@ -56,6 +56,18 @@ export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
             a1.combine(a2);
 
             card.oracle.abilities = [a1, ...card.oracle.abilities.slice(2)];
+        }
+    }
+    
+    private chooseFlavorText(card: MtgCard) {
+        if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
+            const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
+            const smallEnoughFlavorText = this.mtgDataRepository.getSpellFlavorText(maxFlavorTextLength);
+            if (smallEnoughFlavorText !== undefined && smallEnoughFlavorText !== null) {
+                card.wrappedOracleLines.push("FT_LINE");
+                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, card.rendererPreset.maxCharactersPerLine)
+                flavorTextLines.forEach(f => card.wrappedOracleLines.push("FT_" + f));
+            }
         }
     }
 }

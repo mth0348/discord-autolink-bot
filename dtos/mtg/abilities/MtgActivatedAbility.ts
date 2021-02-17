@@ -13,7 +13,7 @@ export class MtgActivatedAbility implements MtgAbility {
 
     public parsedText: string;
 
-    public parserValue: number;
+    public parserValue: number = 0;
 
     public cost: MtgPermanentActivatedCost;
 
