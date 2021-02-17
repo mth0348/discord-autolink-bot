@@ -7,11 +7,13 @@ import { MtgAbilityService } from './MtgAbilityService';
 import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenerator';
+import { MtgLandGenerator } from './generators/MtgLandGenerator';
 
 export class MtgCardService {
 
     private mtgCreatureGenerator: MtgCreatureGenerator;
     private mtgInstantSorceryGenerator: MtgInstantSorceryGenerator;
+    private mtgLandGenerator: MtgLandGenerator;
 
     constructor(mtgDataRepository: MtgDataRepository,
         mtgAbilityService: MtgAbilityService,
@@ -19,6 +21,7 @@ export class MtgCardService {
         mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
         this.mtgCreatureGenerator = new MtgCreatureGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
         this.mtgInstantSorceryGenerator = new MtgInstantSorceryGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
+        this.mtgLandGenerator = new MtgLandGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
     public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {
@@ -44,6 +47,7 @@ export class MtgCardService {
             // case MtgCardType.Planeswalker:
             //     break;
             // case MtgCardType.Land:
+            //     card = this.mtgLandGenerator.generate(card);
             //     break;
         }
 

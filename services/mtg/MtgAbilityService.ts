@@ -38,29 +38,30 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgStaticAbility(spellEvent));
     }
 
-    public generateCreatureAbility(card: MtgCard, abilityType: MtgAbilityType) {
+    public generateCreatureAbility(card: MtgCard, abilityType: MtgAbilityType, requiredPositive: boolean = false) {
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
-                this.generateActivatedAbility(card);
+                this.generateActivatedAbility(card, requiredPositive);
                 break;
 
             case MtgAbilityType.Triggered:
-                this.generateTriggeredAbility(card);
+                this.generateTriggeredAbility(card, requiredPositive);
                 break;
 
             case MtgAbilityType.Static:
-                this.generateStaticAbility(card);
+                this.generateStaticAbility(card, requiredPositive);
                 break;
         }
     }
 
-    private generateActivatedAbility(card: MtgCard) {
+    private generateActivatedAbility(card: MtgCard, requiredPositive: boolean) {
         const colors = card.color.toLowerCase().split('');
 
         const positiveEvents = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
                 a.score > 0
+                && (!requiredPositive || a.score > 0)
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
@@ -105,14 +106,15 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
     }
 
-    private generateTriggeredAbility(card: MtgCard) {
+    private generateTriggeredAbility(card: MtgCard, requiredPositive: boolean) {
         const colors = card.color.toLowerCase().split('');
 
         const conditions = this.mtgDataRepository.getPermanentConditions();
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
-                (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
+                (!requiredPositive || a.score > 0)
+                && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
@@ -121,12 +123,13 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
     }
 
-    private generateStaticAbility(card: MtgCard) {
+    private generateStaticAbility(card: MtgCard, requiredPositive: boolean) {
         const colors = card.color.toLowerCase().split('');
 
         const statics = this.mtgDataRepository.getPermanentStatics()
             .filter(a =>
-                colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                (!requiredPositive || a.score > 0)
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const staticEvent = Random.nextFromList(statics);
