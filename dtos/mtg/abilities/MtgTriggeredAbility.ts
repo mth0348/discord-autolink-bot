@@ -39,10 +39,6 @@ export class MtgTriggeredAbility implements MtgAbility {
         const parsedScore = this.parserValue / 2;
         const finalScore = eventScore + parsedScore;
 
-        if (this.event.score < 0) {
-            let x = 1 + "1";
-        }
-
         Logger.log("Ability '" + this.getText().substr(0, 10) + "..':", LogType.CostEstimation)
         Logger.log(" - event score: " + eventScore, LogType.CostEstimation);
         Logger.log(" - parsed score: " + parsedScore, LogType.CostEstimation);

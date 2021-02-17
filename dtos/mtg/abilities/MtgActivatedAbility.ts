@@ -29,12 +29,6 @@ export class MtgActivatedAbility implements MtgAbility {
     }
 
     public getText(): string {
-        if (this.cost == undefined || this.event === undefined) 
-        {
-            debugger;
-            return "";
-        }
-
         return StringHelper.capitalizeFirstChar(this.cost.text) + ": " + StringHelper.capitalizeFirstChar(this.event.text);
     }
 

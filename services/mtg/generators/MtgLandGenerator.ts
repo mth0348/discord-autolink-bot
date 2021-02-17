@@ -8,6 +8,8 @@ import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
+import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
+import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
 
 export class MtgLandGenerator extends MtgBaseGenerator {
 
@@ -22,6 +24,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
     public generate(card: MtgCard): MtgCard {
 
         card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
+        card.supertype = card.isLegendary ? "Legendary" : "";
         card.name = card.name || this.mtgDataRepository.getLandName(card.isLegendary);
 
         this.chooseAbilities(card);
@@ -29,15 +32,15 @@ export class MtgLandGenerator extends MtgBaseGenerator {
         this.resolveSyntax(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
-        this.estimateCmc(card); /* CMC for lands is used to determine dominant colors */
 
         card.manacost = "";
-        card.color = MtgHelper.getDominantColor(card, 99);
+        card.cmc = 0;
 
         return card;
     }
 
     private chooseAbilities(card: MtgCard) {
+
         const entersTapped = Random.chance(0.5);
         const hasManaAbility = Random.chance(0.7);
 
@@ -45,8 +48,8 @@ export class MtgLandGenerator extends MtgBaseGenerator {
         let abilityCount = 0;
         if (card.rarity === MtgCardRarity.Common || card.rarity === MtgCardRarity.Uncommon) {
             abilityCount = Random.complex([
-                { value: 0, chance: 0.30 },
-                { value: 1, chance: 0.80 },
+                { value: 0, chance: 0.70 },
+                { value: 1, chance: 0.30 },
             ], 0);
         }
         if (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic) {
@@ -77,6 +80,12 @@ export class MtgLandGenerator extends MtgBaseGenerator {
             // enters tapped allows for more colored mana abilities.
             const colorsAllowed = entersTapped ? 5 : Random.next(0, 1);
             this.mtgAbilityService.generateManaAbility(card, colorsAllowed);
+
+            if (card.color.length > 1 && !entersTapped) {
+                // still add in entersTapped.
+                this.mtgAbilityService.generateLandEtbAbility(card);
+                card.oracle.abilities.reverse(); /* swap */
+            }
         }
 
         // actually add rest of the abilities.
@@ -89,7 +98,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
 
         const scoreSoFar = card.oracle.abilities.length > 0 ? card.oracle.abilities.reduce((a, b) => a += b.getScore(), 0) : 0;
         const minScore = scoreSoFar <= 0 ? scoreSoFar : -99;
-        const maxScore = Math.max(1, 1 - scoreSoFar);
+        const maxScore = Math.min(2, Math.max(1, 1 - scoreSoFar));
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
@@ -105,7 +114,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
                 break;
         }
     }
-    
+
     private chooseFlavorText(card: MtgCard) {
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;

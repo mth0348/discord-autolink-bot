@@ -124,7 +124,7 @@ export class MtgCardRenderer {
         const posX = 60;
         const posY = 588 + initialOffset;
 
-        for (let i = 0; i < oracleLines.length; i++) {
+        for (let i = 0; i < Math.min(preset.maxLines, oracleLines.length); i++) {
             let line = oracleLines[i];
 
             const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;

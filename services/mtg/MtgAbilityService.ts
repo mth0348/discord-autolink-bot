@@ -14,6 +14,7 @@ import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanent
 import { isatty } from 'tty';
 import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
+import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 
 export class MtgAbilityService {
 
@@ -111,12 +112,15 @@ export class MtgAbilityService {
             .filter(a =>
                 a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const activatedEvent = Random.nextFromList(events);
 
         let cost = null;
+
+        if (activatedEvent === undefined)
+            debugger;
 
         // decide whether to use DB activatedCost or craft one out of mana symbols.
         if (Random.chance(0.2)) {
@@ -135,13 +139,13 @@ export class MtgAbilityService {
 
             // get three of the most reasonable (closest score) costs, then pick one.
             cost = fairCosts[Random.next(0, 2)];
-
         } else {
             // craft
             const useTapSymbol = Random.chance(0.5);
             const tapSymbolText = useTapSymbol ? ", XT" : "";
 
-            const cmc = Math.max(1, Math.min(6, Math.round(activatedEvent.score * Random.next(50, 80) / 100)));
+            let cmc = Math.max(1, Math.min(6, Math.round(activatedEvent.score * Random.next(50, 80) / 100)));
+            cmc += card.type === MtgCardType.Land ? 1 : 0; /* lands are op */
             const manacost = MtgHelper.getManacost(cmc, activatedEvent.colorIdentity);
 
             cost = new MtgPermanentActivatedCost({
@@ -164,7 +168,7 @@ export class MtgAbilityService {
             .filter(a =>
                 a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const condition = Random.nextFromList(conditions);
@@ -179,7 +183,7 @@ export class MtgAbilityService {
             .filter(a =>
                 a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
-                && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
         const staticEvent = Random.nextFromList(statics);
@@ -187,6 +191,6 @@ export class MtgAbilityService {
     }
 
     private getColors(card: MtgCard): string[] {
-        return MtgHelper.isExactlyColor(card.color, "c") ? MtgCommandParser.BASIC_COLORS : card.color.toLowerCase().split('');
+        return MtgHelper.isExactlyColor(card.color, "c") ? MtgCommandParser.BASIC_COLORS.map(c => c.toLowerCase()) : card.color.toLowerCase().split('');
     }
 }

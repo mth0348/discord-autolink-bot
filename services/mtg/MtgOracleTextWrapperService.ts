@@ -3,10 +3,10 @@ import { MtgOracleTextWrapPreset } from '../../dtos/mtg/MtgOracleTextWrapPreset'
 
 export class MtgOracleTextWrapperService {
 
-    public static PRESET_LARGE: MtgOracleTextWrapPreset = { fontSize: 28, maxCharactersPerLine: 41, maxLines: 7, lineDifInPixel: 4, };
-    public static PRESET_MEDIUM: MtgOracleTextWrapPreset = { fontSize: 26, maxCharactersPerLine: 45, maxLines: 7, lineDifInPixel: 5 };
-    public static PRESET_SMALL: MtgOracleTextWrapPreset = { fontSize: 23, maxCharactersPerLine: 50, maxLines: 8, lineDifInPixel: 4 };
-    public static PRESET_TINY: MtgOracleTextWrapPreset = { fontSize: 22, maxCharactersPerLine: 52, maxLines: 99, lineDifInPixel: 4 };
+    public static PRESET_LARGE: MtgOracleTextWrapPreset = { fontSize: 28, maxCharactersPerLine: 40, maxLines: 7, lineDifInPixel: 4, };
+    public static PRESET_MEDIUM: MtgOracleTextWrapPreset = { fontSize: 26, maxCharactersPerLine: 44, maxLines: 8, lineDifInPixel: 5 };
+    public static PRESET_SMALL: MtgOracleTextWrapPreset = { fontSize: 24, maxCharactersPerLine: 48, maxLines: 9, lineDifInPixel: 4 };
+    public static PRESET_TINY: MtgOracleTextWrapPreset = { fontSize: 22, maxCharactersPerLine: 52, maxLines: 10, lineDifInPixel: 4 };
 
     private presets: MtgOracleTextWrapPreset[] = [
         /* order is important */
@@ -26,6 +26,10 @@ export class MtgOracleTextWrapperService {
                 okPreset = preset;
             }
         });
+
+        if (okPreset === null) {
+            okPreset = MtgOracleTextWrapperService.PRESET_TINY;
+        }
 
         return okPreset;
     }

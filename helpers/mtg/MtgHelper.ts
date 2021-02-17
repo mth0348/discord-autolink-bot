@@ -115,7 +115,7 @@ export class MtgHelper {
         colorCount = colorCount.filter(c => c.count > 0).sort((a, b) => b.count - a.count);
 
         const topColors = colorCount.slice(0, Math.min(maxCount, colorCount.length)).map(c => c.c).join("");
-        return topColors;
+        return MtgHelper.sortWubrg(topColors);
     }
 
     private static getRandomManacostWithoutX(cmc: number, colorString: string): string {
