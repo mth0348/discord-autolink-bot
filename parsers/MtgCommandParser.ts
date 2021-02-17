@@ -103,10 +103,7 @@ export class MtgCommandParser extends BaseCommandParser {
 
     private getRandomType(): string {
 
-        // TODO remove.
-        return MtgCardType.Land;
-
-        return Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature]);
+        return Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land]);
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));
     }
