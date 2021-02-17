@@ -6,10 +6,7 @@ import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
-import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
-import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
-import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
 
 export class MtgLandGenerator extends MtgBaseGenerator {
 
@@ -55,7 +52,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
         if (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic) {
             abilityCount = Random.complex([
                 { value: 1, chance: 0.50 },
-                { value: 2, chance: 0.50 + ((entersTapped || hasManaAbility) ? -1.0 : 0.0) }
+                { value: 2, chance: 0.50 + ((entersTapped || hasManaAbility) ? -1.0 : 0.0) } /* mercy on the oracle text length */
             ], 1);
         }
 

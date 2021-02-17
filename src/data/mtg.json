@@ -1507,8 +1507,9 @@
         },
         {
             "text": "destroy target creature",
-            "score": 1.5,
-            "colorIdentity": "wwbb"
+            "score": 2,
+            "colorIdentity": "wwbb",
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy (self)",
@@ -1548,8 +1549,9 @@
         },
         {
             "text": "destroy target (permanent) an opponent controls",
-            "score": 1.5,
-            "colorIdentity": "wwbbg"
+            "score": 2.1,
+            "colorIdentity": "wwbbg",
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "target (player) discards a card",
@@ -1963,7 +1965,7 @@
         },
         {
             "text": "proliferate, then destroy each nonland permanent with (numbername) or more counters on it",
-            "score": 2,
+            "score": 2.8,
             "colorIdentity": "b",
             "noFollowUp": true
         },
@@ -1998,12 +2000,12 @@
         {
             "text": "destroy target creature or planeswalker",
             "colorIdentity": "wwbb",
-            "score": 2
+            "score": 2.5
         },
         {
             "text": "destroy target planeswalker",
             "colorIdentity": "wwbb",
-            "score": 2
+            "score": 2.2
         },
         {
             "text": "scry (number3)",
@@ -2022,7 +2024,7 @@
         },
         {
             "text": "proliferate, then proliferate again",
-            "score": 1.2,
+            "score": 3,
             "colorIdentity": "ubg",
             "noFollowUp": true
         },
@@ -2064,32 +2066,38 @@
         {
             "text": "destroy target creature with no counters on it",
             "colorIdentity": "b",
-            "score": 1
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
-            "score": 1.3
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
-            "score": 1.8
+            "score": 2,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "exile target creature with no counters on it",
             "colorIdentity": "wbb",
-            "score": 1
+            "score": 2,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "exile target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
-            "score": 1.3
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "exile target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
-            "score": 1.8
+            "score": 2,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token",
@@ -2508,27 +2516,32 @@
         {
             "text": "destroy target creature with flying",
             "colorIdentity": "g",
-            "score": 1
+            "score": 1,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with (keyword)",
             "colorIdentity": "bb",
-            "score": 1
+            "score": 1,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with no counters on it",
             "colorIdentity": "bb",
-            "score": 1.8
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with converted mana cost (number2) or less",
             "colorIdentity": "bb",
-            "score": 1.8
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target creature with converted mana cost (!number2) or higher",
             "colorIdentity": "wwbb",
-            "score": 1.8
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "exile target creature with no counters on it",
@@ -2548,17 +2561,20 @@
         {
             "text": "destroy target tapped creature",
             "colorIdentity": "wwbb",
-            "score": 1.8
+            "score": 1.8,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target (color) creature",
             "colorIdentity": "wwbb",
-            "score": 1
+            "score": 1,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "destroy target artifact, creature or planeswalker",
             "colorIdentity": "wbr",
-            "score": 2.2
+            "score": 2.2,
+            "restrictedTypes": [ "creature", "instant", "sorcery", "artifact", "planeswalker" ]
         },
         {
             "text": "return up to (numbername) card(s) from your graveyard to your hand",
@@ -2724,12 +2740,12 @@
         {
             "text": "destroy target (permanent)",
             "colorIdentity": "wbg",
-            "score": 2
+            "score": 2.2
         },
         {
             "text": "exile target (permanent)",
-            "colorIdentity": "wb",
-            "score": 2
+            "colorIdentity": "wwb",
+            "score": 2.2
         },
         {
             "text": "destroy target creature",

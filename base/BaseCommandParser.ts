@@ -5,16 +5,16 @@ import { ConfigProvider } from '../helpers/ConfigProvider';
 import { ParameterService } from '../services/ParameterService';
 
 export class BaseCommandParser implements ICommandParser {
-    
-    constructor (
+
+    constructor(
         protected discordService: DiscordService,
         protected parameterService: ParameterService,
         private allowedChannels: string[],
         private allowedRoles: string[]
-        ) {
+    ) {
     }
 
-    public isAllowedCommand(message : Message | PartialMessage): boolean {
+    public isAllowedCommand(message: Message | PartialMessage): boolean {
         let isCommand = this.discordService.checkIsCommand(message, `${ConfigProvider.current().prefix}mtg`);
         if (isCommand) {
             let isAllowedInChannel = this.discordService.checkChannelPermissions(message, this.allowedChannels);
@@ -25,6 +25,6 @@ export class BaseCommandParser implements ICommandParser {
     }
 
     async executeAsync(message: Message | PartialMessage): Promise<void> {
-        
+
     }
 }

@@ -5,10 +5,11 @@ import { ImageProvider } from '../../persistence/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
 import { StringHelper } from '../../helpers/StringHelper';
 import { Random } from "../../helpers/Random";
-
-import Canvas = require("canvas");
 import { Logger } from "../../helpers/Logger";
 import { LogType } from "../../dtos/LogType";
+import { MtgHelper } from '../../helpers/mtg/MtgHelper';
+
+import Canvas = require("canvas");
 
 export class MtgCardRenderer {
 
@@ -52,7 +53,7 @@ export class MtgCardRenderer {
     }
 
     private drawCardBorder() {
-        const colorMapping = this.card.color.length <= 2 ? this.card.color : "m";
+        const colorMapping = this.card.color.length <= 2 ? MtgHelper.sortWubrg(this.card.color) : "m";
         const fileName = `IMAGEURL_BORDER_${colorMapping}${this.getTypeFileSuffix()}`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName)).path;

@@ -40,7 +40,7 @@ export class MtgDataRepository {
 
         const list = database.keywords
             .filter(k => k.types.some(t => t === type.toLowerCase()))
-            .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
+            .filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0))
             .filter(k => !simpleOnly || (!k.hasCost && k.nameExtension.length === 0))
             .map(k => new MtgKeyword(k));
 
@@ -113,19 +113,14 @@ export class MtgDataRepository {
     }
 
     public getCreatureFlavorText(maxCharacterLength: number): string {
-        // sort descending by text length.
-        return database.creatureTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
-    }
+        return Random.nextFromList(database.creatureTexts.flavors.filter(f => f.length < maxCharacterLength));    }
 
     public getLandFlavorText(maxCharacterLength: number): string {
-        // sort descending by text length.
-        return database.landTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
+        return Random.nextFromList(database.landTexts.flavors.filter(f => f.length < maxCharacterLength));
     }
 
     public getSpellFlavorText(maxCharacterLength: number): string {
-        // sort descending by text length.
-        return database.spellTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);
-    }
+        return Random.nextFromList(database.spellTexts.flavors.filter(f => f.length < maxCharacterLength));    }
 
     public getPlaneswalkerName() {
         const name = Random.nextFromList(database.planeswalkerTexts.names) + ", ";

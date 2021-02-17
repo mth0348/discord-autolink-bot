@@ -8,7 +8,6 @@ import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenerator';
 import { MtgLandGenerator } from './generators/MtgLandGenerator';
-import { exception } from "console";
 
 export class MtgCardService {
 
@@ -31,7 +30,7 @@ export class MtgCardService {
         card.type = cardType;
         card.rarity = cardRarity;
         card.rarityScore = [MtgCardRarity.Common, MtgCardRarity.Uncommon, MtgCardRarity.Rare, MtgCardRarity.Mythic].indexOf(cardRarity) + 1;
-        card.color = color;
+        card.color = color.toLowerCase();
 
         switch (cardType) {
             case MtgCardType.Creature:

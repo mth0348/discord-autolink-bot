@@ -2,7 +2,7 @@ import { Collection } from 'discord.js';
 import { MtgCard } from '../../dtos/mtg/MtgCard';
 import { Random } from '../Random';
 import { StringHelper } from '../StringHelper';
-import { MtgOracleTextWrapperService } from '../../services/mtg/MtgOracleTextWrapperService';
+
 export class MtgHelper {
 
     private static numberSortLUT: any[] = [
@@ -80,11 +80,11 @@ export class MtgHelper {
             || this.isExactlyColor(text, "urw"))
             lut = this.bgurwSortLUT;
 
-        return text.toLowerCase().split('').sort((a, b) => { return lut.get(a) - lut.get(b); }).join("");
+        return text.split('').sort((a, b) => { return lut.get(a) - lut.get(b); }).join("");
     }
 
     public static isExactlyColor(text: string, color: string) {
-        const i = StringHelper.regexIndexOf(text, new RegExp(`^[\d${color.toLowerCase() + color.toUpperCase()}]+$`));
+        const i = StringHelper.regexIndexOf(color, new RegExp(`^[\d${text}]+$`));
         return i === 0;
     }
 
@@ -102,7 +102,7 @@ export class MtgHelper {
         let colorIdentities = card.color;
         card.oracle.keywords.forEach(k => colorIdentities += k.colorIdentity);
         card.oracle.abilities.forEach(k => colorIdentities += k.getColorIdentity());
-        colorIdentities = colorIdentities.toLowerCase();
+        colorIdentities = colorIdentities;
 
         let colorCount = [{ c: "w", count: 0 }, { c: "u", count: 0 }, { c: "b", count: 0 }, { c: "r", count: 0 }, { c: "g", count: 0 }];
         colorCount[0].count = colorIdentities.split("").filter(c => c === "w").length;
@@ -115,7 +115,7 @@ export class MtgHelper {
         colorCount = colorCount.filter(c => c.count > 0).sort((a, b) => b.count - a.count);
 
         const topColors = colorCount.slice(0, Math.min(maxCount, colorCount.length)).map(c => c.c).join("");
-        return MtgHelper.sortWubrg(topColors);
+        return topColors;
     }
 
     private static getRandomManacostWithoutX(cmc: number, colorString: string): string {
@@ -165,7 +165,7 @@ export class MtgHelper {
         // Two colors.
         if (color.length === 2) {
             if (cmc === 1) {
-                manacost = `${color[0]}${color[1]}`; // TODO zweites  wegnehmen
+                manacost = `${color[0]}${color[1]}`; // TODO Support hybrid mana
             } else if (cmc === 2) {
                 manacost = `${color[0]}${color[1]}`;
             } else if (cmc === 3) {

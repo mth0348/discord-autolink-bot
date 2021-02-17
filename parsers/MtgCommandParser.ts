@@ -24,12 +24,12 @@ export class MtgCommandParser extends BaseCommandParser {
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
 
-    public static COLORLESS = ["C"];
-    public static BASIC_COLORS = ["W", "U", "B", "R", "G"];
-    public static TWO_COLOR_PAIRS = ["WU", "WB", "WR", "WG", "UB", "UR", "UG", "BR", "BG", "RG"];
-    public static THREE_COLOR_PAIRS = ["WUB", "WUR", "WUG", "WBR", "WBG", "WRG", "UBR", "UBG", "URG", "BRG"];
-    public static FOUR_COLOR_PAIRS = ["WUBR", "WUBG", "WURG", "WBRG", "UBRG"];
-    public static FIVE_COLORS = ["WUBRG"];
+    public static COLORLESS = ["c"];
+    public static BASIC_COLORS = ["w", "u", "b", "r", "g"];
+    public static TWO_COLOR_PAIRS = ["wu", "wb", "wr", "wg", "ub", "ur", "ug", "br", "bg", "rg"];
+    public static THREE_COLOR_PAIRS = ["wub", "wur", "wug", "wbr", "wbg", "wrg", "ubr", "ubg", "urg", "brg"];
+    public static FOUR_COLOR_PAIRS = ["wubr", "wugb", "wurg", "wbrg", "ubrg"];
+    public static FIVE_COLORS = ["wubrg"];
 
     private mtgDataRepository: MtgDataRepository;
     private mtgAbilityService: MtgAbilityService;

@@ -7,7 +7,6 @@ import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
-import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
 
 export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
 
@@ -58,7 +57,7 @@ export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
             card.oracle.abilities = [a1, ...card.oracle.abilities.slice(2)];
         }
     }
-    
+
     private chooseFlavorText(card: MtgCard) {
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;

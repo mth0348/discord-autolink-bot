@@ -1,5 +1,4 @@
 import { MtgCard } from '../../dtos/mtg/MtgCard';
-import { MtgAbilityType } from '../../dtos/mtg/MtgAbilityType';
 import { MtgDataRepository } from '../../persistence/repositories/MtgDataRepository';
 import { Random } from '../../helpers/Random';
 import { MtgActivatedAbility } from '../../dtos/mtg/abilities/MtgActivatedAbility';
@@ -11,7 +10,6 @@ import { Collection } from 'discord.js';
 import { MtgPermanentActivatedCost } from '../../persistence/entities/mtg/MtgPermanentActivatedCost';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanentStatics';
-import { isatty } from 'tty';
 import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
@@ -99,7 +97,7 @@ export class MtgAbilityService {
         });
 
         // overwrite color, as the printed mana symbols predict the land cards border.
-        card.color = MtgHelper.sortWubrg(colorString.replace(/[X,\sor]*/g, ""));
+        card.color = colorString.replace(/[X,\s]*(or)*/g, "");
 
         card.oracle.abilities.push(new MtgActivatedAbility(cost, event));
     }
@@ -191,6 +189,6 @@ export class MtgAbilityService {
     }
 
     private getColors(card: MtgCard): string[] {
-        return MtgHelper.isExactlyColor(card.color, "c") ? MtgCommandParser.BASIC_COLORS.map(c => c.toLowerCase()) : card.color.toLowerCase().split('');
+        return MtgHelper.isExactlyColor(card.color, "c") ? MtgCommandParser.BASIC_COLORS.map(c => c) : card.color.split('');
     }
 }

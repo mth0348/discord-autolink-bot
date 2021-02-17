@@ -131,7 +131,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
             { value: 3, chance: 0.05 + (card.rarityScore >= 4 ? 0.2 : 0) }
         ], card.rarityScore >= 4 ? 1 : 0);
 
-        const keywords = this.mtgDataRepository.getKeywordsByColorAndType(card.color.toLowerCase().split(''), card.type, keywordCount);
+        const keywords = this.mtgDataRepository.getKeywordsByColorAndType(card.color.split(''), card.type, keywordCount);
         card.oracle.keywords = keywords;
 
         // special rule: shapeshifter.
@@ -180,7 +180,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
                 break;
         }
     }
-    
+
     private chooseFlavorText(card: MtgCard) {
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
