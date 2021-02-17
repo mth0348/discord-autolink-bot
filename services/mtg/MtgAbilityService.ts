@@ -13,6 +13,8 @@ import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanent
 import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
+import { Logger } from '../../helpers/Logger';
+import { LogType } from '../../dtos/LogType';
 
 export class MtgAbilityService {
 
@@ -35,6 +37,11 @@ export class MtgAbilityService {
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
+
+        if (events.length <= 0) {
+            Logger.log(`No spell ability found for card.`, LogType.Warning, card);
+            return;
+        }
 
         const spellEvent = Random.nextFromList(events);
         card.oracle.abilities.push(new MtgStaticAbility(spellEvent));
@@ -59,6 +66,11 @@ export class MtgAbilityService {
                 .filter(a =>
                     (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                     && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+
+            if (costs.length <= 0) {
+                Logger.log(`No land ETB ability found for card.`, LogType.Warning, card);
+                return;
+            }
 
             const chosenCost = Random.nextFromList(costs);
 
@@ -113,13 +125,14 @@ export class MtgAbilityService {
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
+        if (events.length <= 0) {
+            Logger.log(`No activated ability event found for card.`, LogType.Warning, card);
+            return;
+        }
+
         const activatedEvent = Random.nextFromList(events);
 
         let cost = null;
-
-        if (activatedEvent === undefined)
-            debugger;
-
         // decide whether to use DB activatedCost or craft one out of mana symbols.
         if (Random.chance(0.2)) {
             // db.
@@ -127,6 +140,11 @@ export class MtgAbilityService {
                 .filter(a =>
                     (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                     && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+
+            if (costs.length <= 0) {
+                Logger.log(`No activated costs found for card.`, LogType.Warning, card);
+                return;
+            }
 
             // sort descending by score.
             let fairCosts = costs.filter(c => c.score >= activatedEvent.score).sort((a, b) => b.score - a.score);
@@ -169,6 +187,15 @@ export class MtgAbilityService {
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 
+        if (conditions.length <= 0) {
+            Logger.log(`No conditions found for card.`, LogType.Warning, card);
+            return;
+        }
+        if (events.length <= 0) {
+            Logger.log(`No triggered events found for card.`, LogType.Warning, card);
+            return;
+        }
+
         const condition = Random.nextFromList(conditions);
         const triggeredEvent = Random.nextFromList(events);
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
@@ -183,6 +210,11 @@ export class MtgAbilityService {
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0)
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
+
+        if (statics.length <= 0) {
+            Logger.log(`No static events found for card.`, LogType.Warning, card);
+            return;
+        }
 
         const staticEvent = Random.nextFromList(statics);
         card.oracle.abilities.push(new MtgStaticAbility(staticEvent));

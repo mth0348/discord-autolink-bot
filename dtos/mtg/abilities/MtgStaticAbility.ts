@@ -17,6 +17,9 @@ export class MtgStaticAbility implements MtgAbility {
     public event: MtgPermanentStatics;
 
     constructor(event: MtgPermanentStatics) {
+        if (event === undefined)
+            throw "event or cost is undefined for MtgPermanentActivatedCost";
+
         this.event = event;
     }
 

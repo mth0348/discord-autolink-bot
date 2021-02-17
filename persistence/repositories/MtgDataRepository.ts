@@ -6,8 +6,10 @@ import { MtgPermanentEvent } from '../entities/mtg/MtgPermanentEvent';
 import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
 import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
 import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
+import { Logger } from '../../helpers/Logger';
 
 import database = require('../../src/data/mtg.json');
+import { LogType } from '../../dtos/LogType';
 
 export class MtgDataRepository {
 
@@ -44,8 +46,10 @@ export class MtgDataRepository {
             .filter(k => !simpleOnly || (!k.hasCost && k.nameExtension.length === 0))
             .map(k => new MtgKeyword(k));
 
-        if (list.length <= 0)
+        if (list.length <= 0) {
+            Logger.log(`No keyword found for { colors:${colors}, type:${type}, count:${count}, simpleOnly:${simpleOnly} }`, LogType.Warning);
             return [];
+        }
 
         let result: MtgKeyword[] = [Random.nextFromList(list)];
         for (let i = 1; i < count - 1; i++) {

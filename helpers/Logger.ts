@@ -1,23 +1,23 @@
-import { GuildAuditLogsEntry } from "discord.js";
 import { LogType } from "../dtos/LogType";
 
 export class Logger {
 
     private static logStack: any[] = [];
 
-    public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation];
+    public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation, LogType.Warning];
 
     public static log(text: string, type: LogType = LogType.Verbose, args: any = undefined) {
         if (this.enabledTypes.some(t => t === type)) {
             if (args) {
-                console.log(text, args);
-                this.logStack.push(text);
-                this.logStack.push(args);
+                console.log(type + " " + text, args);
             } else {
-                console.log(text);
-                this.logStack.push(text);
+                console.log(type + " " + text);
             }
         }
+
+        // push to stack anyway.
+        this.logStack.push(type + " " + text);
+        if (args) this.logStack.push(args);
     }
 
     public static getStack(): any[] {

@@ -20,6 +20,9 @@ export class MtgActivatedAbility implements MtgAbility {
     public event: MtgPermanentEvent;
 
     constructor(cost: MtgPermanentActivatedCost, event: MtgPermanentEvent) {
+        if (event === undefined || cost === undefined)
+            throw "event or cost is undefined for MtgPermanentActivatedCost";
+
         this.cost = cost;
         this.event = event;
     }
