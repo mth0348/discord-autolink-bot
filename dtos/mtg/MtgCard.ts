@@ -42,7 +42,7 @@ export class MtgCard {
 
     public getFullType(): string {
         const supertypeText = this.supertype ? this.supertype + " " : "";
-        const typeText = this.type === MtgCardType.Creature && MtgHelper.isExactlyColor(this.color, "c") ? "Artifact Creature" : this.subtype;
+        const typeText = this.type === MtgCardType.Creature && MtgHelper.isExactlyColor(this.color, "c") ? "Artifact Creature" : this.type;
         const subtypeText = (this.subtype ? (" — " + this.subtype) : "");
         return supertypeText + typeText + subtypeText;
     }
