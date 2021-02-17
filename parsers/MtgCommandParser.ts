@@ -21,6 +21,8 @@ import { MtgAbilityService } from '../services/mtg/MtgAbilityService';
 
 export class MtgCommandParser extends BaseCommandParser {
 
+    public name: string = "MtG Parser";
+
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
 

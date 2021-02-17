@@ -8,6 +8,7 @@ import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenerator';
 import { MtgLandGenerator } from './generators/MtgLandGenerator';
+import { Logger } from '../../helpers/Logger';
 
 export class MtgCardService {
 

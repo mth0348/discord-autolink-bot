@@ -1844,7 +1844,8 @@
         {
             "text": "add (mana)",
             "score": 2,
-            "colorIdentity": "wubrg"
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature", "artifact", "planeswalker", "instant", "sorcery"]
         },
         {
             "text": "create a Food token",

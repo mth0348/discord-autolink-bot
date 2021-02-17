@@ -38,8 +38,9 @@ export class MtgLandGenerator extends MtgBaseGenerator {
 
     private chooseAbilities(card: MtgCard) {
 
-        const entersTapped = Random.chance(0.5);
-        const hasManaAbility = Random.chance(0.7);
+        const entersTapped = false; // TODO remove. Random.chance(0.5);
+        const hasManaAbility = true; // TODO remove. Random.chance(0.7);
+        card.color = "gb";
 
         // first, decide on abilities.
         let abilityCount = 0;
@@ -55,6 +56,9 @@ export class MtgLandGenerator extends MtgBaseGenerator {
                 { value: 2, chance: 0.50 + ((entersTapped || hasManaAbility) ? -1.0 : 0.0) } /* mercy on the oracle text length */
             ], 1);
         }
+
+        // TODO remove.
+        abilityCount = 0;
 
         let abilityTypes: MtgAbilityType[] = [];
 

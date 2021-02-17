@@ -6,6 +6,8 @@ import { ParameterService } from '../services/ParameterService';
 
 export class BaseCommandParser implements ICommandParser {
 
+    public name: string;
+
     constructor(
         protected discordService: DiscordService,
         protected parameterService: ParameterService,

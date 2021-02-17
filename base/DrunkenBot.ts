@@ -4,6 +4,7 @@ import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
 import { ParameterService } from '../services/ParameterService';
 import { ImageProvider } from '../persistence/repositories/ImageProvider';
+import { Logger } from "../helpers/Logger";
 
 export class DrunkenBot {
 
@@ -50,13 +51,26 @@ export class DrunkenBot {
 
     private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
         try {
+            Logger.clearStack();
+
             // TODO REMOVE CHECK.
             if (message.author.username === "Telerik" && (message.channel as TextChannel).name.toLowerCase() === "dev-playground") {
                 await parser.executeAsync(message);
             }
         }
         catch (e) {
+            console.warn(`Error occured for parser "${parser.name}":`);
             console.warn(e);
+            console.warn(`LogStack:`);
+            console.warn(`==========================================`);
+
+            const logStack = Logger.getStack();
+            logStack.forEach(log => {
+                console.warn(log);
+            });
+
+            console.warn(`==========================================`);
+
             message.channel.send("Oops, something went wrong, sorry. Please try again...");
         }
     }
