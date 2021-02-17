@@ -35,30 +35,13 @@ export class MtgDataRepository {
         return Random.nextFromList(database.subtypesArtifactCreatures);
     }
 
-    public getKeywordsByColor(colors: string[], count: number): MtgKeyword[] {
-        if (count <= 0) return [];
-
-        const list = database.keywords
-            .filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0))
-            .map(k => new MtgKeyword(k));
-
-        let result: MtgKeyword[] = [Random.nextFromList(list)];
-        for (let i = 1; i < count - 1; i++) {
-            const reducedList = list.filter(f => result.every(r => f !== r));
-            if (reducedList.length > 0) {
-                const second = Random.nextFromList(reducedList);
-                result.push(second);
-            }
-        }
-        return result;
-    }
-
-    public getKeywordsByColorAndType(colors: string[], type: string, count: number): MtgKeyword[] {
+    public getKeywordsByColorAndType(colors: string[], type: string, count: number, simpleOnly: boolean = false): MtgKeyword[] {
         if (count <= 0) return [];
 
         const list = database.keywords
             .filter(k => k.types.some(t => t === type.toLowerCase()))
             .filter(k => colors.some(c => k.colorIdentity.indexOf(c.toLowerCase()) >= 0))
+            .filter(k => !simpleOnly || (!k.hasCost && k.nameExtension.length === 0))
             .map(k => new MtgKeyword(k));
 
         if (list.length <= 0)
