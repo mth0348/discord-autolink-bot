@@ -94,7 +94,12 @@ export class MtgHelper {
 
     public static getDominantColor(card: MtgCard): string {
 
+        // only apply this to cards where there are more colors than symbols to cover.
         if (card.cmc >= card.color.length)
+            return card.color;
+
+        // colorless can ignore dominant colors.
+        if (MtgHelper.isExactlyColor(card.color, "c"))
             return card.color;
 
         let colorIdentities = card.color;

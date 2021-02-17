@@ -20,6 +20,13 @@
         "noncreature permanent",
         "nonland permanent"
     ],
+    "subtypesArtifactCreatures": [
+        "Construct",
+        "Golem",
+        "Myr",
+        "Juggernaut",
+        "Beast"
+    ],
     "subtypes": [
         "Advisor",
         "Aetherborn",

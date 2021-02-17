@@ -69,7 +69,7 @@ export class MtgCommandParser extends BaseCommandParser {
         // setup global card settings.
         const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? this.getRandomType();
         const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? this.getRandomRarity();
-        const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor();
+        const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor(cardType);
 
         // start card generation.
         const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), cardColor);
@@ -110,9 +110,11 @@ export class MtgCommandParser extends BaseCommandParser {
         return Random.nextFromList(Object.keys(MtgCardRarity));
     }
 
-    private getRandomColor(): string {
+    private getRandomColor(cardType: string): string {
+        const allowColorless = (cardType === MtgCardType.Creature || cardType === MtgCardType.Artifact || cardType === MtgCardType.Planeswalker);
+
         const list = Random.complex([
-            { value: MtgCommandParser.COLORLESS, chance: 0.1 },
+            { value: MtgCommandParser.COLORLESS, chance: (allowColorless ? 1.0 : 0.0) },
             { value: MtgCommandParser.BASIC_COLORS, chance: 0.25 },
             { value: MtgCommandParser.TWO_COLOR_PAIRS, chance: 0.30 },
             { value: MtgCommandParser.THREE_COLOR_PAIRS, chance: 0.15 },

@@ -25,10 +25,12 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         card.supertype = card.isLegendary ? "Legendary" : "";
         card.name = card.name || this.mtgDataRepository.getCreatureName(card.isLegendary);
 
-        this.chooseSubtypes(card);
+        const isArtifactCreature = MtgHelper.isExactlyColor(card.color, "c");
+
+        this.chooseSubtypes(card, isArtifactCreature);
         this.chooseKeywords(card);
         this.chooseAbilities(card);
-        this.chooseArtwork(card, "creature");
+        this.chooseArtwork(card, isArtifactCreature ? "artifactcreature" : "creature");
         this.choosePower(card);
         this.chooseToughness(card);
         this.matchPowerToughnessToColor(card);
@@ -42,13 +44,17 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         return card;
     }
 
-    private chooseSubtypes(card: MtgCard) {
+    private chooseSubtypes(card: MtgCard, isArtifactCreature: boolean) {
         if (!card.subtype) {
-            const subtypeCount = Random.complex([
-                { value: 1, chance: 0.7 },
-                { value: 2, chance: 0.3 }
-            ], 1);
-            card.subtype = this.mtgDataRepository.getSubtypes(subtypeCount).join(" ");
+            if (isArtifactCreature) {
+                card.subtype = this.mtgDataRepository.getArtifactCreatureSubtype();
+            } else {
+                const subtypeCount = Random.complex([
+                    { value: 1, chance: 0.7 },
+                    { value: 2, chance: 0.3 }
+                ], 1);
+                card.subtype = this.mtgDataRepository.getSubtypes(subtypeCount).join(" ");
+            }
         }
     }
 
@@ -123,7 +129,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
             { value: 1, chance: 0.35 },
             { value: 2, chance: 0.35 + (card.rarityScore >= 3 ? 0.2 : 0) },
             { value: 3, chance: 0.05 + (card.rarityScore >= 4 ? 0.2 : 0) }
-        ], 0);
+        ], card.rarityScore >= 4 ? 1 : 0);
 
         const keywords = this.mtgDataRepository.getKeywordsByColorAndType(card.color.toLowerCase().split(''), card.type, keywordCount);
         card.oracle.keywords = keywords;

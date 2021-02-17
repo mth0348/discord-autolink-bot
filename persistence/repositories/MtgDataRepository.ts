@@ -31,6 +31,10 @@ export class MtgDataRepository {
         return result;
     }
 
+    public getArtifactCreatureSubtype(): string {
+        return Random.nextFromList(database.subtypesArtifactCreatures);
+    }
+
     public getKeywordsByColor(colors: string[], count: number): MtgKeyword[] {
         if (count <= 0) return [];
 
@@ -105,7 +109,7 @@ export class MtgDataRepository {
             return StringHelper.toCamelCase(adjective + noun);
         }
     }
-    
+
     public getCreatureFlavorText(maxCharacterLength: number): string {
         // sort descending by text length.
         return database.creatureTexts.flavors.sort((a, b) => b.length - a.length).find(f => f.length < maxCharacterLength);

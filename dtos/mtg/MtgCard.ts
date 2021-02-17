@@ -2,9 +2,10 @@ import { MtgCardRarity } from './MtgCardRarity';
 import { MtgCardType } from './MtgCardType';
 import { MtgOracleText } from './MtgOracleText';
 import { MtgOracleTextWrapPreset } from './MtgOracleTextWrapPreset';
+import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 
 export class MtgCard {
-    
+
     public name: string;
 
     public color: string;
@@ -32,18 +33,21 @@ export class MtgCard {
     public oracle: MtgOracleText = new MtgOracleText();
 
     public flavorText: string;
-    
+
     public imageUrl: string;
 
     public wrappedOracleLines: string[];
 
-    public rendererPreset : MtgOracleTextWrapPreset;
+    public rendererPreset: MtgOracleTextWrapPreset;
 
-    public getFullType() : string {
-        return (this.supertype ? this.supertype + " " : "") + this.type + (this.subtype ? (" — " + this.subtype) : "");
+    public getFullType(): string {
+        const supertypeText = this.supertype ? this.supertype + " " : "";
+        const typeText = this.type === MtgCardType.Creature && MtgHelper.isExactlyColor(this.color, "c") ? "Artifact Creature" : this.subtype;
+        const subtypeText = (this.subtype ? (" — " + this.subtype) : "");
+        return supertypeText + typeText + subtypeText;
     }
 
-    public hasPowerToughness() : boolean {
+    public hasPowerToughness(): boolean {
         return this.type === MtgCardType.Creature;
     }
 }
