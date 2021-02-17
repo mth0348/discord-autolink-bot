@@ -1,25 +1,22 @@
 import { MtgDataRepository } from '../../../persistence/repositories/MtgDataRepository';
 import { MtgCard } from '../../../dtos/mtg/MtgCard';
-import { MtgCardType } from '../../../dtos/mtg/MtgCardType';
 import { Random } from '../../../helpers/Random';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgAbilityService } from '../MtgAbilityService';
 import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
-
-import fs = require("fs");
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
-import { Logger } from '../../../helpers/Logger';
-import { LogType } from '../../../dtos/LogType';
+import { MtgBaseGenerator } from './MtgBaseGenerator';
 
-export class MtgCreatureGenerator {
+export class MtgCreatureGenerator extends MtgBaseGenerator {
 
     constructor(
-        private mtgDataRepository: MtgDataRepository,
-        private mtgAbilityService: MtgAbilityService,
-        private mtgSyntaxResolver: MtgSyntaxResolver,
-        private mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
+        mtgDataRepository: MtgDataRepository,
+        mtgAbilityService: MtgAbilityService,
+        mtgSyntaxResolver: MtgSyntaxResolver,
+        mtgOracleTextWrapperService: MtgOracleTextWrapperService) {
+        super(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
     public generate(card: MtgCard): MtgCard {
@@ -31,7 +28,7 @@ export class MtgCreatureGenerator {
         this.chooseSubtypes(card);
         this.chooseKeywords(card);
         this.chooseAbilities(card);
-        this.chooseArtwork(card);
+        this.chooseArtwork(card, "creature");
         this.choosePower(card);
         this.chooseToughness(card);
         this.matchPowerToughnessToColor(card);
@@ -120,25 +117,6 @@ export class MtgCreatureGenerator {
         }
     }
 
-    private wrapTextForRenderer(card: MtgCard) {
-        const preset = this.mtgOracleTextWrapperService.calculateTextWrapPreset(card.oracle);
-        const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllOracleText(card.oracle, preset);
-        card.wrappedOracleLines = wrappedTextLines;
-        card.rendererPreset = preset;
-    }
-
-    private chooseFlavorText(card: MtgCard) {
-        if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
-            const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
-            const smallEnoughFlavorText = this.mtgDataRepository.getCreatureFlavorText(maxFlavorTextLength);
-            if (smallEnoughFlavorText !== null) {
-                card.wrappedOracleLines.push("FT_LINE");
-                const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, card.rendererPreset.maxCharactersPerLine)
-                flavorTextLines.forEach(f => card.wrappedOracleLines.push("FT_" + f));
-            }
-        }
-    }
-
     private chooseKeywords(card: MtgCard) {
         const keywordCount = Random.complex([
             { value: 0, chance: 0.25 },
@@ -178,49 +156,5 @@ export class MtgCreatureGenerator {
         }
 
         card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
-    }
-
-    private estimateCmc(card: MtgCard) {
-        let totalScore = 0;
-
-        Logger.log("Started card cost estimation:", LogType.CostEstimation);
-
-        totalScore += card.power / 2;
-        totalScore += card.toughness / 2.5;
-
-        Logger.log("Power: " + card.power / 2, LogType.CostEstimation);
-        Logger.log("Toughness: " + card.toughness / 2, LogType.CostEstimation);
-
-        card.oracle.keywords.forEach(k => totalScore += k.getScore());
-        card.oracle.abilities.forEach(a => totalScore += a.getScore());
-
-        // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
-        const minCmcForReduction = 3;
-        const randomReduction = totalScore > minCmcForReduction ? Random.chance((totalScore - minCmcForReduction) / 10) ? 1 : 0 : 0;
-        const mythicReduction = card.rarity === MtgCardRarity.Mythic ? Random.chance(0.33) ? 0.5 : 0.25 : 0;
-        const reducedCmc = totalScore - randomReduction - mythicReduction;
-
-        Logger.log("Random reduction: " + randomReduction, LogType.CostEstimation);
-        Logger.log("Mythic reduction: " + mythicReduction, LogType.CostEstimation);
-        Logger.log("Before rounding: " + (reducedCmc), LogType.CostEstimation);
-
-        const roundedScore = Math.round(reducedCmc);
-
-        Logger.log("After rounding: " + roundedScore, LogType.CostEstimation);
-
-        card.cmc = Math.max(1, Math.min(9, roundedScore));
-
-        Logger.log("Final capped CMC = " + card.cmc, LogType.CostEstimation);
-    }
-
-    private chooseArtwork(card: MtgCard) {
-        const artPath = "assets/img/mtg/cards/creature/";
-        const files = fs.readdirSync(artPath);
-        let randomArtworkFile = Random.nextFromList(files);
-        card.imageUrl = artPath + randomArtworkFile;
-    }
-
-    private resolveSyntax(card: MtgCard): void {
-        this.mtgSyntaxResolver.resolveSyntax(card);
     }
 }
