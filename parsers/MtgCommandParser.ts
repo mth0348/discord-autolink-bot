@@ -18,6 +18,7 @@ import { MtgOracleTextWrapperService } from '../services/mtg/MtgOracleTextWrappe
 import { MtgDataRepository } from '../persistence/repositories/MtgDataRepository';
 import { MtgSyntaxResolver } from '../services/mtg/MtgSyntaxResolver';
 import { MtgAbilityService } from '../services/mtg/MtgAbilityService';
+import { StringHelper } from '../helpers/StringHelper';
 
 export class MtgCommandParser extends BaseCommandParser {
 
@@ -53,7 +54,7 @@ export class MtgCommandParser extends BaseCommandParser {
         this.paramConfigs = [
             new ParameterServiceConfig("type", "t", MtgCommandParser.AVAILABLE_TYPES),
             new ParameterServiceConfig("rarity", "r", MtgCommandParser.AVAILABLE_RARITIES),
-            new ParameterServiceConfig("color", "c", MtgCommandParser.AVAILABLE_RARITIES),
+            new ParameterServiceConfig("color", "c"),
         ];
 
         this.initializeCardRendererData();
@@ -74,7 +75,7 @@ export class MtgCommandParser extends BaseCommandParser {
         const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor(cardType);
 
         // start card generation.
-        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), cardColor);
+        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor));
 
         // render card.
         const mtgCardRenderer = new MtgCardRenderer(card);
@@ -125,5 +126,9 @@ export class MtgCommandParser extends BaseCommandParser {
         ], MtgCommandParser.BASIC_COLORS);
 
         return Random.nextFromList(list);
+    }
+
+    private stripInvalidColorValues(cardColor: string): string {
+        return StringHelper.removeDuplicateChars(cardColor.replace(/[^wubrgc]/g, ""));
     }
 }
