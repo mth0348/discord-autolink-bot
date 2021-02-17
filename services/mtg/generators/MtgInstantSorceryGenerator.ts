@@ -44,8 +44,8 @@ export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
         ], 1);
 
         for (let i = 0; i < abilityCount; i++) {
-            const isRequiredToBePositive = i === 0; /* first ability is always a positive one */
-            this.mtgAbilityService.generateSpellAbility(card, isRequiredToBePositive);
+            const minScore = i === 0 ? 0 : -99; /* first ability is always a positive one */
+            this.mtgAbilityService.generateSpellAbility(card, minScore);
         }
 
         // combine two abilities with ", then".

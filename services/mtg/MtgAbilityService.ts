@@ -26,13 +26,13 @@ export class MtgAbilityService {
     constructor(private mtgDataRepository: MtgDataRepository) {
     }
 
-    public generateSpellAbility(card: MtgCard, requiredPositive: boolean = false) {
+    public generateSpellAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99) {
 
         const colors = card.color.toLowerCase().split('');
 
         const events = this.mtgDataRepository.getInstantSorceryEvents()
             .filter(a =>
-                (!requiredPositive || a.score > 0)
+                a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
@@ -65,7 +65,7 @@ export class MtgAbilityService {
 
             const etbEvent = new MtgPermanentStatics({
                 colorIdentity: chosenCost.colorIdentity,
-                text: "as (self) enters the battlefield, you may " + chosenCost.text + ". If you don't, (self) enters the battlefield tapped.",
+                text: "as (self) enters the battlefield, you may " + chosenCost.text + ". If you don't, (self) enters the battlefield tapped",
                 score: -chosenCost.score / 2
             });
             card.oracle.abilities.push(new MtgStaticAbility(etbEvent));
@@ -99,13 +99,12 @@ export class MtgAbilityService {
     }
 
 
-    public generateActivatedAbility(card: MtgCard, requiredPositive: boolean = false) {
+    public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99) {
         const colors = card.color.toLowerCase().split('');
 
         const positiveEvents = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
-                a.score > 0
-                && (!requiredPositive || a.score > 0)
+                a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
@@ -150,14 +149,14 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
     }
 
-    public generateTriggeredAbility(card: MtgCard, requiredPositive: boolean = false) {
+    public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
         const colors = card.color.toLowerCase().split('');
 
         const conditions = this.mtgDataRepository.getPermanentConditions();
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
-                (!requiredPositive || a.score > 0)
+                a.score >= minScore && a.score <= maxScore
                 && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
@@ -167,12 +166,13 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
     }
 
-    public generateStaticAbility(card: MtgCard, requiredPositive: boolean = false) {
+    public generateStaticAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
         const colors = card.color.toLowerCase().split('');
 
         const statics = this.mtgDataRepository.getPermanentStatics()
             .filter(a =>
-                (!requiredPositive || a.score > 0)
+                a.score >= minScore && a.score <= maxScore
+                && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
                 && colors.some(c => a.colorIdentity.indexOf(c) >= 0 || c === "c")
                 && a.score <= this.rarityScoreLUT.get(card.rarity));
 

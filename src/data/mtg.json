@@ -305,7 +305,7 @@
         {
             "name": "Enchant",
             "hasCost": false,
-            "score": 0,
+            "score": 0.1,
             "nameExtension": "(type)",
             "colorIdentity": "wubrg",
             "types": [
@@ -315,7 +315,7 @@
         {
             "name": "Equip",
             "hasCost": true,
-            "score": 0,
+            "score": 0.1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
@@ -637,7 +637,7 @@
         {
             "name": "Entwine",
             "hasCost": true,
-            "score": 0,
+            "score": 0.1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
@@ -1528,7 +1528,7 @@
         },
         {
             "text": "you gain (number) life",
-            "score": 0,
+            "score": 0.1,
             "colorIdentity": "wbg"
         },
         {
@@ -1781,12 +1781,12 @@
         },
         {
             "text": "each opponent exiles a card from his or her hand",
-            "score": 0,
+            "score": 0.1,
             "colorIdentity": "bb"
         },
         {
             "text": "each player discards a card",
-            "score": 0,
+            "score": 0.1,
             "colorIdentity": "wubrg"
         },
         {
@@ -2151,32 +2151,38 @@
         {
             "text": "(other creatures) you control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
-            "score": -4
+            "score": -4,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "(other creatures) you control get +(number)/+(samenumber)",
             "colorIdentity": "wwbg",
-            "score": 4
+            "score": 4,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "creatures you don't control get -1/-1",
             "colorIdentity": "bb",
-            "score": 4
+            "score": 4,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "creatures you don't control get -2/-2",
             "colorIdentity": "bb",
-            "score": 5
+            "score": 5,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "(other creatures) you don't control get -(number)/-(samenumber)",
             "colorIdentity": "bb",
-            "score": 6
+            "score": 6,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "(other creatures) you control get +1/+1 and have (keyword)",
             "colorIdentity": "wubrg",
-            "score": 4.2
+            "score": 4.2,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "you can't lose the game and your opponents can't win the game",
@@ -2186,7 +2192,8 @@
         {
             "text": "you can't lose the game and your opponents can't win the game",
             "colorIdentity": "wubrg",
-            "score": 5
+            "score": 5,
+            "restrictedTypes": [ "creature", "enchantment", "artifact" ]
         },
         {
             "text": "you can't win the game and your opponents can't lose the game",
@@ -2685,7 +2692,7 @@
         {
             "text": "prevent all combat damage that would be dealt this turn",
             "colorIdentity": "g",
-            "score": 0,
+            "score": 0.1,
             "restrictedTypes": [ "instant" ]
         },
         {
