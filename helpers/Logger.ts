@@ -4,9 +4,9 @@ export class Logger {
 
     public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation];
 
-    public static log(text: string, type: LogType = LogType.Verbose) {
+    public static log(text: string, type: LogType = LogType.Verbose, args: any = undefined) {
         if (this.enabledTypes.some(t => t === type)) {
-            console.log(text);
+            console.log(text, args);
         }
     }
 }

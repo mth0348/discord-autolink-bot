@@ -101,6 +101,9 @@ export class MtgCommandParser extends BaseCommandParser {
 
     private getRandomType(): string {
 
+        // TODO remove.
+        return MtgCardType.Land;
+
         return Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature]);
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));
@@ -111,10 +114,10 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private getRandomColor(cardType: string): string {
-        const allowColorless = (cardType === MtgCardType.Creature || cardType === MtgCardType.Artifact || cardType === MtgCardType.Planeswalker);
+        const allowColorless = [MtgCardType.Creature, MtgCardType.Land, MtgCardType.Artifact, MtgCardType.Planeswalker].some(c => c == cardType);
 
         const list = Random.complex([
-            { value: MtgCommandParser.COLORLESS, chance: (allowColorless ? 1.0 : 0.0) },
+            { value: MtgCommandParser.COLORLESS, chance: (allowColorless ? 0.1 : 0.0) },
             { value: MtgCommandParser.BASIC_COLORS, chance: 0.25 },
             { value: MtgCommandParser.TWO_COLOR_PAIRS, chance: 0.30 },
             { value: MtgCommandParser.THREE_COLOR_PAIRS, chance: 0.15 },

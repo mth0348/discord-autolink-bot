@@ -92,11 +92,7 @@ export class MtgHelper {
         return "X" + MtgHelper.sortWubrg(manacost).split("").join("X");
     }
 
-    public static getDominantColor(card: MtgCard): string {
-
-        // only apply this to cards where there are more colors than symbols to cover.
-        if (card.cmc >= card.color.length)
-            return card.color;
+    public static getDominantColor(card: MtgCard, maxCount: number): string {
 
         // colorless can ignore dominant colors.
         if (MtgHelper.isExactlyColor(card.color, "c"))
@@ -115,10 +111,9 @@ export class MtgHelper {
         colorCount[4].count = colorIdentities.split("").filter(c => c === "g").length;
 
         // sort by count descending.
-        colorCount.sort((a, b) => b.count - a.count);
+        colorCount = colorCount.filter(c => c.count > 0).sort((a, b) => b.count - a.count);
 
-        const randomColorCount = Random.next(1, card.cmc);
-        const topColors = colorCount.slice(0, randomColorCount).map(c => c.c).join("");
+        const topColors = colorCount.slice(0, Math.min(maxCount, colorCount.length)).map(c => c.c).join("");
         return topColors;
     }
 

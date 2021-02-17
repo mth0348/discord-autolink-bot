@@ -38,7 +38,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
-        card.color = MtgHelper.getDominantColor(card);
+        card.color = MtgHelper.getDominantColor(card, card.cmc);
         card.manacost = MtgHelper.getManacost(card.cmc, card.color);
 
         return card;
@@ -158,9 +158,26 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
                 { value: MtgAbilityType.Static, chance: 0.20 }
             ], 0);
 
-            this.mtgAbilityService.generateCreatureAbility(card, abilityType);
+            this.generateAbility(card, abilityType);
         }
 
         card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
+    }
+
+    private generateAbility(card: MtgCard, abilityType: MtgAbilityType) {
+
+        switch (abilityType) {
+            case MtgAbilityType.Activated:
+                this.mtgAbilityService.generateActivatedAbility(card);
+                break;
+
+            case MtgAbilityType.Triggered:
+                this.mtgAbilityService.generateTriggeredAbility(card);
+                break;
+
+            case MtgAbilityType.Static:
+                this.mtgAbilityService.generateStaticAbility(card);
+                break;
+        }
     }
 }

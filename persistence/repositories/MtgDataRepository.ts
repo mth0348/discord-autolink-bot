@@ -6,11 +6,11 @@ import { MtgPermanentEvent } from '../entities/mtg/MtgPermanentEvent';
 import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
 import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
 import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
+import { MtgStaticAbility } from '../../dtos/mtg/abilities/MtgStaticAbility';
 
 import database = require('../../src/data/mtg.json');
 
 export class MtgDataRepository {
-
     public getTypes(): string[] {
         return database.types;
     }

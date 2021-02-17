@@ -30,7 +30,7 @@ export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
-        card.color = MtgHelper.getDominantColor(card);
+        card.color = MtgHelper.getDominantColor(card, card.cmc);
         card.manacost = MtgHelper.getManacost(card.cmc, card.color);
 
         return card;

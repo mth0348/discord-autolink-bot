@@ -8,6 +8,7 @@ import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenerator';
 import { MtgLandGenerator } from './generators/MtgLandGenerator';
+import { exception } from "console";
 
 export class MtgCardService {
 
@@ -42,13 +43,11 @@ export class MtgCardService {
             case MtgCardType.Sorcery:
                 card = this.mtgInstantSorceryGenerator.generate(card);
                 break;
-            // case MtgCardType.Enchantment:
-            //     break;
-            // case MtgCardType.Planeswalker:
-            //     break;
-            // case MtgCardType.Land:
-            //     card = this.mtgLandGenerator.generate(card);
-            //     break;
+            case MtgCardType.Land:
+                card = this.mtgLandGenerator.generate(card);
+                break;
+            default:
+                throw "Not implemented";
         }
 
         return card;

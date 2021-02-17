@@ -1914,19 +1914,19 @@
             "noFollowUp": true
         },
         {
-            "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put (numbername) of those cards into your hand",
+            "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "uu",
             "noFollowUp": true
         },
         {
-            "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put (numbername) of those cards into your hand",
+            "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
             "noFollowUp": true
         },
         {
-            "text": "look at the top X cards of your library, where X is the number of (color|type) creatures you control. You may put (numbername) of those cards into your hand",
+            "text": "look at the top X cards of your library, where X is the number of (color|type) creatures you control. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
             "noFollowUp": true
@@ -2311,6 +2311,31 @@
             "score": 5
         },
         {
+            "text": "reveal a (subtype) card from your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "return a (type) you control to your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "return a (subtype) creature you control to your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "mill (numbername) cards",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "mill (numbername2) cards",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
             "text": "discard a card",
             "colorIdentity": "ubr",
             "score": 2
@@ -2347,9 +2372,14 @@
             "score": 6
         },
         {
-            "text": "sacrifice a (permanent)",
+            "text": "sacrifice a(n) (permanent)",
             "colorIdentity": "wubrg",
             "score": 5
+        },
+        {
+            "text": "sacrifice a creature",
+            "colorIdentity": "wubrg",
+            "score": 4
         },
         {
             "text": "discard a(n) (type) card",
@@ -4257,5 +4287,5 @@
             "clutches",
             "bubble"
         ]
-    }    
+    }  
 }

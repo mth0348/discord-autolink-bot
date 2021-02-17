@@ -10,6 +10,9 @@ import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
 import { Collection } from 'discord.js';
 import { MtgPermanentActivatedCost } from '../../persistence/entities/mtg/MtgPermanentActivatedCost';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
+import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanentStatics';
+import { isatty } from 'tty';
+import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
 
 export class MtgAbilityService {
 
@@ -38,24 +41,65 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgStaticAbility(spellEvent));
     }
 
-    public generateCreatureAbility(card: MtgCard, abilityType: MtgAbilityType, requiredPositive: boolean = false) {
+    public generateLandEtbAbility(card: MtgCard) {
+        const colors = card.color.toLowerCase().split('');
 
-        switch (abilityType) {
-            case MtgAbilityType.Activated:
-                this.generateActivatedAbility(card, requiredPositive);
-                break;
+        const isRegularTapped = Random.chance(0.8);
+        if (isRegularTapped) {
 
-            case MtgAbilityType.Triggered:
-                this.generateTriggeredAbility(card, requiredPositive);
-                break;
+            const etbEvent = new MtgPermanentStatics({
+                colorIdentity: "",
+                text: "(self) enters the battlefield tapped",
+                score: -1.5
+            });
+            card.oracle.abilities.push(new MtgStaticAbility(etbEvent));
 
-            case MtgAbilityType.Static:
-                this.generateStaticAbility(card, requiredPositive);
-                break;
+        } else {
+
+            const costs = this.mtgDataRepository.getPermanentActivatedCosts()
+                .filter(a =>
+                    (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
+                    && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+
+            const chosenCost = Random.nextFromList(costs);
+
+            const etbEvent = new MtgPermanentStatics({
+                colorIdentity: chosenCost.colorIdentity,
+                text: "as (self) enters the battlefield, you may " + chosenCost.text + ". If you don't, (self) enters the battlefield tapped.",
+                score: -chosenCost.score / 2
+            });
+            card.oracle.abilities.push(new MtgStaticAbility(etbEvent));
+
         }
     }
 
-    private generateActivatedAbility(card: MtgCard, requiredPositive: boolean) {
+    public generateManaAbility(card: MtgCard) {
+        let colorString = "";
+
+        if (card.color.length === 1)
+            colorString = "X" + card.color;
+        else if (card.color.length === 2)
+            colorString = "X" + card.color.split("").join(" or X");
+        else if (card.color.length > 2)
+            colorString = "X" + card.color.slice(0, card.color.length - 1).split("").join(", X") + " or X" + card.color[card.color.length - 1];
+
+        const cost = new MtgPermanentActivatedCost({
+            text: "XT",
+            score: 0,
+            colorIdentity: card.color
+        });
+
+        const event = new MtgPermanentEvent({
+            text: "add " + colorString,
+            score: 1,
+            colorIdentity: card.color
+        });
+
+        card.oracle.abilities.push(new MtgActivatedAbility(cost, event));
+    }
+
+
+    public generateActivatedAbility(card: MtgCard, requiredPositive: boolean = false) {
         const colors = card.color.toLowerCase().split('');
 
         const positiveEvents = this.mtgDataRepository.getPermanentEvents()
@@ -106,7 +150,7 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
     }
 
-    private generateTriggeredAbility(card: MtgCard, requiredPositive: boolean) {
+    public generateTriggeredAbility(card: MtgCard, requiredPositive: boolean = false) {
         const colors = card.color.toLowerCase().split('');
 
         const conditions = this.mtgDataRepository.getPermanentConditions();
@@ -123,7 +167,7 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
     }
 
-    private generateStaticAbility(card: MtgCard, requiredPositive: boolean) {
+    public generateStaticAbility(card: MtgCard, requiredPositive: boolean = false) {
         const colors = card.color.toLowerCase().split('');
 
         const statics = this.mtgDataRepository.getPermanentStatics()

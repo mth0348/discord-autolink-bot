@@ -7,6 +7,8 @@ import { StringHelper } from '../../helpers/StringHelper';
 import { Random } from "../../helpers/Random";
 
 import Canvas = require("canvas");
+import { Logger } from "../../helpers/Logger";
+import { LogType } from "../../dtos/LogType";
 
 export class MtgCardRenderer {
 
@@ -27,6 +29,8 @@ export class MtgCardRenderer {
     }
 
     public async renderCard(): Promise<MessageAttachment> {
+
+        Logger.log("Pre-draw card: ", LogType.Verbose, this.card);
 
         this.fillBlack();
         this.drawCardBorder();
@@ -49,7 +53,7 @@ export class MtgCardRenderer {
 
     private drawCardBorder() {
         const colorMapping = this.card.color.length <= 2 ? this.card.color : "m";
-        const fileName = `IMAGEURL_BORDER_${colorMapping}${this.card.type === MtgCardType.Creature ? "_CREATURE" : ""}`;
+        const fileName = `IMAGEURL_BORDER_${colorMapping}${this.getTypeFileSuffix()}`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName)).path;
         const cardImage = ImageProvider.getImage(cardImageUrl);
@@ -60,11 +64,17 @@ export class MtgCardRenderer {
     private drawCardTitle() {
         const cardTitle = this.card.name;
         this.ctx.font = `${cardTitle.length > 25 ? 34 : 38}px matrixbold`;
-        this.ctx.fillText(cardTitle, 52, 78, 520 - (this.card.manacost.length * 17));
+
+        // check is necessary, lands have no manacost.
+        if (this.card.manacost.length > 0) {
+            this.ctx.fillText(cardTitle, 52, 78, 520 - (this.card.manacost.length * 17));
+        }
     }
 
     private async drawCardCost() {
-        await this.overlayManacostSymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 75);
+        if (this.card.manacost.length > 0) {
+            await this.overlayManacostSymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 75);
+        }
     }
 
     private drawCardType() {
@@ -214,5 +224,15 @@ export class MtgCardRenderer {
 
         // fill image in dest. rectangle
         this.ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
+    }
+
+    private getTypeFileSuffix() {
+        switch (this.card.type) {
+            case MtgCardType.Creature:
+                return "_CREATURE";
+            case MtgCardType.Land:
+                return "_LAND";
+        }
+        return "";
     }
 }
