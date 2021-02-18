@@ -7,9 +7,13 @@ import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
 import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
 import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
 import { Logger } from '../../helpers/Logger';
+import { LogType } from '../../dtos/LogType';
+import { MtgHelper } from '../../helpers/mtg/MtgHelper';
+import { MtgCommandParser } from '../../parsers/MtgCommandParser';
+import { MtgCard } from '../../dtos/mtg/MtgCard';
 
 import database = require('../../src/data/mtg.json');
-import { LogType } from '../../dtos/LogType';
+import { createDecipher } from 'crypto';
 
 export class MtgDataRepository {
 
@@ -37,8 +41,10 @@ export class MtgDataRepository {
         return Random.nextFromList(database.subtypesArtifactCreatures);
     }
 
-    public getKeywordsByColorAndType(colors: string[], type: string, count: number, simpleOnly: boolean = false): MtgKeyword[] {
+    public getKeywordsByColorAndType(colorColors: string, type: string, count: number, simpleOnly: boolean = false): MtgKeyword[] {
         if (count <= 0) return [];
+
+        const colors = this.getColors(colorColors);
 
         const list = database.keywords
             .filter(k => k.types.some(t => t === type.toLowerCase()))
@@ -117,14 +123,16 @@ export class MtgDataRepository {
     }
 
     public getCreatureFlavorText(maxCharacterLength: number): string {
-        return Random.nextFromList(database.creatureTexts.flavors.filter(f => f.length < maxCharacterLength));    }
+        return Random.nextFromList(database.creatureTexts.flavors.filter(f => f.length < maxCharacterLength));
+    }
 
     public getLandFlavorText(maxCharacterLength: number): string {
         return Random.nextFromList(database.landTexts.flavors.filter(f => f.length < maxCharacterLength));
     }
 
     public getSpellFlavorText(maxCharacterLength: number): string {
-        return Random.nextFromList(database.spellTexts.flavors.filter(f => f.length < maxCharacterLength));    }
+        return Random.nextFromList(database.spellTexts.flavors.filter(f => f.length < maxCharacterLength));
+    }
 
     public getPlaneswalkerName() {
         const name = Random.nextFromList(database.planeswalkerTexts.names) + ", ";
@@ -154,4 +162,9 @@ export class MtgDataRepository {
 
         return StringHelper.toCamelCase(adjective + noun);
     }
+
+    private getColors(cardColors: string) {
+        return MtgHelper.isExactlyColor(cardColors, "c") ? MtgCommandParser.BASIC_COLORS.map(c => c) : cardColors.split('');
+    }
+
 }

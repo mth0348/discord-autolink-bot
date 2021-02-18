@@ -2889,12 +2889,14 @@
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword)",
             "colorIdentity": "wubrg",
-            "score": 2.3
+            "score": 2.3,
+            "restrictedTypes": [ "creature", "artifact", "enchantment", "planeswalker", "instant", "sorcery" ]
         },
         {
             "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
             "colorIdentity": "wubrg",
-            "score": 2.4
+            "score": 2.4,
+            "restrictedTypes": [ "creature", "artifact", "enchantment", "planeswalker", "instant", "sorcery" ]
         },
         {
             "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
@@ -4488,6 +4490,8 @@
             "valley",
             "city",
             "fortress",
+            "marshes",
+            "marsh",
             "cave",
             "caves",
             "cavern",

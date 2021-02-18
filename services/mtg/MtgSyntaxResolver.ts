@@ -96,7 +96,7 @@ export class MtgSyntaxResolver {
             }
 
             if (text.indexOf("(keyword)") >= 0) {
-                const keyword = this.mtgDataRepository.getKeywordsByColorAndType(card.color.split(''), "creature", 1, true)[0];
+                const keyword = this.mtgDataRepository.getKeywordsByColorAndType(card.color, "creature", 1, true)[0];
                 text = text.replace("(keyword)", keyword.name.toLowerCase());
             }
 

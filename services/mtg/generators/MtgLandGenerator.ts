@@ -7,6 +7,7 @@ import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
+import { MtgActivatedAbility } from '../../../dtos/mtg/abilities/MtgActivatedAbility';
 
 export class MtgLandGenerator extends MtgBaseGenerator {
 
@@ -68,7 +69,7 @@ export class MtgLandGenerator extends MtgBaseGenerator {
         }
 
         // decide if enters tapped. Only makes sense if also has mana ability.
-        if (entersTapped && hasManaAbility) {
+        if (entersTapped) {
             this.mtgAbilityService.generateLandEtbAbility(card);
         }
 
@@ -78,11 +79,13 @@ export class MtgLandGenerator extends MtgBaseGenerator {
             const colorsAllowed = entersTapped ? 5 : Random.next(0, 1);
             this.mtgAbilityService.generateManaAbility(card, colorsAllowed);
 
-            if (card.color.length > 1 && !entersTapped) {
-                // still add in entersTapped.
-                this.mtgAbilityService.generateLandEtbAbility(card);
-                card.oracle.abilities.reverse(); /* swap */
-            }
+            // which mana symbols are used for mana ability?
+            const colorSymbolRegex = /Xw|Xu|Xb|Xr|Xg|Xc/gi;
+            const manaAbility = card.oracle.abilities[card.oracle.abilities.length - 1] as MtgActivatedAbility;
+            let eventsSymbols = manaAbility.event.text.match(colorSymbolRegex);
+            card.color = eventsSymbols.join("").replace(/[X,\s]/gi, "");
+        } else {
+            card.color = "c";
         }
 
         // actually add rest of the abilities.

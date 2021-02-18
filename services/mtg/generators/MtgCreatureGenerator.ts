@@ -131,7 +131,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
             { value: 3, chance: 0.05 + (card.rarityScore >= 4 ? 0.2 : 0) }
         ], card.rarityScore >= 4 ? 1 : 0);
 
-        const keywords = this.mtgDataRepository.getKeywordsByColorAndType(card.color.split(''), card.type, keywordCount);
+        const keywords = this.mtgDataRepository.getKeywordsByColorAndType(card.color, card.type, keywordCount);
         card.oracle.keywords = keywords;
 
         // special rule: shapeshifter.

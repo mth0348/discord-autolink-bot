@@ -108,9 +108,6 @@ export class MtgAbilityService {
             colorIdentity: card.color
         });
 
-        // overwrite color, as the printed mana symbols predict the land cards border.
-        card.color = colorString.replace(/[X,\s]*(or)*/g, "");
-
         card.oracle.abilities.push(new MtgActivatedAbility(cost, event));
     }
 

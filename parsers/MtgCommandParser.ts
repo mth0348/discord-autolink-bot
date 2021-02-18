@@ -104,9 +104,17 @@ export class MtgCommandParser extends BaseCommandParser {
 
     private getRandomType(): string {
 
-        return Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land]);
+        const type = Random.complex([
+            { value: MtgCardType.Instant, chance: 0.28 },
+            { value: MtgCardType.Sorcery, chance: 0.28 },
+            { value: MtgCardType.Creature, chance: 0.28 },
+            { value: MtgCardType.Land, chance: 0.16 },
+        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land]));
+
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));
+
+        return type;
     }
 
     private getRandomRarity(): string {
