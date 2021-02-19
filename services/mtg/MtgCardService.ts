@@ -8,6 +8,7 @@ import { MtgSyntaxResolver } from './MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from './MtgOracleTextWrapperService';
 import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenerator';
 import { MtgLandGenerator } from './generators/MtgLandGenerator';
+import { MtgPlaneswalkerGenerator } from "./generators/MtgPlaneswalkerGenerator";
 import { Logger } from '../../helpers/Logger';
 
 export class MtgCardService {
@@ -15,6 +16,7 @@ export class MtgCardService {
     private mtgCreatureGenerator: MtgCreatureGenerator;
     private mtgInstantSorceryGenerator: MtgInstantSorceryGenerator;
     private mtgLandGenerator: MtgLandGenerator;
+    private mtgPlaneswalkerGenerator: MtgPlaneswalkerGenerator;
 
     constructor(mtgDataRepository: MtgDataRepository,
         mtgAbilityService: MtgAbilityService,
@@ -23,6 +25,7 @@ export class MtgCardService {
         this.mtgCreatureGenerator = new MtgCreatureGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
         this.mtgInstantSorceryGenerator = new MtgInstantSorceryGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
         this.mtgLandGenerator = new MtgLandGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
+        this.mtgPlaneswalkerGenerator = new MtgPlaneswalkerGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
     public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {
@@ -45,6 +48,9 @@ export class MtgCardService {
                 break;
             case MtgCardType.Land:
                 card = this.mtgLandGenerator.generate(card);
+                break;
+            case MtgCardType.Planeswalker:
+                card = this.mtgPlaneswalkerGenerator.generate(card);
                 break;
             default:
                 throw "Not implemented";

@@ -10,10 +10,12 @@ import { LogType } from "../../dtos/LogType";
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 
 import Canvas = require("canvas");
+import { MtgCardRenderer } from "./MtgCardRenderer";
+import { MtgActivatedAbility } from "../../dtos/mtg/abilities/MtgActivatedAbility";
+import { runInThisContext } from "vm";
+import { MtgOracleTextWrapPreset } from '../../dtos/mtg/MtgOracleTextWrapPreset';
 
-export class MtgCardRenderer {
-
-    public static MANASYMBOL_PATTERN = /X[^\s]{1}/g;
+export class MtgPlaneswalkerCardRenderer {
 
     private canvas: Canvas.Canvas;
     private ctx: Canvas.CanvasRenderingContext2D;
@@ -34,30 +36,34 @@ export class MtgCardRenderer {
         Logger.log("Pre-draw card: ", LogType.Verbose, this.card);
 
         this.fillBlack();
+        await this.drawCardArtwork();
+        await this.drawLineSeparator();
         this.drawCardBorder();
         this.drawCardTitle();
         await this.drawCardCost();
         this.drawCardType();
-        await this.drawCardArtwork();
         this.drawExpansionSymbol();
-        await this.drawOracleAndFlavorText();
-        this.drawPowerToughness();
+        await this.drawOracleText();
         this.drawCardNumber();
 
         const attachment = new MessageAttachment(this.canvas.toBuffer(), this.card.name + '.png');
         return attachment;
     }
 
+    private async drawLineSeparator() {
+        const spearator = await Canvas.loadImage(`assets/img/mtg/pw_separator.png`);
+        this.ctx.drawImage(spearator, 10, 605, 610, 120);
+    }
+
     private fillBlack() {
-        this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     private drawCardBorder() {
         const colorMapping = this.card.color.length <= 2 ? MtgHelper.sortWubrg(this.card.color) : "m";
-        const fileName = `IMAGEURL_BORDER_${colorMapping}${this.getTypeFileSuffix()}`;
+        const fileName = `IMAGEURL_BORDER_${colorMapping}_PLANESWALKER`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName));
-        Logger.log(`Card image Url for filename ${fileName}: `, LogType.Verbose, cardImageUrl);
         const cardImage = ImageProvider.getImage(cardImageUrl.path);
 
         this.ctx.drawImage(cardImage, 0, 0, this.canvas.width, this.canvas.height);
@@ -72,23 +78,21 @@ export class MtgCardRenderer {
         if (this.card.manacost.length > 0) {
             offsetRight = this.card.manacost.length * 17;
         }
-        this.ctx.fillText(cardTitle, 52, 78, 520 - offsetRight);
+        this.ctx.fillText(cardTitle, 52, 65, 520 - offsetRight);
     }
 
     private async drawCardCost() {
-        if (this.card.manacost.length > 0) {
-            await this.overlayManacostSymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 75);
-        }
+        await this.overlayManacostSymbols(this.card.manacost, 17, 32, 577 - (this.card.manacost.length * 16), 64);
     }
 
     private drawCardType() {
-        this.ctx.font = '36px matrixbold';
+        this.ctx.font = '34px matrixbold';
         this.ctx.fillText(this.card.getFullType(), 52, 530, 490);
     }
 
     private async drawCardArtwork() {
         const artwork = await Canvas.loadImage(this.card.imageUrl);
-        this.drawImageProp(artwork, 50, 102, 530, 385, 0.5, 0.2);
+        this.drawImageProp(artwork, 20, 20, this.canvas.width - 40, this.canvas.height - 40, 0.5, 0.2);
     }
 
     private drawExpansionSymbol() {
@@ -96,63 +100,77 @@ export class MtgCardRenderer {
         this.ctx.drawImage(expansionSymbol, 545, 502, 35, 35);
     }
 
-    private drawPowerToughness() {
-        if (!this.card.hasPowerToughness()) {
-            return;
-        }
-
-        const pt = `${this.card.power}/${this.card.toughness}`;
-        const offset = pt.length === 3 ? 520 : pt.length === 4 ? 508 : 500;
-        this.ctx.font = pt.length > 4 ? '37px mplantinbold' : '38px mplantinbold';
-        this.ctx.fillText(pt, offset, 822);
-    }
-
     private drawCardNumber() {
         this.ctx.font = `$14px mplantin`;
         this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(Random.next(100, 999).toString(), 38, 833);
+        this.ctx.fillText(Random.next(100, 999).toString(), 37, 833);
     }
 
-    private async drawOracleAndFlavorText() {
+    private async drawOracleText() {
 
         const preset = this.card.rendererPreset;
         const oracleLines = this.card.wrappedOracleLines;
 
+        this.ctx.fillStyle = '#FFFFFF';
         this.ctx.font = `${preset.fontSize}px mplantin`;
 
-        // if there is enough space, leave some area free before oracle text starts.
-        const initialOffset = oracleLines.length < 4 ? (40 - oracleLines.length * 10) : 0;
+        const posX = 100;
+        const posY = 552;
 
-        const posX = 60;
-        const posY = 588 + initialOffset;
+        const singleLineOffset = preset.fontSize + preset.lineDifInPixel;
+        const lineHeight = 3 * singleLineOffset;
 
-        for (let i = 0; i < Math.min(preset.maxLines, oracleLines.length); i++) {
-            let line = oracleLines[i];
+        for (let i = 0; i < 3; i++) {
+            // draw symbol.
+            const activatedAbility = this.card.oracle.abilities[i] as MtgActivatedAbility;
+            const cost = activatedAbility.cost;
+            const isUp = cost.score > 0;
+            const pwSymbolImage = ImageProvider.getImage(`assets/img/mtg/symbols/mtg_pw_${isUp ? 'up' : 'down'}.png`)
+            this.ctx.drawImage(pwSymbolImage, 25, 570 + (i * (lineHeight + 2)), 75, 52);
+            
+            // draw symbol number.
+            this.ctx.fillStyle = '#FFFFFF';
+            this.ctx.font = `28px mplantinbold`;
+            this.ctx.fillText(cost.text, 25 + (isUp ? 21 : 25), 570 + (i * (lineHeight + 2)) + (isUp ? 36 : 34));
 
-            const lineOffset = (i * preset.fontSize) + preset.lineDifInPixel;
-            const isFlavorText = StringHelper.startsWith(line, "FT_");
-            const isFlavorTextSeparator = StringHelper.startsWith(line, "FT_LINE");
+            this.ctx.fillStyle = '#000000';
+            this.ctx.font = `${preset.fontSize}px mplantin`;
 
-            if (!isFlavorText) {
-                // make placeholder space for symbols.
-                const lineWithoutSymbols = line.replace(MtgCardRenderer.MANASYMBOL_PATTERN, "    ");
+            const line1 = oracleLines[i * 3 + 0];
+            const line2 = oracleLines[i * 3 + 1];
+            const line3 = oracleLines[i * 3 + 2];
 
-                this.ctx.fillText(lineWithoutSymbols, posX, posY + lineOffset, 520);
-                await this.overlaySymbols(lineWithoutSymbols, line, preset.fontSize, posX, posY + lineOffset);
+            let blockOffset = i * lineHeight;
+
+            // for debug: draw text borders.
+            // this.ctx.strokeRect(posX, posY + blockOffset, 470, singleLineOffset * 3);
+
+            if (line2 === "" && line3 === "") {
+                /* center text if only one line */
+                blockOffset += singleLineOffset / 1.25;
+            } else if (line3 === "")  {
+                 /* center text by half of line if only two lines */
+                blockOffset += singleLineOffset / 4;
             }
-            else {
-                // from here on, we can safely assume the rest is flavor text, so set font to italic.
-                this.ctx.font = `${preset.fontSize}px mplantinitalic`;
-                if (isFlavorTextSeparator) {
-                    // skip text if its a line.
-                    const symbol = await Canvas.loadImage(`assets/img/mtg/separator.png`);
-                    this.ctx.drawImage(symbol, 40, posY + lineOffset - 20, 540, 20);
-                } else {
-                    line = line.substring(3);
-                    this.ctx.fillText(line, posX, posY + lineOffset, 520);
-                }
-            }
+
+            if (line1 !== "") 
+               await this.drawOracleTextLine(line1, posX, posY + blockOffset + singleLineOffset, preset);
+            if (line2 !== "")
+                await this.drawOracleTextLine(line2, posX, posY + blockOffset + singleLineOffset * 2, preset);
+            if (line3 !== "")
+                await this.drawOracleTextLine(line3, posX, posY + blockOffset + singleLineOffset * 3, preset);
         }
+
+        this.ctx.fillStyle = '#000000';
+    }
+
+    
+    private async drawOracleTextLine(line: string, posX: number, posY: number, preset: MtgOracleTextWrapPreset) {
+        // make placeholder space for symbols.
+        const lineWithoutSymbols = line.replace(MtgCardRenderer.MANASYMBOL_PATTERN, "    ");
+
+        this.ctx.fillText(lineWithoutSymbols, posX, posY, 470);
+        await this.overlaySymbols(lineWithoutSymbols, line, preset.fontSize, posX, posY);
     }
 
     private async overlaySymbols(lineWithoutSymbols: string, line: string, size: number, positionX: number, positionY: number) {

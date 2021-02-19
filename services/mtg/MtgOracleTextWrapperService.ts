@@ -16,6 +16,25 @@ export class MtgOracleTextWrapperService {
         MtgOracleTextWrapperService.PRESET_TINY,
     ];
 
+    /* Planeswalkers always have 3 abilities, with each a maximum of 3 lines. */
+    public calculatePlaneswalkerTextWrapPreset(oracle: MtgOracleText): MtgOracleTextWrapPreset {
+
+        let okPreset: MtgOracleTextWrapPreset = null;
+
+        this.presets.forEach(preset => {
+            const wrappedOracle = this.wordWrapAllPlaneswalkerOracleText(oracle, preset.maxCharactersPerLine - 4);
+            if (okPreset == null && wrappedOracle.length <= 9) { /* max lines is always 9 */
+                okPreset = preset;
+            }
+        });
+
+        if (okPreset === null) {
+            okPreset = MtgOracleTextWrapperService.PRESET_TINY;
+        }
+
+        return okPreset;
+    }
+
     public calculateTextWrapPreset(oracle: MtgOracleText): MtgOracleTextWrapPreset {
 
         let okPreset: MtgOracleTextWrapPreset = null;
@@ -34,7 +53,7 @@ export class MtgOracleTextWrapperService {
         return okPreset;
     }
 
-    public wordWrapAllOracleText(oracle: MtgOracleText, preset: MtgOracleTextWrapPreset): any {
+    public wordWrapAllOracleText(oracle: MtgOracleText, preset: MtgOracleTextWrapPreset):  string[] {
         const lines: string[] = [];
 
         // only keywords WITHOUT cost.
@@ -82,6 +101,28 @@ export class MtgOracleTextWrapperService {
         // remove last line if empty.
         if (lines.length > 0 && lines[lines.length - 1] === "")
             lines.splice(lines.length - 1, 1);
+
+        return lines;
+    }
+
+    public wordWrapAllPlaneswalkerOracleText(oracle: MtgOracleText, maxCharactersPerLine: number): string[] {
+        const lines: string[] = [];
+
+        for (let i = 0; i < oracle.abilities.length; i++) {
+            const abilityText = oracle.abilities[i].parsedText;
+            const abilityLines = this.wordWrapText(abilityText, maxCharactersPerLine);
+            if (abilityLines.length === 1) {
+                lines.push(abilityLines[0].trim());
+                lines.push("");
+                lines.push("");
+            } else if (abilityLines.length === 2) {
+                lines.push(abilityLines[0].trim());
+                lines.push(abilityLines[1].trim());
+                lines.push("");
+            } else {
+                abilityLines.forEach(line => lines.push(line.trim()));
+            }
+        }
 
         return lines;
     }

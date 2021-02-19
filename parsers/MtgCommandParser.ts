@@ -19,6 +19,7 @@ import { MtgDataRepository } from '../persistence/repositories/MtgDataRepository
 import { MtgSyntaxResolver } from '../services/mtg/MtgSyntaxResolver';
 import { MtgAbilityService } from '../services/mtg/MtgAbilityService';
 import { StringHelper } from '../helpers/StringHelper';
+import { MtgPlaneswalkerCardRenderer } from '../services/mtg/MtgPlaneswalkerCardRenderer';
 
 export class MtgCommandParser extends BaseCommandParser {
 
@@ -78,7 +79,7 @@ export class MtgCommandParser extends BaseCommandParser {
         const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor));
 
         // render card.
-        const mtgCardRenderer = new MtgCardRenderer(card);
+        const mtgCardRenderer = card.type === MtgCardType.Planeswalker ? new MtgPlaneswalkerCardRenderer(card) : new MtgCardRenderer(card);
         const renderedCard = await mtgCardRenderer.renderCard();
 
         message.channel.send('', renderedCard);
@@ -105,11 +106,12 @@ export class MtgCommandParser extends BaseCommandParser {
     private getRandomType(): string {
 
         const type = Random.complex([
-            { value: MtgCardType.Instant, chance: 0.28 },
-            { value: MtgCardType.Sorcery, chance: 0.28 },
-            { value: MtgCardType.Creature, chance: 0.28 },
+            { value: MtgCardType.Instant, chance: 0.21 },
+            { value: MtgCardType.Sorcery, chance: 0.21 },
+            { value: MtgCardType.Creature, chance: 0.21 },
+            { value: MtgCardType.Planeswalker, chance: 0.21 },
             { value: MtgCardType.Land, chance: 0.16 },
-        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land]));
+        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker]));
 
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));
