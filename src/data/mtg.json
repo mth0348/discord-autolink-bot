@@ -1896,67 +1896,78 @@
             "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.2,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "reveal the top X cards of your library, where X is the number of (type) cards in your graveyard. Put those cards into your hand",
             "score": 5,
             "colorIdentity": "uurr",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "uu",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top X cards of your library, where X is the number of (type|color) creatures you control. You may put up to (numbername) of those cards into your hand",
             "score": 2,
             "colorIdentity": "wubrg",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "reveal the top (number) cards of your library, Put one of those cards into your hand and the rest into your graveyard",
             "score": 2,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.2,
             "colorIdentity": "uug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 2.2,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "look at the top (number3) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
             "score": 3.5,
             "colorIdentity": "ug",
-            "noFollowUp": true
+            "noFollowUp": true,
+            "restrictedTypes": ["creature","artifact","instant","sorcery","enchantment"]
         },
         {
             "text": "draw X cards, where X is the number of (permanent)s you control",

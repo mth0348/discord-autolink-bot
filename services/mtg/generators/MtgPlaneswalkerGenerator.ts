@@ -2,16 +2,13 @@ import { MtgDataRepository } from '../../../persistence/repositories/MtgDataRepo
 import { MtgCard } from '../../../dtos/mtg/MtgCard';
 import { Random } from '../../../helpers/Random';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
-import { MtgAbilityType } from '../../../dtos/mtg/MtgAbilityType';
 import { MtgAbilityService } from '../MtgAbilityService';
 import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
-import { MtgActivatedAbility } from '../../../dtos/mtg/abilities/MtgActivatedAbility';
-import { MtgPermanentActivatedCost } from '../../../persistence/entities/mtg/MtgPermanentActivatedCost';
-import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanentEvent';
-import { MtgActivatedPwAbility } from '../../../dtos/mtg/abilities/MtgActivatedPwAbility';
+import { Logger } from '../../../helpers/Logger';
+import { LogType } from '../../../dtos/LogType';
 
 export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
 
@@ -37,6 +34,7 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
         this.resolveSyntax(card);
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
+        this.estimateStartingLoyalty(card);
         card.color = MtgHelper.getDominantColor(card, card.cmc);
         card.manacost = MtgHelper.getManacost(card.cmc, card.color);
 
@@ -44,47 +42,47 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
     }
 
     protected wrapTextForRenderer(card: MtgCard) {
-        const preset = this.mtgOracleTextWrapperService.calculatePlaneswalkerTextWrapPreset(card.oracle);
-        const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllPlaneswalkerOracleText(card.oracle, preset.maxCharactersPerLine - 4);
-        card.wrappedOracleLines = wrappedTextLines;
         card.rendererPreset = MtgOracleTextWrapperService.PRESET_TINY;
+        const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllPlaneswalkerOracleText(card.oracle, card.rendererPreset.maxCharactersPerLine - 2);
+        card.wrappedOracleLines = wrappedTextLines;
     }
+    
+    protected estimateCmc(card: MtgCard) {
+        let totalScore = 0;
 
+        Logger.log("Started card cost estimation:", LogType.CostEstimation);
+
+        card.oracle.abilities.forEach(a => totalScore += a.getScore());
+        totalScore *= Random.next(50, 70) / 100;
+
+        // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
+        const minCmcForReduction = 3;
+        const randomReduction = totalScore > minCmcForReduction ? Random.chance((totalScore - minCmcForReduction) / 10) ? 1 : 0 : 0;
+        const reducedCmc = totalScore - randomReduction;
+
+        Logger.log("Random reduction: " + randomReduction, LogType.CostEstimation);
+        Logger.log("Before rounding: " + (reducedCmc), LogType.CostEstimation);
+
+        const roundedScore = Math.round(reducedCmc);
+
+        Logger.log("After rounding: " + roundedScore, LogType.CostEstimation);
+
+        card.cmc = Math.max(1, Math.min(9, roundedScore));
+
+        Logger.log("Final capped CMC = " + card.cmc, LogType.CostEstimation);
+    }
     private chooseSubtypes(card: MtgCard) {
         // first word of name.
         card.subtype = card.name.split(",")[0].split(" ")[0];
     }
 
     private chooseAbilities(card: MtgCard) {
+        this.mtgAbilityService.generateActivatedPwAbility(card, +0.0, +1.00, true);
+        this.mtgAbilityService.generateActivatedPwAbility(card, +1.1, +3.99);
+        this.mtgAbilityService.generateActivatedPwAbility(card, +4.0, +99.0);
+    }
 
-        card.oracle.abilities.push(new MtgActivatedPwAbility(new MtgPermanentActivatedCost({
-            text: "+4",
-            score: 4,
-            colorIdentity: "r"
-        }), new MtgPermanentEvent({
-            text: "Add XbXr",
-            score: 0,
-            colorIdentity: "r"
-        })));
-
-        card.oracle.abilities.push(new MtgActivatedPwAbility(new MtgPermanentActivatedCost({
-            text: "-1",
-            score: -1,
-            colorIdentity: "b"
-        }), new MtgPermanentEvent({
-            text: "Destroy target creature, then exile a card from your hand",
-            score: 0,
-            colorIdentity: "b"
-        })));
-
-        card.oracle.abilities.push(new MtgActivatedPwAbility(new MtgPermanentActivatedCost({
-            text: "-8",
-            score: -8,
-            colorIdentity: "b"
-        }), new MtgPermanentEvent({
-            text: "Each opponent sacrifices a create, discards a card, then (self) deals (number2) damage to each opponent",
-            score: 0,
-            colorIdentity: "b"
-        })));
+    private estimateStartingLoyalty(card: MtgCard) {
+        card.startingLoyalty = 5;
     }
 }

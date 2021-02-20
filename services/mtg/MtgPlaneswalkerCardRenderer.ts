@@ -8,12 +8,11 @@ import { Random } from "../../helpers/Random";
 import { Logger } from '../../helpers/Logger';
 import { LogType } from "../../dtos/LogType";
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
-
-import Canvas = require("canvas");
 import { MtgCardRenderer } from "./MtgCardRenderer";
 import { MtgActivatedAbility } from "../../dtos/mtg/abilities/MtgActivatedAbility";
-import { runInThisContext } from "vm";
 import { MtgOracleTextWrapPreset } from '../../dtos/mtg/MtgOracleTextWrapPreset';
+
+import Canvas = require("canvas");
 
 export class MtgPlaneswalkerCardRenderer {
 
@@ -44,6 +43,7 @@ export class MtgPlaneswalkerCardRenderer {
         this.drawCardType();
         this.drawExpansionSymbol();
         await this.drawOracleText();
+        this.drawStartingLoyalty();
         this.drawCardNumber();
 
         const attachment = new MessageAttachment(this.canvas.toBuffer(), this.card.name + '.png');
@@ -52,7 +52,7 @@ export class MtgPlaneswalkerCardRenderer {
 
     private async drawLineSeparator() {
         const spearator = await Canvas.loadImage(`assets/img/mtg/pw_separator.png`);
-        this.ctx.drawImage(spearator, 10, 605, 610, 120);
+        this.ctx.drawImage(spearator, 10, 615, 610, 120);
     }
 
     private fillBlack() {
@@ -115,7 +115,7 @@ export class MtgPlaneswalkerCardRenderer {
         this.ctx.font = `${preset.fontSize}px mplantin`;
 
         const posX = 100;
-        const posY = 552;
+        const posY = 557;
 
         const singleLineOffset = preset.fontSize + preset.lineDifInPixel;
         const lineHeight = 3 * singleLineOffset;
@@ -162,6 +162,12 @@ export class MtgPlaneswalkerCardRenderer {
         }
 
         this.ctx.fillStyle = '#000000';
+    }
+
+    private drawStartingLoyalty() {
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.font = `32px mplantinbold`;
+        this.ctx.fillText(this.card.startingLoyalty.toString(), 545, 816);
     }
 
     

@@ -40,6 +40,8 @@ export class MtgCard {
 
     public rendererPreset: MtgOracleTextWrapPreset;
 
+    public startingLoyalty: number;
+
     public getFullType(): string {
         const supertypeText = this.supertype ? this.supertype + " " : "";
         const typeText = this.type === MtgCardType.Creature && MtgHelper.isExactlyColor(this.color, "c") ? "Artifact Creature" : this.type;

@@ -99,7 +99,7 @@ export class MtgHelper {
         if (MtgHelper.isExactlyColor(card.color, "c"))
             return card.color;
 
-        let colorIdentities = card.color;
+        let colorIdentities = card.color + card.color; /* card color is weighted stronger than rest */
         card.oracle.keywords.forEach(k => colorIdentities += k.colorIdentity);
         card.oracle.abilities.forEach(k => colorIdentities += k.getColorIdentity());
         colorIdentities = colorIdentities;

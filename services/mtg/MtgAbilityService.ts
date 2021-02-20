@@ -15,6 +15,7 @@ import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { Logger } from '../../helpers/Logger';
 import { LogType } from '../../dtos/LogType';
+import { MtgActivatedPwAbility } from '../../dtos/mtg/abilities/MtgActivatedPwAbility';
 
 export class MtgAbilityService {
 
@@ -169,6 +170,35 @@ export class MtgAbilityService {
         }
 
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
+    }
+
+    public generateActivatedPwAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99, isFirst: boolean = false) {
+        const colors = this.getColors(card);
+
+        const events = this.mtgDataRepository.getPermanentEvents()
+            .filter(a =>
+                a.score >= minScore && a.score <= maxScore
+                && (a.restrictedTypes == undefined || a.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)))
+                && colors.some(c => a.colorIdentity.indexOf(c) >= 0));
+
+        if (events.length <= 0) {
+            Logger.log(`No activated ability event found for card.`, LogType.Warning, card);
+            return;
+        }
+
+        const activatedEvent = Random.nextFromList(events);
+        const score = Math.max(-8, Math.min(8, activatedEvent.score * Random.next(60, 100) / 100));
+        let roundedScore = Math.round(score);
+        if (roundedScore === 0) roundedScore = 1;
+
+        // sort descending by score.
+        const cost = new MtgPermanentActivatedCost({
+            text: `${isFirst ? '+' : '-'}${Math.abs(roundedScore)}`,
+            score: roundedScore,
+            colorIdentity: activatedEvent.colorIdentity
+        });
+
+        card.oracle.abilities.push(new MtgActivatedPwAbility(cost, activatedEvent));
     }
 
     public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
