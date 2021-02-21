@@ -69,14 +69,14 @@ export class MtgSyntaxResolver {
                 // ignore lastNumber increase.
             }
             if (text.indexOf("(number2)") >= 0) {
-                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6]);
+                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5]);
                 moreThanOne = true;
                 text = text.replace("(number2)", number.toString());
                 text = text.replace("(samenumber)", number.toString());
                 parserValue = Math.max(parserValue, number);
             }
             if (text.indexOf("(!number2)") >= 0) {
-                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6]).toString();
+                let number = Random.nextFromList([2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5]).toString();
                 text = text.replace("(!number2)", number);
                 text = text.replace("(samenumber)", number);
                 // ignore lastNumber increase.

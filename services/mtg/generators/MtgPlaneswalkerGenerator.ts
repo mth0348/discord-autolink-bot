@@ -47,7 +47,7 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
         const wrappedTextLines = this.mtgOracleTextWrapperService.wordWrapAllPlaneswalkerOracleText(card.oracle, card.rendererPreset.maxCharactersPerLine - 2);
         card.wrappedOracleLines = wrappedTextLines;
     }
-    
+
     protected estimateCmc(card: MtgCard) {
         let totalScore = 0;
 
@@ -82,12 +82,17 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
 
     private chooseAbilities(card: MtgCard) {
         this.mtgAbilityService.generateActivatedPwAbility(card, +0.0, +1.00, true);
-        this.mtgAbilityService.generateActivatedPwAbility(card, +1.1, +3.99);
-        this.mtgAbilityService.generateActivatedPwAbility(card, +4.0, +99.0);
+        this.mtgAbilityService.generateActivatedPwAbility(card, +1.1, +2.99);
+        this.mtgAbilityService.generateActivatedPwAbility(card, +3.0, +99.0);
     }
 
     private estimateStartingLoyalty(card: MtgCard) {
         let startingLoyalty = card.cmc - Random.next(0, 1);
+
+        const thirdAbility = card.oracle.abilities[2] as MtgActivatedPwAbility;
+        if (thirdAbility.getRawScore() <= 4)
+            startingLoyalty += Random.next(0, 1);
+
         card.startingLoyalty = Math.max(2, Math.min(6, startingLoyalty));
     }
 }

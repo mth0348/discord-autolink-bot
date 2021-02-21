@@ -189,7 +189,7 @@ export class MtgAbilityService {
         }
 
         const activatedEvent = Random.nextFromList(events);
-        const score = Math.max(-8, Math.min(8, activatedEvent.score * Random.next(60, 100) / 100));
+        const score = Math.max(-8, Math.min(8, activatedEvent.score * Random.next(70, 110) / 100));
         let roundedScore = Math.round(score);
         if (roundedScore === 0) roundedScore = 1;
 

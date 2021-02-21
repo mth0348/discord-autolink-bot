@@ -2155,6 +2155,16 @@
             "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
             "colorIdentity": "wubrg",
             "score": 5.5
+        },
+        {
+            "text": "create two (number3)/(samenumber) (color) (subtype) creature tokens with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 6
+        },
+        {
+            "text": "gain control of target opponent during that player's next turn",
+            "colorIdentity": "wubrg",
+            "score": 5.5
         }
     ],
     "permanentStatics": [
@@ -2458,12 +2468,12 @@
         {
             "text": "(name) deals (number2) damage to each (subtype) creature",
             "colorIdentity": "rr",
-            "score": 1
+            "score": 1.1
         },
         {
             "text": "(name) deals (number2) damage to each non-(subtype) creature",
             "colorIdentity": "rr",
-            "score": 1
+            "score": 1.1
         },
         {
             "text": "put (numbername) +1/+1 counter(s) on target creature",
