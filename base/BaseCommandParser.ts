@@ -8,16 +8,21 @@ export class BaseCommandParser implements ICommandParser {
 
     public name: string;
 
+    protected prefixes: string[];
+
     constructor(
         protected discordService: DiscordService,
         protected parameterService: ParameterService,
-        private allowedChannels: string[],
-        private allowedRoles: string[]
+        private allowedChannels: string[] | undefined,
+        private allowedRoles: string[] | undefined
     ) {
     }
 
     public isAllowedCommand(message: Message | PartialMessage): boolean {
-        let isCommand = this.discordService.checkIsCommand(message, `${ConfigProvider.current().prefix}mtg`);
+        if (this.allowedChannels === undefined || this.allowedRoles === undefined) 
+            return true;
+
+        let isCommand = this.prefixes.some(prefix => this.discordService.checkIsCommand(message, `${ConfigProvider.current().prefix}${prefix}`));
         if (isCommand) {
             let isAllowedInChannel = this.discordService.checkChannelPermissions(message, this.allowedChannels);
             let isAllowedRole = this.discordService.checkRolePermissions(message, this.allowedRoles);

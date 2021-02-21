@@ -32,8 +32,6 @@ export class MtgPlaneswalkerCardRenderer {
 
     public async renderCard(): Promise<MessageAttachment> {
 
-        Logger.log("Pre-draw card: ", LogType.Verbose, this.card);
-
         this.fillBlack();
         await this.drawCardArtwork();
         await this.drawLineSeparator();

@@ -52,4 +52,15 @@ export class MtgCard {
     public hasPowerToughness(): boolean {
         return this.type === MtgCardType.Creature;
     }
+
+    public toLogString(): string[] {
+        let result: string[] = [];
+        result.push(`MtgCard: { name: ${this.name}, type: ${this.supertype} ${this.type} - ${this.subtype}, cost: ${this.manacost} (${this.cmc}), rarity: ${this.rarity}, P/T: ${this.power}/${this.toughness}, image: ${this.imageUrl} }`);
+        result.push(`\t- keywords (${this.oracle.keywords.length}): ${this.oracle.keywords.map(k => k.getText(this)).join(", ")}`);
+        result.push(`\t- abilities (${this.oracle.abilities.length}):`);
+        this.oracle.abilities.forEach(a => {
+            result.push(`\t-- ${a.getText()}`);
+        });
+        return result;
+    }
 }

@@ -31,8 +31,6 @@ export class MtgCardRenderer {
 
     public async renderCard(): Promise<MessageAttachment> {
 
-        Logger.log("Pre-draw card: ", LogType.Verbose, this.card);
-
         this.fillBlack();
         this.drawCardBorder();
         this.drawCardTitle();

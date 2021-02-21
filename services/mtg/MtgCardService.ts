@@ -10,6 +10,7 @@ import { MtgInstantSorceryGenerator } from './generators/MtgInstantSorceryGenera
 import { MtgLandGenerator } from './generators/MtgLandGenerator';
 import { MtgPlaneswalkerGenerator } from "./generators/MtgPlaneswalkerGenerator";
 import { Logger } from '../../helpers/Logger';
+import { LogType } from "../../dtos/LogType";
 
 export class MtgCardService {
 
@@ -55,6 +56,10 @@ export class MtgCardService {
             default:
                 throw "Not implemented";
         }
+
+        Logger.log(`Generated card for params "type: ${cardType}, rarity: ${cardRarity}, color: ${color}":`);
+        card.toLogString().forEach(l => Logger.log(l, LogType.Verbose));
+        Logger.log("Card Object: ", LogType.Verbose, card);
 
         return card;
     }

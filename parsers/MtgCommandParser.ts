@@ -10,8 +10,6 @@ import { EnumHelper } from '../helpers/EnumHelper';
 import { MtgCardRenderer } from '../services/mtg/MtgCardRenderer';
 import { ImageProvider } from '../persistence/repositories/ImageProvider';
 import { Resources } from '../helpers/Constants';
-
-import Canvas = require("canvas");
 import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
 import { MtgOracleTextWrapperService } from '../services/mtg/MtgOracleTextWrapperService';
@@ -20,10 +18,15 @@ import { MtgSyntaxResolver } from '../services/mtg/MtgSyntaxResolver';
 import { MtgAbilityService } from '../services/mtg/MtgAbilityService';
 import { StringHelper } from '../helpers/StringHelper';
 import { MtgPlaneswalkerCardRenderer } from '../services/mtg/MtgPlaneswalkerCardRenderer';
+import { Logger } from '../helpers/Logger';
+
+import Canvas = require("canvas");
 
 export class MtgCommandParser extends BaseCommandParser {
 
     public name: string = "MtG Parser";
+
+    protected prefixes: string[] = [ "mtg", "magic", "card" ];
 
     public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
@@ -65,7 +68,7 @@ export class MtgCommandParser extends BaseCommandParser {
 
     public async executeAsync(message: Message | PartialMessage): Promise<void> {
 
-        console.log(`${message.author.username} requested an MtG card with: ` + message.content);
+        Logger.log(`${message.author.username} requested an MtG card with: ` + message.content);
 
         // extract parameters.
         const parameters = this.parameterService.extractParameters(message.content, this.paramConfigs);
@@ -82,9 +85,7 @@ export class MtgCommandParser extends BaseCommandParser {
         const mtgCardRenderer = card.type === MtgCardType.Planeswalker ? new MtgPlaneswalkerCardRenderer(card) : new MtgCardRenderer(card);
         const renderedCard = await mtgCardRenderer.renderCard();
 
-        message.channel.send('', renderedCard);
-
-        console.log("Generated card: ", card);
+        this.discordService.sendMessageWithReactions(message, "", renderedCard);
     }
 
     private initializeCardRendererData() {

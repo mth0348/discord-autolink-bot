@@ -31,7 +31,6 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
         this.chooseSubtypes(card);
         this.chooseAbilities(card);
         this.chooseArtwork(card, 'planeswalker');
-        // this.chooseStartingLoyalty(card);
         this.resolveSyntax(card);
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
