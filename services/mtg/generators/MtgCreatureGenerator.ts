@@ -164,20 +164,17 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
     }
 
-    private generateAbility(card: MtgCard, abilityType: MtgAbilityType) {
+    private generateAbility(card: MtgCard, abilityType: MtgAbilityType): boolean {
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
-                this.mtgAbilityService.generateActivatedAbility(card);
-                break;
+                return this.mtgAbilityService.generateActivatedAbility(card);
 
             case MtgAbilityType.Triggered:
-                this.mtgAbilityService.generateTriggeredAbility(card);
-                break;
+                return this.mtgAbilityService.generateTriggeredAbility(card);
 
             case MtgAbilityType.Static:
-                this.mtgAbilityService.generateStaticAbility(card);
-                break;
+                return this.mtgAbilityService.generateStaticAbility(card);
         }
     }
 

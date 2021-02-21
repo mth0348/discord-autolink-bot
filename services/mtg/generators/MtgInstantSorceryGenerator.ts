@@ -5,8 +5,8 @@ import { MtgAbilityService } from '../MtgAbilityService';
 import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
-import { MtgStaticAbility } from '../../../dtos/mtg/abilities/MtgStaticAbility';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
+import { MtgSpellAbility } from '../../../dtos/mtg/abilities/MtgSpellAbility';
 
 export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
 
@@ -49,12 +49,13 @@ export class MtgInstantSorceryGenerator extends MtgBaseGenerator {
 
         // combine two abilities with ", then".
         if (abilityCount === 3 || (abilityCount === 2 && Random.chance(0.25))) {
-            const a1 = card.oracle.abilities[0] as MtgStaticAbility;
-            const a2 = card.oracle.abilities[1] as MtgStaticAbility;
+            const a1 = card.oracle.abilities[0] as MtgSpellAbility;
+            const a2 = card.oracle.abilities[1] as MtgSpellAbility;
 
-            a1.combine(a2);
-
-            card.oracle.abilities = [a1, ...card.oracle.abilities.slice(2)];
+            if (!a1.event.noFollowUp) {
+                a1.combine(a2);
+                card.oracle.abilities = [a1, ...card.oracle.abilities.slice(2)];
+            }
         }
     }
 

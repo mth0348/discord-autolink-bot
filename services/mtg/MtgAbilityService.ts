@@ -16,6 +16,7 @@ import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { Logger } from '../../helpers/Logger';
 import { LogType } from '../../dtos/LogType';
 import { MtgActivatedPwAbility } from '../../dtos/mtg/abilities/MtgActivatedPwAbility';
+import { MtgSpellAbility } from '../../dtos/mtg/abilities/MtgSpellAbility';
 
 export class MtgAbilityService {
 
@@ -45,7 +46,7 @@ export class MtgAbilityService {
         }
 
         const spellEvent = Random.nextFromList(events);
-        card.oracle.abilities.push(new MtgStaticAbility(spellEvent));
+        card.oracle.abilities.push(new MtgSpellAbility(spellEvent));
     }
 
     public generateLandEtbAbility(card: MtgCard) {
@@ -81,7 +82,6 @@ export class MtgAbilityService {
                 score: 1 - chosenCost.score / 6
             });
             card.oracle.abilities.push(new MtgStaticAbility(etbEvent));
-
         }
     }
 
@@ -113,7 +113,7 @@ export class MtgAbilityService {
     }
 
 
-    public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99) {
+    public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99): boolean {
         const colors = this.getColors(card);
 
         const events = this.mtgDataRepository.getPermanentEvents()
@@ -125,7 +125,7 @@ export class MtgAbilityService {
 
         if (events.length <= 0) {
             Logger.log(`No activated ability event found for card.`, LogType.Warning, card);
-            return;
+            return true;
         }
 
         const activatedEvent = Random.nextFromList(events);
@@ -141,7 +141,7 @@ export class MtgAbilityService {
 
             if (costs.length <= 0) {
                 Logger.log(`No activated costs found for card.`, LogType.Warning, card);
-                return;
+                return true;
             }
 
             // sort descending by score.
@@ -170,6 +170,8 @@ export class MtgAbilityService {
         }
 
         card.oracle.abilities.push(new MtgActivatedAbility(cost, activatedEvent));
+
+        return !activatedEvent.noFollowUp;
     }
 
     public generateActivatedPwAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99, isFirst: boolean = false) {
@@ -183,7 +185,7 @@ export class MtgAbilityService {
 
         if (events.length <= 0) {
             Logger.log(`No activated ability event found for card.`, LogType.Warning, card);
-            return;
+            return true;
         }
 
         const activatedEvent = Random.nextFromList(events);
@@ -201,7 +203,7 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedPwAbility(cost, activatedEvent));
     }
 
-    public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
+    public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99): boolean {
         const colors = this.getColors(card);
 
         const conditions = this.mtgDataRepository.getPermanentConditions()
@@ -216,16 +218,18 @@ export class MtgAbilityService {
 
         if (conditions.length <= 0) {
             Logger.log(`No conditions found for card.`, LogType.Warning, card);
-            return;
+            return true;
         }
         if (events.length <= 0) {
             Logger.log(`No triggered events found for card.`, LogType.Warning, card);
-            return;
+            return true;
         }
 
         const condition = Random.nextFromList(conditions);
         const triggeredEvent = Random.nextFromList(events);
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
+
+        return !triggeredEvent.noFollowUp;
     }
 
     public generateStaticAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99) {
@@ -240,11 +244,13 @@ export class MtgAbilityService {
 
         if (statics.length <= 0) {
             Logger.log(`No static events found for card.`, LogType.Warning, card);
-            return;
+            return true;
         }
 
         const staticEvent = Random.nextFromList(statics);
         card.oracle.abilities.push(new MtgStaticAbility(staticEvent));
+
+        return true;
     }
 
     private getColors(card: MtgCard): string[] {

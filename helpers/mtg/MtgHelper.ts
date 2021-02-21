@@ -114,7 +114,11 @@ export class MtgHelper {
         // sort by count descending.
         colorCount = colorCount.filter(c => c.count > 0).sort((a, b) => b.count - a.count);
 
-        const topColors = colorCount.slice(0, Math.min(maxCount, colorCount.length)).map(c => c.c).join("");
+        // take 
+        const diff = card.color.length < colorCount.length ? Math.abs(colorCount[0].count - colorCount[card.color.length].count) : 0;
+        const take = Math.min(card.color.length + (diff < 3 ? 1 : 0), Math.min(maxCount, colorCount.length));
+
+        const topColors = colorCount.slice(0, take).map(c => c.c).join("");
         return topColors;
     }
 

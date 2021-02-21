@@ -1,12 +1,12 @@
 import { MtgAbility } from './MtgAbility';
 import { MtgAbilityType } from '../MtgAbilityType';
-import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
+import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanentEvent';
 import { StringHelper } from '../../../helpers/StringHelper';
 import { Random } from '../../../helpers/Random';
 import { Logger } from '../../../helpers/Logger';
 import { LogType } from '../../LogType';
 
-export class MtgStaticAbility implements MtgAbility {
+export class MtgSpellAbility implements MtgAbility {
 
     public type = MtgAbilityType.Static;
 
@@ -14,11 +14,11 @@ export class MtgStaticAbility implements MtgAbility {
 
     public parserValue: number = 0;
 
-    public event: MtgPermanentStatics;
+    public event: MtgPermanentEvent;
 
-    constructor(event: MtgPermanentStatics) {
+    constructor(event: MtgPermanentEvent) {
         if (event === undefined)
-            throw "event or cost is undefined for MtgPermanentActivatedCost";
+            throw "event is undefined for MtgPermanentActivatedCost";
 
         this.event = event;
     }
@@ -44,6 +44,12 @@ export class MtgStaticAbility implements MtgAbility {
         Logger.log(" - final score: " + finalScore, LogType.CostEstimation);
 
         return finalScore;
+    }
+
+    public combine(other: MtgSpellAbility) {
+        this.event.text += ", then " + other.event.text;
+        this.event.score += other.event.score;
+        this.event.colorIdentity += other.event.colorIdentity;
     }
 
     public getContext(): string {
