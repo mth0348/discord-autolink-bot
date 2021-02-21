@@ -21,6 +21,7 @@ export class MtgBaseGenerator {
 
     protected estimateCmc(card: MtgCard) {
         let totalScore = 0;
+        let minScore = 1;
 
         Logger.log("Started card cost estimation:", LogType.CostEstimation);
 
@@ -29,7 +30,9 @@ export class MtgBaseGenerator {
             totalScore += card.toughness / 2.5;
 
             Logger.log("Power: " + card.power / 2, LogType.CostEstimation);
-            Logger.log("Toughness: " + card.toughness / 2, LogType.CostEstimation);
+            Logger.log("Toughness: " + card.toughness / 2.5, LogType.CostEstimation);
+
+            minScore = Math.round(totalScore);
         }
 
         card.oracle.keywords.forEach(k => totalScore += k.getScore());
@@ -49,7 +52,7 @@ export class MtgBaseGenerator {
 
         Logger.log("After rounding: " + roundedScore, LogType.CostEstimation);
 
-        card.cmc = Math.max(1, Math.min(9, roundedScore));
+        card.cmc = Math.max(minScore, Math.min(9, roundedScore));
 
         Logger.log("Final capped CMC = " + card.cmc, LogType.CostEstimation);
     }

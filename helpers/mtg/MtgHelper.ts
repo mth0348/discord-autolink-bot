@@ -1,7 +1,10 @@
 import { Collection } from 'discord.js';
 import { MtgCard } from '../../dtos/mtg/MtgCard';
+import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { Random } from '../Random';
 import { StringHelper } from '../StringHelper';
+import { Logger } from '../Logger';
+import { LogType } from '../../dtos/LogType';
 
 export class MtgHelper {
 
@@ -114,11 +117,22 @@ export class MtgHelper {
         // sort by count descending.
         colorCount = colorCount.filter(c => c.count > 0).sort((a, b) => b.count - a.count);
 
+        Logger.log("Color identities: " + colorIdentities, LogType.Colors);
+        Logger.log(`Color chart: [ ${colorCount.map(x => `{${x.c} (${x.count})` ).join(", ")} ]`, LogType.Colors);
+        Logger.log("Card colors: " + card.color.length, LogType.Colors);
+        Logger.log("Color max count: " + maxCount, LogType.Colors);
+
         // take 
+        const takeThreshold = card.type === MtgCardType.Planeswalker ? 3 : 2;
         const diff = card.color.length < colorCount.length ? Math.abs(colorCount[0].count - colorCount[card.color.length].count) : 0;
-        const take = Math.min(card.color.length + (diff < 3 ? 1 : 0), Math.min(maxCount, colorCount.length));
+        const take = Math.min(card.color.length + (diff < takeThreshold ? 1 : 0), Math.min(maxCount, colorCount.length));
+
+        Logger.log("Color max take: " + take, LogType.Colors);
 
         const topColors = colorCount.slice(0, take).map(c => c.c).join("");
+
+        Logger.log("Final pick: " + topColors, LogType.Colors);
+
         return topColors;
     }
 

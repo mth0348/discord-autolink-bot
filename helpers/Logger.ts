@@ -4,7 +4,7 @@ export class Logger {
 
     private static logStack: any[] = [];
 
-    public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation, LogType.Warning];
+    public static enabledTypes: LogType[] = [LogType.Verbose, LogType.CostEstimation, LogType.Colors, LogType.Warning];
 
     public static log(text: string, type: LogType = LogType.Verbose, args: any = undefined) {
         if (this.enabledTypes.some(t => t === type)) {

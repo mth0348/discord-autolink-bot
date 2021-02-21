@@ -53,6 +53,10 @@ export class MtgActivatedPwAbility implements MtgAbility {
         return finalScore;
     }
 
+    public getRawScore(): number {
+        return this.event.score + this.parserValue / 2;
+    }
+
     public getContext(): string {
         return "";
     }

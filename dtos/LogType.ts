@@ -1,5 +1,6 @@
 export enum LogType {
     Verbose =           "[VERBOSE]",
     CostEstimation =    "[COST]   ",
-    Warning =           "[WARNING]"
+    Colors  =           "[COLORS] ",
+    Warning =           "[WARNING]",
 }

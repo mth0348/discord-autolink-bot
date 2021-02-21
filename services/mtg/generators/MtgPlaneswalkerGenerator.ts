@@ -9,6 +9,7 @@ import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { Logger } from '../../../helpers/Logger';
 import { LogType } from '../../../dtos/LogType';
+import { MtgActivatedPwAbility } from '../../../dtos/mtg/abilities/MtgActivatedPwAbility';
 
 export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
 
@@ -58,19 +59,22 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
         // the higher the cmc, the more likely a reduction occurs. (min-cmc: 3)
         const minCmcForReduction = 3;
         const randomReduction = totalScore > minCmcForReduction ? Random.chance((totalScore - minCmcForReduction) / 10) ? 1 : 0 : 0;
-        const reducedCmc = totalScore - randomReduction;
+        const randomReduction2 = Random.chance(0.5) ? 0.5 : 0.25;
+        const reducedCmc = totalScore - randomReduction - randomReduction2;
 
         Logger.log("Random reduction: " + randomReduction, LogType.CostEstimation);
+        Logger.log("Random reduction 2: " + randomReduction2, LogType.CostEstimation);
         Logger.log("Before rounding: " + (reducedCmc), LogType.CostEstimation);
 
         const roundedScore = Math.round(reducedCmc);
 
         Logger.log("After rounding: " + roundedScore, LogType.CostEstimation);
 
-        card.cmc = Math.max(1, Math.min(9, roundedScore));
+        card.cmc = Math.max(3, Math.min(9, roundedScore));
 
         Logger.log("Final capped CMC = " + card.cmc, LogType.CostEstimation);
     }
+
     private chooseSubtypes(card: MtgCard) {
         // first word of name.
         card.subtype = card.name.split(",")[0].split(" ")[0];
@@ -83,6 +87,7 @@ export class MtgPlaneswalkerGenerator extends MtgBaseGenerator {
     }
 
     private estimateStartingLoyalty(card: MtgCard) {
-        card.startingLoyalty = 5;
+        let startingLoyalty = card.cmc - Random.next(0, 1);
+        card.startingLoyalty = Math.max(2, Math.min(6, startingLoyalty));
     }
 }
