@@ -22,7 +22,7 @@ export class BotCommandParser extends BaseCommandParser {
 
         const embed = new MessageEmbed({
             files: [{
-                attachment: "assets/img/mtg/bot banner.png",
+                attachment: "assets/img/banner.png",
                 name: "banner.png"
             }]
         });
