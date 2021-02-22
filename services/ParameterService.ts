@@ -1,7 +1,6 @@
 import { Parameter } from "../dtos/Parameter";
 import { ParameterServiceConfig } from '../dtos/ParameterServiceConfig';
-import { ConfigProvider } from '../helpers/ConfigProvider';
-import { StringHelper } from "../helpers/StringHelper";
+import { StringHelper } from '../helpers/StringHelper';
 
 export class ParameterService {
 
@@ -11,11 +10,12 @@ export class ParameterService {
         const result: Parameter[] = [];
 
         params.forEach(param => {
-            const paramParts = param.trim().split(":");
+            let paramParts = param.trim().split(":");
+            if (paramParts.length <= 1) paramParts = param.trim().split("=");
             if (paramParts.length === 2) {
 
-                const paramName = paramParts[0];
-                const paramValue = paramParts[1];
+                const paramName = paramParts[0].trim();
+                const paramValue = paramParts[1].trim();
 
                 // find param with that name.
                 configs.forEach(config => {
@@ -30,7 +30,8 @@ export class ParameterService {
 
                     }
                 });
-
+            } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "help")) {
+                result.push(new Parameter("help", "help"))
             }
         });
 

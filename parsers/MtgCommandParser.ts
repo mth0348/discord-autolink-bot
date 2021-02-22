@@ -1,4 +1,4 @@
-import { Message, PartialMessage } from 'discord.js';
+import { Message, MessageEmbed, PartialMessage } from 'discord.js';
 import { MtgCardService } from '../services/mtg/MtgCardService';
 import { BaseCommandParser } from './../base/BaseCommandParser';
 import { DiscordService } from '../services/DiscordService';
@@ -28,7 +28,7 @@ export class MtgCommandParser extends BaseCommandParser {
 
     protected prefixes: string[] = [ "mtg", "magic", "card" ];
 
-    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact"];
+    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact", "aura", "artifactcreature"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
 
     public static COLORLESS = ["c"];
@@ -51,7 +51,7 @@ export class MtgCommandParser extends BaseCommandParser {
 
         this.mtgDataRepository = new MtgDataRepository();
         this.mtgAbilityService = new MtgAbilityService(this.mtgDataRepository);
-        this.mtgSyntaxResolver = new MtgSyntaxResolver(this.mtgDataRepository);
+        this.mtgSyntaxResolver = new MtgSyntaxResolver(this.mtgDataRepository, this.mtgAbilityService);
         this.mtgOracleTextWrapperService = new MtgOracleTextWrapperService();
         this.mtgCardService = new MtgCardService(this.mtgDataRepository, this.mtgAbilityService, this.mtgSyntaxResolver, this.mtgOracleTextWrapperService);
 
@@ -73,6 +73,12 @@ export class MtgCommandParser extends BaseCommandParser {
         // extract parameters.
         const parameters = this.parameterService.extractParameters(message.content, this.paramConfigs);
 
+        // decide if user asked for help.
+        if (this.parameterService.tryGetParameterValue("help", parameters) === "help") {
+            this.showHelp(message);
+            return;
+        }
+
         // setup global card settings.
         const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? this.getRandomType();
         const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? this.getRandomRarity();
@@ -86,6 +92,29 @@ export class MtgCommandParser extends BaseCommandParser {
         const renderedCard = await mtgCardRenderer.renderCard();
 
         this.discordService.sendMessageWithReactions(message, "", renderedCard);
+    }
+
+    private showHelp(message: Message | PartialMessage) {
+        Logger.log(`${message.author.username} requested help: ` + message.content);
+
+        const embed = new MessageEmbed({
+            files: [{
+                attachment: "assets/img/mtg/bot banner.png",
+                name: "banner.png"
+            }]
+        });
+
+        embed.setTitle("MtG Bot Help")
+            .setDescription("The new MtG Bot can do a lot of awesome stuff. Here are its features:")
+            .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Pictures are all hand-picked by Mats and are chosen randomly amongst those that fit the card's type.")
+            .addField(`Card Types`, "The bot can generate almost any type of magic card. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments* and *planeswalkers*.")
+            .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
+                                 "`type:<type>` (or shorthand `t`), like '!mtg t:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\nNote that the color parameter is respected ")
+            .setTimestamp()
+            .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
+            .setImage("attachment://banner.png");
+
+        this.discordService.sendMessageEmbed(message, embed);
     }
 
     private initializeCardRendererData() {
@@ -106,13 +135,16 @@ export class MtgCommandParser extends BaseCommandParser {
 
     private getRandomType(): string {
 
+        /* Aura and ArtifactCreature are not "real" types */
+
         const type = Random.complex([
-            { value: MtgCardType.Instant, chance: 0.21 },
-            { value: MtgCardType.Sorcery, chance: 0.21 },
-            { value: MtgCardType.Creature, chance: 0.21 },
-            { value: MtgCardType.Planeswalker, chance: 0.21 },
-            { value: MtgCardType.Land, chance: 0.16 },
-        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker]));
+            { value: MtgCardType.Instant,       chance: 0.16 },
+            { value: MtgCardType.Sorcery,       chance: 0.16 },
+            { value: MtgCardType.Creature,      chance: 0.16 },
+            { value: MtgCardType.Planeswalker,  chance: 0.16 },
+            { value: MtgCardType.Enchantment,   chance: 0.16 },
+            { value: MtgCardType.Land,          chance: 0.16 },
+        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker, MtgCardType.Enchantment]));
 
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));
@@ -125,7 +157,7 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private getRandomColor(cardType: string): string {
-        const allowColorless = [MtgCardType.Creature, MtgCardType.Land, MtgCardType.Artifact, MtgCardType.Planeswalker].some(c => c == cardType);
+        const allowColorless = [MtgCardType.Creature, MtgCardType.ArtifactCreature, MtgCardType.Land, MtgCardType.Artifact, MtgCardType.Planeswalker].some(c => c == cardType);
 
         const list = Random.complex([
             { value: MtgCommandParser.COLORLESS, chance: (allowColorless ? 0.1 : 0.0) },

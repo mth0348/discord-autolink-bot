@@ -6,12 +6,13 @@ import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { StringHelper } from '../../helpers/StringHelper';
 import { MtgParsable } from '../../dtos/mtg/abilities/MtgParsable';
+import { MtgAbilityService } from './MtgAbilityService';
 
 export class MtgSyntaxResolver {
 
     public static COLOR_NAMES = ["white", "blue", "black", "red", "green"];
 
-    constructor(private mtgDataRepository: MtgDataRepository) {
+    constructor(private mtgDataRepository: MtgDataRepository, private mtgAbilityService: MtgAbilityService) {
     }
 
     public resolveSyntax(card: MtgCard): void {
@@ -176,24 +177,25 @@ export class MtgSyntaxResolver {
                 text = text.replace(costPattern, cost);
             }
 
-            // TODO Aura not yet supported.
-            // if (text.indexOf("(ability)") >= 0) {
-            //     let cardname = this.card.name;
-            //     this.card.name = "enchanted creature";
 
-            //     let isTriggered = this.flipCoin();
-            //     let ability = undefined;
-            //     if (isTriggered) {
-            //         ability = this.getTriggeredAbility();
-            //     } else {
-            //         ability = this.getActivatedAbility(this.rarityNumber);
-            //     }
-            //     this.lastAbilityScore = ability.score;
+            if (text.indexOf("(ability)") >= 0) {
+                let cardname = card.name;
+                card.name = "enchanted creature";
+                let previousAbilities = card.oracle.abilities;
 
-            //     text = text.replace("(ability)", `"${ability.text.replace(/\.$/g, '')}"`);
-            //     this.card.name = cardname;
-            // }
-            // text = text.replace("(auratype)", this.auraType);
+                let isTriggered = Random.chance(0.5);
+                if (isTriggered) {
+                    this.mtgAbilityService.generateTriggeredAbility(card, 0, 3);
+                } else {
+                    this.mtgAbilityService.generateActivatedAbility(card, 0, 3);
+                }
+                let ability = card.oracle.abilities[card.oracle.abilities.length - 1];
+                parserValue += ability.getScore();
+                card.oracle.abilities = previousAbilities;
+
+                text = text.replace("(ability)", ability.getText());
+                card.name = cardname;
+            }
 
             text = text.replace("(player)", Random.nextFromList(["player", "opponent"]));
             text = text.replace(/\(name\)/g, card.name);

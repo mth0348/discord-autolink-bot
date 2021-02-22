@@ -8,6 +8,7 @@ import { MtgSyntaxResolver } from '../MtgSyntaxResolver';
 import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
+import { MtgCardType } from '../../../dtos/mtg/MtgCardType';
 
 export class MtgCreatureGenerator extends MtgBaseGenerator {
 
@@ -26,6 +27,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         card.name = card.name || this.mtgDataRepository.getCreatureName(card.isLegendary);
 
         const isArtifactCreature = MtgHelper.isExactlyColor(card.color, "c");
+        card.type = isArtifactCreature ? MtgCardType.ArtifactCreature : MtgCardType.Creature;
 
         this.chooseSubtypes(card, isArtifactCreature);
         this.chooseKeywords(card);

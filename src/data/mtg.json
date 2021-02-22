@@ -3015,14 +3015,35 @@
         {
             "text": "gets +(number2)/+(number2)",
             "score": 2,
-            "colorIdentity": "wubrg",
+            "colorIdentity": "wubrgg",
             "auraType": "creature",
             "onlyOnce": true
         },
         {
             "text": "gets +(number3)/+(number3)",
             "score": 3.5,
-            "colorIdentity": "g",
+            "colorIdentity": "ggg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number)/+(samenumber)",
+            "score": 1,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number2)/+(samenumber)",
+            "score": 2,
+            "colorIdentity": "wubrgg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number3)/+(samenumber)",
+            "score": 3.5,
+            "colorIdentity": "ggg",
             "auraType": "creature",
             "onlyOnce": true
         },
@@ -3043,7 +3064,7 @@
         {
             "text": "can block as though it had flying",
             "score": 0.5,
-            "colorIdentity": "wubrg",
+            "colorIdentity": "wurg",
             "auraType": "creature"
         },
         {
@@ -3054,7 +3075,7 @@
         },
         {
             "text": "gets -(number)/-(number)",
-            "score": 1,
+            "score": 1.2,
             "colorIdentity": "bb",
             "isForOpponent": true,
             "auraType": "creature",
@@ -3077,8 +3098,32 @@
             "onlyOnce": true
         },
         {
+            "text": "gets -(number)/-(samenumber)",
+            "score": 1.2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(samenumber)",
+            "score": 3,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(samenumber)",
+            "score": 4,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
             "text": "gets -(number)/-0",
-            "score": 1,
+            "score": 0.5,
             "colorIdentity": "uu",
             "isForOpponent": true,
             "auraType": "creature",
@@ -3086,7 +3131,7 @@
         },
         {
             "text": "gets -(number2)/-0",
-            "score": 2,
+            "score": 1,
             "colorIdentity": "uu",
             "isForOpponent": true,
             "auraType": "creature",
@@ -3094,7 +3139,7 @@
         },
         {
             "text": "gets -(number3)/-0",
-            "score": 3,
+            "score": 2,
             "colorIdentity": "uu",
             "isForOpponent": true,
             "auraType": "creature",
@@ -3126,7 +3171,7 @@
         },
         {
             "text": "gets +1/+1 for each artifact and/or enchantment you control",
-            "score": 1.5,
+            "score": 2.2,
             "colorIdentity": "wubrg",
             "auraType": "creature",
             "onlyOnce": true
@@ -4338,7 +4383,6 @@
             "fury",
             "hand",
             "sigil",
-            "cover",
             "sphere",
             "cover",
             "pool",

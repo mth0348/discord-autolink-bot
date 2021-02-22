@@ -10,10 +10,9 @@ import { Logger } from '../../helpers/Logger';
 import { LogType } from '../../dtos/LogType';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
-import { MtgCard } from '../../dtos/mtg/MtgCard';
+import { MtgEnchantmentEffect } from '../entities/mtg/MtgEnchantmentEffect';
 
 import database = require('../../src/data/mtg.json');
-import { createDecipher } from 'crypto';
 
 export class MtgDataRepository {
 
@@ -86,6 +85,10 @@ export class MtgDataRepository {
 
     public getInstantSorceryEvents(): MtgInstantSorceryEvent[] {
         return database.instantSorceryEvents.map(x => new MtgInstantSorceryEvent(x));
+    }
+
+    public getEnchantmentEffects(): MtgEnchantmentEffect[] {
+        return database.enchantmentEffects.map(x => new MtgEnchantmentEffect(x));
     }
 
     public getCreatureName(isLegendary: boolean): string {
