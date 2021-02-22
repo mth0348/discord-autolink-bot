@@ -137,6 +137,42 @@ export class MtgDataRepository {
         return Random.nextFromList(database.spellTexts.flavors.filter(f => f.length < maxCharacterLength));
     }
 
+    public getArtifactFlavorText(maxCharacterLength: number) {
+        return Random.nextFromList(database.artifactTexts.flavors.filter(f => f.length < maxCharacterLength));
+    }
+
+    public getArtifactName(isLegendary: boolean, isEquipment: boolean): string {
+        const nouns = Random.nextFromList(database.landTexts.equipmentDescriptors);
+
+        if (isEquipment) {
+            const equipmentAdjective = Random.nextFromList(database.artifactTexts.equipmentAdjectives) + " ";
+            const equipmentDescriptor = Random.nextFromList(database.artifactTexts.equipmentDescriptors);
+
+            if (isLegendary) {
+                const name = Random.nextFromList(database.artifactTexts.names) + ", ";
+                /* "murbar, evil spear" */
+                return StringHelper.toCamelCase(name + equipmentAdjective + equipmentDescriptor);
+            } else {
+                if (Random.chance(0.5)) {
+                    /* "spear of wisdom" */
+                    return StringHelper.capitalizeFirstChar(equipmentDescriptor) + " of " + StringHelper.capitalizeFirstChar(nouns);
+                }
+                /* "evil spear" */
+                return StringHelper.toCamelCase(equipmentAdjective + equipmentDescriptor);
+            }
+        }
+
+        const artifactDescriptor = Random.nextFromList(database.artifactTexts.artifactDescriptors);
+
+        if (Random.chance(0.5)) {
+            /* "orb of wisdom" */
+            return StringHelper.capitalizeFirstChar(artifactDescriptor) + " of " + StringHelper.capitalizeFirstChar(nouns);
+        }
+
+        /* "wise orb" */
+        return StringHelper.toCamelCase(artifactAdjective + artifactDescriptor);
+    }
+
     public getPlaneswalkerName() {
         const name = Random.nextFromList(database.planeswalkerTexts.names) + ", ";
         const secondName = Random.nextFromList(database.planeswalkerTexts.names) + " ";

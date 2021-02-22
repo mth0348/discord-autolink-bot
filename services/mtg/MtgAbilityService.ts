@@ -115,7 +115,7 @@ export class MtgAbilityService {
     }
 
 
-    public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99, allowTapSymbol: boolean = true): boolean {
+    public generateActivatedAbility(card: MtgCard, minScore: number = 0, maxScore: number = 99, allowTapSymbol: boolean = true, enforceTapSymbol: boolean = true): boolean {
         const colors = this.getColors(card);
 
         const events = this.mtgDataRepository.getPermanentEvents()
@@ -157,7 +157,7 @@ export class MtgAbilityService {
             cost = fairCosts[Random.next(0, 2)];
         } else {
             // craft
-            const useTapSymbol = Random.chance(0.5) && allowTapSymbol;
+            const useTapSymbol = Random.chance(0.5) && allowTapSymbol || enforceTapSymbol;
             const tapSymbolText = useTapSymbol ? ", XT" : "";
 
             let cmc = Math.max(1, Math.min(6, Math.round(activatedEvent.score * Random.next(50, 80) / 100)));
@@ -258,6 +258,39 @@ export class MtgAbilityService {
 
         if (effects.length <= 0) {
             Logger.log(`No aura effects found for card.`, LogType.Warning, card);
+            return true;
+        }
+
+        const effect = Random.nextFromList(effects);
+        card.oracle.abilities.push(new MtgAuraAbility(effect));
+    }
+
+    public generateEquipmentAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99, prevEffect: MtgEnchantmentEffect = null): boolean {
+        const colors = this.getColors(card);
+
+        let effects;
+
+        if (prevEffect == null) {
+            effects = this.mtgDataRepository.getEnchantmentEffects()
+                .filter(e =>
+                    e.score >= minScore && e.score <= maxScore
+                    && e.auraType == "creature"
+                    && e.isForOpponent === false
+                    && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
+                    && e.score <= this.rarityScoreLUT.get(card.rarity));
+        } else {
+            effects = this.mtgDataRepository.getEnchantmentEffects()
+                .filter(e =>
+                    e.score >= minScore && e.score <= maxScore
+                    && e.auraType == "creature"
+                    && e.isForOpponent === false
+                    && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
+                    && e.score <= this.rarityScoreLUT.get(card.rarity)
+                    && (!prevEffect.onlyOnce || !e.onlyOnce));
+        }
+
+        if (effects.length <= 0) {
+            Logger.log(`No equipment effects found for card.`, LogType.Warning, card);
             return true;
         }
 

@@ -180,7 +180,7 @@ export class MtgSyntaxResolver {
 
             if (text.indexOf("(ability)") >= 0) {
                 let cardname = card.name;
-                card.name = "enchanted creature";
+                card.name = card.type === MtgCardType.Enchantment ? "enchanted creature" : "equipped creature";
                 let previousAbilities = card.oracle.abilities;
 
                 let isTriggered = Random.chance(0.5);

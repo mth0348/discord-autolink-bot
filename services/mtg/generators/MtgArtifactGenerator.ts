@@ -12,7 +12,7 @@ import { MtgAuraAbility } from '../../../dtos/mtg/abilities/MtgAuraAbility';
 import { MtgKeyword } from '../../../persistence/entities/mtg/MtgKeyword';
 import { MtgCardType } from '../../../dtos/mtg/MtgCardType';
 
-export class MtgEnchantmentGenerator extends MtgBaseGenerator {
+export class MtgArtifactGenerator extends MtgBaseGenerator {
 
     constructor(
         mtgDataRepository: MtgDataRepository,
@@ -26,14 +26,16 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
 
         card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
         card.supertype = card.isLegendary ? "Legendary" : "";
-        card.name = card.name || this.mtgDataRepository.getEnchantmentName();
 
-        const isAura = Random.chance(0.3) || card.type === MtgCardType.Aura;
-        card.type = MtgCardType.Enchantment; /* aura is also an enchantment */
+        card.type = MtgCardType.Artifact;
+        card.color = "c";
 
-        this.chooseSubtypes(card, isAura);
-        this.chooseAbilities(card, isAura);
-        this.chooseArtwork(card, isAura ? "aura" : "enchantment");
+        const isEquipment = Random.chance(0.33);
+        card.name = card.name || this.mtgDataRepository.getArtifactName(isEquipment);
+
+        this.chooseSubtypes(card, isEquipment);
+        this.chooseAbilities(card, isEquipment);
+        this.chooseArtwork(card, isEquipment ? "equipment" : "artifact");
         this.resolveSyntax(card);
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
@@ -44,36 +46,37 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
         return card;
     }
 
-    private chooseSubtypes(card: MtgCard, isAura: boolean) {
-        if (isAura) {
-            card.subtype = "Aura";
+    private chooseSubtypes(card: MtgCard, isEquipment: boolean) {
+        if (isEquipment) {
+            card.subtype = "Equipment";
         }
     }
 
-    private chooseAbilities(card: MtgCard, isAura: boolean) {
+    private chooseAbilities(card: MtgCard, isEquipment: boolean) {
 
         const abilityCount = Random.complex([
             { value: 1, chance: 0.50 },
             { value: 2, chance: 0.50 + (card.rarityScore <= 2 ? -1.0 : 0.0) }
         ], 1);
 
-        if (isAura) {
+        if (isEquipment) {
 
-            this.mtgAbilityService.generateAuraAbility(card, -99, +99);
+            this.mtgAbilityService.generateEquipmentAbility(card, -99, +99);
             const a1 = card.oracle.abilities[0] as MtgAuraAbility;
 
             card.oracle.keywords.push(new MtgKeyword({
-                name: "Enchant " + a1.effect.auraType + (a1.effect.isForOpponent ? " an opponent controls" : ""),
-                score: 0,
+                name: "Equip",
+                score: a1.getScore(), // TODO is this right?
                 colorIdentity: a1.effect.colorIdentity,
                 nameExtension: "",
-                hasCost: false
+                hasCost: true,
+                isTop: false
             }));
 
-            a1.effect.text = "Enchanted " + a1.effect.auraType + " " + a1.effect.text;
+            a1.effect.text = "Equipped " + a1.effect.auraType + " " + a1.effect.text;
 
             if (abilityCount === 2) {
-                this.mtgAbilityService.generateAuraAbility(card, -99, +99, a1.effect);
+                this.mtgAbilityService.generateEquipmentAbility(card, -99, +99, a1.effect);
                 const a2 = card.oracle.abilities[1] as MtgAuraAbility;
 
                 a1.combine(a2);
@@ -84,23 +87,23 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
 
             for (let i = 0; i < abilityCount; i++) {
                 const abilityType = Random.complex([
-                    { value: MtgAbilityType.Activated, chance: 0.25 },
-                    { value: MtgAbilityType.Triggered, chance: 0.25 },
-                    { value: MtgAbilityType.Static, chance: 0.50 }
+                    { value: MtgAbilityType.Activated, chance: 0.60 },
+                    { value: MtgAbilityType.Triggered, chance: 0.20 },
+                    { value: MtgAbilityType.Static, chance: 0.20 }
                 ], 0);
 
-                this.generateEnchantmentAbility(card, abilityType);
+                this.generateArtifactAbility(card, abilityType);
             }
         }
 
         card.oracle.abilities.sort((a, b) => { return a.type - b.type; });
     }
 
-    private generateEnchantmentAbility(card: MtgCard, abilityType: MtgAbilityType): boolean {
+    private generateArtifactAbility(card: MtgCard, abilityType: MtgAbilityType): boolean {
 
         switch (abilityType) {
             case MtgAbilityType.Activated:
-                return this.mtgAbilityService.generateActivatedAbility(card, 0, +99, false /* no tap symbol */);
+                return this.mtgAbilityService.generateActivatedAbility(card, 0, +99, true, true /* enforce tap symbol */);
 
             case MtgAbilityType.Triggered:
                 return this.mtgAbilityService.generateTriggeredAbility(card, 0, +99);
@@ -115,7 +118,7 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
 
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
-            const smallEnoughFlavorText = this.mtgDataRepository.getSpellFlavorText(maxFlavorTextLength);
+            const smallEnoughFlavorText = this.mtgDataRepository.getArtifactFlavorText(maxFlavorTextLength);
             if (smallEnoughFlavorText !== undefined && smallEnoughFlavorText !== null) {
                 card.wrappedOracleLines.push("FT_LINE");
                 const flavorTextLines = this.mtgOracleTextWrapperService.wordWrapText(smallEnoughFlavorText, card.rendererPreset.maxCharactersPerLine)
