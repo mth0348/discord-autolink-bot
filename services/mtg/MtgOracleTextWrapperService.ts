@@ -3,7 +3,7 @@ import { MtgOracleTextWrapPreset } from '../../dtos/mtg/MtgOracleTextWrapPreset'
 
 export class MtgOracleTextWrapperService {
 
-    public static PRESET_LARGE: MtgOracleTextWrapPreset = { fontSize: 28, maxCharactersPerLine: 40, maxLines: 7, lineDifInPixel: 4, };
+    public static PRESET_LARGE: MtgOracleTextWrapPreset = { fontSize: 28, maxCharactersPerLine: 41, maxLines: 7, lineDifInPixel: 4, };
     public static PRESET_MEDIUM: MtgOracleTextWrapPreset = { fontSize: 26, maxCharactersPerLine: 44, maxLines: 8, lineDifInPixel: 5 };
     public static PRESET_SMALL: MtgOracleTextWrapPreset = { fontSize: 24, maxCharactersPerLine: 48, maxLines: 9, lineDifInPixel: 4 };
     public static PRESET_TINY: MtgOracleTextWrapPreset = { fontSize: 22, maxCharactersPerLine: 52, maxLines: 10, lineDifInPixel: 4 };
@@ -57,16 +57,16 @@ export class MtgOracleTextWrapperService {
         const lines: string[] = [];
 
         // only keywords WITHOUT cost.
-        if (oracle.keywords.some(k => !k.hasCost || k.isTop)) {
+        if (oracle.keywords.some(k => k.isTop)) {
             // separate with and without name extension as well.
             // special case: things like 'cumulative upkeep' have the isTop flag set to true, they should also be rendered at the top.
-            let nameExtendedKeywords = oracle.keywords.filter(k => !k.hasCost && k.nameExtension.length > 0).map(k => k.parsedText);
+            let nameExtendedKeywords = oracle.keywords.filter(k => k.isTop && k.nameExtension.length > 0).map(k => k.parsedText);
             nameExtendedKeywords.forEach(line => { lines.push(line.trim()); });
             if (nameExtendedKeywords.length > 0) {
                 lines.push("");
             }
 
-            let regularKeywords = oracle.keywords.filter(k => (!k.hasCost || k.isTop) && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
+            let regularKeywords = oracle.keywords.filter(k => k.isTop && k.nameExtension.length === 0).map(k => k.parsedText).join(", ");
             if (regularKeywords.length > 0) {
                 lines.push(regularKeywords.trim());
                 lines.push("");
@@ -90,8 +90,8 @@ export class MtgOracleTextWrapperService {
         }
 
         // only keywords WITH cost.
-        if (oracle.keywords.some(k => k.hasCost)) {
-            const keywordsWithCost = oracle.keywords.filter(k => k.hasCost).map(k => k.parsedText);
+        if (oracle.keywords.some(k => !k.isTop)) {
+            const keywordsWithCost = oracle.keywords.filter(k => !k.isTop).map(k => k.parsedText);
             // only ever print 1.
             if (keywordsWithCost.length === 1) {
                 lines.push(keywordsWithCost[0]);

@@ -5,7 +5,7 @@ export enum MtgCardType {
     Creature = "Creature",
     Artifact = "Artifact",
     Equipment = "Equipment",
-    ArtifactCreature = "Artifact Creature",
+    Artifactcreature = "Artifact Creature",
     Instant = "Instant",
     Sorcery = "Sorcery",
     Planeswalker = "Planeswalker",

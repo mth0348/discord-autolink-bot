@@ -173,7 +173,7 @@ export class MtgSyntaxResolver {
                 const score = text.substr(text.indexOf("s:") + 2, text.indexOf(",c:") - text.indexOf("s:") - 2);
                 const colors = text.substr(text.indexOf("c:") + 2, text.indexOf("]") - text.indexOf("c:") - 2);
 
-                let cost = MtgHelper.getManacost(Math.max(1, Math.round(parseFloat(score))), colors);
+                let cost = MtgHelper.getManacost(Math.max(1, Math.round(parseFloat(score) + Random.next(0, 1))), colors);
                 text = text.replace(costPattern, cost);
             }
 

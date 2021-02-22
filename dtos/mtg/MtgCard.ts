@@ -50,7 +50,7 @@ export class MtgCard {
     }
 
     public hasPowerToughness(): boolean {
-        return this.type === MtgCardType.Creature || this.type === MtgCardType.ArtifactCreature;
+        return this.type === MtgCardType.Creature || this.type === MtgCardType.Artifactcreature;
     }
 
     public toLogString(): string[] {

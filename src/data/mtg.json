@@ -275,36 +275,40 @@
         {
             "name": "Deathtouch",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "bg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Defender",
             "hasCost": false,
+            "isTop": true,
             "score": -1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Double Strike",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wr",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Enchant",
             "hasCost": false,
+            "isTop": true,
             "score": 0.1,
             "nameExtension": "(type)",
             "colorIdentity": "wubrg",
@@ -315,6 +319,7 @@
         {
             "name": "Equip",
             "hasCost": true,
+            "isTop": false,
             "score": 0.1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -325,16 +330,18 @@
         {
             "name": "First Strike",
             "hasCost": false,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "wbg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Flash",
             "hasCost": false,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "u",
@@ -342,32 +349,35 @@
             "types": [
                 "creature",
                 "artifact",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Flying",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Haste",
             "hasCost": false,
+            "isTop": true,
             "score": 0.5,
             "nameExtension": "",
             "colorIdentity": "rg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Hexproof",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "ubg",
@@ -375,12 +385,13 @@
                 "creature",
                 "artifact",
                 "enchantment",
-                "land"
+                "land", "artifact creature"
             ]
         },
         {
             "name": "Hexproof from",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "(types|color)",
             "colorIdentity": "ubg",
@@ -388,12 +399,13 @@
                 "creature",
                 "artifact",
                 "enchantment",
-                "land"
+                "land", "artifact creature"
             ]
         },
         {
             "name": "Indestructible",
             "hasCost": false,
+            "isTop": true,
             "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -401,52 +413,57 @@
                 "creature",
                 "artifact",
                 "land",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Intimidate",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "brg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Lifelink",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wb",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Protection from",
             "hasCost": false,
+            "isTop": true,
             "score": 1.2,
             "nameExtension": "(types|color)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Reach",
             "hasCost": false,
+            "isTop": true,
             "score": 0.2,
             "nameExtension": "",
             "colorIdentity": "g",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Shroud",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -454,27 +471,29 @@
                 "creature",
                 "land",
                 "artifact",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Trample",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "rg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Vigilance",
             "hasCost": false,
+            "isTop": true,
             "score": 0.5,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
@@ -485,12 +504,13 @@
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Buyback",
             "hasCost": true,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -502,6 +522,7 @@
         {
             "name": "Shadow",
             "hasCost": false,
+            "isTop": true,
             "score": 0.5,
             "nameExtension": "",
             "colorIdentity": "b",
@@ -512,6 +533,7 @@
         {
             "name": "Cycling",
             "hasCost": true,
+            "isTop": false,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -521,22 +543,24 @@
                 "land",
                 "enchantment",
                 "instant",
-                "sorcery"
+                "sorcery", "artifact creature"
             ]
         },
         {
             "name": "Echo",
             "hasCost": true,
+            "isTop": true,
             "score": -0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Fading",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -550,6 +574,7 @@
         {
             "name": "Kicker",
             "hasCost": true,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -562,6 +587,7 @@
         {
             "name": "Flashback",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "ur",
@@ -573,6 +599,7 @@
         {
             "name": "Madness",
             "hasCost": true,
+            "isTop": false,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "br",
@@ -586,6 +613,7 @@
         {
             "name": "Fear",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "b",
@@ -596,16 +624,18 @@
         {
             "name": "Morph",
             "hasCost": true,
+            "isTop": false,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Amplify",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -616,6 +646,7 @@
         {
             "name": "Storm",
             "hasCost": false,
+            "isTop": false,
             "score": 1.5,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -627,16 +658,18 @@
         {
             "name": "Affinity for",
             "hasCost": false,
-            "score": 1,
+            "isTop": true,
+            "score": 2.4,
             "nameExtension": "(type)",
             "colorIdentity": "wubrg",
             "types": [
-                "artifact"
+                "artifact", "artifact creature"
             ]
         },
         {
             "name": "Entwine",
             "hasCost": true,
+            "isTop": false,
             "score": 0.1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -648,6 +681,7 @@
         {
             "name": "Modular",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -658,6 +692,7 @@
         {
             "name": "Sunburst",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -669,16 +704,18 @@
         {
             "name": "Bushido",
             "hasCost": false,
+            "isTop": true,
             "score": 0.3,
             "nameExtension": "(number)",
             "colorIdentity": "w",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Splice onto Arcane",
             "hasCost": true,
+            "isTop": false,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -690,16 +727,18 @@
         {
             "name": "Ninjutsu",
             "hasCost": true,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "ub",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Convoke",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -714,16 +753,18 @@
         {
             "name": "Dredge",
             "hasCost": false,
+            "isTop": false,
             "score": 1.2,
             "nameExtension": "(number)",
             "colorIdentity": "bg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Transmute",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -731,22 +772,24 @@
                 "creature",
                 "instant",
                 "sorcery",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Bloodthirst",
             "hasCost": false,
+            "isTop": true,
             "score": 0.3,
             "nameExtension": "(number)",
             "colorIdentity": "r",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Replicate",
             "hasCost": true,
+            "isTop": true,
             "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "ur",
@@ -756,29 +799,20 @@
             ]
         },
         {
-            "name": "Forecast",
-            "hasCost": false,
-            "score": 0.7,
-            "nameExtension": "",
-            "colorIdentity": "wubrg",
-            "excludeFromSimple": true,
-            "types": [
-                "creature"
-            ]
-        },
-        {
             "name": "Split Second",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "instant"
+                "instant", "artifact creature"
             ]
         },
         {
             "name": "Suspend",
             "hasCost": true,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -793,16 +827,18 @@
         {
             "name": "Vanishing",
             "hasCost": false,
+            "isTop": true,
             "score": -0.5,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Aura Swap",
             "hasCost": false,
+            "isTop": true,
             "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -813,6 +849,7 @@
         {
             "name": "Delve",
             "hasCost": false,
+            "isTop": true,
             "score": 1.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -825,6 +862,7 @@
         {
             "name": "Gravestorm",
             "hasCost": false,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "b",
@@ -837,6 +875,7 @@
         {
             "name": "Changeling",
             "hasCost": false,
+            "isTop": true,
             "score": 0.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -847,48 +886,53 @@
         {
             "name": "Evoke",
             "hasCost": true,
+            "isTop": false,
             "score": 0.9,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Persist",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Devour",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Exalted",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
                 "creature",
                 "land",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Unearth",
             "hasCost": true,
+            "isTop": false,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -899,6 +943,7 @@
         {
             "name": "Cascade",
             "hasCost": false,
+            "isTop": true,
             "score": 1.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -907,12 +952,13 @@
                 "creature",
                 "instant",
                 "sorcery",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Annihilator",
             "hasCost": false,
+            "isTop": true,
             "score": 1.6,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -923,6 +969,7 @@
         {
             "name": "Rebound",
             "hasCost": false,
+            "isTop": true,
             "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -934,6 +981,7 @@
         {
             "name": "Totem Armor",
             "hasCost": false,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -944,26 +992,29 @@
         {
             "name": "Infect",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Battle Cry",
             "hasCost": false,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "wr",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Living Weapon",
             "hasCost": false,
+            "isTop": true,
             "score": 0.7,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -974,16 +1025,18 @@
         {
             "name": "Undying",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Miracle",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -995,6 +1048,7 @@
         {
             "name": "Overload",
             "hasCost": true,
+            "isTop": false,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1006,7 +1060,8 @@
         {
             "name": "Scavenge",
             "hasCost": true,
-            "score": 0.4,
+            "isTop": false,
+            "score": 1.2,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
@@ -1016,16 +1071,18 @@
         {
             "name": "Unleash",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Cipher",
             "hasCost": false,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1037,47 +1094,52 @@
         {
             "name": "Evolve",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Extort",
             "hasCost": true,
+            "isTop": true,
             "score": 0.5,
             "nameExtension": "",
-            "colorIdentity": "wubrg",
+            "colorIdentity": "wwbb",
             "types": [
                 "creature",
-                "enchantment"
+                "enchantment", "artifact creature"
             ]
         },
         {
             "name": "Tribute",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Dethrone",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Prowess",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1088,6 +1150,7 @@
         {
             "name": "Dash",
             "hasCost": true,
+            "isTop": false,
             "score": 0.6,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1098,16 +1161,18 @@
         {
             "name": "Menace",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Awaken",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
@@ -1119,16 +1184,18 @@
         {
             "name": "Ingest",
             "hasCost": false,
+            "isTop": true,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Surge",
             "hasCost": true,
+            "isTop": false,
             "score": 0.4,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1139,26 +1206,29 @@
         {
             "name": "Fabricate",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Improvise",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
             "types": [
-                "artifact"
+                "artifact", "artifact creature"
             ]
         },
         {
             "name": "Embalm",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1169,6 +1239,7 @@
         {
             "name": "Eternalize",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1179,16 +1250,18 @@
         {
             "name": "Afflict",
             "hasCost": false,
+            "isTop": true,
             "score": 0.8,
             "nameExtension": "(number)",
             "colorIdentity": "wubrg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Ascend",
             "hasCost": false,
+            "isTop": true,
             "score": 0.6,
             "nameExtension": "",
             "excludeFromSimple": true,
@@ -1202,6 +1275,7 @@
         {
             "name": "Jump-Start",
             "hasCost": false,
+            "isTop": false,
             "score": 0.8,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1213,6 +1287,7 @@
         {
             "name": "Mentor",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1223,17 +1298,19 @@
         {
             "name": "Riot",
             "hasCost": false,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "excludeFromSimple": true,
             "colorIdentity": "rg",
             "types": [
-                "creature"
+                "creature", "artifact creature"
             ]
         },
         {
             "name": "Spectacle",
             "hasCost": true,
+            "isTop": true,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -1245,6 +1322,7 @@
         {
             "name": "Escape",
             "hasCost": true,
+            "isTop": false,
             "score": 1,
             "nameExtension": "",
             "colorIdentity": "wubrg",
@@ -2215,11 +2293,6 @@
             "colorIdentity": "wubrg",
             "score": 4.2,
             "restrictedTypes": ["creature", "enchantment", "artifact"]
-        },
-        {
-            "text": "you can't lose the game and your opponents can't win the game",
-            "colorIdentity": "wubrg",
-            "score": 5
         },
         {
             "text": "you can't lose the game and your opponents can't win the game",

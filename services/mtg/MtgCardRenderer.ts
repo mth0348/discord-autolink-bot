@@ -232,7 +232,7 @@ export class MtgCardRenderer {
         switch (this.card.type) {
             case MtgCardType.Creature:
                 return "_CREATURE";
-            case MtgCardType.ArtifactCreature:
+            case MtgCardType.Artifactcreature:
                 return "_CREATURE";
             case MtgCardType.Land:
                 return "_LAND";

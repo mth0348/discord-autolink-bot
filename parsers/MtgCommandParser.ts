@@ -59,6 +59,7 @@ export class MtgCommandParser extends BaseCommandParser {
             new ParameterServiceConfig("type", "t", MtgCommandParser.AVAILABLE_TYPES),
             new ParameterServiceConfig("rarity", "r", MtgCommandParser.AVAILABLE_RARITIES),
             new ParameterServiceConfig("color", "c"),
+            new ParameterServiceConfig("name", "n"),
         ];
 
         this.initializeCardRendererData();
@@ -83,9 +84,10 @@ export class MtgCommandParser extends BaseCommandParser {
         const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? this.getRandomType();
         const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? this.getRandomRarity();
         const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor(cardType);
+        const cardName = this.parameterService.tryGetParameterValue("name", parameters);
 
         // start card generation.
-        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor));
+        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor), cardName);
 
         // render card.
         const mtgCardRenderer = card.type === MtgCardType.Planeswalker ? new MtgPlaneswalkerCardRenderer(card) : new MtgCardRenderer(card);
@@ -104,13 +106,13 @@ export class MtgCommandParser extends BaseCommandParser {
             }]
         });
 
-        embed.setTitle("MtG Bot Help")
+        embed.setTitle("MtG Bot Overview")
             .setDescription("The new MtG Bot can do a lot of awesome stuff. Here are its features:")
             .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Artworks are chosen randomly amongst those that fit the card's type best.")
             .addField(`Content`, "There are over 5000 lines of config file for the generator to draw names, abilities and keywords from. Also, there are over 1000 card artworks to choose from, all hand-picked by Mats.")
             .addField(`Card Types`, "The bot can generate almost any type of magic card. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments* and *planeswalkers*.")
             .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
-                                 "`type:<type>` (or shorthand `t`), like '!mtg t:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\nNote that the color parameter is respected ")
+                                 "`type:<type>` (short `t`), like 't:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\n`name:<text>` (short `n`) to put a name yourself (use '_' for spaces).\r\n")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
@@ -159,7 +161,7 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private getRandomColor(cardType: string): string {
-        const allowColorless = [MtgCardType.Creature, MtgCardType.ArtifactCreature, MtgCardType.Land, MtgCardType.Artifact, MtgCardType.Planeswalker].some(c => c == cardType);
+        const allowColorless = [MtgCardType.Creature, MtgCardType.Artifactcreature, MtgCardType.Land, MtgCardType.Artifact, MtgCardType.Planeswalker].some(c => c == cardType);
 
         const list = Random.complex([
             { value: MtgCommandParser.COLORLESS, chance: (allowColorless ? 0.1 : 0.0) },

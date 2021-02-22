@@ -36,17 +36,21 @@ export class MtgCardService {
         this.mtgArtifactGenerator = new MtgArtifactGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
-    public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {
+    public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string, name: string): MtgCard {
 
         let card = new MtgCard();
         card.type = cardType;
         card.rarity = cardRarity;
         card.rarityScore = [MtgCardRarity.Common, MtgCardRarity.Uncommon, MtgCardRarity.Rare, MtgCardRarity.Mythic].indexOf(cardRarity) + 1;
         card.color = color.toLowerCase();
+        card.name = name === undefined ? "" : name.trim().substring(0, 25).replace(/_/g, " ");
 
         switch (cardType) {
             case MtgCardType.Creature:
-            case MtgCardType.ArtifactCreature:
+                card = this.mtgCreatureGenerator.generate(card);
+                break;
+            case MtgCardType.Artifactcreature:
+                card.color = "c";
                 card = this.mtgCreatureGenerator.generate(card);
                 break;
             case MtgCardType.Instant:
@@ -68,7 +72,8 @@ export class MtgCardService {
             case MtgCardType.Artifact:
                 const isArtifactCreature = Random.chance(0.10);
                 if (isArtifactCreature) {
-                    card.type = MtgCardType.ArtifactCreature;
+                    card.type = MtgCardType.Artifactcreature;
+                    card.color = "c";
                     card = this.mtgCreatureGenerator.generate(card);
                 } else {
                     card = this.mtgArtifactGenerator.generate(card);
