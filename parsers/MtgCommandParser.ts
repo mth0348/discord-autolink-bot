@@ -106,7 +106,8 @@ export class MtgCommandParser extends BaseCommandParser {
 
         embed.setTitle("MtG Bot Help")
             .setDescription("The new MtG Bot can do a lot of awesome stuff. Here are its features:")
-            .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Pictures are all hand-picked by Mats and are chosen randomly amongst those that fit the card's type.")
+            .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Artworks are chosen randomly amongst those that fit the card's type best.")
+            .addField(`Content`, "There are over 5000 lines of config file for the generator to draw names, abilities and keywords from. Also, there are over 1000 card artworks to choose from, all hand-picked by Mats.")
             .addField(`Card Types`, "The bot can generate almost any type of magic card. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments* and *planeswalkers*.")
             .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
                                  "`type:<type>` (or shorthand `t`), like '!mtg t:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\nNote that the color parameter is respected ")
