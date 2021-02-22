@@ -179,8 +179,6 @@ export class MtgSyntaxResolver {
 
 
             if (text.indexOf("(ability)") >= 0) {
-                let cardname = card.name;
-                card.name = card.type === MtgCardType.Enchantment ? "enchanted creature" : "equipped creature";
                 let previousAbilities = card.oracle.abilities;
 
                 let isTriggered = Random.chance(0.5);
@@ -193,8 +191,8 @@ export class MtgSyntaxResolver {
                 parserValue += ability.getScore();
                 card.oracle.abilities = previousAbilities;
 
-                text = text.replace("(ability)", `"${ability.getText()}"`);
-                card.name = cardname;
+                let selfName = card.type === MtgCardType.Enchantment ? "enchanted creature" : "equipped creature";
+                text = text.replace("(ability)", `"${ability.getText().replace("(name)", selfName).replace("(self)", selfName)}"`);
             }
 
             text = text.replace("(player)", Random.nextFromList(["player", "opponent"]));

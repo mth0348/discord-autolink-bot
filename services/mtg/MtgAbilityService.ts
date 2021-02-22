@@ -211,7 +211,7 @@ export class MtgAbilityService {
         const conditions = this.mtgDataRepository.getPermanentConditions()
             .filter(c => 
                 (!mustContainSelfRef || (c.text.indexOf("(self)") >= 0 || c.text.indexOf("(name)") >= 0))
-                && c.restrictedTypes == undefined || c.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)));
+                && (c.restrictedTypes == undefined || c.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type))));
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>

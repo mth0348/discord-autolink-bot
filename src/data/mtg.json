@@ -4641,6 +4641,7 @@
             "greatness",
             "adventure",
             "doom",
+            "destiny",
             "power",
             "menace",
             "darkness",
@@ -4949,7 +4950,7 @@
             "Any relic of the dead is precious, if they were valued living.",
             "The potential power is unlimited.",
             "Do not think of it as just a jewel. You have yet to see the power it is capable of.",
-            "\"A stone, nothing more\" - Mats",
+            "\"A useless piece, nothing more.\" - Mats",
             "My precious!",
             "It is one of those lessons that every child should learn: Don't play with fire, sharp objects, or ancient artifacts.",
             "Magic becomes art when it has nothing to hide.",
@@ -4969,7 +4970,14 @@
             "Forged by high-shadow elves of the Gulbar cliffs, this artifact eradiates immense waves of power.",
             "Infused with the light of the Seven, this relict is worth more than you will ever know.",
             "\"I used to study those kind of artifacts, until some totem exploded in front of me\" - some professor",
-            "This is true art."
+            "This is true art.",
+            "This is but a worthless piece of equipment compared to the Staff of Gubargar.",
+            "Low and behold, an artifact so ancient, even the gods look young next to it.",
+            "An item such as this, that can withstand time itself, is the too potent to be held by you.",
+            "This was a mistake.",
+            "Every blackguard has such an item in his or her pockets. It is tradition.",
+            "Have you ever considered selling this item? The benefit would be huge.",
+            "Whoever holds this relic, it is said that this person becomes a monster after five moons exactly."
         ]
     }
 }
