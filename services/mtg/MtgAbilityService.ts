@@ -268,7 +268,6 @@ export class MtgAbilityService {
     }
 
     public generateEquipmentAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99, prevEffect: MtgEnchantmentEffect = null): boolean {
-        const colors = this.getColors(card);
 
         let effects;
 
@@ -278,7 +277,6 @@ export class MtgAbilityService {
                     e.score >= minScore && e.score <= maxScore
                     && e.auraType == "creature"
                     && (e.isForOpponent === undefined || e.isForOpponent === false)
-                    && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
                     && e.score <= this.rarityScoreLUT.get(card.rarity));
         } else {
             effects = this.mtgDataRepository.getEnchantmentEffects()
@@ -286,7 +284,6 @@ export class MtgAbilityService {
                     e.score >= minScore && e.score <= maxScore
                     && e.auraType == "creature"
                     && (e.isForOpponent === undefined || e.isForOpponent === false)
-                    && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
                     && e.score <= this.rarityScoreLUT.get(card.rarity)
                     && (!prevEffect.onlyOnce || !e.onlyOnce));
         }

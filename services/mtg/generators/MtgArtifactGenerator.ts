@@ -26,7 +26,6 @@ export class MtgArtifactGenerator extends MtgBaseGenerator {
 
         card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
         card.supertype = card.isLegendary ? "Legendary" : "";
-
         card.color = "c";
 
         const isEquipment = Random.chance(0.33) || card.type === MtgCardType.Equipment;
@@ -71,7 +70,7 @@ export class MtgArtifactGenerator extends MtgBaseGenerator {
 
             card.oracle.keywords.push(new MtgKeyword({
                 name: "Equip",
-                score: a1.getScore(),
+                score: a1.effect.score,
                 colorIdentity: a1.effect.colorIdentity,
                 nameExtension: "",
                 hasCost: true,

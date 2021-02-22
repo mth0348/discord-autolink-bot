@@ -1191,6 +1191,7 @@
             "hasCost": false,
             "score": 0.6,
             "nameExtension": "",
+            "excludeFromSimple": true,
             "colorIdentity": "wubrg",
             "types": [
                 "creature",
