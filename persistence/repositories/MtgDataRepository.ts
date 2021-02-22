@@ -142,27 +142,27 @@ export class MtgDataRepository {
     }
 
     public getArtifactName(isLegendary: boolean, isEquipment: boolean): string {
-        const nouns = Random.nextFromList(database.landTexts.equipmentDescriptors);
+        const nouns = Random.nextFromList(database.landTexts.nouns);
+        const adjectives = Random.nextFromList(database.artifactTexts.adjectives) + " ";
+
+        const equipmentDescriptor = Random.nextFromList(database.artifactTexts.equipmentDescriptors);
+        const artifactDescriptor = Random.nextFromList(database.artifactTexts.artifactDescriptors);
 
         if (isEquipment) {
-            const equipmentAdjective = Random.nextFromList(database.artifactTexts.equipmentAdjectives) + " ";
-            const equipmentDescriptor = Random.nextFromList(database.artifactTexts.equipmentDescriptors);
 
             if (isLegendary) {
                 const name = Random.nextFromList(database.artifactTexts.names) + ", ";
                 /* "murbar, evil spear" */
-                return StringHelper.toCamelCase(name + equipmentAdjective + equipmentDescriptor);
+                return StringHelper.toCamelCase(name + adjectives + equipmentDescriptor);
             } else {
                 if (Random.chance(0.5)) {
                     /* "spear of wisdom" */
                     return StringHelper.capitalizeFirstChar(equipmentDescriptor) + " of " + StringHelper.capitalizeFirstChar(nouns);
                 }
                 /* "evil spear" */
-                return StringHelper.toCamelCase(equipmentAdjective + equipmentDescriptor);
+                return StringHelper.toCamelCase(adjectives + equipmentDescriptor);
             }
         }
-
-        const artifactDescriptor = Random.nextFromList(database.artifactTexts.artifactDescriptors);
 
         if (Random.chance(0.5)) {
             /* "orb of wisdom" */
@@ -170,7 +170,7 @@ export class MtgDataRepository {
         }
 
         /* "wise orb" */
-        return StringHelper.toCamelCase(artifactAdjective + artifactDescriptor);
+        return StringHelper.toCamelCase(adjectives + artifactDescriptor);
     }
 
     public getPlaneswalkerName() {
