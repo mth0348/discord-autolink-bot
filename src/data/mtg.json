@@ -2413,7 +2413,7 @@
         {
             "text": "If one or more creature tokens would be created under your control, that many (number3)/(samenumber) (color) (subtype) creature tokens with (keyword) are created instead",
             "colorIdentity": "ggg",
-            "score": 6
+            "score": 5
         }
     ],
     "permanentActivatedCosts": [
