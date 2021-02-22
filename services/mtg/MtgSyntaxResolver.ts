@@ -147,7 +147,7 @@ export class MtgSyntaxResolver {
             }
             if (text.indexOf("(types|color)") >= 0) {
                 let type = Random.flipCoin() ? Random.nextFromList(MtgSyntaxResolver.COLOR_NAMES) : Random.nextFromList(this.mtgDataRepository.getTypes()) + "s";
-                text = text.replace("(types|color)", type);
+                text = text.replace("(types|color)", type.replace("ys", "ies"));
             }
             if (text.indexOf("(type|color)") >= 0) {
                 let type = Random.flipCoin() ? Random.nextFromList(MtgSyntaxResolver.COLOR_NAMES) : Random.nextFromList(this.mtgDataRepository.getTypes());
