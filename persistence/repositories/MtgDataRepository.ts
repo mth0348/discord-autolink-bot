@@ -48,7 +48,7 @@ export class MtgDataRepository {
         const list = database.keywords
             .filter(k => k.types.some(t => t === type.toLowerCase()))
             .filter(k => colors.some(c => k.colorIdentity.indexOf(c) >= 0))
-            .filter(k => !simpleOnly || (!k.hasCost && k.nameExtension.length === 0))
+            .filter(k => !simpleOnly || (!k.hasCost && k.nameExtension.length === 0 && (k.excludeFromSimple === undefined || !k.excludeFromSimple)))
             .map(k => new MtgKeyword(k));
 
         if (list.length <= 0) {

@@ -28,7 +28,7 @@ export class MtgCommandParser extends BaseCommandParser {
 
     protected prefixes: string[] = [ "mtg", "magic", "card" ];
 
-    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact", "aura", "artifactcreature"];
+    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact", "aura", "artifactcreature","equipment"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
 
     public static COLORLESS = ["c"];
@@ -138,13 +138,14 @@ export class MtgCommandParser extends BaseCommandParser {
         /* Aura and ArtifactCreature are not "real" types */
 
         const type = Random.complex([
-            { value: MtgCardType.Instant,       chance: 0.16 },
-            { value: MtgCardType.Sorcery,       chance: 0.16 },
-            { value: MtgCardType.Creature,      chance: 0.16 },
-            { value: MtgCardType.Planeswalker,  chance: 0.16 },
-            { value: MtgCardType.Enchantment,   chance: 0.16 },
-            { value: MtgCardType.Land,          chance: 0.16 },
-        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker, MtgCardType.Enchantment]));
+            { value: MtgCardType.Instant,       chance: 0.14 },
+            { value: MtgCardType.Sorcery,       chance: 0.14 },
+            { value: MtgCardType.Creature,      chance: 0.14 },
+            { value: MtgCardType.Planeswalker,  chance: 0.14 },
+            { value: MtgCardType.Enchantment,   chance: 0.14 },
+            { value: MtgCardType.Artifact,      chance: 0.14 },
+            { value: MtgCardType.Land,          chance: 0.14 },
+        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker, MtgCardType.Enchantment, MtgCardType.Artifact]));
 
         // TODO support more types.
         // return Random.nextFromList(Object.keys(MtgCardType));

@@ -205,11 +205,13 @@ export class MtgAbilityService {
         card.oracle.abilities.push(new MtgActivatedPwAbility(cost, activatedEvent));
     }
 
-    public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99): boolean {
+    public generateTriggeredAbility(card: MtgCard, minScore: number = -99, maxScore: number = 99, mustContainSelfRef: boolean = false): boolean {
         const colors = this.getColors(card);
 
         const conditions = this.mtgDataRepository.getPermanentConditions()
-            .filter(c => c.restrictedTypes == undefined || c.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)));
+            .filter(c => 
+                (!mustContainSelfRef || (c.text.indexOf("(self)") >= 0 || c.text.indexOf("(name)") >= 0))
+                && c.restrictedTypes == undefined || c.restrictedTypes.some(t => StringHelper.isEqualIgnoreCase(t, card.type)));
 
         const events = this.mtgDataRepository.getPermanentEvents()
             .filter(a =>
@@ -270,12 +272,12 @@ export class MtgAbilityService {
 
         let effects;
 
-        if (prevEffect == null) {
+        if (prevEffect === undefined || prevEffect === null) {
             effects = this.mtgDataRepository.getEnchantmentEffects()
                 .filter(e =>
                     e.score >= minScore && e.score <= maxScore
                     && e.auraType == "creature"
-                    && e.isForOpponent === false
+                    && (e.isForOpponent === undefined || e.isForOpponent === false)
                     && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
                     && e.score <= this.rarityScoreLUT.get(card.rarity));
         } else {
@@ -283,7 +285,7 @@ export class MtgAbilityService {
                 .filter(e =>
                     e.score >= minScore && e.score <= maxScore
                     && e.auraType == "creature"
-                    && e.isForOpponent === false
+                    && (e.isForOpponent === undefined || e.isForOpponent === false)
                     && colors.some(c => e.colorIdentity.indexOf(c) >= 0)
                     && e.score <= this.rarityScoreLUT.get(card.rarity)
                     && (!prevEffect.onlyOnce || !e.onlyOnce));

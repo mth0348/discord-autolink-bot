@@ -27,16 +27,21 @@ export class MtgArtifactGenerator extends MtgBaseGenerator {
         card.isLegendary = card.isLegendary || Random.chance(0.25) && (card.rarity === MtgCardRarity.Rare || card.rarity === MtgCardRarity.Mythic);
         card.supertype = card.isLegendary ? "Legendary" : "";
 
-        card.type = MtgCardType.Artifact;
         card.color = "c";
 
-        const isEquipment = Random.chance(0.33);
-        card.name = card.name || this.mtgDataRepository.getArtifactName(isEquipment);
+        const isEquipment = Random.chance(0.33) || card.type === MtgCardType.Equipment;
+        card.name = card.name || this.mtgDataRepository.getArtifactName(card.isLegendary, isEquipment);
+
+        card.type = MtgCardType.Artifact;
 
         this.chooseSubtypes(card, isEquipment);
         this.chooseAbilities(card, isEquipment);
         this.chooseArtwork(card, isEquipment ? "equipment" : "artifact");
         this.resolveSyntax(card);
+
+        // remove equip cost from formula.
+        if (isEquipment) card.oracle.keywords[0].score = 0;
+
         this.estimateCmc(card);
         this.wrapTextForRenderer(card);
         this.chooseFlavorText(card);
@@ -66,7 +71,7 @@ export class MtgArtifactGenerator extends MtgBaseGenerator {
 
             card.oracle.keywords.push(new MtgKeyword({
                 name: "Equip",
-                score: a1.getScore(), // TODO is this right?
+                score: a1.getScore(),
                 colorIdentity: a1.effect.colorIdentity,
                 nameExtension: "",
                 hasCost: true,
@@ -114,8 +119,6 @@ export class MtgArtifactGenerator extends MtgBaseGenerator {
     }
 
     private chooseFlavorText(card: MtgCard) {
-        // TODO add own flavor text for enchantments.
-
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
             const smallEnoughFlavorText = this.mtgDataRepository.getArtifactFlavorText(maxFlavorTextLength);

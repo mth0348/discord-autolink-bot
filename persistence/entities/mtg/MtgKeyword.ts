@@ -12,6 +12,7 @@ export class MtgKeyword implements MtgParsable {
     public nameExtension: string;
     public colorIdentity: string;
     public types: string[];
+    public excludeFromSimple: boolean | undefined;
 
     public parsedText: string;
     public parserValue: number = 0;
@@ -24,6 +25,7 @@ export class MtgKeyword implements MtgParsable {
         this.nameExtension = data.nameExtension;
         this.colorIdentity = data.colorIdentity;
         this.types = data.types;
+        this.excludeFromSimple = data.excludeFromSimple;
     }
 
     public getScore(): number {

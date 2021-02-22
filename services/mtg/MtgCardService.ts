@@ -12,6 +12,8 @@ import { MtgPlaneswalkerGenerator } from "./generators/MtgPlaneswalkerGenerator"
 import { Logger } from '../../helpers/Logger';
 import { LogType } from "../../dtos/LogType";
 import { MtgEnchantmentGenerator } from './generators/MtgEnchantmentGenerator';
+import { Random } from '../../helpers/Random';
+import { MtgArtifactGenerator } from './generators/MtgArtifactGenerator';
 
 export class MtgCardService {
 
@@ -20,6 +22,7 @@ export class MtgCardService {
     private mtgLandGenerator: MtgLandGenerator;
     private mtgPlaneswalkerGenerator: MtgPlaneswalkerGenerator;
     private mtgEnchantmentGenerator: MtgEnchantmentGenerator;
+    private mtgArtifactGenerator: MtgArtifactGenerator;
 
     constructor(mtgDataRepository: MtgDataRepository,
         mtgAbilityService: MtgAbilityService,
@@ -30,6 +33,7 @@ export class MtgCardService {
         this.mtgLandGenerator = new MtgLandGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
         this.mtgPlaneswalkerGenerator = new MtgPlaneswalkerGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
         this.mtgEnchantmentGenerator = new MtgEnchantmentGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
+        this.mtgArtifactGenerator = new MtgArtifactGenerator(mtgDataRepository, mtgAbilityService, mtgSyntaxResolver, mtgOracleTextWrapperService);
     }
 
     public generateCard(cardType: MtgCardType, cardRarity: MtgCardRarity, color: string): MtgCard {
@@ -41,11 +45,8 @@ export class MtgCardService {
         card.color = color.toLowerCase();
 
         switch (cardType) {
-            case MtgCardType.ArtifactCreature:
-                card.color = "c";
-                card = this.mtgCreatureGenerator.generate(card);
-                break;
             case MtgCardType.Creature:
+            case MtgCardType.ArtifactCreature:
                 card = this.mtgCreatureGenerator.generate(card);
                 break;
             case MtgCardType.Instant:
@@ -63,6 +64,18 @@ export class MtgCardService {
             case MtgCardType.Aura:
             case MtgCardType.Enchantment:
                 card = this.mtgEnchantmentGenerator.generate(card);
+                break;
+            case MtgCardType.Artifact:
+                const isArtifactCreature = Random.chance(0.10);
+                if (isArtifactCreature) {
+                    card.type = MtgCardType.ArtifactCreature;
+                    card = this.mtgCreatureGenerator.generate(card);
+                } else {
+                    card = this.mtgArtifactGenerator.generate(card);
+                }
+                break;
+            case MtgCardType.Equipment:
+                card = this.mtgArtifactGenerator.generate(card);
                 break;
             default:
                 throw "Not implemented";

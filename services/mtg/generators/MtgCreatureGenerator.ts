@@ -26,7 +26,7 @@ export class MtgCreatureGenerator extends MtgBaseGenerator {
         card.supertype = card.isLegendary ? "Legendary" : "";
         card.name = card.name || this.mtgDataRepository.getCreatureName(card.isLegendary);
 
-        const isArtifactCreature = MtgHelper.isExactlyColor(card.color, "c");
+        const isArtifactCreature = MtgHelper.isExactlyColor(card.color, "c") || card.type === MtgCardType.ArtifactCreature;
         card.type = isArtifactCreature ? MtgCardType.ArtifactCreature : MtgCardType.Creature;
 
         this.chooseSubtypes(card, isArtifactCreature);

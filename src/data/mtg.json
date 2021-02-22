@@ -1224,6 +1224,7 @@
             "hasCost": false,
             "score": 1,
             "nameExtension": "",
+            "excludeFromSimple": true,
             "colorIdentity": "rg",
             "types": [
                 "creature"
@@ -3049,7 +3050,7 @@
         },
         {
             "text": "gets +X/+0 for each (permanent) you control",
-            "score": 2,
+            "score": 2.5,
             "colorIdentity": "wubrg",
             "auraType": "creature",
             "onlyOnce": true

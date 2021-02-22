@@ -13,7 +13,7 @@ import Canvas = require("canvas");
 
 export class MtgCardRenderer {
 
-    public static MANASYMBOL_PATTERN = /X[^\s]{1}/g;
+    public static MANASYMBOL_PATTERN = /X[wubrgWUBRG0-9xXtT]{1}/g;
 
     private canvas: Canvas.Canvas;
     private ctx: Canvas.CanvasRenderingContext2D;

@@ -185,7 +185,7 @@ export class MtgSyntaxResolver {
 
                 let isTriggered = Random.chance(0.5);
                 if (isTriggered) {
-                    this.mtgAbilityService.generateTriggeredAbility(card, 0, 3);
+                    this.mtgAbilityService.generateTriggeredAbility(card, 0, 3, true);
                 } else {
                     this.mtgAbilityService.generateActivatedAbility(card, 0, 3);
                 }
@@ -193,7 +193,7 @@ export class MtgSyntaxResolver {
                 parserValue += ability.getScore();
                 card.oracle.abilities = previousAbilities;
 
-                text = text.replace("(ability)", ability.getText());
+                text = text.replace("(ability)", `"${ability.getText()}"`);
                 card.name = cardname;
             }
 
