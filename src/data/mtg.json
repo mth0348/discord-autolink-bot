@@ -3296,6 +3296,18 @@
             "auraType": "permanent"
         },
         {
+            "text": "doesn't untap during its controller's untap step",
+            "score": 1.5,
+            "colorIdentity": "uu",
+            "auraType": "permanent"
+        },
+        {
+            "text": "doesn't untap during its controller's untap step",
+            "score": 1.5,
+            "colorIdentity": "uu",
+            "auraType": "creature"
+        },
+        {
             "text": "can't be the target of spells or abilities your opponents control",
             "score": 1.5,
             "colorIdentity": "wubrg",

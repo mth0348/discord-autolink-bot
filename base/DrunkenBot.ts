@@ -6,6 +6,7 @@ import { ParameterService } from '../services/ParameterService';
 import { ImageProvider } from '../persistence/repositories/ImageProvider';
 import { Logger } from '../helpers/Logger';
 import { BotCommandParser } from '../parsers/BotCommandParser';
+import { CsGoCommandParser } from '../parsers/CsGoCommandParser';
 
 export class DrunkenBot {
 
@@ -89,7 +90,7 @@ export class DrunkenBot {
     private registerCommandParsers(): void {
         this.registeredParsers.push(new BotCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
-        // this.registeredParsers.push(new MtgCommandParser()); // csgoNadeParser
+        // this.registeredParsers.push(new CsGoCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser
         // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
         // this.registeredParsers.push(new MtgCommandParser()); // dndParser

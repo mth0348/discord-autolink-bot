@@ -13,7 +13,7 @@ export class DiscordService {
         this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
     }
 
-    sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment) {
+    sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment = undefined) {
         message.channel.send(text, attachment);
     }
 
