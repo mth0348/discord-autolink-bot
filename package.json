@@ -4,7 +4,7 @@
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
   "scripts": {
-    "build-ts": "tsc",
+    "build-ts": "tsc -p tsconfig.json",
     "postinstall": "npm run build-ts",
     "start": "npm run serve",
     "serve": "node dist/index.js",
