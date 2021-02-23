@@ -6,8 +6,8 @@
         "sourceMap": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
-        "lib": [ "dom", "es2015" ],
+        "lib": [ "DOM", "ES2015"],
         "outDir": "dist",
-        "types": [ "node", "mocha", "chai" ]
+        "types": [ "node" ]
     }
 }
