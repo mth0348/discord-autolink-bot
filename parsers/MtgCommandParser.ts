@@ -109,8 +109,9 @@ export class MtgCommandParser extends BaseCommandParser {
         embed.setTitle("MtG Bot Overview")
             .setDescription("The new MtG Bot can do a lot of awesome stuff. Here are its features:")
             .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Artworks are chosen randomly amongst those that fit the card's type best.")
+            .addField(`Algorithm`, "The way cards are generated has changed. Now, the color is chosen first, the rest comes after. This means better alignment of abilities with colors, plus better balancing of manacosts.")
             .addField(`Content`, "There are over 5000 lines of config file for the generator to draw names, abilities and keywords from. Also, there are over 1000 card artworks to choose from, all hand-picked by Mats.")
-            .addField(`Card Types`, "The bot can generate almost any type of magic card. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments* and *planeswalkers*.")
+            .addField(`Card Types`, "The bot can generate almost all types of cards. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments* and *planeswalkers*.")
             .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
                                  "`type:<type>` (short `t`), like 't:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\n`name:<text>` (short `n`) to put a name yourself (use '_' for spaces).\r\n")
             .setTimestamp()
@@ -176,6 +177,6 @@ export class MtgCommandParser extends BaseCommandParser {
     }
 
     private stripInvalidColorValues(cardColor: string): string {
-        return StringHelper.removeDuplicateChars(cardColor.replace(/[^wubrgc]/g, ""));
+        return StringHelper.removeDuplicateChars(cardColor.replace(/[^wubrgcWUBRGC]/g, ""));
     }
 }
