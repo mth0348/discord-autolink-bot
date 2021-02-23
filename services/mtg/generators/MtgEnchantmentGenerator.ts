@@ -67,7 +67,8 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
                 score: 0,
                 colorIdentity: a1.effect.colorIdentity,
                 nameExtension: "",
-                hasCost: false
+                hasCost: false,
+                isTop: true
             }));
 
             a1.effect.text = "Enchanted " + a1.effect.auraType + " " + a1.effect.text;
