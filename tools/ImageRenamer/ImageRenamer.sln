@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageRenamer", "ImageRenamer\ImageRenamer.csproj", "{398E6147-5925-48D9-918F-5D5877307ABF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{398E6147-5925-48D9-918F-5D5877307ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{398E6147-5925-48D9-918F-5D5877307ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{398E6147-5925-48D9-918F-5D5877307ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{398E6147-5925-48D9-918F-5D5877307ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6CEACE4-3146-43DD-B7CE-1904A52FEDDA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        ".gitignore": true,
+        "**/.vs": true,
+        "**/node_modules": true,
+        "**/tools": true,
+        "**/dist": true,
+        "package-lock.json": true
+    },
+    "autoimport.filesToScan": "**/*.{ts,tsx,js}"
+}

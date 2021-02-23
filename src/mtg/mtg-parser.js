@@ -1,4 +1,7 @@
 const { DiscordHelper } = require('../discord-helper.js');
+const Canvas = require('canvas');
+const Discord = require('discord.js');
+const fs = require('fs');
 
 const MtgResponse = require('./mtg-response.js');
 const MtgHelpResponse = require('./mtg-response-help.js');
@@ -82,7 +85,7 @@ class MtgParser {
         ];
     }
 
-    startWorkflow(message) {
+    async startWorkflow(message) {
         this.getEmojis(message);
 
         let validInputs = ["creature", "instant", "sorcery", "planeswalker", "enchantment"];
@@ -114,7 +117,7 @@ class MtgParser {
         try {
             switch (cardType) {
                 case "creature":
-                    this.createCreatureCard(message);
+                    await this.createCreatureCard(message);
                     break;
                 case "instant":
                     this.createInstantCard(message);
@@ -313,8 +316,10 @@ class MtgParser {
         this.sendCard(message);
     }
 
-    createCreatureCard(message) {
+    async createCreatureCard(message) {
+
         this.card = new MtgCard();
+        this.card.image = "https://i.pinimg.com/564x/5f/d1/7d/5fd17dd54f1ca06df2d83c221f162911.jpg";
         this.card.type = "Creature";
         this.card.subtype = mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase();
         this.card.subtype += [false, false, false, true][this.random(0, 3)] ? " " + mtgData.subtypes[this.random(0, mtgData.subtypes.length - 1)].toCamelCase() : "";
@@ -333,12 +338,12 @@ class MtgParser {
         this.log.push("score calculation:");
 
         let power = this.powers[this.random(0, this.powers.length - 1)];
-        totalScore += power / 2.5;
+        totalScore += power / 2;
         this.log.push("power :\t\t" + (power / 2));
 
         let toughness = this.random(1,5) == 5 ? power : this.toughnesses[this.random(0, this.toughnesses.length - 1)];
-        totalScore += toughness / 3; /* less weight than power */
-        this.log.push("toughness:\t " + (toughness / 2));
+        totalScore += toughness / 2.5; /* less weight than power */
+        this.log.push("toughness:\t " + (toughness / 2.5));
 
         // decide triggered abilities.
         let ability = "";
@@ -433,13 +438,13 @@ class MtgParser {
         if (this.card.color.indexOf("w") >= 0 || this.card.color.indexOf("u") >= 0) {
             let p = power;
             let t = toughness;
-            toughness = Math.max(power, toughness);
+            toughness = Math.max(p, t);
             power = Math.min(p, t);
         }
-        if (this.card.color.indexOf("r") >= 0) {
+        if (this.card.color.indexOf("r") >= 0 && this.flipCoin()) {
             let p = power;
             let t = toughness;
-            power = Math.max(power, toughness);
+            power = Math.max(p, t);
             toughness = Math.min(p, t);
         }
 
@@ -488,12 +493,212 @@ class MtgParser {
 
         this.card.cost = this.resolveManaSymbols(manacost);
         this.card.rarity = rarityText;
-        this.card.oracle = this.resolveManaSymbols(oracle);
+        this.card.oracle = oracle;//this.resolveManaSymbols(oracle);
         this.card.flavor = "";
         this.card.power = power;
         this.card.toughness = toughness;
 
-        this.sendCard(message);
+        // ==============================================================================
+        // ======================== CARD RENDER ENGINE ==================================
+        // ==============================================================================
+
+        Canvas.registerFont('src/assets/fonts/MPLANTIN.ttf', { family: "mplantin" });
+        Canvas.registerFont('src/assets/fonts/MPLANTIN-BOLD.ttf', { family: "mplantinbold" });
+        Canvas.registerFont('src/assets/fonts/MatrixBold.ttf', { family: "matrixbold" });
+
+        const canvas = Canvas.createCanvas(630, 880);
+        const ctx = canvas.getContext('2d');
+    
+        // fill black.
+        ctx.strokeStyle = '#000000';
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+        const colorMapping = this.card.color.length <= 2 ? this.card.color : "m";
+        const fileName =  `${colorMapping}${this.card.type === 'Creature' ? "_creature" : ""}`;
+        const cardFrame = await Canvas.loadImage(`src/assets/img/borders/${fileName}.png`);
+        ctx.drawImage(cardFrame, 0, 0, canvas.width, canvas.height);
+
+        console.log(this.card);
+
+        ctx.fillStyle = '#000000';
+        ctx.font = `${this.card.name.length > 25 ? 34 : 38}px matrixbold`;
+
+        // render card name.
+        const cardTitle = this.card.name;
+        ctx.fillText(cardTitle, 55, 78, 585 - (this.card.cost.length * 17));
+
+        // render card cost.
+        await this.overlaySymbols(ctx, this.card.cost, 17, 32, 577 - (this.card.cost.length * 16), 76, true);
+
+        // render card type.
+        const cardTypeAndSubtype = `${(this.card.supertype !== undefined ? this.card.supertype + ' ' : '')}${this.card.type}${(this.card.subtype !== undefined ? ` — ${this.card.subtype}` : '')}`;
+        ctx.font = '36px matrixbold';
+        ctx.fillText(cardTypeAndSubtype, 55, 530, 520);
+
+        // render card art.
+        const artPath = "src/assets/img/cards/creature/";
+        const files = fs.readdirSync(artPath);
+        let randomArtworkFile = files[this.random(0, files.length - 1)];
+        const artwork = await Canvas.loadImage(artPath + randomArtworkFile);
+        this.drawImageProp(ctx, artwork, 50, 102, 530, 385, 0.5, 0.2);
+
+        // render expansion symbol.
+        const symbolFileName = ["common", "uncommon", "rare", "mythic"][rarity - 1];
+        const expansionSymbol = await Canvas.loadImage(`src/assets/img/expansion/${symbolFileName}.png`);
+        ctx.drawImage(expansionSymbol, 542, 502, 35, 35);
+
+        let oracleFontSize = 28;
+        let maxCharactersPerLine = 42;
+        let lineOffset = 50;
+
+        const totalOracleText = ability + secondAbility + keyword;
+        const isLongOracle = totalOracleText.length > 120;
+        const isVeryLongOracle = totalOracleText.length > 220;
+        if (isLongOracle) {
+            oracleFontSize = 26;
+            maxCharactersPerLine = 45;
+            lineOffset = 45;
+        }
+        if (isVeryLongOracle) {
+            oracleFontSize = 23;
+            maxCharactersPerLine = 50;
+            lineOffset = 40;
+        }
+        const gapSize = isLongOracle ? 14 : 16;
+        console.log(totalOracleText.length);
+
+        ctx.font = `${oracleFontSize}px mplantin`;
+
+        const wrappedKeywordText = this.wordWrapText(keyword, maxCharactersPerLine);
+        const wrappedAbilityText = this.wordWrapText(ability, maxCharactersPerLine);
+        const abilityWordWrapCount = this.lastWordWrapCount;
+        const wrappedAbility2Text = this.wordWrapText(secondAbility, maxCharactersPerLine);
+
+        // render oracle text.
+        let offset = 590;
+        if (keyword.length > 0) {
+            ctx.fillText(wrappedKeywordText, 55, offset, 520);
+            offset += lineOffset;
+        }
+        ctx.fillText(wrappedAbilityText.replace(/X[^\s]{1}/g, "    "), 55, offset, 520);
+        await this.overlaySymbols(ctx, wrappedAbilityText, gapSize, oracleFontSize, 55, offset);
+        
+        offset += lineOffset + (15 * abilityWordWrapCount);
+        ctx.fillText(wrappedAbility2Text.replace(/X[^\s]{1}/g, "    "), 55, offset, 520);
+        await this.overlaySymbols(ctx, wrappedAbility2Text, gapSize, oracleFontSize, 55, offset);
+        
+        // render power and toughnes.
+        if (this.card.type === "Creature") {
+            const pt = `${this.card.power}/${this.card.toughness}`;
+            const offset = pt.length === 3 ? 520 : pt.length === 4 ? 508 : 500;
+            ctx.font = pt.length > 4 ? '37px mplantinbold' : '38px mplantinbold';
+            ctx.fillText(pt, offset, 822);
+        }
+    
+        // render card number;
+        ctx.font = `$14px mplantin`;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(this.random(100, 999), 38, 833);
+ 
+
+        const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+    
+        // this.sendCard(message);
+        message.channel.send('', attachment);
+
+        // ==============================================================================
+        // ==============================================================================
+        // ==============================================================================
+    }
+
+    async overlaySymbols(ctx, text, gap, size, positionX, positionY, drawShadow) {
+
+        let i = this.regexIndexOf(text, /X[^\s]{1}/g);
+        while (i >= 0) {
+            if (drawShadow) {
+                const shadowSymbol = await Canvas.loadImage(`src/data/img/mtg mana icons/mtg_Shadow.png`);
+                ctx.drawImage(shadowSymbol, positionX + i * gap, positionY + 9 - size, size, size);
+            }
+
+            const s = text.substring(i + 1, i + 2).toUpperCase();
+            const symbol = await Canvas.loadImage(`src/data/img/mtg mana icons/mtg_${s}.png`);
+            ctx.drawImage(symbol, positionX + i * gap, positionY + 5 - size, size, size);
+
+            i = this.regexIndexOf(text, /X[^\s]{1}/g, i + 1);
+        }
+    }
+
+    regexIndexOf(string, regex, startpos) {
+        var indexOf = string.substring(startpos || 0).search(regex);
+        return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
+    }
+
+    wordWrapText(text, maxCharactersPerLine) {
+        this.lastWordWrapCount = 0;
+
+        let resultString = '';
+        let remainingWords = text.split(" ");
+        while (remainingWords.length > 0)
+        {
+            let nextWordLength = 0;
+            let line = "";
+            do {
+                line += remainingWords[0] + " ";
+                remainingWords.splice(0, 1);
+                nextWordLength = line.length + (remainingWords.length > 0 ? remainingWords[0].length : 0);
+            } while (nextWordLength < maxCharactersPerLine && remainingWords.length > 0);
+            resultString += line + "\r\n";
+            this.lastWordWrapCount++;
+        }
+        return resultString.trim().substring(0, resultString.length - 2);
+    }
+
+    drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
+
+        if (arguments.length === 2) {
+            x = y = 0;
+            w = ctx.canvas.width;
+            h = ctx.canvas.height;
+        }
+    
+        // default offset is center
+        offsetX = typeof offsetX === "number" ? offsetX : 0.5;
+        offsetY = typeof offsetY === "number" ? offsetY : 0.5;
+    
+        // keep bounds [0.0, 1.0]
+        if (offsetX < 0) offsetX = 0;
+        if (offsetY < 0) offsetY = 0;
+        if (offsetX > 1) offsetX = 1;
+        if (offsetY > 1) offsetY = 1;
+    
+        var iw = img.width,
+            ih = img.height,
+            r = Math.min(w / iw, h / ih),
+            nw = iw * r,   // new prop. width
+            nh = ih * r,   // new prop. height
+            cx, cy, cw, ch, ar = 1;
+    
+        // decide which gap to fill    
+        if (nw < w) ar = w / nw;                             
+        if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
+        nw *= ar;
+        nh *= ar;
+    
+        // calc source rectangle
+        cw = iw / (nw / w);
+        ch = ih / (nh / h);
+    
+        cx = (iw - cw) * offsetX;
+        cy = (ih - ch) * offsetY;
+    
+        // make sure source rectangle is valid
+        if (cx < 0) cx = 0;
+        if (cy < 0) cy = 0;
+        if (cw > iw) cw = iw;
+        if (ch > ih) ch = ih;
+    
+        // fill image in dest. rectangle
+        ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
     }
 
     random(minInclusive, maxInclusive) {
@@ -569,14 +774,14 @@ class MtgParser {
         if ([false, false, false, true][this.random(0, 3)]) {
             let activated = this.getActivatedCost(Math.min(6, cost), color, forceNoCreature);
             keywordcost = activated.text.toCamelCase();
-            //event.score += (cost - activated.score);
+
             if (tapSymbol)
-                keywordcost = `{t}, ${keywordcost}`;
+                keywordcost = `XT, ${keywordcost}`;
         }
         else {
             keywordcost = this.getManacostFromCmc(cost, (this.random(1, 5) == 5 ? "" : color));
             if (tapSymbol)
-                keywordcost = `${keywordcost !== "" ? keywordcost + ", " : ""}{t}`;
+                keywordcost = `${keywordcost !== "" ? keywordcost + "," : ""}XT `;
         }
 
         return { text: `${this.parseSyntax(keywordcost)}: ${this.parseSyntax(event.text.toCamelCase())}.`, score: event.score };
@@ -885,7 +1090,7 @@ class MtgParser {
             if (text.indexOf("(mana)") >= 0) {
                 let symbols = this.colorIdentity.split("");
                 let symbol = `{${symbols[this.random(0, this.colorIdentity.length - 1)]}}`;
-                if (this.flipCoin()) symbol += `{${symbols[this.random(0, this.colorIdentity.length - 1)]}}`;
+                if (this.flipCoin()) symbol += `X${symbols[this.random(0, this.colorIdentity.length - 1)]}`;
                 text = text.replace("(mana)", symbol);
             }
 
@@ -1023,13 +1228,24 @@ class MtgParser {
             // else use all colors.
         }
 
-        return maxes.map(c => c.c).join("");
+        let result = maxes.map(c => c.c);
+
+        // sort by WUBRG.
+        const lookup = [{ c: "w", i: 0 }, { c: "u", i: 1 }, { c: "b", i: 2 }, { c: "r", i: 3 }, { c: "g", i: 4 }];
+        return result.sort(function(x, y) {
+            if (lookup[x] < lookup[y]) {
+              return -1;
+            }
+            if (lookup[x] > lookup[y]) {
+              return 1;
+            }
+            return 0;
+          }).join("");
     }
 
     getManacostFromCmc(cmc, colorString) {
-
         if (colorString.length === 0) {
-            return `{${Math.min(9, cmc)}}`;
+            return `X${Math.min(9, cmc)}`;
         }
 
         let manacost = "";
@@ -1038,74 +1254,74 @@ class MtgParser {
         // Mono color.
         if (color.length === 1) {
             if (cmc === 1) {
-                manacost = `{${color}}`;
+                manacost = `X${color}`;
             } else if (cmc === 2) {
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols) {
-                    manacost = `{${color}}{${color}}`;
+                    manacost = `X${color}X${color}`;
                 }
                 else {
-                    manacost = `{${Math.min(9, cmc - 1)}}{${color}}`;
+                    manacost = `X${Math.min(9, cmc - 1)}X${color}`;
                 }
             } else if (cmc === 3) {
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols) {
-                    return `{${color}}{${color}}{${color}}`;
+                    return `X${color}X${color}X${color}`;
                 }
 
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
-                    return `{1}{${color}}{${color}}`;
+                    return `X1X${color}${color}`;
 
-                return `{2}{${color}}`;
+                return `X2X${color}`;
             } else if (cmc > 3) {
                 let twoSymbols = this.flipCoin();
                 if (twoSymbols)
-                    return `{${Math.min(9, cmc - 2)}}{${color}}{${color}}`;
+                    return `X${Math.min(9, cmc - 2)}X${color}X${color}`;
 
                 let threeSymbols = this.random(1, 4) === 4;
                 if (threeSymbols && cmc > 2)
-                    return `{${Math.min(9, cmc - 3)}}{${color}}{${color}}{${color}}`;
+                    return `X${Math.min(9, cmc - 3)}X${color}X${color}X${color}`;
 
-                manacost = `{${Math.min(9, cmc - 1)}}{${color}}`;
+                manacost = `X${Math.min(9, cmc - 1)}X${color}`;
             }
         }
 
         // Two colors.
         if (color.length === 2) {
             if (cmc === 1) {
-                manacost = `{${color[0]}${color[1]}}`;
+                manacost = `X${color[0]}X${color[1]}`; // TODO zweites X wegnehmen
             } else if (cmc === 2) {
-                manacost = `{${color[0]}}{${color[1]}}`;
+                manacost = `X${color[0]}X${color[1]}`;
             } else if (cmc === 3) {
                 let threeSymbols = this.random(0, 2); // 0 = none, 1 = first symbol twice, 2 = second symbol twice.
                 switch (threeSymbols) {
                     case 0:
-                        manacost = `{1}{${color[0]}}{${color[1]}}`;
+                        manacost = `X1X${color[0]}X${color[1]}`;
                         break;
                     case 1:
-                        manacost = `{${color[0]}}{${color[0]}}{${color[1]}}`;
+                        manacost = `X${color[0]}X${color[0]}X${color[1]}`;
                         break;
                     case 2:
-                        manacost = `{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        manacost = `X${color[0]}X${color[1]}X${color[1]}`;
                         break;
                 }
             } else if (cmc > 3) {
                 let fourSymbols = this.random(0, 3); // 0 = none, 1 = first symbol twice, 2 = second symbol twice, 3 = both symbol twice.
                 switch (fourSymbols) {
                     case 0:
-                        manacost = `{${Math.min(9, cmc - 2)}}{${color[0]}}{${color[1]}}`;
+                        manacost = `X${Math.min(9, cmc - 2)}X${color[0]}X${color[1]}`;
                         break;
                     case 1:
-                        manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[0]}}{${color[1]}}`;
+                        manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[0]}X${color[1]}`;
                         break;
                     case 2:
-                        manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[1]}X${color[1]}`;
                         break;
                     case 3:
-                        manacost = `{${color[0]}}{${color[0]}}{${color[1]}}{${color[1]}}`;
+                        manacost = `X${color[0]}X${color[0]}X${color[1]}X${color[1]}`;
                         if (cmc > 4) {
-                            manacost = `{${Math.min(9, cmc - 4)}}${manacost}`;
+                            manacost = `X${Math.min(9, cmc - 4)}${manacost}`;
                         }
                         break;
                 }
@@ -1115,14 +1331,14 @@ class MtgParser {
         // More than two colors.
         if (color.length >= 3) {
             if (cmc === 1) {
-                manacost = `{${color[this.random(0, color.length - 1)]}}`;
+                manacost = `X${color[this.random(0, color.length - 1)]}`;
             } else if (cmc === 2) {
                 let rnd = this.random(0, color.length - 2);
-                manacost = `{${color[rnd]}}{${color[rnd + 1]}}`;
+                manacost = `X${color[rnd]}X${color[rnd + 1]}`;
             } else if (cmc === 3) {
-                manacost = `{${color[0]}}{${color[1]}}{${color[2]}}`;
+                manacost = `X${color[0]}X${color[1]}X${color[2]}`;
             } else if (cmc > 3) {
-                manacost = `{${Math.min(9, cmc - 3)}}{${color[0]}}{${color[1]}}{${color[2]}}`;
+                manacost = `X${Math.min(9, cmc - 3)}X${color[0]}X${color[1]}X${color[2]}`;
             }
         }
 
