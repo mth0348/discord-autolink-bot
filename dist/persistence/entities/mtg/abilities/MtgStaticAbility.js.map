@@ -1,0 +1,1 @@
+{"version":3,"file":"MtgStaticAbility.js","sourceRoot":"","sources":["../../../../../persistence/entities/mtg/abilities/MtgStaticAbility.ts"],"names":[],"mappings":";;;AACA,sEAAqE;AAGrE;IAMI,0BAAY,KAA0B;QAJ/B,SAAI,GAAG,+BAAc,CAAC,MAAM,CAAC;QAKhC,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACvB,CAAC;IAEL,uBAAC;AAAD,CAAC,AAVD,IAUC;AAVY,4CAAgB"}

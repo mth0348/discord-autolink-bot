@@ -1,0 +1,5077 @@
+{
+    "types": [
+        "instant",
+        "sorcery",
+        "creature",
+        "artifact",
+        "land",
+        "enchantment",
+        "permanent"
+    ],
+    "auratargets": [
+        "creature"
+    ],
+    "permanentTypes": [
+        "creature",
+        "artifact",
+        "land",
+        "enchantment",
+        "permanent",
+        "noncreature permanent",
+        "nonland permanent"
+    ],
+    "subtypesArtifactCreatures": [
+        "Construct",
+        "Golem",
+        "Myr",
+        "Juggernaut",
+        "Beast"
+    ],
+    "subtypes": [
+        "Advisor",
+        "Aetherborn",
+        "Ally",
+        "Angel",
+        "Antelope",
+        "Ape",
+        "Archer",
+        "Archon",
+        "Artificer",
+        "Assassin",
+        "Atog",
+        "Aurochs",
+        "Avatar",
+        "Azra",
+        "Badger",
+        "Barbarian",
+        "Basilisk",
+        "Bat",
+        "Bear",
+        "Beast",
+        "Beeble",
+        "Berserker",
+        "Bird",
+        "Blinkmoth",
+        "Boar",
+        "Bringer",
+        "Brushwagg",
+        "Camarid",
+        "Camel",
+        "Caribou",
+        "Carrier",
+        "Cat",
+        "Centaur",
+        "Cephalid",
+        "Chimera",
+        "Citizen",
+        "Cleric",
+        "Cockatrice",
+        "Construct",
+        "Coward",
+        "Crab",
+        "Crocodile",
+        "Cyclops",
+        "Dauthi",
+        "Demigod",
+        "Demon",
+        "Deserter",
+        "Devil",
+        "Dinosaur",
+        "Djinn",
+        "Dragon",
+        "Drake",
+        "Dreadnought",
+        "Drone",
+        "Druid",
+        "Dryad",
+        "Dwarf",
+        "Efreet",
+        "Egg",
+        "Elder",
+        "Eldrazi",
+        "Elemental",
+        "Elephant",
+        "Elf",
+        "Elk",
+        "Eye",
+        "Faerie",
+        "Ferret",
+        "Fish",
+        "Flagbearer",
+        "Fox",
+        "Frog",
+        "Fungus",
+        "Gargoyle",
+        "Germ",
+        "Giant",
+        "Gnome",
+        "Goat",
+        "Goblin",
+        "God",
+        "Golem",
+        "Gorgon",
+        "Graveborn",
+        "Gremlin",
+        "Griffin",
+        "Hag",
+        "Harpy",
+        "Hellion",
+        "Hippo",
+        "Hippogriff",
+        "Homarid",
+        "Homunculus",
+        "Horror",
+        "Horse",
+        "Hound",
+        "Human",
+        "Hydra",
+        "Hyena",
+        "Illusion",
+        "Imp",
+        "Incarnation",
+        "Insect",
+        "Jackal",
+        "Jellyfish",
+        "Juggernaut",
+        "Kavu",
+        "Kirin",
+        "Kithkin",
+        "Knight",
+        "Kobold",
+        "Kor",
+        "Kraken",
+        "Lamia",
+        "Lammasu",
+        "Leech",
+        "Leviathan",
+        "Lhurgoyf",
+        "Licid",
+        "Lizard",
+        "Manticore",
+        "Masticore",
+        "Mercenary",
+        "Merfolk",
+        "Metathran",
+        "Minion",
+        "Minotaur",
+        "Mole",
+        "Monger",
+        "Mongoose",
+        "Monk",
+        "Monkey",
+        "Moonfolk",
+        "Mouse",
+        "Mutant",
+        "Myr",
+        "Mystic",
+        "Naga",
+        "Nautilus",
+        "Nephilim",
+        "Nightmare",
+        "Nightstalker",
+        "Ninja",
+        "Noble",
+        "Noggle",
+        "Nomad",
+        "Nymph",
+        "Octopus",
+        "Ogre",
+        "Ooze",
+        "Orc",
+        "Orgg",
+        "Otter",
+        "Ouphe",
+        "Ox",
+        "Oyster",
+        "Pangolin",
+        "Peasant",
+        "Pegasus",
+        "Pest",
+        "Phelddagrif",
+        "Phoenix",
+        "Pilot",
+        "Pincher",
+        "Pirate",
+        "Plant",
+        "Praetor",
+        "Processor",
+        "Rabbit",
+        "Rat",
+        "Rebel",
+        "Reflection",
+        "Rhino",
+        "Rogue",
+        "Sable",
+        "Salamander",
+        "Samurai",
+        "Saproling",
+        "Satyr",
+        "Scarecrow",
+        "Scion",
+        "Scorpion",
+        "Scout",
+        "Sculpture",
+        "Serpent",
+        "Servo",
+        "Shade",
+        "Shaman",
+        "Shapeshifter",
+        "Shark",
+        "Sheep",
+        "Siren",
+        "Skeleton",
+        "Slith",
+        "Sliver",
+        "Slug",
+        "Snake",
+        "Soldier",
+        "Soltari",
+        "Spawn",
+        "Specter",
+        "Spellshaper",
+        "Sphinx",
+        "Spider",
+        "Spike",
+        "Spirit",
+        "Splinter",
+        "Sponge",
+        "Squid",
+        "Squirrel",
+        "Starfish",
+        "Surrakar",
+        "Survivor",
+        "Tentacle",
+        "Tetravite",
+        "Thalakos",
+        "Thopter",
+        "Thrull",
+        "Treefolk",
+        "Trilobite",
+        "Triskelavite",
+        "Troll",
+        "Turtle",
+        "Unicorn",
+        "Vampire",
+        "Vedalken",
+        "Viashino",
+        "Wall",
+        "Warlock",
+        "Warrior",
+        "Weird",
+        "Werewolf",
+        "Whale",
+        "Wizard",
+        "Wolf",
+        "Wolverine",
+        "Wombat",
+        "Worm",
+        "Wraith",
+        "Wurm",
+        "Yeti",
+        "Zombie",
+        "Zubera"
+    ],
+    "keywords": [
+        {
+            "name": "Deathtouch",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "bg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Defender",
+            "hasCost": false,
+            "isTop": true,
+            "score": -1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Double Strike",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wr",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Enchant",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.1,
+            "nameExtension": "(type)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Equip",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "equipment"
+            ]
+        },
+        {
+            "name": "First Strike",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "",
+            "colorIdentity": "wbg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Flash",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "",
+            "colorIdentity": "u",
+            "excludeFromSimple": true,
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Flying",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Haste",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.5,
+            "nameExtension": "",
+            "colorIdentity": "rg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Hexproof",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "ubg",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment",
+                "land", "artifact creature"
+            ]
+        },
+        {
+            "name": "Hexproof from",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "(types|color)",
+            "colorIdentity": "ubg",
+            "types": [
+                "creature",
+                "artifact",
+                "enchantment",
+                "land", "artifact creature"
+            ]
+        },
+        {
+            "name": "Indestructible",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.2,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Intimidate",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "brg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Lifelink",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wb",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Protection from",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.2,
+            "nameExtension": "(types|color)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Reach",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.2,
+            "nameExtension": "",
+            "colorIdentity": "g",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Shroud",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "land",
+                "artifact",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Trample",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "rg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Vigilance",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.5,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Cumulative Upkeep",
+            "hasCost": true,
+            "isTop": true,
+            "score": -1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Buyback",
+            "hasCost": true,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Shadow",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.5,
+            "nameExtension": "",
+            "colorIdentity": "b",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cycling",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment",
+                "instant",
+                "sorcery", "artifact creature"
+            ]
+        },
+        {
+            "name": "Echo",
+            "hasCost": true,
+            "isTop": true,
+            "score": -0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Fading",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "artifact",
+                "land",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Kicker",
+            "hasCost": true,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Flashback",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "ur",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Madness",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "br",
+            "types": [
+                "creature",
+                "sorcery",
+                "instant",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Fear",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "b",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Morph",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Amplify",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Storm",
+            "hasCost": false,
+            "isTop": false,
+            "score": 1.5,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Affinity for",
+            "hasCost": false,
+            "isTop": true,
+            "score": 2.4,
+            "nameExtension": "(type)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "artifact", "artifact creature"
+            ]
+        },
+        {
+            "name": "Entwine",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Modular",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "artifact creature"
+            ]
+        },
+        {
+            "name": "Sunburst",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
+            "types": [
+                "artifact creature"
+            ]
+        },
+        {
+            "name": "Bushido",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.3,
+            "nameExtension": "(number)",
+            "colorIdentity": "w",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Splice onto Arcane",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Ninjutsu",
+            "hasCost": true,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "ub",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Convoke",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Dredge",
+            "hasCost": false,
+            "isTop": false,
+            "score": 1.2,
+            "nameExtension": "(number)",
+            "colorIdentity": "bg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Transmute",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Bloodthirst",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.3,
+            "nameExtension": "(number)",
+            "colorIdentity": "r",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Replicate",
+            "hasCost": true,
+            "isTop": true,
+            "score": 1.2,
+            "nameExtension": "",
+            "colorIdentity": "ur",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Split Second",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant", "artifact creature"
+            ]
+        },
+        {
+            "name": "Suspend",
+            "hasCost": true,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "artifact",
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Vanishing",
+            "hasCost": false,
+            "isTop": true,
+            "score": -0.5,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Aura Swap",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.2,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "enchantment"
+            ]
+        },
+        {
+            "name": "Delve",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Gravestorm",
+            "hasCost": false,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "b",
+            "excludeFromSimple": true,
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Changeling",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.2,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Evoke",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.9,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Persist",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Devour",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Exalted",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "land",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Unearth",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Cascade",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "excludeFromSimple": true,
+            "types": [
+                "creature",
+                "instant",
+                "sorcery",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Annihilator",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.6,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Rebound",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1.2,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Totem Armor",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "aura"
+            ]
+        },
+        {
+            "name": "Infect",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Battle Cry",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "",
+            "colorIdentity": "wr",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Living Weapon",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.7,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "equipment"
+            ]
+        },
+        {
+            "name": "Undying",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Miracle",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Overload",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Scavenge",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1.2,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Unleash",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Cipher",
+            "hasCost": false,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Evolve",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Extort",
+            "hasCost": true,
+            "isTop": true,
+            "score": 0.5,
+            "nameExtension": "",
+            "colorIdentity": "wwbb",
+            "types": [
+                "creature",
+                "enchantment", "artifact creature"
+            ]
+        },
+        {
+            "name": "Tribute",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Dethrone",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Prowess",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Dash",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.6,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Menace",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Awaken",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Ingest",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Surge",
+            "hasCost": true,
+            "isTop": false,
+            "score": 0.4,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Fabricate",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Improvise",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "artifact", "artifact creature"
+            ]
+        },
+        {
+            "name": "Embalm",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Eternalize",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Afflict",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.8,
+            "nameExtension": "(number)",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Ascend",
+            "hasCost": false,
+            "isTop": true,
+            "score": 0.6,
+            "nameExtension": "",
+            "excludeFromSimple": true,
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "enchantment",
+                "land"
+            ]
+        },
+        {
+            "name": "Jump-Start",
+            "hasCost": false,
+            "isTop": false,
+            "score": 0.8,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Mentor",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature"
+            ]
+        },
+        {
+            "name": "Riot",
+            "hasCost": false,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "excludeFromSimple": true,
+            "colorIdentity": "rg",
+            "types": [
+                "creature", "artifact creature"
+            ]
+        },
+        {
+            "name": "Spectacle",
+            "hasCost": true,
+            "isTop": true,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "instant",
+                "sorcery"
+            ]
+        },
+        {
+            "name": "Escape",
+            "hasCost": true,
+            "isTop": false,
+            "score": 1,
+            "nameExtension": "",
+            "colorIdentity": "wubrg",
+            "types": [
+                "creature",
+                "instant",
+                "sorcery"
+            ]
+        }
+    ],
+    "permanentConditions": [
+        {
+            "text": "When (name) enters the battlefield",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever (name) attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever (name) enters the battlefield or attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "When you cast this spell",
+            "replacementText": "",
+            "context": "self",
+            "restrictedTypes": ["artifact", "creature", "instant", "sorcery", "planeswalker", "enchantment"]
+        },
+        {
+            "text": "Whenever another creature enters the battlefield",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another nontoken creature enters the battlefield",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another creature enters the battlefield under your control",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever another nontoken creature enters the battlefield under your control",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever you gain life",
+            "replacementText": "Whenever you would gain life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever an opponent gains life",
+            "replacementText": "Whenever an opponent would gain life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever you lose life",
+            "replacementText": "Whenever you would lose life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever an opponent loses life",
+            "replacementText": "Whenever an opponent would lose life",
+            "context": "life"
+        },
+        {
+            "text": "Whenever (name) attacks",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "Whenever you cast a(n) (type|color) spell",
+            "replacementText": "",
+            "context": "spell"
+        },
+        {
+            "text": "Whenever (name) becomes tapped",
+            "replacementText": "",
+            "context": "self"
+        },
+        {
+            "text": "At the beginning of combat on your turn",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of your ukpeep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of your endstep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of each upkeep",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "At the beginning of combat on each turn",
+            "replacementText": "",
+            "context": "phase"
+        },
+        {
+            "text": "Whenever you draw a card",
+            "replacementText": "Whenever you would draw a card",
+            "context": "draw"
+        },
+        {
+            "text": "Whenever a creature dealt damage by (self) this turn dies",
+            "replacementText": "Whenever a creature dealt damage by (self) this turn would die",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever one or more creatures you control attack",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever one or more creatures an opponent controls attack",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control blocks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control becomes blocked",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls attacks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls blocks",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls becomes blocked",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature you control becomes tapped",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a creature an opponent controls becomes tapped",
+            "replacementText": "",
+            "context": "creature"
+        },
+        {
+            "text": "Whenever a +1/+1 counter is put on (self)",
+            "replacementText": "",
+            "context": "creature"
+        }
+    ],
+    "permanentEvents": [
+        {
+            "text": "(self) deals (number) damage to any target",
+            "score": 0.5,
+            "colorIdentity": "rr"
+        },
+        {
+            "text": "you may put a land card from your hand onto the battlefield tapped",
+            "score": 1,
+            "colorIdentity": "g"
+        },
+        {
+            "text": "you may put a land card from your hand onto the battlefield",
+            "score": 1,
+            "colorIdentity": "g"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on (self)",
+            "score": 0.6,
+            "colorIdentity": "g",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "untap (self)",
+            "score": 0.2,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "untap target permanent",
+            "score": 0.2,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "(self) deals (number) damage to target (player)",
+            "score": 1,
+            "colorIdentity": "rr"
+        },
+        {
+            "text": "(self) deals (number) damage to target creature an opponent controls",
+            "score": 0.6,
+            "colorIdentity": "rr"
+        },
+        {
+            "text": "(self) deals (number) damage to target (subtype) creature an opponent controls",
+            "score": 0.2,
+            "colorIdentity": "rr"
+        },
+        {
+            "text": "(self) deals (number) damage to target non-(subtype) creature an opponent controls",
+            "score": 0.4,
+            "colorIdentity": "rr"
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature target (player) controls",
+            "colorIdentity": "rr",
+            "score": 4
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature",
+            "colorIdentity": "rr",
+            "score": 3
+        },
+        {
+            "text": "(name) deals (number2) damage to each (subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1
+        },
+        {
+            "text": "(name) deals (number2) damage to each non-(subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1
+        },
+        {
+            "text": "draw a card",
+            "score": 1.2,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "draw (numbername) cards",
+            "score": 2.5,
+            "colorIdentity": "uu"
+        },
+        {
+            "text": "destroy target creature",
+            "score": 2,
+            "colorIdentity": "wwbb",
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy (self)",
+            "score": -1,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "you lose (number) life",
+            "score": -0.5,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "you lose (number2) life",
+            "score": -0.9,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "you gain (number) life",
+            "score": 0.1,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "you gain (number2) life",
+            "score": 0.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "you lose (number) life and draw a card",
+            "score": 0.4,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "you lose (number2) life and draw (numbername) cards",
+            "score": 1,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "destroy target (permanent) an opponent controls",
+            "score": 2.1,
+            "colorIdentity": "wwbbg",
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "target (player) discards a card",
+            "score": 1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "target (player) discards (numbername) cards",
+            "score": 2.5,
+            "colorIdentity": "br"
+        },
+        {
+            "text": "target player draws a card",
+            "score": 1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "target opponent draws a card",
+            "score": -1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "target player draws (numbername) cards",
+            "score": 3,
+            "colorIdentity": "u"
+        },
+        {
+            "text": "target opponent draws (numbername) cards",
+            "score": -2.2,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "each opponent draws (numbername) cards",
+            "score": -2.2,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "target (player) sacrifices a creature",
+            "score": 1.2,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "target (player) sacrifices a creature",
+            "score": 1.2,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "target (player) sacrifices two creatures",
+            "score": 3,
+            "colorIdentity": "wwbb"
+        },
+        {
+            "text": "target (player) sacrifices a(n) (permanent)",
+            "score": 1.2,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "target (player) sacrifices two (permanent)s",
+            "score": 3.2,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "target (player) sacrifices a (subtype) creature",
+            "score": 0.6,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "target (player) sacrifices a non-(subtype) creature",
+            "score": 1.2,
+            "colorIdentity": "wbr"
+        },
+        {
+            "text": "sacrifice (self)",
+            "score": -1,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "sacrifice a creature",
+            "score": -0.8,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "score": 1.8,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "score": 1.8,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "score": 1.8,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername2) +1/+1 counter(s) on target creature",
+            "score": 2.4,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername2) +1/+1 counter(s) on target creature",
+            "score": 2.4,
+            "colorIdentity": "gr"
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target (subtype) creature",
+            "score": 0.7,
+            "colorIdentity": "rg"
+        },
+        {
+            "text": "put (numbername) -1/-1 counter(s) on target creature",
+            "score": 1.8,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "put (numbername) -1/-1 counter(s) on target (subtype) creature",
+            "score": 0.7,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "put a (keyword) counter on another target creature",
+            "score": 1.4,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "put the top (numbername) cards of your library into your graveyard",
+            "score": -0.5,
+            "colorIdentity": "ub"
+        },
+        {
+            "text": "put the top (numbername2) cards of your library into your graveyard",
+            "score": -0.8,
+            "colorIdentity": "ub"
+        },
+        {
+            "text": "target (player) puts the top (numbername) cards of his or her library into his or her graveyard",
+            "score": 0.5,
+            "colorIdentity": "ub"
+        },
+        {
+            "text": "return target (type) card from your graveyard to your hand",
+            "score": 1,
+            "colorIdentity": "bg"
+        },
+        {
+            "text": "return target creature card from your graveyard to the battlefield under your control",
+            "score": 3.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target creature card from a graveyard to the battlefield under your control",
+            "score": 4,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from your graveyard to the battlefield under your control",
+            "score": 4,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from a graveyard to the battlefield under your control",
+            "score": 4.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return up to (numbername) target (type) card(s) from your graveyard to your hand",
+            "score": 2.2,
+            "colorIdentity": "bg"
+        },
+        {
+            "text": "return target creature card from your graveyard to the battlefield under your control tapped",
+            "score": 3.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target creature card from a graveyard to the battlefield under your control tapped",
+            "score": 4,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from your graveyard to the battlefield under your control tapped",
+            "score": 4.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "return target (permanent) card from a graveyard to the battlefield under your control tapped",
+            "score": 4.5,
+            "colorIdentity": "wbg"
+        },
+        {
+            "text": "exile target (permanent)",
+            "score": 2.5,
+            "colorIdentity": "wb"
+        },
+        {
+            "text": "exile target creature",
+            "score": 2.2,
+            "colorIdentity": "wb"
+        },
+        {
+            "text": "exile target permanent",
+            "score": 3.0,
+            "colorIdentity": "wb"
+        },
+        {
+            "text": "exile (self)",
+            "score": -1,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "each player exiles (numbername) cards from his or her hand",
+            "score": 0.4,
+            "colorIdentity": "bb"
+        },
+        {
+            "text": "each opponent exiles (numbername) cards from his or her hand",
+            "score": 3.1,
+            "colorIdentity": "bb"
+        },
+        {
+            "text": "each player exiles a card from his or her hand",
+            "score": 1.5,
+            "colorIdentity": "bb"
+        },
+        {
+            "text": "each opponent exiles a card from his or her hand",
+            "score": 0.3,
+            "colorIdentity": "bb"
+        },
+        {
+            "text": "each player discards a card",
+            "score": 0.3,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "each opponent discards a card",
+            "score": 1.5,
+            "colorIdentity": "bb"
+        },
+        {
+            "text": "each player discards (numbername) cards",
+            "score": 0.5,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "each opponent discards (numbername) cards",
+            "score": 3.1,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "target (player) discards a card",
+            "score": 1,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "target (player) discards (numbername) cards",
+            "score": 2.5,
+            "colorIdentity": "b"
+        },
+        {
+            "text": "discard a card",
+            "score": -0.8,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "remove up to (numbername) counter(s) from target permanent",
+            "score": 0.5,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "remove up to (numbername2) counter(s) from target permanent",
+            "score": 1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "discard (numbername) cards",
+            "score": -1.6,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "take an extra turn",
+            "score": 5.5,
+            "colorIdentity": "u"
+        },
+        {
+            "text": "add (mana)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature", "artifact", "planeswalker", "instant", "sorcery"]
+        },
+        {
+            "text": "create a Food token",
+            "score": 0.6,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "create (numbername) Food tokens",
+            "score": 1.1,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "create (numbername2) Food tokens",
+            "score": 1.3,
+            "colorIdentity": "wubrg"
+        },
+        {
+            "text": "(self) gets +(number)/+0 until end of turn",
+            "score": 0.5,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "(self) gets +(number)/+(samenumber) until end of turn",
+            "score": 0.5,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "(self) gets +(number2)/+(samenumber) until end of turn",
+            "score": 1,
+            "colorIdentity": "wubrg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "(self) deals damage equal to its power to target creature",
+            "score": 2.2,
+            "colorIdentity": "rg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "(self) deals damage equal to its power to any target",
+            "score": 2.6,
+            "colorIdentity": "rg",
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "reveal the top X cards of your library, where X is the number of (subtype) creatures you control. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.2,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "reveal the top X cards of your library, where X is the number of non-(subtype) creatures you control. Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "reveal the top X cards of your library, where X is the number of (type) cards in your graveyard. Put those cards into your hand",
+            "score": 5,
+            "colorIdentity": "uurr",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top X cards of your library, where X is the number of opponents you have. You may put up to (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "uu",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top X cards of your library, where X is the number of (permanent)s you control. You may put up to (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top X cards of your library, where X is the number of (type|color) creatures you control. You may put up to (numbername) of those cards into your hand",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "reveal the top (number) cards of your library, Put one of those cards into your hand and the rest into your graveyard",
+            "score": 2,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.2,
+            "colorIdentity": "uug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top (number2) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 2.2,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "look at the top (number3) cards of your library. Put (numbername) of those cards into your hand and the rest into your graveyard",
+            "score": 3.5,
+            "colorIdentity": "ug",
+            "noFollowUp": true,
+            "restrictedTypes": ["creature", "artifact", "instant", "sorcery", "enchantment"]
+        },
+        {
+            "text": "draw X cards, where X is the number of (permanent)s you control",
+            "score": 5,
+            "colorIdentity": "u",
+            "noFollowUp": true
+        },
+        {
+            "text": "proliferate, then destroy each nonland permanent with (numbername) or more counters on it",
+            "score": 2.8,
+            "colorIdentity": "b",
+            "noFollowUp": true
+        },
+        {
+            "text": "destroy all (permanent)s",
+            "score": 5,
+            "colorIdentity": "wbg",
+            "noFollowUp": true
+        },
+        {
+            "text": "destroy each (permanent) target opponent controls",
+            "score": 6.2,
+            "colorIdentity": "wbg",
+            "noFollowUp": true
+        },
+        {
+            "text": "destroy all creatures",
+            "score": 4,
+            "colorIdentity": "wb",
+            "noFollowUp": true
+        },
+        {
+            "text": "proliferate",
+            "score": 0.8,
+            "colorIdentity": "ubg"
+        },
+        {
+            "text": "destroy target artifact, creature or planeswalker",
+            "colorIdentity": "wwbbr",
+            "score": 2.2
+        },
+        {
+            "text": "destroy target creature or planeswalker",
+            "colorIdentity": "wwbb",
+            "score": 2.5
+        },
+        {
+            "text": "destroy target planeswalker",
+            "colorIdentity": "wwbb",
+            "score": 2.2
+        },
+        {
+            "text": "scry (number3)",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
+            "text": "scry (number2)",
+            "colorIdentity": "wubrg",
+            "score": 0.2
+        },
+        {
+            "text": "scry (number)",
+            "colorIdentity": "wubrg",
+            "score": 0
+        },
+        {
+            "text": "proliferate, then proliferate again",
+            "score": 3,
+            "colorIdentity": "ubg",
+            "noFollowUp": true
+        },
+        {
+            "text": "tap up to one target creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap up to one target (color) creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap up to one target (subtype) creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap up to one target (permanent)",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "tap up to (numbername) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 0.8
+        },
+        {
+            "text": "tap up to (numbername2) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1.2
+        },
+        {
+            "text": "destroy target creature with (keyword)",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "destroy target creature with no counters on it",
+            "colorIdentity": "b",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with converted mana cost (number2) or less",
+            "colorIdentity": "bb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with converted mana cost (!number2) or higher",
+            "colorIdentity": "wwbb",
+            "score": 2,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "exile target creature with no counters on it",
+            "colorIdentity": "wbb",
+            "score": 2,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "exile target creature with converted mana cost (number2) or less",
+            "colorIdentity": "bb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "exile target creature with converted mana cost (!number2) or higher",
+            "colorIdentity": "wwbb",
+            "score": 2,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "rg",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "rg",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "rg",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5.5
+        },
+        {
+            "text": "create two (number3)/(samenumber) (color) (subtype) creature tokens with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 6
+        },
+        {
+            "text": "gain control of target opponent during that player's next turn",
+            "colorIdentity": "wubrg",
+            "score": 5.5
+        }
+    ],
+    "permanentStatics": [
+        {
+            "text": "(other creatures) you control have (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
+            "text": "(other creatures) you control have (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 2.5
+        },
+        {
+            "text": "(other creatures) you control get -(number)/-(samenumber)",
+            "colorIdentity": "bb",
+            "score": -4,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "(other creatures) you control get +(number)/+(samenumber)",
+            "colorIdentity": "wwbg",
+            "score": 4,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "creatures you don't control get -1/-1",
+            "colorIdentity": "bb",
+            "score": 4,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "creatures you don't control get -2/-2",
+            "colorIdentity": "bb",
+            "score": 5,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "(other creatures) you don't control get -(number)/-(samenumber)",
+            "colorIdentity": "bb",
+            "score": 6,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "(other creatures) you control get +1/+1 and have (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 4.2,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "you can't lose the game and your opponents can't win the game",
+            "colorIdentity": "wubrg",
+            "score": 5,
+            "restrictedTypes": ["creature", "enchantment", "artifact"]
+        },
+        {
+            "text": "you can't win the game and your opponents can't lose the game",
+            "colorIdentity": "wubrg",
+            "score": -4
+        },
+        {
+            "text": "skip your draw step",
+            "colorIdentity": "wubrg",
+            "score": -4
+        },
+        {
+            "text": "(other creatures) you control lose (keyword)",
+            "colorIdentity": "wubrg",
+            "score": -5
+        },
+        {
+            "text": "creatures you control can't have counters placed on them",
+            "colorIdentity": "gg",
+            "score": 3
+        },
+        {
+            "text": "You can't get poison counters",
+            "colorIdentity": "wwbbgg",
+            "score": 2
+        },
+        {
+            "text": "You may cast nonland cards with (keyword) from your graveyard",
+            "colorIdentity": "wubrg",
+            "score": 2.5
+        },
+        {
+            "text": "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead",
+            "colorIdentity": "uu",
+            "score": 4.2
+        },
+        {
+            "text": "If you would gain life, you gain twice that much life instead",
+            "colorIdentity": "www",
+            "score": 3.5
+        },
+        {
+            "text": "If an opponent would draw a card except the first on he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card",
+            "colorIdentity": "uubb",
+            "score": 3.5
+        },
+        {
+            "text": "If an opponent would draw two or more cards, instead you and that player each draw a card",
+            "colorIdentity": "wubrg",
+            "score": 3
+        },
+        {
+            "text": "If you would gain life, you gain that much life plus (number) instead",
+            "colorIdentity": "www",
+            "score": 2
+        },
+        {
+            "text": "Whenever an opponent would gain life, you gain that much life instead",
+            "colorIdentity": "wwwbbb",
+            "score": 4
+        },
+        {
+            "text": "Whenever an opponent would lose life, that player loses that much life plus (number) instead",
+            "colorIdentity": "bbb",
+            "score": 3.5
+        },
+        {
+            "text": "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead",
+            "colorIdentity": "rrr",
+            "score": 4
+        },
+        {
+            "text": "If a source you control would deal damage to a permanent or player, it deals that much damage plus (number) to that permanent or player instead",
+            "colorIdentity": "rrr",
+            "score": 2.8
+        },
+        {
+            "text": "If you would draw a card while you have no cards in hand, instead draw two cards and lose (number) life",
+            "colorIdentity": "bbb",
+            "score": 1.5
+        },
+        {
+            "text": "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead",
+            "colorIdentity": "ggb",
+            "score": 3.5
+        },
+        {
+            "text": "(other creatures) you control enter the battlefield with an additional +1/+1 counter on it",
+            "colorIdentity": "ggg",
+            "score": 3.5
+        },
+        {
+            "text": "whenever damage would be dealt to you, prevent all but (number) of that damage",
+            "colorIdentity": "wwww",
+            "score": 4
+        },
+        {
+            "text": "whenever damage would be dealt to you, prevent (number) of that damage",
+            "colorIdentity": "wwww",
+            "score": 3
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number2)/(samenumber) (color) (subtype) creature tokens are created instead",
+            "colorIdentity": "wwgg",
+            "score": 4
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number2)/(samenumber) (color) (subtype) creature tokens with (keyword) are created instead",
+            "colorIdentity": "wwgg",
+            "score": 4.5
+        },
+        {
+            "text": "If one or more creature tokens would be created under your control, that many (number3)/(samenumber) (color) (subtype) creature tokens with (keyword) are created instead",
+            "colorIdentity": "ggg",
+            "score": 5
+        }
+    ],
+    "permanentActivatedCosts": [
+        {
+            "text": "sacrifice (self)",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "reveal a (subtype) card from your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "return a (type) you control to your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "return a (subtype) creature you control to your hand",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "mill (numbername) cards",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "mill (numbername2) cards",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
+            "text": "discard a card",
+            "colorIdentity": "ubr",
+            "score": 2
+        },
+        {
+            "text": "discard (numbername) cards",
+            "colorIdentity": "ubr",
+            "score": 6
+        },
+        {
+            "text": "tap another untapped creature you control",
+            "colorIdentity": "wubrg",
+            "score": 1
+        },
+        {
+            "text": "put a -1/-1 counter on (self)",
+            "colorIdentity": "bg",
+            "score": 4,
+            "restrictedTypes": ["creature"]
+        },
+        {
+            "text": "pay (number) life",
+            "colorIdentity": "b",
+            "score": 2.5
+        },
+        {
+            "text": "pay (number2) life",
+            "colorIdentity": "b",
+            "score": 3.5
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "wubrg",
+            "score": 6
+        },
+        {
+            "text": "sacrifice a(n) (permanent)",
+            "colorIdentity": "wubrg",
+            "score": 5
+        },
+        {
+            "text": "sacrifice a creature",
+            "colorIdentity": "wubrg",
+            "score": 4
+        },
+        {
+            "text": "discard a(n) (type) card",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
+            "text": "tap (numbername) untapped creatures you control",
+            "colorIdentity": "wubrg",
+            "score": 5
+        }
+    ],
+    "instantSorceryEvents": [
+        {
+            "text": "(name) deals (number) damage to any target",
+            "colorIdentity": "rr",
+            "score": 0.8
+        },
+        {
+            "text": "(name) deals (number2) damage to any target",
+            "colorIdentity": "rr",
+            "score": 1.7
+        },
+        {
+            "text": "(name) deals (number) damage to any target",
+            "colorIdentity": "rr",
+            "score": 0.8
+        },
+        {
+            "text": "(name) deals (number2) damage to any target",
+            "colorIdentity": "rr",
+            "score": 1.5
+        },
+        {
+            "text": "(name) deals (number2) damage to target creature an opponent controls",
+            "colorIdentity": "rr",
+            "score": 1.5
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature target (player) controls",
+            "colorIdentity": "rr",
+            "score": 4
+        },
+        {
+            "text": "(name) deals (number2) damage to each creature",
+            "colorIdentity": "rr",
+            "score": 2
+        },
+        {
+            "text": "(name) deals (number2) damage to each (subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1.1
+        },
+        {
+            "text": "(name) deals (number2) damage to each non-(subtype) creature",
+            "colorIdentity": "rr",
+            "score": 1.1
+        },
+        {
+            "text": "put (numbername) +1/+1 counter(s) on target creature",
+            "colorIdentity": "g",
+            "score": 1
+        },
+        {
+            "text": "put (numbername) -1/-1 counter(s) on target creature an opponent controls",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "draw (numbername) cards",
+            "colorIdentity": "u",
+            "score": 3.1
+        },
+        {
+            "text": "scry (number3)",
+            "colorIdentity": "wubrg",
+            "score": 2
+        },
+        {
+            "text": "scry (number2)",
+            "colorIdentity": "wubrg",
+            "score": 0.2
+        },
+        {
+            "text": "scry (number)",
+            "colorIdentity": "wubrg",
+            "score": 0
+        },
+        {
+            "text": "draw a card",
+            "colorIdentity": "ug",
+            "score": 1
+        },
+        {
+            "text": "you gain (number2) life",
+            "colorIdentity": "w",
+            "score": 0
+        },
+        {
+            "text": "return target (permanent) to its owner's hand",
+            "colorIdentity": "u",
+            "score": 0.9
+        },
+        {
+            "text": "return target creature to its owner's hand",
+            "colorIdentity": "u",
+            "score": 0.8
+        },
+        {
+            "text": "return target creature to its owner's hand",
+            "colorIdentity": "u",
+            "score": 0.5
+        },
+        {
+            "text": "return a creature you control to its owner's hand",
+            "colorIdentity": "u",
+            "score": -1
+        },
+        {
+            "text": "destroy target creature with flying",
+            "colorIdentity": "g",
+            "score": 1,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with (keyword)",
+            "colorIdentity": "bb",
+            "score": 1,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with no counters on it",
+            "colorIdentity": "bb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with converted mana cost (number2) or less",
+            "colorIdentity": "bb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target creature with converted mana cost (!number2) or higher",
+            "colorIdentity": "wwbb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "exile target creature with no counters on it",
+            "colorIdentity": "wwwbb",
+            "score": 1.8
+        },
+        {
+            "text": "exile target creature with converted mana cost (number2) or less",
+            "colorIdentity": "wwwbb",
+            "score": 1.8
+        },
+        {
+            "text": "exile target creature with converted mana cost (!number2) or higher",
+            "colorIdentity": "wwwbb",
+            "score": 1.8
+        },
+        {
+            "text": "destroy target tapped creature",
+            "colorIdentity": "wwbb",
+            "score": 1.8,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target (color) creature",
+            "colorIdentity": "wwbb",
+            "score": 1,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "destroy target artifact, creature or planeswalker",
+            "colorIdentity": "wbr",
+            "score": 2.2,
+            "restrictedTypes": ["creature", "instant", "sorcery", "artifact", "planeswalker"]
+        },
+        {
+            "text": "return up to (numbername) card(s) from your graveyard to your hand",
+            "colorIdentity": "g",
+            "score": 2.2
+        },
+        {
+            "text": "return target (type) card from your graveyard to the battlefield",
+            "colorIdentity": "wb",
+            "score": 4
+        },
+        {
+            "text": "gain control of target (permanent) an opponent controls until end of turn",
+            "colorIdentity": "r",
+            "score": 2.5
+        },
+        {
+            "text": "gain control of target (permanent) an opponent controls",
+            "colorIdentity": "u",
+            "score": 4.2
+        },
+        {
+            "text": "tap all (permanent)s target opponent controls",
+            "colorIdentity": "u",
+            "score": 3
+        },
+        {
+            "text": "tap all (subtype) creatures target opponent controls",
+            "colorIdentity": "u",
+            "score": 1
+        },
+        {
+            "text": "tap all creatures target opponent controls",
+            "colorIdentity": "u",
+            "score": 2.5
+        },
+        {
+            "text": "tap all (permanent)s target opponent controls",
+            "colorIdentity": "u",
+            "score": 3.1
+        },
+        {
+            "text": "untap target creature you control",
+            "colorIdentity": "u",
+            "score": 0
+        },
+        {
+            "text": "tap target creature",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "untap all creatures you control",
+            "colorIdentity": "u",
+            "score": 3
+        },
+        {
+            "text": "sacrifice a creature",
+            "colorIdentity": "wubrg",
+            "score": -1
+        },
+        {
+            "text": "sacrifice a (permanent)",
+            "colorIdentity": "wubrg",
+            "score": -1
+        },
+        {
+            "text": "tap all creatures you control",
+            "colorIdentity": "u",
+            "score": -1.1
+        },
+        {
+            "text": "tap all creatures target (player) controls",
+            "colorIdentity": "u",
+            "score": 2.2
+        },
+        {
+            "text": "tap all creatures you control",
+            "colorIdentity": "u",
+            "score": -1
+        },
+        {
+            "text": "tap all (permanent)s you control",
+            "colorIdentity": "u",
+            "score": -1
+        },
+        {
+            "text": "prevent the next (number2) damage that would be dealt to you",
+            "colorIdentity": "w",
+            "score": 0.2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "prevent all combat damage that would be dealt to creatures you control this turn",
+            "colorIdentity": "w",
+            "score": 0.2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "prevent the next (number3) damage that would be dealt to you",
+            "colorIdentity": "w",
+            "score": 2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "discard a card",
+            "colorIdentity": "bbrr",
+            "score": -1
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "bbrr",
+            "score": -2.5
+        },
+        {
+            "text": "you lose (number2) life",
+            "colorIdentity": "bb",
+            "score": -1.2
+        },
+        {
+            "text": "put the top (numbername2) cards of your library into your graveyard",
+            "score": -0.5,
+            "colorIdentity": "ubg"
+        },
+        {
+            "text": "prevent the next (number3) damage that would be dealt to creatures you control",
+            "colorIdentity": "w",
+            "score": 2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "prevent all combat damage that would be dealt this turn",
+            "colorIdentity": "g",
+            "score": 0.1,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "you and creatures you control gain hexproof until end of turn",
+            "colorIdentity": "wu",
+            "score": 1.1
+        },
+        {
+            "text": "creatures you control gain hexproof until end of turn",
+            "colorIdentity": "wu",
+            "score": 1
+        },
+        {
+            "text": "counter target spell",
+            "colorIdentity": "uuu",
+            "score": 2.5,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target (player) loses (number) life and you gain (number) life",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "target (player) loses (number2) life",
+            "colorIdentity": "b",
+            "score": 1
+        },
+        {
+            "text": "destroy target (permanent)",
+            "colorIdentity": "wbg",
+            "score": 2.2
+        },
+        {
+            "text": "exile target (permanent)",
+            "colorIdentity": "wwb",
+            "score": 2.2
+        },
+        {
+            "text": "destroy target creature",
+            "colorIdentity": "wb",
+            "score": 2
+        },
+        {
+            "text": "discard your hand",
+            "colorIdentity": "br",
+            "score": -3
+        },
+        {
+            "text": "discard a card",
+            "colorIdentity": "ubr",
+            "score": -1
+        },
+        {
+            "text": "target (permanent) gains protection from (color) until end of turn",
+            "colorIdentity": "w",
+            "score": 1
+        },
+        {
+            "text": "exile target (permanent) you control, then return it to the battlefield",
+            "colorIdentity": "w",
+            "score": 2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 1.2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number2)/+(samenumber) until end of turn",
+            "colorIdentity": "wg",
+            "score": 1.2
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/+0 and gain (keyword) until end of turn",
+            "colorIdentity": "r",
+            "score": 1.3
+        },
+        {
+            "text": "up to (numbername) target creatures each get +(number)/-(samenumber) until end of turn",
+            "colorIdentity": "b",
+            "score": 1.1
+        },
+        {
+            "text": "target creature gets +(number)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "wubrg",
+            "score": 1.3
+        },
+        {
+            "text": "target creature gets +(number)/+0 and gains (keyword) and (keyword) until end of turn",
+            "colorIdentity": "wubrg",
+            "score": 1.5
+        },
+        {
+            "text": "target attacking creature gets +(number)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 0.5,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+0 until end of turn",
+            "colorIdentity": "r",
+            "score": 0.5,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "r",
+            "score": 1.2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target attacking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
+            "colorIdentity": "rg",
+            "score": 1.7,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target blocking creature gets +(number)/+0 until end of turn",
+            "colorIdentity": "wrg",
+            "score": 0.5,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+0 until end of turn",
+            "colorIdentity": "wrg",
+            "score": 0.5,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+0 and gains (keyword) until end of turn",
+            "colorIdentity": "wrg",
+            "score": 1.2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "target blocking creature gets +(number2)/+(samenumber) and gains (keyword) until end of turn",
+            "colorIdentity": "wrg",
+            "score": 1.7,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "switch target creature's power and toughness until end of turn",
+            "colorIdentity": "ur",
+            "score": 0
+        },
+        {
+            "text": "destroy target artifact",
+            "colorIdentity": "r",
+            "score": 1.6
+        },
+        {
+            "text": "target (player) sacrifices a(n) (permanent)",
+            "colorIdentity": "wwbb",
+            "score": 2.1
+        },
+        {
+            "text": "target (player) sacrifices (numbername) (permanent)s",
+            "colorIdentity": "bbb",
+            "score": 3
+        },
+        {
+            "text": "each player sacrifices a(n) (permanent)",
+            "colorIdentity": "wbr",
+            "score": 2.1
+        },
+        {
+            "text": "each player sacrifices (numbername) (permanent)s",
+            "colorIdentity": "wbr",
+            "score": 1.5
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 1.8
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 2.3,
+            "restrictedTypes": ["creature", "artifact", "enchantment", "planeswalker", "instant", "sorcery"]
+        },
+        {
+            "text": "create a (number)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 2.4,
+            "restrictedTypes": ["creature", "artifact", "enchantment", "planeswalker", "instant", "sorcery"]
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "r",
+            "score": 3.5
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3.5
+        },
+        {
+            "text": "create a (number2)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 3.8
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token",
+            "colorIdentity": "rg",
+            "score": 5
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5.2
+        },
+        {
+            "text": "create a (number3)/(samenumber) (color) (subtype) creature token with (keyword) and (keyword)",
+            "colorIdentity": "wubrg",
+            "score": 5.3
+        },
+        {
+            "text": "creatures with (keyword) can't block this turn",
+            "colorIdentity": "r",
+            "score": 0.2
+        },
+        {
+            "text": "creatures your opponents control can't block this turn",
+            "colorIdentity": "r",
+            "score": 0.2
+        },
+        {
+            "text": "creatures your opponents control lose (keyword) until end of turn",
+            "colorIdentity": "wu",
+            "score": 0
+        },
+        {
+            "text": "counter target (type/counterable) spell",
+            "colorIdentity": "u",
+            "score": 1.2,
+            "restrictedTypes": ["instant"]
+        },
+        {
+            "text": "tap target (permanent)",
+            "colorIdentity": "wu",
+            "score": 0.5
+        },
+        {
+            "text": "tap up to (numbername) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1
+        },
+        {
+            "text": "tap up to (numbername2) target (permanent)s",
+            "colorIdentity": "wu",
+            "score": 1.4
+        },
+        {
+            "text": "destroy all (permanent)s",
+            "score": 4,
+            "colorIdentity": "wbg",
+            "noFollowUp": true
+        },
+        {
+            "text": "destroy all (permanent)s target opponent controls",
+            "score": 5.8,
+            "colorIdentity": "wbg",
+            "noFollowUp": true
+        },
+        {
+            "text": "destroy all creatures",
+            "score": 3.2,
+            "colorIdentity": "wb",
+            "noFollowUp": true
+        }
+    ],
+    "enchantmentEffects": [
+        {
+            "text": "gets +(number)/+(number)",
+            "score": 1,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number2)/+(number2)",
+            "score": 2,
+            "colorIdentity": "wubrgg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number3)/+(number3)",
+            "score": 3.5,
+            "colorIdentity": "ggg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number)/+(samenumber)",
+            "score": 1,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number2)/+(samenumber)",
+            "score": 2,
+            "colorIdentity": "wubrgg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +(number3)/+(samenumber)",
+            "score": 3.5,
+            "colorIdentity": "ggg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +X/+0 for each (permanent) you control",
+            "score": 2.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +X/+X for each (subtype) creature you control",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "can block as though it had flying",
+            "score": 0.5,
+            "colorIdentity": "wurg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can block creatures with unblockable as though they didn't have unblockable",
+            "score": 0.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "gets -(number)/-(number)",
+            "score": 1.2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(number)",
+            "score": 2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(number)",
+            "score": 3.5,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number)/-(samenumber)",
+            "score": 1.2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(samenumber)",
+            "score": 3,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(samenumber)",
+            "score": 4,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number)/-0",
+            "score": 0.5,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-0",
+            "score": 1,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-0",
+            "score": 2,
+            "colorIdentity": "uu",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number)/-(number)",
+            "score": 1,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number2)/-(number2)",
+            "score": 2,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets -(number3)/-(number3)",
+            "score": 3.5,
+            "colorIdentity": "bb",
+            "isForOpponent": true,
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "gets +1/+1 for each artifact and/or enchantment you control",
+            "score": 2.2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature",
+            "onlyOnce": true
+        },
+        {
+            "text": "has (keyword)",
+            "score": 1.2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (keyword) and (keyword)",
+            "score": 2.5,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "loses (keyword)",
+            "score": 1.2,
+            "isForOpponent": true,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "loses indestructible",
+            "score": 0.5,
+            "isForOpponent": true,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "can't be blocked",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can't be blocked by more than (numbername) creature(s)",
+            "score": 2,
+            "colorIdentity": "rg",
+            "auraType": "creature"
+        },
+        {
+            "text": "can't be the target of spells or abilities",
+            "score": 1.5,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "doesn't untap during its controller's untap step",
+            "score": 1.5,
+            "colorIdentity": "uu",
+            "auraType": "permanent"
+        },
+        {
+            "text": "doesn't untap during its controller's untap step",
+            "score": 1.5,
+            "colorIdentity": "uu",
+            "auraType": "creature"
+        },
+        {
+            "text": "can't be the target of spells or abilities your opponents control",
+            "score": 1.5,
+            "colorIdentity": "wubrg",
+            "auraType": "permanent"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        },
+        {
+            "text": "has (ability)",
+            "score": 2,
+            "colorIdentity": "wubrg",
+            "auraType": "creature"
+        }
+    ],
+    "planeswalkerTexts": {
+        "names": [
+            "Aegnor",
+            "Aego",
+            "Aelena",
+            "Aelene",
+            "Aeleanor",
+            "Aelinor",
+            "Aelrindel",
+            "Aemma",
+            "Aerendyl",
+            "Aeson",
+            "Afamrail",
+            "Agis",
+            "Ailmar",
+            "Aithlin",
+            "Akasha",
+            "Akash",
+            "Akashi",
+            "Akkar",
+            "Alabyran",
+            "Alae",
+            "Alaesa",
+            "Alaglossa",
+            "Alais",
+            "Alavara",
+            "Alea",
+            "Alerathla",
+            "Allannia",
+            "Alloralla",
+            "Alys",
+            "Alyssa",
+            "Alyssia",
+            "Amaryll",
+            "Amaryllis",
+            "Aquilaen",
+            "Aranel",
+            "Arazorwyn",
+            "Aredhel",
+            "Arwen",
+            "Axil",
+            "Axilea",
+            "Axilia",
+            "Azari",
+            "Azariah",
+            "Baela",
+            "Baelen",
+            "Beala",
+            "Beleg",
+            "Beluar",
+            "Bhuraelea",
+            "Biafyndar",
+            "Bialaer",
+            "Blythe",
+            "Blythswana",
+            "Bonna",
+            "Bonnalurie",
+            "Braern",
+            "Braerindra",
+            "Briareth",
+            "Caerthynna",
+            "Calarel",
+            "Cameron",
+            "Cauladra",
+            "Celeborn",
+            "Celebrían",
+            "Celebrimbor",
+            "Chandrelle",
+            "Chasianna",
+            "Chathanglas",
+            "Cheyrth",
+            "Chichlandra",
+            "Chin’nesstre",
+            "Chomylla",
+            "Círdan",
+            "Ciyradyl",
+            "Cluhurach",
+            "Cluym",
+            "Cohnal",
+            "Conall",
+            "Connak",
+            "Cornaith",
+            "Corym",
+            "Curunir",
+            "Cymbiir",
+            "Cystenn",
+            "Daeharice",
+            "Daemeon",
+            "Daealla",
+            "Daena",
+            "Daenestra",
+            "Daenys",
+            "Daeondra",
+            "Dakath",
+            "Dalyor",
+            "Darcassan",
+            "Dior",
+            "Doreah",
+            "Earendil",
+            "Edrahil",
+            "Eladithas",
+            "Elanjar",
+            "Elaran",
+            "Elashor",
+            "Elbauthin",
+            "Elbereth",
+            "Eldaernth",
+            "Eldar",
+            "Eldrin",
+            "Elaria",
+            "Elénaril",
+            "Elenshaer",
+            "Elenwe",
+            "Ellania",
+            "Elora",
+            "Eluchil",
+            "Elwin",
+            "Elwing",
+            "Elyssa",
+            "Erlan",
+            "Erlathan",
+            "Eroan",
+            "Erolith",
+            "Eschallus",
+            "Estelar",
+            "Etchelion",
+            "Ethlando",
+            "Ettrian",
+            "Evindal",
+            "Eyrynnhv",
+            "Faelar",
+            "Faelyn",
+            "Faeranduil",
+            "Falael",
+            "Fëanor",
+            "Fenris",
+            "Fhaertala",
+            "Filaurel",
+            "Filauria",
+            "Fildaerae",
+            "Finduilas",
+            "Filvendor",
+            "Fingolfin",
+            "Finrod",
+            "Folduin",
+            "Fraeya",
+            "Gael",
+            "Gaelira",
+            "Gaemon",
+            "Gaerradh",
+            "Gaylia",
+            "Ghilanna",
+            "Gil-galad",
+            "Gilgalad",
+            "Glorfindel",
+            "Glynkas",
+            "Glynnii",
+            "Gweyr",
+            "Gwynnestri",
+            "Gylledha",
+            "Haalija",
+            "Hacathra",
+            "Haela",
+            "Haemir",
+            "Hagduin",
+            "Haladavar",
+            "Halaema",
+            "Halaena",
+            "Halafarin",
+            "Halama",
+            "Halanaestra",
+            "Hameada",
+            "Haryk",
+            "Hastos",
+            "Hatharal",
+            "Herbalar",
+            "Holcene",
+            "Holone",
+            "Horith",
+            "Hubyr",
+            "Hycis",
+            "Hyacinth",
+            "Iahalae",
+            "Ialantha",
+            "Iarmenor",
+            "Iefyr",
+            "Ievos",
+            "Idril",
+            "Ikeshia",
+            "Ilbryn",
+            "Iliven",
+            "Ilmadia",
+            "Ilthuryn",
+            "Ilyrana",
+            "Ilythyrra",
+            "Imdalace",
+            "Imizael",
+            "Inarie",
+            "Inchel",
+            "Inialos",
+            "Injros",
+            "Intevar",
+            "Iolas",
+            "Irithiel",
+            "Ithirae",
+            "Iziuel",
+            "Jahandra",
+            "Jassin",
+            "Jhaan",
+            "Jhaartael",
+            "Jhaeros",
+            "Kaeda",
+            "Kaylessa",
+            "Keara",
+            "Keerla",
+            "Keishara",
+            "Kelkalyn",
+            "Kethryllia",
+            "Kevan",
+            "Keya",
+            "Klaern",
+            "Kolvar",
+            "Kuornos",
+            "Kuskyn",
+            "Kymil",
+            "Kyrenic",
+            "Kyrrha",
+            "Kyrtaar",
+            "Kythaela",
+            "Laamtora",
+            "Laeanna",
+            "Laena",
+            "Laerdya",
+            "Lazziar",
+            "Leandra",
+            "Leilatha",
+            "Liluth",
+            "Llamryl",
+            "Lúthien",
+            "Lyraesel",
+            "Maaleshiira",
+            "Maegelle",
+            "Maelyrra",
+            "Maeralya",
+            "Maiele",
+            "Meara",
+            "Mereena",
+            "Merlara",
+            "Mithrandir",
+            "Miriel",
+            "Molonym",
+            "Molostroi",
+            "Montagor",
+            "Morgan",
+            "Morthil",
+            "Morwen",
+            "Mylaela",
+            "Myrddin",
+            "Myriil",
+            "Myrin",
+            "Myrynda",
+            "Mythanthar",
+            "Naertho",
+            "Naeryndam",
+            "Napraeleon",
+            "Narbeth",
+            "Nardual",
+            "Nelaeryn",
+            "Neldor",
+            "Nerilamin",
+            "Nesterin",
+            "Nevarth",
+            "Nhamashal",
+            "Nieven",
+            "Nindr",
+            "Nuovis",
+            "Nushala",
+            "Nym",
+            "Nylaathria",
+            "Ochyllyss",
+            "Oluevaera",
+            "Onas",
+            "Oribel",
+            "Oritris",
+            "Orndacil",
+            "Ornthalas",
+            "Orris",
+            "Orym",
+            "Oslarelar",
+            "Otaehryn",
+            "Othorion",
+            "Paeral",
+            "Paeris",
+            "Phaerl",
+            "Phaendar",
+            "Phantyni",
+            "Pharom",
+            "Phelorna",
+            "Phraan",
+            "Phuingara",
+            "Phyrra",
+            "Pirphal",
+            "Pleufan",
+            "Purtham",
+            "Pyrder",
+            "Quaela",
+            "Quaeth",
+            "Quamara",
+            "Raegel",
+            "Raejiisa",
+            "Raerauntha",
+            "Rathiain",
+            "Raunaeril",
+            "Ravaphine",
+            "Reinys",
+            "Renestrae",
+            "Reysalor",
+            "Rhistel",
+            "Rubrae",
+            "Ryllae",
+            "Saelethil",
+            "Saelihn",
+            "Saélihn",
+            "Saevel",
+            "Saeya",
+            "Sasha",
+            "Seiveril",
+            "Shalana",
+            "Shalantha",
+            "Shalheira",
+            "Shandalar",
+            "Shanyrria",
+            "Sharaera",
+            "Sharian",
+            "Sheedra",
+            "Shiera",
+            "Shyael",
+            "Shyllisyrr",
+            "Siirist",
+            "Silvyr",
+            "Sinnafain",
+            "Soliania",
+            "Soora",
+            "Sorsasta",
+            "Sudryl",
+            "Susklahava",
+            "Sylmae",
+            "Symrustar",
+            "Syndra",
+            "Synnorha",
+            "Syrenese",
+            "Syrune",
+            "Syviis",
+            "Taena",
+            "Taenaran",
+            "Taenya",
+            "Taeriel",
+            "Taerntym",
+            "Takari",
+            "Talaedra",
+            "Talanashta",
+            "Talila",
+            "Talilia",
+            "Talindra",
+            "Tamara",
+            "Tamnaeuth",
+            "Tannivh",
+            "Tarasynora",
+            "Tassarion",
+            "Teharissa",
+            "Tehlmar",
+            "Therona",
+            "Thingol",
+            "Thranduil",
+            "Tiatha",
+            "Toross",
+            "Travaran",
+            "Triandal",
+            "Tsarra",
+            "Turgon",
+            "Tyria",
+            "Urmicca",
+            "Usunaar",
+            "Uthorim",
+            "Vaalyun",
+            "Vaegon",
+            "Vaella",
+            "Vaeril",
+            "Valindra",
+            "Veara",
+            "Venrie",
+            "Vestele",
+            "Viansola",
+            "Violen",
+            "Virjeon",
+            "Viserra",
+            "Zabbas",
+            "Zaltarish",
+            "Zeale",
+            "Zhuirentel",
+            "Yaereene",
+            "Yalanilue",
+            "Yathlanae",
+            "Yhendorn",
+            "Ylyndar",
+            "Ynshael",
+            "Yrlissa",
+            "Yrneha",
+            "Yrniela"
+        ]
+    },
+    "creatureTexts": {
+        "adjectives": [
+            "furious",
+            "sleeping",
+            "thrashing",
+            "roaring",
+            "snoring",
+            "howling",
+            "squealing",
+            "raging",
+            "ravaging",
+            "menacing",
+            "threatening",
+            "torturing",
+            "tormenting",
+            "pestilent",
+            "wicked",
+            "vengeful",
+            "heroic",
+            "phenomenal",
+            "monstrous",
+            "flame-spitting",
+            "dreadful",
+            "shrieking",
+            "agonizing",
+            "baneful",
+            "horrific",
+            "insane",
+            "deafening",
+            "wailing",
+            "fulminating",
+            "unstable",
+            "formless",
+            "unsustainable",
+            "alluring",
+            "untaimable",
+            "destructive",
+            "unbearable",
+            "rotting",
+            "fear-inducing",
+            "electric",
+            "legendary",
+            "unruly",
+            "royal",
+            "uncontrollable",
+            "mysterious",
+            "scheming",
+            "canibalistic",
+            "cabal",
+            "intorable",
+            "horrible",
+            "rebellious",
+            "insurgent",
+            "blasphemous",
+            "torrential",
+            "rabid",
+            "riotous",
+            "rampant",
+            "fanatic",
+            "ferocious",
+            "dangerous",
+            "poisonous",
+            "mischievous",
+            "swift-strike",
+            "agile",
+            "clever",
+            "aggressive",
+            "tiny",
+            "wild",
+            "herbivorous",
+            "carnivorous",
+            "voiceless",
+            "sadistic",
+            "deadly",
+            "vile",
+            "horrendous",
+            "hideous",
+            "fearsome",
+            "insanely competitive",
+            "evil",
+            "heinous",
+            "cold-blooded",
+            "mechanical",
+            "diabolical",
+            "most vicious",
+            "clumsy",
+            "fearless",
+            "swift",
+            "foreign",
+            "skeletal",
+            "inhuman",
+            "bloodthirsty",
+            "horrid",
+            "hydra-headed",
+            "swiftboot",
+            "ruthless",
+            "treacherous",
+            "self-destructive",
+            "crooked",
+            "unstoppable",
+            "relentless",
+            "nocturnal",
+            "nameless",
+            "horrifying",
+            "formidable",
+            "malevolent",
+            "benevolent",
+            "ancient",
+            "fearful",
+            "majestic",
+            "snake-eyed",
+            "ballistic",
+            "battle-ready",
+            "battle-scarred",
+            "magudai",
+            "great",
+            "torturing",
+            "fleshmad",
+            "stalwart",
+            "condemned",
+            "lion-hearted",
+            "dazzling",
+            "true-strike",
+            "courageous",
+            "audacious",
+            "unfearful",
+            "spirited",
+            "blood-seeking",
+            "blood-leeching"
+        ],
+        "names": [
+            "Therod",
+            "Maldos",
+            "Indroar",
+            "Tonzoagg",
+            "Snuga",
+            "Lurzoggror",
+            "Bledrahginn",
+            "Skirzaolgutch",
+            "Hranzuldi",
+            "Laurgrurbunn",
+            "Trutus",
+            "Anrel",
+            "Crenrash",
+            "Drelbunn",
+            "Krandil",
+            "Olzuru",
+            "Bladrihleg",
+            "Nedriros",
+            "Dirburduch",
+            "Mwodrahgun",
+            "Snogload",
+            "Ghanzil",
+            "Ogu",
+            "Brarbath",
+            "Muwditch",
+            "Nullaolghin",
+            "Dragrundratch",
+            "Shonrulghbog",
+            "Lulmugrel",
+            "Bruhgrunde",
+            "Nullit",
+            "Eggrut",
+            "Hagitch",
+            "Blenrut",
+            "Hrawdach",
+            "Laorgirzoag",
+            "Krehgibrich",
+            "Idrulghbo",
+            "Undandra",
+            "Charbirgroth",
+            "Blihluk",
+            "Krelghbagg",
+            "Kuldu",
+            "Aras",
+            "Thaugrerg",
+            "Therinzok",
+            "Rahlurthiwl",
+            "Haohgrordum",
+            "Grelzirthen",
+            "Blehlirtod",
+            "Zordard",
+            "Kascrurq",
+            "Cavdraqth",
+            "Kotgark",
+            "Kuskrug",
+            "Ruqrig",
+            "Bladefist",
+            "Madfang",
+            "Angered",
+            "Defita",
+            "Rara",
+            "Gathra",
+            "Tiri",
+            "Velgi",
+            "Katreu",
+            "Matru",
+            "Tusqra",
+            "Megdo",
+            "Dasze",
+            "Sendril",
+            "Reysar",
+            "Rayek",
+            "Bilam",
+            "Gulugulu",
+            "Respert",
+            "Twislo",
+            "Gustom",
+            "Frenko",
+            "Ceudni",
+            "Cerzo",
+            "Zodna"
+        ],
+        "nouns": [
+            "mentor",
+            "critic",
+            "conqueror",
+            "hunter",
+            "conqueror",
+            "hag",
+            "phantom",
+            "templar",
+            "occultist",
+            "decimator",
+            "crusher",
+            "destroyer",
+            "grinder",
+            "ripper",
+            "knight",
+            "substigator",
+            "devourer",
+            "obliterator",
+            "breeder",
+            "professor",
+            "tyrant",
+            "slasher",
+            "archmage",
+            "mutant",
+            "artificer",
+            "oathsworn",
+            "journeyman",
+            "bringer",
+            "lawbringer",
+            "infiltrator",
+            "masher",
+            "corpse",
+            "undead",
+            "summoner",
+            "extractor",
+            "punisher",
+            "siren",
+            "caller",
+            "extinguisher",
+            "warbringer",
+            "warmonger",
+            "tormentor",
+            "piercer",
+            "vandalizer",
+            "demolisher",
+            "ritualist",
+            "brute",
+            "slaughterer",
+            "ambusher",
+            "annihilator",
+            "judge",
+            "executioner",
+            "henchman",
+            "sorcerer",
+            "noble",
+            "criminal",
+            "thief",
+            "snatcher",
+            "warlock",
+            "cardinal",
+            "predator",
+            "sentinel",
+            "preacher",
+            "schemer",
+            "trickster",
+            "cutthroat",
+            "scavenger",
+            "lurker",
+            "demigod",
+            "looter",
+            "raider",
+            "vagabound",
+            "colonist",
+            "cultist",
+            "doctor",
+            "soldier",
+            "warrior",
+            "adventurer",
+            "murderer",
+            "cutthroat",
+            "engineer",
+            "miner",
+            "champion",
+            "convict",
+            "fanatic",
+            "adept",
+            "bannerlord",
+            "flagbearer",
+            "advisor",
+            "advocate",
+            "apostle",
+            "human",
+            "flesh-bringer",
+            "fiend",
+            "sadist",
+            "desecrator",
+            "priest",
+            "hollow Being",
+            "being",
+            "lord",
+            "flesh-renderer",
+            "flesh-gorger",
+            "meat Grinder",
+            "field Soldier",
+            "field Marshall",
+            "king",
+            "imperator",
+            "overlord",
+            "underlord",
+            "seeker",
+            "heretic",
+            "marshall",
+            "chief",
+            "chieftain",
+            "monster",
+            "strider",
+            "horror",
+            "treasurer",
+            "collector",
+            "cleric",
+            "peasant",
+            "executioner",
+            "dean",
+            "duke",
+            "handler",
+            "master",
+            "trainee",
+            "fighter",
+            "traitor",
+            "assassin",
+            "leader",
+            "legend",
+            "nestling",
+            "broodmother",
+            "mother",
+            "father",
+            "sire",
+            "godsire",
+            "officer",
+            "offspring",
+            "overseer",
+            "mechalite",
+            "regasloph",
+            "guardian",
+            "felidar",
+            "fire-born",
+            "water-born",
+            "one",
+            "abomination",
+            "condemnation"
+        ],
+        "flavors": [
+            "Greatness at any cost.",
+            "Every victorious warrior draws his strength from the highest source; his love.",
+            "Warriors want a worthy opponent.",
+            "There is no redress in fighting the pathetic.",
+            "I am someone to fear, not hunt.",
+            "A warrior never worries about his fear.",
+            "Victory is reserved for those who are willing to pay it’s price.",
+            "From ashes I come, to ashes I go",
+            "What is life compared to death?",
+            "The more you sweat in training, the less you will bleed in battle.",
+            "The bravest warriors know when to retreat.",
+            "Nobody can hurt me without my permission.",
+            "\"Courage is victory\" - Malakhir",
+            "With faith on our side, all battles shall be won.",
+            "Wisdom is strength.",
+            "Knowledge is power.",
+            "Power is power.",
+            "It is easier to fight for one’s principles than to live up to them.",
+            "People who fight fire with fire usually end up with ashes.",
+            "\"The supreme art of war is to subdue the enemy without fighting.\" – Sun Tzu",
+            "Supreme excellence consists in breaking the enemy’s resistance without fighting.",
+            "\"I can eat up to a thousand bananas a day, how much can you handle?\" - a monkey, probably",
+            "No battle is worth fighting except the last one.",
+            "Rise above the shadow.",
+            "We create monsters and then we can't control them.",
+            "A monster is not dangerous. Not as long as it's asleep...",
+            "Those monsters are just like us, but uglier.",
+            "Good blood, bad blood.",
+            "Beastiality at its best.",
+            "A monster, even in the eyes of the gods.",
+            "Good or evil, a monster is a monster.",
+            "They linger in the shadows and stalk their prey from afar.",
+            "Swift and deadly. One strike from this beast and you are out.",
+            "You don't have to imagine what a walking killing machine would look like. Just look at this fellow!",
+            "What on earth is this?",
+            "Do you also wonder what it eats?",
+            "Do you also wonder what it eats? - That's right, humans!",
+            "No human is ever safe from those hainous monsters.",
+            "\"Death and destruction, that's what those beasts have brought upon us.\" - Farmer",
+            "They are known to eat their victims alive.",
+            "Such a rare sight. Beautiful, but rather deadly.",
+            "No sword will save you from that!",
+            "Its skin is hard, its teeth are sharp. Don't go close.",
+            "For many sailors, this is what they see last before they die.",
+            "It may look harmless, but don't trust a book by its cover.",
+            "Don't judge a book by its cover.",
+            "This species is rarely encountered alone.",
+            "Its daily menu consits of basiliks, dragons, and other big lizards.",
+            "It wishes for a more pleasant meal, like some basilik, dragon, or any other big lizard.",
+            "It hungers for blood.",
+            "They usually come in numbers. Most town are overwhelmed by their sheer force.",
+            "Humans have fought those bastards for over centuries. The battle is not yet won...",
+            "And so the fight begins...",
+            "\"I would rather eat a broom than fight this ugly brute.\" - Broomeater Joe",
+            "\"I would rather fight a broom than eat this ugly brute.\" - Broomfighter Sven"
+        ]
+    },
+    "spellTexts": {
+        "adjectives": [
+            "powerful",
+            "dead Man's",
+            "eternal",
+            "unbroken",
+            "vigilant",
+            "glaring",
+            "cursed",
+            "illusory",
+            "necrotic",
+            "predatory",
+            "psychic",
+            "shielding",
+            "blood-seeking",
+            "blood-leeching",
+            "unblemished",
+            "inevitable",
+            "heroic",
+            "ephemeral",
+            "lethal",
+            "fatal",
+            "bewitched",
+            "deviously Clever",
+            "second-chance",
+            "devastating",
+            "indisputably Powerful",
+            "elemental",
+            "potent",
+            "abhorrent",
+            "crazy",
+            "experimental",
+            "harmful",
+            "hopeless",
+            "devastating",
+            "agonizing",
+            "epidemic",
+            "corrupted",
+            "tormented",
+            "merciless",
+            "merciful",
+            "delirious",
+            "incidious",
+            "fragile",
+            "destructive",
+            "rogue",
+            "clever",
+            "infinite",
+            "madcap",
+            "savage",
+            "severe",
+            "curious",
+            "black",
+            "white",
+            "pure",
+            "divine",
+            "ceremonial",
+            "clerical",
+            "surgical",
+            "secret",
+            "subtle",
+            "protective",
+            "dangerous",
+            "terrible",
+            "considerable",
+            "inhuman",
+            "inanimate",
+            "armed",
+            "zealous",
+            "artful",
+            "artificial",
+            "artificer's",
+            "mutated",
+            "artisan's",
+            "aspect of",
+            "assassin's",
+            "assert",
+            "autumn's",
+            "summer's",
+            "avenging",
+            "striking",
+            "destroying",
+            "avoid",
+            "awakened",
+            "back to",
+            "forward",
+            "nature's",
+            "banished",
+            "banishment",
+            "barbed",
+            "charged",
+            "barrier ",
+            "beacon of",
+            "become",
+            "beast",
+            "beastly",
+            "heavenly",
+            "righteous",
+            "glorious",
+            "feral",
+            "ferocious",
+            "betrayal of",
+            "death of",
+            "beginning of",
+            "bile",
+            "biomass",
+            "ominous",
+            "baleful",
+            "portenous",
+            "disastrous",
+            "ill-omened",
+            "cataclystic",
+            "fatal",
+            "inauspicious",
+            "calamitous",
+            "baneful",
+            "apocalyptic",
+            "final",
+            "cleaved",
+            "torn",
+            "divided",
+            "foul",
+            "polarized",
+            "electrified",
+            "reversed",
+            "twisted",
+            "exalted",
+            "ancient",
+            "destructive",
+            "fishy",
+            "suspicious",
+            "suspect",
+            "risky",
+            "perilous",
+            "pestilent",
+            "thundering",
+            "unexpected",
+            "mishappened",
+            "malformed",
+            "athentic",
+            "offensive",
+            "stalwart",
+            "vigorous",
+            "protective",
+            "awakened",
+            "cunning",
+            "mind-bending",
+            "mind-numbing",
+            "befuddling",
+            "wicked",
+            "precarious",
+            "unreasonable",
+            "hazardous",
+            "desperate",
+            "unstable",
+            "drowned",
+            "cruel",
+            "disreputable",
+            "miscreant",
+            "vile",
+            "calculated",
+            "crudely",
+            "fail-safe",
+            "illuminated",
+            "devastating",
+            "flesh-grinding",
+            "ruinous",
+            "blasphemous"
+        ],
+        "nouns": [
+            "blast",
+            "mutation",
+            "revelry",
+            "flesh",
+            "draught",
+            "offering",
+            "blight",
+            "within",
+            "apparition",
+            "attack",
+            "desctruction",
+            "cry",
+            "light",
+            "promotion",
+            "balefire",
+            "fire",
+            "strike",
+            "death",
+            "breach",
+            "unmaking",
+            "blessing",
+            "lightning",
+            "decree",
+            "dismemberment",
+            "charm",
+            "stroke",
+            "trap",
+            "backdraft",
+            "banishment",
+            "bolt",
+            "hope",
+            "shoal",
+            "power",
+            "spell",
+            "magic",
+            "hostility",
+            "malevolence",
+            "impact",
+            "hunt",
+            "freeze",
+            "storm",
+            "reprisal",
+            "volley",
+            "ritual",
+            "ambitions",
+            "concentration",
+            "expulsion",
+            "explosion",
+            "strength",
+            "force",
+            "judgement",
+            "impurity",
+            "purity",
+            "greed",
+            "energy",
+            "flame",
+            "dismissal",
+            "devastation",
+            "finale",
+            "experiment",
+            "adventure",
+            "shift",
+            "purge",
+            "company",
+            "damnation",
+            "complications",
+            "condemnation",
+            "mists",
+            "tendrils",
+            "consumption",
+            "consecration",
+            "desecration",
+            "resolution",
+            "plunder",
+            "revenge",
+            "vengeance",
+            "lash",
+            "winds"
+        ],
+        "flavors": [
+            "Magic becomes art when it has nothing to hide.",
+            "Never ever doubt in magic.",
+            "Magic is not a practice.",
+            "Real magic is not about gaining power over others: it is about gaining power over yourself.",
+            "Magic is believing in yourself, if you can do that, you can make anything happen.",
+            "The real secret of magic lies in the performance.",
+            "Effective magic is transcendent nature.",
+            "A little magic can take you a long way.",
+            "And where does magic come from?",
+            "Those who don't believe in magic will never find it.",
+            "There is no magic in magic, it's all in the details.",
+            "Boom goes the dynamite!",
+            "\"Take that, you scoundrel!\" - Lorelai",
+            "\"In your face!\" - Jace Beleren",
+            "The loss of magic is the denial of unlimited possibility.",
+            "Unlimited power!",
+            "\"This may look like an experiment, but trust me, I know what I'm doing...\" - Joe",
+            "In the eye of the storm, you are safe. Don't step out of it.",
+            "Don't do this at home.",
+            "Abominations have no right to exist.",
+            "Cleansing this planet from impurity will be the wizards' greatest achievement.",
+            "\"You shall not pass!\" - Gandalf",
+            "\"Courage is victory\" - Malakhir",
+            "In times of need, look for a purple star at night. It will guide you and grant you strength.",
+            "The chain is only as strong as its weakest link.",
+            "Putting an end this suffering is merciful, nothing else.",
+            "\"Rest assured, this spell will go well.\" - Dave (died)",
+            "And so the fight begins...",
+            "Good or evil, a monster is a monster.",
+            "Knowledge is power.",
+            "Power is power.",
+            "Wisdom is strength.",
+            "With faith on our side, all battles shall be won.",
+            "People who fight fire with fire usually end up with ashes.",
+            "The worlds are at peace only when all evil has been cleansed from them.",
+            "Such savagery is not tolerated here.",
+            "Savagery is a sin and must be punished.",
+            "\"Filth like you should never have left its lair!\" - Aurius",
+            "There is more where that came from...",
+            "Defense is the best offense. Though, not all the time. Actually never. ATTACK!",
+            "Defense is the best offense.",
+            "The ideal space must contain elements of magic, serenity, sorcery and mystery.",
+            "The world is magic.",
+            "Life is dull without a little bit of trickery.",
+            "\"This took me almost a year to create.\" - smirking lunatic",
+            "Let the flow of magic guide you, like a river guides a floating leaf.",
+            "A wizard is never late, nor is he early, he arrives precisely when he means to.",
+            "Don't mess with a wizard when he's wizarding!",
+            "Do not meddle in the affairs of Wizards, for they are subtle and quick to anger.",
+            "To the wizard death, is merely a belief."
+        ]
+    },
+    "enchantmentTexts": {
+        "nouns": [
+            "defense",
+            "resolution",
+            "fortification",
+            "shield",
+            "barricade",
+            "stand",
+            "offense",
+            "solidarity",
+            "act",
+            "energy",
+            "flame",
+            "fire",
+            "ice",
+            "blossom",
+            "blessing",
+            "faith",
+            "fever",
+            "fury",
+            "hand",
+            "sigil",
+            "sphere",
+            "cover",
+            "pool",
+            "knowledge",
+            "ambition",
+            "strength",
+            "power",
+            "tar",
+            "mantle",
+            "rock",
+            "stone",
+            "restraints",
+            "darkness",
+            "glorification",
+            "colossification",
+            "veil",
+            "mask",
+            "shroud",
+            "presence",
+            "authority",
+            "rest",
+            "membrane",
+            "bond",
+            "conscience",
+            "wisdom",
+            "umbra",
+            "cloak",
+            "shadow",
+            "ward",
+            "obsession",
+            "curiosity",
+            "exhaustion",
+            "reflection",
+            "favor",
+            "weight",
+            "stance",
+            "vigor",
+            "hold",
+            "spell",
+            "casting",
+            "divinity",
+            "mastery",
+            "resonance",
+            "layer",
+            "enlightmenment",
+            "vines",
+            "radiance",
+            "proportions",
+            "storm",
+            "snare",
+            "armor",
+            "intellect",
+            "ideal",
+            "presence",
+            "divinity",
+            "mark",
+            "form",
+            "embrace",
+            "demise",
+            "adaptation",
+            "mutation",
+            "deformity",
+            "arc",
+            "shackles",
+            "field",
+            "possession",
+            "touch",
+            "wings",
+            "spectacle",
+            "paradise",
+            "plating",
+            "coating",
+            "aegis",
+            "war paint",
+            "infestation",
+            "guide",
+            "transformation",
+            "boon",
+            "magemark",
+            "zendikon",
+            "punishment",
+            "ward",
+            "cover",
+            "growth",
+            "gains",
+            "wrapping",
+            "clutches",
+            "bubble"
+        ]
+    },
+    "landTexts": {
+        "adjectives": [
+            "forgotten",
+            "deserted",
+            "abandoned",
+            "lost",
+            "hidden",
+            "mischievous",
+            "secret",
+            "misty",
+            "coastal",
+            "icy",
+            "dangerous",
+            "perilous",
+            "poisonous",
+            "protected",
+            "empty",
+            "fallen",
+            "corrupted",
+            "delirious",
+            "divine",
+            "shattering",
+            "arid",
+            "ironbreak",
+            "shatterstone",
+            "sandy",
+            "mirrored",
+            "phantasmal",
+            "distant",
+            "solitary",
+            "churchway",
+            "ivory",
+            "ebony",
+            "woodmere",
+            "gallem",
+            "desolate",
+            "wailing",
+            "greenmer",
+            "granite",
+            "voiceless",
+            "faraway",
+            "prolan",
+            "scarlet",
+            "crimson",
+            "stokegus",
+            "witmond",
+            "faymond",
+            "celestine",
+            "elestine",
+            "drowned",
+            "watery",
+            "adamantine",
+            "winderberg",
+            "hinterland",
+            "clay",
+            "crushing",
+            "bainrock",
+            "palestone",
+            "white-iron",
+            "black-iron",
+            "talmond",
+            "greymond",
+            "saintberg",
+            "driftwood",
+            "sandstone",
+            "varenstino",
+            "lestead",
+            "bloomsend",
+            "flamestoked",
+            "haunted",
+            "lifeless",
+            "faldover",
+            "minneshall",
+            "silver"
+        ],
+        "descriptors": [
+            "grove",
+            "mesa",
+            "canyon",
+            "valley",
+            "city",
+            "fortress",
+            "marshes",
+            "marsh",
+            "cave",
+            "caves",
+            "cavern",
+            "caverns",
+            "wood",
+            "woods",
+            "lair",
+            "desert",
+            "mountains",
+            "shrubland",
+            "cliffs",
+            "coast",
+            "wetland",
+            "taiga",
+            "plains",
+            "moors",
+            "volcano",
+            "settlement",
+            "nest",
+            "temple",
+            "shrine",
+            "abyss",
+            "chasm",
+            "bluffs",
+            "gorge",
+            "gates"
+        ],
+        "names": [
+            "Viddall",
+            "Aruer",
+            "Adur",
+            "Shoeus",
+            "Vornir",
+            "Eeyr",
+            "Dhisaos",
+            "Atia",
+            "Oohr",
+            "Isius",
+            "Qhivmos",
+            "Ises",
+            "Dhyznos",
+            "Oaris",
+            "Ias",
+            "Vadall",
+            "Ases",
+            "Udaris",
+            "Zoxtris",
+            "Xilir",
+            "Vurara",
+            "Guses",
+            "Etdite",
+            "Qhydon",
+            "Zatris",
+            "Xunos",
+            "Nidtris",
+            "Phaen",
+            "Ronarin",
+            "Uzris",
+            "Dolin",
+            "Ermis",
+            "Xadses",
+            "Yros",
+            "Ymtis",
+            "Amos",
+            "Tedis",
+            "Thyzdite"
+        ],
+        "nouns": [
+            "greatness",
+            "adventure",
+            "doom",
+            "destiny",
+            "power",
+            "menace",
+            "darkness",
+            "banishment",
+            "blossom",
+            "boon",
+            "condemnation",
+            "death",
+            "life",
+            "damnation",
+            "demise",
+            "enlightmenment",
+            "danger",
+            "favor",
+            "gods",
+            "fire",
+            "ice",
+            "magic",
+            "greed",
+            "growth",
+            "guidance",
+            "horror",
+            "impurity",
+            "judgement",
+            "knowledge",
+            "wisdom",
+            "legends",
+            "malevolence",
+            "mastery",
+            "monsters",
+            "mutation",
+            "paradise",
+            "punishment",
+            "reflection",
+            "resolution",
+            "peace",
+            "revenge",
+            "revelry",
+            "shackles",
+            "shadow",
+            "slaughter",
+            "solidarity",
+            "solitude",
+            "strength",
+            "weakness",
+            "treasure",
+            "vengeance",
+            "vigor",
+            "surprise",
+            "adaptation",
+            "blessing",
+            "war"
+        ],
+        "flavors": [
+            "Life is like a landscape.",
+            "Study nature, love nature, stay close to nature. It will never fail you.",
+            "Choose only one master: nature.",
+            "Leave the road, take the trails.",
+            "By discovering nature, you discover yourself.",
+            "Nature is pleased with simplicity.",
+            "The clearest way into the Universe is through a forest wilderness.",
+            "Adopt the pace of nature. Her secret is patience.",
+            "Darkness grows in the shadows.",
+            "Once a place of power, now only a mere shadow of its former glory.",
+            "There are always flowers for those who want to see them.",
+            "Architectural perfection",
+            "\"You made this? I made this.\" - Bob the builder",
+            "Any landscape is a condition of the spirit.",
+            "A place of power, it's gotta be.",
+            "\"Medallion's humming!\" - Geralt",
+            "Not all who wander are lost.",
+            "A fortress is of no use to cowards.",
+            "Different roads sometimes lead to the same castle.",
+            "You make kingdoms and castles on your own.",
+            "There is no rules of architecture for a castle in the clouds.",
+            "Don't be afraid to walk the longer road.",
+            "The key to victory is a strategical place for your stronghold.",
+            "What a sight to behold.",
+            "They say knowledge protect you better than castles. This begs to differ.",
+            "Your home is your castle.",
+            "Have fun storming the castle!",
+            "This place has withstood the rebirth of the Universe, do you think your petty army can tear it down?",
+            "\"If you are ever going to build something, build this!\" - Don",
+            "They don't have to know about the secret entrance.",
+            "Did you know that there is a secret entrance?",
+            "This is not a place to live, it is a place to fight.",
+            "\"Don't deny it, this is way cooler than your stinking hobbit hole!\" - Frodo, after living here",
+            "If a castle gets destroyed, you just build a new one.",
+            "Better positioned than Kings Landing."
+        ]
+    },
+    "artifactTexts": {
+        "adjectives": [
+            "adventuring",
+            "amorphous",
+            "ancestral",
+            "destructive",
+            "argentum",
+            "angelic",
+            "avarice",
+            "banshee's",
+            "barbed",
+            "basilik",
+            "behemoth",
+            "blacked",
+            "sharpened",
+            "blazing",
+            "torching",
+            "blight",
+            "blinding",
+            "bloodforged",
+            "forged",
+            "rusty",
+            "gruesome",
+            "fearful",
+            "bloodthirsty",
+            "brawler's",
+            "warrior's",
+            "bronze",
+            "golden",
+            "silver",
+            "butcher's",
+            "captian's",
+            "champion's",
+            "civic",
+            "commander's",
+            "conqueror's",
+            "copper",
+            "steel",
+            "furious",
+            "cranial",
+            "crystal",
+            "darksteel",
+            "brightsteel",
+            "blightsteel",
+            "ironforged",
+            "demonic",
+            "diabolic",
+            "divine",
+            "holy",
+            "kingly",
+            "royal",
+            "elven",
+            "empyreal",
+            "sublime",
+            "godless",
+            "godly",
+            "heavenly",
+            "celestial",
+            "elysian",
+            "formless",
+            "ghostfire",
+            "invisible",
+            "leonin",
+            "livewire",
+            "darktide",
+            "iron",
+            "ancient",
+            "forgotten",
+            "lost",
+            "meteoric",
+            "sylvan",
+            "mirror",
+            "moonsilver",
+            "nemesis",
+            "nightmare",
+            "scavenged",
+            "broken",
+            "unstable",
+            "sharpened",
+            "shining",
+            "luminous",
+            "skeleton",
+            "sunforged",
+            "surestrike",
+            "thornbite",
+            "thirsting",
+            "blazing",
+            "true"
+        ],
+        "equipmentDescriptors": [
+            "trident",
+            "blade",
+            "stinger",
+            "weapon",
+            "pike",
+            "pole",
+            "club",
+            "lance",
+            "cutter",
+            "axe",
+            "hammer",
+            "polearm",
+            "pollax",
+            "staff",
+            "fang",
+            "maul",
+            "machete",
+            "jitte",
+            "sidearm",
+            "claw",
+            "morningstar",
+            "stalker",
+            "masterwork",
+            "construct",
+            "slicer",
+            "sickle",
+            "bane",
+            "greatsword",
+            "spear",
+            "halberd",
+            "cleaver",
+            "mace"
+        ],
+        "artifactDescriptors": [
+            "orb",
+            "construct",
+            "relict",
+            "relic",
+            "banner",
+            "engine",
+            "portal",
+            "vial",
+            "archive",
+            "network",
+            "altar",
+            "amulet",
+            "module",
+            "glass",
+            "monument",
+            "stone",
+            "totem",
+            "gateway",
+            "charger",
+            "station",
+            "cage",
+            "ornament",
+            "sphere",
+            "heart",
+            "jewel",
+            "forge",
+            "tome",
+            "medallion",
+            "chamber",
+            "vessel",
+            "container",
+            "chalice",
+            "powerstone",
+            "seal",
+            "statue",
+            "idol",
+            "crystal",
+            "prism"
+        ],
+        "names": [
+            "Oregen",
+            "Weisack",
+            "Ogath",
+            "Cruvrox",
+            "Nojur",
+            "Juaron",
+            "Obalvur",
+            "Odurrim",
+            "Stununag",
+            "Holmud",
+            "Roscun",
+            "Nonah",
+            "Koscim",
+            "Sagro",
+            "Nibru",
+            "Gimivas",
+            "Kevebos",
+            "Qebemem",
+            "Ubobith",
+            "Adamos",
+            "Argulvos",
+            "Jumid",
+            "Guzos",
+            "Qivis",
+            "Nikrah",
+            "Qumabih",
+            "Saruvu",
+            "Qozuzel",
+            "Khidarud",
+            "Kobegan",
+            "Seegu",
+            "Qeren",
+            "Dimmu",
+            "Uagom",
+            "Rebud",
+            "Jogerlex",
+            "Imono",
+            "Otsuvis",
+            "Ijaroh",
+            "Tigevem",
+            "Garnal",
+            "Ojeth",
+            "Jarnos",
+            "Khiju",
+            "Qommu",
+            "Novogri",
+            "Vommuguax",
+            "Vurlukes"
+        ],
+        "flavors": [
+            "Any relic of the dead is precious, if they were valued living.",
+            "The potential power is unlimited.",
+            "Do not think of it as just a jewel. You have yet to see the power it is capable of.",
+            "\"A useless piece, nothing more.\" - Mats",
+            "My precious!",
+            "It is one of those lessons that every child should learn: Don't play with fire, sharp objects, or ancient artifacts.",
+            "Magic becomes art when it has nothing to hide.",
+            "What a sight to behold.",
+            "This artifact may be lost, but it will never be forgotten.",
+            "At least it doesn't have legs.",
+            "Even though it looks spectacular, it is actually only worth a few bucks.",
+            "Treasure beyond possession.",
+            "A family heirloom, passed down through hundreds of generations.",
+            "\"A family heirloom, passed down through hundreds of generations. And you lost it?!\" - Angry Pete",
+            "Nothing gives me more comfort than the smell of old scrolls and ancient relics.",
+            "You can tell by the Argulam obsidian used in the forging process, that this is not made by humans.",
+            "A hat for every head.",
+            "But that was the trouble with ancient artifacts - no one really knew what they did.",
+            "\"Aside from the sunstrider orb, this is my favorite artifact\" - Timmy",
+            "When I was young, they used to have all kinds of those items in every household. Now this is one of the only ones...",
+            "Forged by high-shadow elves of the Gulbar cliffs, this artifact eradiates immense waves of power.",
+            "Infused with the light of the Seven, this relict is worth more than you will ever know.",
+            "\"I used to study those kind of artifacts, until some totem exploded in front of me\" - some professor",
+            "This is true art.",
+            "This is but a worthless piece of equipment compared to the Staff of Gubargar.",
+            "Low and behold, an artifact so ancient, even the gods look young next to it.",
+            "An item such as this, that can withstand time itself, is the too potent to be held by you.",
+            "This was a mistake.",
+            "Every blackguard has such an item in his or her pockets. It is tradition.",
+            "Have you ever considered selling this item? The benefit would be huge.",
+            "Whoever holds this relic, it is said that this person becomes a monster after five moons exactly."
+        ]
+    }
+}

@@ -4,10 +4,7 @@
   "description": "A discord bot which can output links based on input tags.",
   "main": "index.ts",
   "scripts": {
-    "start": "node dist/index.js",
-    "watch-node": "nodemon dist/index.js",
-    "watch-ts": "tsc -w",
-    "postinstall": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
