@@ -2,9 +2,17 @@
   "name": "discordautolinkbot",
   "version": "1.0.0",
   "description": "A discord bot which can output links based on input tags.",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/index.js",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w"
+  },
+  "engines": {
+    "node": "12.16.1"
   },
   "repository": {
     "type": "git",
