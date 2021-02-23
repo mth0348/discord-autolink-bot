@@ -1,14 +1,12 @@
-/* Practical card types, not actual card types */
-
 export enum MtgCardType {
     Land = "Land",
     Creature = "Creature",
     Artifact = "Artifact",
-    Equipment = "Equipment",
-    Artifactcreature = "Artifact Creature",
+    Equipment = "Equipment", /* pseudo type */
+    Artifactcreature = "Artifact Creature", /* pseudo type */
     Instant = "Instant",
     Sorcery = "Sorcery",
     Planeswalker = "Planeswalker",
     Enchantment = "Enchantment",
-    Aura = "Aura",
+    Aura = "Aura", /* pseudo type */
 }

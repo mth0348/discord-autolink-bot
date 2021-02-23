@@ -41,24 +41,19 @@ export class DrunkenBot {
 
     public startListening(): void {
         this.client.on('message', message => {
-
             this.registeredParsers.forEach(async parser => {
                 if (parser.isAllowedCommand(message)) {
                     await this.startWorkflow(parser, message);
                 }
             });
-
         });
     }
 
     private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
-        try {
-            Logger.clearStack();
+        Logger.clearStack();
 
-            // TODO REMOVE CHECK.
-            if (message.author.username === "Telerik" && (message.channel as TextChannel).name.toLowerCase() === "dev-playground") {
-                await parser.executeAsync(message);
-            }
+        try {
+            await parser.executeAsync(message);
         }
         catch (e) {
             message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");

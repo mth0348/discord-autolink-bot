@@ -26,9 +26,9 @@ export class MtgCommandParser extends BaseCommandParser {
 
     public name: string = "MtG Parser";
 
-    protected prefixes: string[] = [ "mtg", "magic", "card" ];
+    protected prefixes: string[] = ["mtg", "magic", "card"];
 
-    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact", "aura", "artifactcreature","equipment"];
+    public static AVAILABLE_TYPES = ["creature", "land", "instant", "sorcery", "planeswalker", "enchantment", "artifact", "aura", "artifactcreature", "equipment"];
     public static AVAILABLE_RARITIES = ["common", "uncommon", "rare", "mythic"];
 
     public static COLORLESS = ["c"];
@@ -113,7 +113,7 @@ export class MtgCommandParser extends BaseCommandParser {
             .addField(`More Content`, "There are over 5000 lines of config file for the generator to draw names, abilities and keywords from. Also, there are over 1000 card artworks to choose from, all hand-picked by Mats.")
             .addField(`Card Types`, "The bot can generate almost all types of cards. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments*, *planeswalkers*, and subtypes like *auras* and *equipments*.")
             .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
-                                 "`type:<type>` (short `t`), like 't:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\n`name:<text>` (short `n`) to put a name yourself (use '_' for spaces).\r\n")
+                "`type:<type>` (short `t`), like 't:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\n`name:<text>` (short `n`) to put a name yourself (use '_' for spaces).\r\n")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
@@ -142,17 +142,14 @@ export class MtgCommandParser extends BaseCommandParser {
         /* Aura and ArtifactCreature are not "real" types */
 
         const type = Random.complex([
-            { value: MtgCardType.Instant,       chance: 0.14 },
-            { value: MtgCardType.Sorcery,       chance: 0.14 },
-            { value: MtgCardType.Creature,      chance: 0.14 },
-            { value: MtgCardType.Planeswalker,  chance: 0.14 },
-            { value: MtgCardType.Enchantment,   chance: 0.14 },
-            { value: MtgCardType.Artifact,      chance: 0.14 },
-            { value: MtgCardType.Land,          chance: 0.14 },
-        ], Random.nextFromList([MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Creature, MtgCardType.Land, MtgCardType.Planeswalker, MtgCardType.Enchantment, MtgCardType.Artifact]));
-
-        // TODO support more types.
-        // return Random.nextFromList(Object.keys(MtgCardType));
+            { value: MtgCardType.Creature, chance: 0.20 },
+            { value: MtgCardType.Instant, chance: 0.13 },
+            { value: MtgCardType.Sorcery, chance: 0.13 },
+            { value: MtgCardType.Planeswalker, chance: 0.13 },
+            { value: MtgCardType.Enchantment, chance: 0.13 },
+            { value: MtgCardType.Artifact, chance: 0.13 },
+            { value: MtgCardType.Land, chance: 0.13 },
+        ], Random.nextFromList([MtgCardType.Creature, MtgCardType.Instant, MtgCardType.Sorcery, MtgCardType.Planeswalker, MtgCardType.Enchantment, MtgCardType.Artifact, MtgCardType.Land]));
 
         return type;
     }

@@ -112,8 +112,6 @@ export class MtgEnchantmentGenerator extends MtgBaseGenerator {
     }
 
     private chooseFlavorText(card: MtgCard) {
-        // TODO add own flavor text for enchantments.
-
         if (Random.chance(0.5) || card.wrappedOracleLines.length <= 3) {
             const maxFlavorTextLength = (card.rendererPreset.maxLines - card.wrappedOracleLines.length - 1) * card.rendererPreset.maxCharactersPerLine;
             const smallEnoughFlavorText = this.mtgDataRepository.getSpellFlavorText(maxFlavorTextLength);

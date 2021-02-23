@@ -183,7 +183,7 @@ export class MtgHelper {
         // Two colors.
         if (color.length === 2) {
             if (cmc === 1) {
-                manacost = `${color[0]}${color[1]}`; // TODO Support hybrid mana
+                manacost = `${color[Random.next(0, 1)]}`; // TODO Support hybrid mana
             } else if (cmc === 2) {
                 manacost = `${color[0]}${color[1]}`;
             } else if (cmc === 3) {
