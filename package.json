@@ -2,10 +2,10 @@
   "name": "discordautolinkbot",
   "version": "1.0.0",
   "description": "A discord bot which can output links based on input tags.",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "start": "npm run serve",
-    "serve": "npx ts-node index.ts"
+    "serve": "node dist/index.js"
   },
   "engines": {
     "node": "12.16.1"
@@ -28,7 +28,6 @@
     "canvas": "^2.6.1",
     "discord.js": "^12.0.2",
     "fuse.js": "^5.0.9-beta",
-    "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   },
   "devDependencies": {
