@@ -118,7 +118,7 @@ export class MtgCommandParser extends BaseCommandParser {
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
 
-        this.discordService.sendMessageEmbed(message, embed);
+        this.discordService.sendMessageEmbed(message, "", embed);
     }
 
     private initializeCardRendererData() {

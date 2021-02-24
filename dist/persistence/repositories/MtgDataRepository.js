@@ -14,7 +14,7 @@ var LogType_1 = require("../../dtos/LogType");
 var MtgHelper_1 = require("../../helpers/mtg/MtgHelper");
 var MtgCommandParser_1 = require("../../parsers/MtgCommandParser");
 var MtgEnchantmentEffect_1 = require("../entities/mtg/MtgEnchantmentEffect");
-var database = require("../../src/data/mtg.json");
+var database = require("../../assets/data/mtg.json");
 var MtgDataRepository = (function () {
     function MtgDataRepository() {
     }

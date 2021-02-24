@@ -17,8 +17,8 @@ export class DiscordService {
         message.channel.send(text, attachment);
     }
 
-    sendMessageEmbed(message: Message | PartialMessage, embed: MessageEmbed) {
-        message.channel.send(embed);
+    sendMessageEmbed(message: Message | PartialMessage, text: string, embed: MessageEmbed) {
+        message.channel.send(text, embed);
     }
 
     sendMessageWithReactions(message: Message | PartialMessage, text: string, attachment: MessageAttachment) {

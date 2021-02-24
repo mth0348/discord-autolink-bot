@@ -1,3 +1,4 @@
+import { CsGoParamType } from '../dtos/csgo/CsGoParamType';
 import { MtgCardRarity } from '../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../dtos/mtg/MtgCardType';
 import { StringHelper } from './StringHelper';
@@ -14,6 +15,10 @@ export class EnumHelper {
 
     public static toMtgCardType(enumString: string): MtgCardType {
         return MtgCardType[StringHelper.toCamelCase(enumString) as keyof typeof MtgCardType];
+    }
+
+    public static toCsGoParamType(enumString: string): CsGoParamType {
+        return CsGoParamType[StringHelper.toCamelCase(enumString) as keyof typeof CsGoParamType];
     }
 
 }

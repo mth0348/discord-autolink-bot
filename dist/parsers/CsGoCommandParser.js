@@ -55,35 +55,129 @@ var Logger_1 = require("../helpers/Logger");
 var BaseCommandParser_1 = require("../base/BaseCommandParser");
 var CsGoMap_1 = require("../dtos/csgo/CsGoMap");
 var CsGoSide_1 = require("../dtos/csgo/CsGoSide");
+var CsGoNadesService_1 = require("../services/csgo/CsGoNadesService");
+var CsGoDataRepository_1 = require("../persistence/repositories/CsGoDataRepository");
+var CsGoNadeType_1 = require("../dtos/csgo/CsGoNadeType");
+var StringHelper_1 = require("../helpers/StringHelper");
+var drunkenbot_1 = require("../base/drunkenbot");
 var CsGoCommandParser = (function (_super) {
     __extends(CsGoCommandParser, _super);
     function CsGoCommandParser(discordService, parameterService) {
         var _this = _super.call(this, discordService, parameterService, undefined, undefined) || this;
         _this.name = "CS GO Parser";
-        _this.prefixes = ["nades", "cs", "csgo"];
+        _this.prefixes = ["nades", "cs", "csgo", "nade"];
+        _this.emoji_numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
+        _this.defaultAwaitReactionFilter = function (reaction, user) { return user.id !== reaction.message.author.id; };
+        _this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
+        _this.csGoDataRepository = new CsGoDataRepository_1.CsGoDataRepository();
+        _this.csGoNadesService = new CsGoNadesService_1.CsGoNadesService(_this.csGoDataRepository);
         console.log("|| - registered CS GO parser.  ||");
         return _this;
     }
     CsGoCommandParser.prototype.executeAsync = function (message) {
         return __awaiter(this, void 0, void 0, function () {
-            var embed, parameters;
+            var parameters, queryString, results;
             return __generator(this, function (_a) {
-                Logger_1.Logger.log(message.author.username + " requested help: " + message.content);
-                embed = new discord_js_1.MessageEmbed({
-                    files: [{
-                            attachment: "assets/img/banner.png",
-                            name: "banner.png"
-                        }]
-                });
+                this.updateEmojiCache(message);
                 parameters = this.parameterService.extractParameters(message.content, []);
                 if (this.parameterService.tryGetParameterValue("help", parameters) === "help") {
                     this.showHelp(message);
                     return [2];
                 }
-                this.discordService.sendMessage(message, "This bot is still under construction...");
+                if (message.content.indexOf(" ") < 0) {
+                    message.reply("No parameters found. Please try again.");
+                    return [2];
+                }
+                queryString = message.content.split(" ").slice(1).join(" ");
+                results = this.csGoNadesService.getForQuery(queryString);
+                this.printOutRecords(message, results);
                 return [2];
             });
         });
+    };
+    CsGoCommandParser.prototype.printOutRecords = function (message, records) {
+        var _this = this;
+        if (records.length > 9) {
+            var reply_1 = "There are still over 10 search results, try adding more information to your query. Found results:\r\n";
+            records.slice(0, Math.min(12, records.length)).forEach(function (r) { return reply_1 += _this.toSuggestionRow(r) + "\r\n"; });
+            message.reply(reply_1 + "...");
+        }
+        else if (records.length <= 0) {
+            message.reply("Sorry, I didn't find anything for your query, try adding more information");
+        }
+        else if (records.length === 1) {
+            this.sendResult(message, records[0]);
+        }
+        else {
+            var embed_1 = new discord_js_1.MessageEmbed()
+                .setTitle("CSGO Nades Bot Result")
+                .setDescription("The following clips have been found:\r\n")
+                .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128');
+            records.forEach(function (r, i) {
+                var row = _this.toResultRow(r, i);
+                embed_1.addField(row, r.description.length > 0 ? r.description : "-");
+            });
+            var self_1 = this;
+            message.reply("", embed_1).then(function (embed) {
+                records.forEach(function (r, i) { return embed.react(self_1.emoji_numbers[i]); });
+                embed.awaitReactions(self_1.defaultAwaitReactionFilter, self_1.defaultAwaitReactionOptions)
+                    .then(function (collected) {
+                    var reaction = collected.first();
+                    if (reaction === undefined)
+                        return;
+                    switch (reaction.emoji.name) {
+                        case "1️⃣":
+                            self_1.sendResult(message, records[0]);
+                            return;
+                        case "2️⃣":
+                            self_1.sendResult(message, records[1]);
+                            return;
+                        case "3️⃣":
+                            self_1.sendResult(message, records[2]);
+                            return;
+                        case "4️⃣":
+                            self_1.sendResult(message, records[3]);
+                            return;
+                        case "5️⃣":
+                            self_1.sendResult(message, records[4]);
+                            return;
+                        case "6️⃣":
+                            self_1.sendResult(message, records[5]);
+                            return;
+                        case "7️⃣":
+                            self_1.sendResult(message, records[6]);
+                            return;
+                        case "8️⃣":
+                            self_1.sendResult(message, records[7]);
+                            return;
+                        case "9️⃣":
+                            self_1.sendResult(message, records[8]);
+                            return;
+                        case "📢":
+                            var username = reaction.users.cache.find(function (e) { return e.username !== reaction.message.author.username; }).username;
+                            drunkenbot_1.DrunkenBot.reportMessage(message, username, 'User report');
+                            return;
+                    }
+                })["catch"](function (e) { return drunkenbot_1.DrunkenBot.reportMessage(message, 'DrunkenBot Workflow', e); });
+            });
+        }
+    };
+    CsGoCommandParser.prototype.sendResult = function (message, video) {
+        message.reply(video.source);
+    };
+    CsGoCommandParser.prototype.toSuggestionRow = function (video) {
+        var side = video.side === CsGoSide_1.CsGoSide.CT ? this.emoji_ct : this.emoji_t;
+        var type = video.type === CsGoNadeType_1.CsGoNadeType.Smoke ? this.emoji_smoke : CsGoNadeType_1.CsGoNadeType.Molotov ? this.emoji_molotov : this.emoji_flash;
+        var map = StringHelper_1.StringHelper.capitalizeFirstChar(video.map);
+        var location = video.location;
+        return map + " - " + side.toString() + " - " + type.toString() + " - " + location;
+    };
+    CsGoCommandParser.prototype.toResultRow = function (video, index) {
+        var side = video.side === CsGoSide_1.CsGoSide.CT ? this.emoji_ct : this.emoji_t;
+        var type = video.type === CsGoNadeType_1.CsGoNadeType.Smoke ? this.emoji_smoke : CsGoNadeType_1.CsGoNadeType.Molotov ? this.emoji_molotov : this.emoji_flash;
+        var map = StringHelper_1.StringHelper.capitalizeFirstChar(video.map);
+        var location = video.location;
+        return this.emoji_numbers[index] + ": " + map + " - " + side.toString() + " - " + type.toString() + " - " + location;
     };
     CsGoCommandParser.prototype.showHelp = function (message) {
         Logger_1.Logger.log(message.author.username + " requested help: " + message.content);
@@ -96,15 +190,22 @@ var CsGoCommandParser = (function (_super) {
         embed.setTitle("CSGO Nades Bot Overview")
             .setDescription("Here is how the parameter system works for this module:")
             .addField("Click-through", "Emoji click support through the whole process. No more copying commands.")
-            .addField("Filters", "The parameter system has been reworked in hope to ease the usage of this module:\r\n" +
-            "Just type your query after !nades and the bot will try and match as many results as possible. For example:\r\n" +
-            "`!nades mirage ct abs`\r\n`!nades inferno pit flash`\r\n")
+            .addField("Filters", "The parameter system has been reworked in hope to ease the usage of this module. " +
+            "Just type your query after !nades and the bot will try and match as many results as possible. The param order doesn't matter anymore:\r\n" +
+            "`!nades mirage smoke t con`\r\n`!nades t smoke long mid`\r\n`!nades moly t`")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
-        this.discordService.sendMessageEmbed(message, embed);
+        this.discordService.sendMessageEmbed(message, "", embed);
     };
-    CsGoCommandParser.AVAILABLE_TYPES = ["smoke", "s", "flash", "f", "m", "molo", "moli", "moly", "molotov", "molotof"];
+    CsGoCommandParser.prototype.updateEmojiCache = function (message) {
+        this.emoji_smoke = message.guild.emojis.cache.find(function (e) { return e.name === 'csgo_smoke'; });
+        this.emoji_molotov = message.guild.emojis.cache.find(function (e) { return e.name === 'csgo_molotov_ct'; });
+        this.emoji_flash = message.guild.emojis.cache.find(function (e) { return e.name === 'csgo_flash'; });
+        this.emoji_ct = message.guild.emojis.cache.find(function (e) { return e.name === 'csgo_ct'; });
+        this.emoji_t = message.guild.emojis.cache.find(function (e) { return e.name === 'csgo_t'; });
+    };
+    CsGoCommandParser.AVAILABLE_TYPES = ["smoke", "s", "flash", "f", "m", "molo", "moli", "molli", "molly", "moly", "molotov", "molotof"];
     CsGoCommandParser.AVAILABLE_MAPS = Object.keys(CsGoMap_1.CsGoMap);
     CsGoCommandParser.AVAILABLE_SIDES = Object.keys(CsGoSide_1.CsGoSide);
     return CsGoCommandParser;

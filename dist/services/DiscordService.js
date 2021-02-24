@@ -14,8 +14,8 @@ var DiscordService = (function () {
         if (attachment === void 0) { attachment = undefined; }
         message.channel.send(text, attachment);
     };
-    DiscordService.prototype.sendMessageEmbed = function (message, embed) {
-        message.channel.send(embed);
+    DiscordService.prototype.sendMessageEmbed = function (message, text, embed) {
+        message.channel.send(text, embed);
     };
     DiscordService.prototype.sendMessageWithReactions = function (message, text, attachment) {
         var self = this;

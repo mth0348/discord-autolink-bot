@@ -12,7 +12,7 @@ import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgEnchantmentEffect } from '../entities/mtg/MtgEnchantmentEffect';
 
-import database = require('../../src/data/mtg.json');
+import database = require('../../assets/data/mtg.json');
 
 export class MtgDataRepository {
 
@@ -137,7 +137,7 @@ export class MtgDataRepository {
         return Random.nextFromList(database.spellTexts.flavors.filter(f => f.length < maxCharacterLength));
     }
 
-    public getArtifactFlavorText(maxCharacterLength: number) {
+    public getArtifactFlavorText(maxCharacterLength: number): string {
         return Random.nextFromList(database.artifactTexts.flavors.filter(f => f.length < maxCharacterLength));
     }
 

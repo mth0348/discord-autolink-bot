@@ -5,7 +5,7 @@ export class CsGoVideo {
     public type: string;
     public location: string;
     public source: string;
-    
+
     constructor(data: any) {
         this.description = data.description;
         this.map = data.map;
@@ -13,5 +13,9 @@ export class CsGoVideo {
         this.type = data.type;
         this.location = data.location;
         this.source = data.source;
+    }
+
+    public toString() {
+        return `${this.map} ${this.type} ${this.side} - ${this.location}`;
     }
 }

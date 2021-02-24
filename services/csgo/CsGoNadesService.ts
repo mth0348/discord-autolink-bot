@@ -1,150 +1,120 @@
-import { Logger } from '../../helpers/Logger';
-import { LogType } from "../../dtos/LogType";
-import { Random } from '../../helpers/Random';
 import { CsGoDataRepository } from '../../persistence/repositories/CsGoDataRepository';
+import { CsGoVideo } from '../../persistence/entities/csgo/CsGoVideo';
+import { Parameter } from '../../dtos/Parameter';
+import { CsGoParamType } from '../../dtos/csgo/CsGoParamType';
+import { EnumHelper } from '../../helpers/EnumHelper';
 
-const csgoList = require('./../data/csgo.json');
-const Fuse = require('fuse.js');
+import Fuse from 'fuse.js';
 
-export class MtgCardService {
-    mapOptions: { keys: string[]; threshold: number; };
-    typeOptions: { keys: string[]; threshold: number; };
-    sideOptions: { keys: string[]; threshold: number; };
-    locationOptions: { keys: string[]; threshold: number; includeScore: boolean; distance: number; minMatchCharLength: number; };
+export class CsGoNadesService {
 
+    private mapOptions: Fuse.IFuseOptions<CsGoVideo>;
+    private typeOptions: Fuse.IFuseOptions<CsGoVideo>;
+    private sideOptions: Fuse.IFuseOptions<CsGoVideo>;
+    private locationOptions: Fuse.IFuseOptions<CsGoVideo>;
+
+    private fuseSide: Fuse<CsGoVideo>;
+    private fuseType: Fuse<CsGoVideo>;
+    private fuseMap: Fuse<CsGoVideo>;
+
+    private masterList: CsGoVideo[];
 
     constructor(private csGoDataRepository: CsGoDataRepository) {
 
-        this.mapOptions = { keys: ['map'], threshold: 0.4 };
-        this.typeOptions = { keys: ['type'], threshold: 0.4 };
-        this.sideOptions = { keys: ['side'], threshold: 0 };
-        this.locationOptions = { keys: ['location'], threshold: 0.4, includeScore: true, distance: 25, minMatchCharLength: 0 };
+        this.masterList = this.csGoDataRepository.getAll();
 
-        // this.smoke_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_smoke');
-        // this.molotov_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_molotov_ct');
-        // this.flash_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_flash');
-        // this.ct_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_ct');
-        // this.t_emoji = message.guild.emojis.cache.find(e => e.name === 'csgo_t');
+        this.sideOptions = { keys: ["side"], threshold: 0 };
+        this.typeOptions = { keys: ["type"], threshold: 0.4 };
+        this.mapOptions = { keys: ["map"], threshold: 0.3, minMatchCharLength: 4 };
+        this.locationOptions = { keys: ["location"], threshold: 0.5 };
+
+        this.fuseSide = new Fuse(this.masterList, this.sideOptions);
+        this.fuseType = new Fuse(this.masterList, this.typeOptions);
+        this.fuseMap = new Fuse(this.masterList, this.mapOptions);
     }
 
-    // public searchNadeVideoUrls(map: string, type: string,): string[] {
+    public getForQuery(queryString: string) {
 
-    //     let searchTerms = query.substring(7).split(" ");
-    //     let results = csgoList;
-    //     results = this.populateResultWithSearch(results, searchTerms, 0, this.mapOptions);
-    //     results = this.populateResultWithSearch(results, searchTerms, 1, this.typeOptions);
-    //     results = this.populateResultWithSearch(results, searchTerms, 2, this.sideOptions);
-    //     results = this.populateResultWithSearch(results, searchTerms, 3, this.locationOptions, true);
+        let extractedParams: Parameter[] = [];
 
-    //     console.log(`Search for '${query.substring(7)}', ${results.length} results found.`);
+        // search over all properties for all parameters.
+        let queryParts = queryString.split(" ");
+        for (let i = queryParts.length - 1; i >= 0; i--) {
+            const part = queryParts[i];
 
-    //     if (results === null || results.length === 0) {
-    //         return [];
-    //     }
-    //     else if (results.length === 1) {
-    //         return results;
+            // decide which search param it is.
+            const paramType = this.decideSearchParamType(part);
+            if (paramType !== CsGoParamType.None) {
+                extractedParams.push(new Parameter(paramType, part));
+                queryParts.splice(i, 1);
+            }
+        };
 
-    //     }
-    //     else if (results.length === 2 && this.twoMatches) {
-    //         let first = results[0];
-    //         let second = results[1];
-    //         // message.channel.send(`${first.source}\n${second.source}.`)
+        // the rest is location param.
+        if (queryParts.length > 0) {
+            extractedParams.push(new Parameter(CsGoParamType.Location, queryParts.join(" ")))
+        }
 
-    //         console.log("Returned with two matches.")
-    //         return results;
-    //     }
-    //     // else {
-    //     //     if (searchTerms.length === 1) {
-    //     //         message.channel.send(`There are ${results.length} clips for '${searchTerms[0]}'. Click the appropriate grenade emoji.`).then(m => {
-    //     //             if (this.isPresent(results, r => r.type, 'smoke')) m.react(this.smoke_emoji.id);
-    //     //             if (this.isPresent(results, r => r.type, 'molotov')) m.react(this.molotov_emoji.id);
-    //     //             if (this.isPresent(results, r => r.type, 'flash')) m.react(this.flash_emoji.id);
+        let results = this.masterList;
 
-    //     //             m.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
-    //     //                 .then(collected => {
-    //     //                     const reaction = collected.first();
-    //     //                     if (reaction === undefined) return;
-    //     //                     switch (reaction.emoji.id) {
-    //     //                         case this.smoke_emoji.id:
-    //     //                             message.content += ' smoke';
-    //     //                             return this.startWorkflow(message);
-    //     //                         case this.molotov_emoji.id:
-    //     //                             message.content += ' molotov';
-    //     //                             return this.startWorkflow(message);
-    //     //                         case this.flash_emoji.id:
-    //     //                             message.content += ' flash';
-    //     //                             return this.startWorkflow(message);
-    //     //                     }
-    //     //                 }).catch(this.errorHandler);
-    //     //         }).catch(this.errorHandler);
-    //     //     }
+        extractedParams.forEach(param => {
+            let tempFuse: Fuse<CsGoVideo> = null;
 
-    //     //     if (searchTerms.length === 2) {
-    //     //         message.channel.send(`There are ${results.length} clips for '${searchTerms[0]} ${searchTerms[1]}'. Click the appropriate side emoji.`).then(m => {
-    //     //             if (this.isPresent(results, r => r.side, 't')) m.react(this.t_emoji.id);
-    //     //             if (this.isPresent(results, r => r.side, 'ct')) m.react(this.ct_emoji.id);
+            let paramEnum = EnumHelper.toCsGoParamType(param.name);
+            switch (paramEnum) {
 
-    //     //             m.awaitReactions(this.defaultAwaitReactionFilter, this.defaultAwaitReactionOptions)
-    //     //                 .then(collected => {
-    //     //                     const reaction = collected.first();
-    //     //                     switch (reaction.emoji.id) {
-    //     //                         case this.t_emoji.id:
-    //     //                             message.content += ' t';
-    //     //                             return this.startWorkflow(message);
-    //     //                         case this.ct_emoji.id:
-    //     //                             message.content += ' ct';
-    //     //                             return this.startWorkflow(message);
-    //     //                     }
-    //     //                 }).catch(this.errorHandler);
-    //     //         }).catch(this.errorHandler);
-    //     //     }
+                case CsGoParamType.Side:
+                    tempFuse = new Fuse(results, this.sideOptions);
+                    break;
+                case CsGoParamType.Type:
+                    tempFuse = new Fuse(results, this.typeOptions);
+                    break;
+                case CsGoParamType.Map:
+                    tempFuse = new Fuse(results, this.mapOptions);
+                    break;
+                case CsGoParamType.Location:
+                    tempFuse = new Fuse(results, this.locationOptions);
+                    break;
+            }
 
-    //     //     if (searchTerms.length >= 3) {
-    //     //         message.channel.send(`There are ${results.length} clips for that. Enter one of the following:.`).then(m => {
-    //     //             let responseText = "Options:\n";
-    //     //             for (let i = 0; i < results.length; i++) {
-    //     //                 const r = results[i];
-    //     //                 responseText += `!nades ${r.map} ${r.type} ${r.side} ${r.location}\n`
-    //     //             }
-    //     //             message.channel.send(responseText);
-    //     //             return;
-    //     //         }).catch(this.errorHandler);
-    //     //     }
-    //     // }
+            if (tempFuse !== null) {
+                let tempSearched = tempFuse.search(param.value);
+                results = results.filter(r => tempSearched.some(t => t.item === r))
+            }
 
-    //     return null;
-    // }
+        });
 
-    // populateResultWithSearch(results: , searchTerms, index, searchOptions, includeRest) {
-    //     if (searchTerms.length > index && results.length > 1) {
-    //         let searchTerm = '';
-    //         if (includeRest) {
-    //             for (var i = index; i < searchTerms.length; i++) {
-    //                 searchTerm += ` ${searchTerms[i]}`;
-    //             }
-    //         } else {
-    //             searchTerm = searchTerms[index];
-    //         }
-    //         let fuse = new Fuse(results, searchOptions);
-    //         let searchResults = fuse.search(searchTerm);
+        return results.sort((a, b) => {
+            // sort by map...
+            if (a.map < b.map)return -1;
+            else if (a.map > b.map) return 1;
+        
+            // .. then by side ..
+            if (a.side < b.side)return -1;
+            else if (a.side > b.side) return 1;
+        
+            // .. then by type ..
+            if (a.type < b.type)return -1;
+            else if (a.type > b.type) return 1;
+        
+            // .. then by location.
+            if (a.location < b.location)return -1;
+            else if (a.location > b.location) return 1;
+            
+            return 0;
+        });
+    }
 
-    //         // return almost perfect match.
-    //         if (searchResults.length > 0 && searchResults[0].score < 0.05) {
-    //             return [searchResults[0].item];
-    //         }
-    //         // return almost perfect matches if their score is very similar.
-    //         if (searchResults.length === 2 && (searchResults[1].score - searchResults[0].score) < 0.05) {
-    //             this.twoMatches = true;
-    //             return [searchResults[0].item, searchResults[1].item];
-    //         }
+    private decideSearchParamType(part: string): CsGoParamType {
+        if (this.fuseSide.search(part).length > 0)
+            return CsGoParamType.Side
+        if (this.fuseType.search(part).length > 0)
+            return CsGoParamType.Type;
+        if (this.fuseMap.search(part).length > 0)
+            return CsGoParamType.Map;
 
-    //         // this removes the unnecessary .item property nesting.
-    //         let newResults = [];
-    //         searchResults.forEach(e => {
-    //             newResults.push(e.item);
-    //         });
-    //         results = newResults;
-    //     }
-    //     return results;
-    // }
+        // CsGoParamType.Location is resolved separately.
+
+        return CsGoParamType.None;
+    }
 }

@@ -44,6 +44,7 @@ var ParameterService_1 = require("../services/ParameterService");
 var ImageProvider_1 = require("../persistence/repositories/ImageProvider");
 var Logger_1 = require("../helpers/Logger");
 var BotCommandParser_1 = require("../parsers/BotCommandParser");
+var CsGoCommandParser_1 = require("../parsers/CsGoCommandParser");
 var DrunkenBot = (function () {
     function DrunkenBot(token) {
         this.client = new discord_js_1.Client();
@@ -90,17 +91,19 @@ var DrunkenBot = (function () {
                         Logger_1.Logger.clearStack();
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([1, 4, , 5]);
+                        if (!(message.author.username === "Telerik" && message.channel.name.toLowerCase() === "dev-playground")) return [3, 3];
                         return [4, parser.executeAsync(message)];
                     case 2:
                         _a.sent();
-                        return [3, 4];
-                    case 3:
+                        _a.label = 3;
+                    case 3: return [3, 5];
+                    case 4:
                         e_1 = _a.sent();
                         message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
                         DrunkenBot.reportMessage(message, parser.name, e_1);
-                        return [3, 4];
-                    case 4: return [2];
+                        return [3, 5];
+                    case 5: return [2];
                 }
             });
         });
@@ -123,6 +126,7 @@ var DrunkenBot = (function () {
     DrunkenBot.prototype.registerCommandParsers = function () {
         this.registeredParsers.push(new BotCommandParser_1.BotCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new MtgCommandParser_1.MtgCommandParser(this.discordService, this.parameterService));
+        this.registeredParsers.push(new CsGoCommandParser_1.CsGoCommandParser(this.discordService, this.parameterService));
     };
     return DrunkenBot;
 }());

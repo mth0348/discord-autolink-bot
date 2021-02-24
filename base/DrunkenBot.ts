@@ -53,7 +53,10 @@ export class DrunkenBot {
         Logger.clearStack();
 
         try {
-            await parser.executeAsync(message);
+            // TODO REMOVE CHECK.
+            if (message.author.username === "Telerik" && (message.channel as TextChannel).name.toLowerCase() === "dev-playground") {
+                await parser.executeAsync(message);
+            }
         }
         catch (e) {
             message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
@@ -85,7 +88,7 @@ export class DrunkenBot {
     private registerCommandParsers(): void {
         this.registeredParsers.push(new BotCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
-        // this.registeredParsers.push(new CsGoCommandParser(this.discordService, this.parameterService));
+        this.registeredParsers.push(new CsGoCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser
         // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
         // this.registeredParsers.push(new MtgCommandParser()); // dndParser

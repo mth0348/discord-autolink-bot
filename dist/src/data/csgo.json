@@ -1,0 +1,554 @@
+[
+    {
+        "description": "Covers Connector and Window but not B-Short",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Top Mid",
+        "source": "https://youtu.be/wMDxgNhl9qI"
+    },
+    {
+        "description": "Covers Short but not Connector and Window B-Short",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Top Mid",
+        "source": "https://youtu.be/JSWmUxqZr20"
+    },
+    {
+        "description": "Thrown from Top Mid",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Window",
+        "source": "https://youtu.be/DXYFcsBqzEw"
+    },
+    {
+        "description": "Thrown from Top Mid",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Mid B Short",
+        "source": "https://youtu.be/lr7G9VU5o6s"
+    },
+    {
+        "description": "Thrown from Top Mid to go B Short",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector",
+        "source": "https://youtu.be/PRMya2dfdPQ"
+    },
+    {
+        "description": "Thrown from T Ramp, doesn't cover Jungle",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector",
+        "source": "https://youtu.be/DX0hmzhJwVA"
+    },
+    {
+        "description": "Thrown from T Ramp, covers Jungle and Connector",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Jungle",
+        "source": "https://youtu.be/PwZMzJsMdoQ"
+    },
+    {
+        "description": "Thrown with Jump+Throw, covers CT",
+        "map": "mirage",
+        "side": "t",
+        "type": "Smoke",
+        "location": "CT Ticket",
+        "source": "https://youtu.be/gPessAcXo2U"
+    },
+    {
+        "description": "Thrown from T Ramp covers Stairs, supreme for Palace player",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Stairs",
+        "source": "https://youtu.be/qRXanvKP8do"
+    },
+    {
+        "description": "Thrown before T aps",
+        "map": "mirage",
+        "side": "t",
+        "type": "smoke",
+        "location": "Bench",
+        "source": "https://youtu.be/G89WndN0soM"
+    },
+    {
+        "description": "Thrown from B Site",
+        "map": "mirage",
+        "side": "ct",
+        "type": "smoke",
+        "location": "Aps",
+        "source": "https://youtu.be/63IB7bHteBo"
+    },
+    {
+        "description": "Fast T Ramp smoke while running",
+        "map": "mirage",
+        "side": "ct",
+        "type": "smoke",
+        "location": "Ramp",
+        "source": "https://youtu.be/wxkiLvOxTwM"
+    },
+    {
+        "description": "Pop Flash to peek Mid from Window",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/PYdjPVcaxN0"
+    },
+    {
+        "description": "Pop Flash for Teammates Mid/Window",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/2-ntWSakVHI"
+    },
+    {
+        "description": "Pop Flash for Teammates peek out Top Mid",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/lGvaHGdEAZE"
+    },
+    {
+        "description": "Pop Flash for peek B Car and Aps",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "Aps Car",
+        "source": "https://youtu.be/r6h2U6hnWdE"
+    },
+    {
+        "description": "Run-Flash for B Site Push out Aps",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "B Site",
+        "source": "https://youtu.be/ZyBHlFo4srE"
+    },
+    {
+        "description": "Step-Flash for T-Ramp from Underwoods A Site",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "Ramp",
+        "source": "https://youtu.be/Rza_elU2lQk"
+    },
+    {
+        "description": "Flash for A-Site from Palace",
+        "map": "mirage",
+        "side": "t",
+        "type": "flash",
+        "location": "A Site",
+        "source": "https://youtu.be/frZpU04ZKYc"
+    },
+    {
+        "description": "Molotov for Ninja A from Stairs",
+        "map": "mirage",
+        "side": "ct",
+        "type": "molotov",
+        "location": "Ninja",
+        "source": "https://youtu.be/0hqERDZn7kA"
+    },
+    {
+        "description": "Molotov for Ninja A from Stairs",
+        "map": "mirage",
+        "side": "t",
+        "type": "molotov",
+        "location": "Ninja",
+        "source": "https://youtu.be/0hqERDZn7kA"
+    },
+    {
+        "description": "Flash for B Aps from Car",
+        "map": "mirage",
+        "side": "ct",
+        "type": "flash",
+        "location": "Aps",
+        "source": "https://youtu.be/TbJOqULU87E"
+    },
+    {
+        "description": "Molotov for A Underwood from Palace",
+        "map": "mirage",
+        "side": "t",
+        "type": "molotov",
+        "location": "Underwood",
+        "source": "https://youtu.be/Q7y8cKXeX4Q"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "CT Boost",
+        "source": "https://youtu.be/_u9eNdzP6gs"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "Coffins",
+        "source": "https://youtu.be/7s36QASohFk"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "A Short Mid",
+        "source": "https://youtu.be/tTqC8taNzyc"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "B Site",
+        "source": "https://youtu.be/Oz5JyrgirB0"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/FCbBBnWyvY4"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "Pit",
+        "source": "https://youtu.be/iLUlfFcIeIU"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "flash",
+        "location": "Boiler",
+        "source": "https://youtu.be/YMQh7wLRzyc"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Back Alley",
+        "source": "https://youtu.be/paeOwYW81Tw"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/WZlpML2HMoc"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Mid",
+        "source": "https://youtu.be/gkw6_pjugUY"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "A Long",
+        "source": "https://youtu.be/-lU5XGRw9Xs"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Library",
+        "source": "https://youtu.be/MLNGKS3zVMo"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "B Site",
+        "source": "https://youtu.be/Nk4ULf-2FGs"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Coffins",
+        "source": "https://youtu.be/yHx4_m5Hj5Y"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Banana close B",
+        "source": "https://youtu.be/_D2fAA0t-bQ"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "Banana",
+        "source": "https://youtu.be/PoiR65RsWGI"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "ct",
+        "type": "flash",
+        "location": "CT Sand bags",
+        "source": "https://youtu.be/4zx5Lh-1-vo"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "A Long Mid",
+        "source": "https://youtu.be/cjmFxKFyvjI"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "A Long Mid",
+        "source": "https://youtu.be/OrWetbr1GwU"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "Library",
+        "source": "https://youtu.be/d7ltMGyuVHs"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "A Long Site",
+        "source": "https://youtu.be/RNkSiyiwzcs"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "smoke",
+        "location": "Boiler A Short",
+        "source": "https://youtu.be/T--5nlFsJ4U"
+    },
+    {
+        "description": "",
+        "map": "inferno",
+        "side": "t",
+        "type": "molotov",
+        "location": "Quad",
+        "source": "https://youtu.be/pbr2hjg6SDI"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "molotov",
+        "location": "A Site rug",
+        "source": "https://youtu.be/_zZoMXoRk6k"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "Top Mid",
+        "source": "https://youtu.be/ppSFxB56ae8"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "smoke",
+        "location": "A Upper",
+        "source": "https://youtu.be/hCvqJK11bBo"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "B Site Alley",
+        "source": "https://youtu.be/-TDnpfSRRWs"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector B Site",
+        "source": "https://youtu.be/RK-2n9-p4z0"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "Heaven A Site",
+        "source": "https://youtu.be/hrQSRA5T8oA"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "Palace B Site",
+        "source": "https://youtu.be/oo0rElhoKDM"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "Palace B Site",
+        "source": "https://youtu.be/il_NREzebqw"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "t",
+        "type": "smoke",
+        "location": "Walkway A Mid",
+        "source": "https://youtu.be/x2DwgaEsDss"
+    },
+    {
+        "description": "",
+        "map": "anubis",
+        "side": "ct",
+        "type": "molotov",
+        "location": "A Long Entrance",
+        "source": "https://youtu.be/SzcTI1Q4JVI"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Green A3",
+        "source": "https://youtu.be/lc-FnkfKRng"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Ticket",
+        "source": "https://youtu.be/DuRV7erpCnE"
+    },
+    {
+        "description": "Thrown from B",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Hell",
+        "source": "https://youtu.be/vRF9cEpePWE"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Ebox",
+        "source": "https://youtu.be/UX_bRWxbvi0"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Bombtrain red",
+        "source": "https://youtu.be/XNCCO8k1z44"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Bombtrain red",
+        "source": "https://youtu.be/0swjRl_SwaA"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector A Bomb Site",
+        "source": "https://youtu.be/gRjzLxlKrbA"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector Sidewalk",
+        "source": "https://youtu.be/gY-K8kEAUSw"
+    },
+    {
+        "description": "run throw",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Connector Sidewalk",
+        "source": "https://youtu.be/DoC3fU89ios"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Sidewalk B",
+        "source": "https://youtu.be/AnpKQOaJsSg"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Sidewalk Close",
+        "source": "https://youtu.be/QPMH3dH6aXo"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Summit",
+        "source": "https://youtu.be/Hz_8I5WzGBY"
+    },
+    {
+        "description": "",
+        "map": "train",
+        "side": "t",
+        "type": "smoke",
+        "location": "Catwalk",
+        "source": "https://youtu.be/IRlLhj8Zmpg"
+    }
+]

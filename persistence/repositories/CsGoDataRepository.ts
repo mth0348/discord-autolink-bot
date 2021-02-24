@@ -1,11 +1,11 @@
 import { CsGoVideo } from '../entities/csgo/CsGoVideo';
 
-import database = require('../../src/data/mtg.json');
+import database = require('../../assets/data/csgo.json');
 
 export class CsGoDataRepository {
 
-    public getPermanentConditions(): CsGoVideo[] {
-        return database.permanentConditions.map(x => new CsGoVideo(x));
+    public getAll(): CsGoVideo[] {
+        return database.map(x => new CsGoVideo(x));
     }
 
 }

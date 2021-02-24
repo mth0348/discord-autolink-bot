@@ -27,7 +27,7 @@
   "dependencies": {
     "canvas": "^2.6.1",
     "discord.js": "^12.0.2",
-    "fuse.js": "^5.0.9-beta",
+    "fuse.js": "^6.4.6",
     "typescript": "^4.1.5"
   },
   "devDependencies": {

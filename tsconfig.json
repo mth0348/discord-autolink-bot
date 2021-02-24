@@ -6,6 +6,7 @@
         "sourceMap": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
+        "esModuleInterop": true,
         "lib": [ "dom", "es2015" ],
         "outDir": "dist",
         "types": ["node"]

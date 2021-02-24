@@ -4,7 +4,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid",
+        "location": "Top Mid",
         "source": "https://youtu.be/wMDxgNhl9qI"
     },
     {
@@ -12,7 +12,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "top mid",
+        "location": "Top Mid",
         "source": "https://youtu.be/JSWmUxqZr20"
     },
     {
@@ -20,7 +20,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "window",
+        "location": "Window",
         "source": "https://youtu.be/DXYFcsBqzEw"
     },
     {
@@ -28,7 +28,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "mid b short",
+        "location": "Mid B Short",
         "source": "https://youtu.be/lr7G9VU5o6s"
     },
     {
@@ -36,7 +36,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "connector",
+        "location": "Connector",
         "source": "https://youtu.be/PRMya2dfdPQ"
     },
     {
@@ -44,7 +44,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "connector",
+        "location": "Connector",
         "source": "https://youtu.be/DX0hmzhJwVA"
     },
     {
@@ -52,15 +52,15 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "jungle",
+        "location": "Jungle",
         "source": "https://youtu.be/PwZMzJsMdoQ"
     },
     {
         "description": "Thrown with Jump+Throw, covers CT",
         "map": "mirage",
         "side": "t",
-        "type": "smoke",
-        "location": "ct ticket",
+        "type": "Smoke",
+        "location": "CT Ticket",
         "source": "https://youtu.be/gPessAcXo2U"
     },
     {
@@ -68,7 +68,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "stairs",
+        "location": "Stairs",
         "source": "https://youtu.be/qRXanvKP8do"
     },
     {
@@ -76,7 +76,7 @@
         "map": "mirage",
         "side": "t",
         "type": "smoke",
-        "location": "bench",
+        "location": "Bench",
         "source": "https://youtu.be/G89WndN0soM"
     },
     {
@@ -84,7 +84,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
-        "location": "aps",
+        "location": "Aps",
         "source": "https://youtu.be/63IB7bHteBo"
     },
     {
@@ -92,7 +92,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "smoke",
-        "location": "ramp",
+        "location": "Ramp",
         "source": "https://youtu.be/wxkiLvOxTwM"
     },
     {
@@ -100,7 +100,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/PYdjPVcaxN0"
     },
     {
@@ -108,7 +108,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/2-ntWSakVHI"
     },
     {
@@ -116,7 +116,7 @@
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/lGvaHGdEAZE"
     },
     {
@@ -124,7 +124,7 @@
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "aps car",
+        "location": "Aps Car",
         "source": "https://youtu.be/r6h2U6hnWdE"
     },
     {
@@ -132,7 +132,7 @@
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "b site",
+        "location": "B Site",
         "source": "https://youtu.be/ZyBHlFo4srE"
     },
     {
@@ -140,7 +140,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "ramp",
+        "location": "Ramp",
         "source": "https://youtu.be/Rza_elU2lQk"
     },
     {
@@ -148,7 +148,7 @@
         "map": "mirage",
         "side": "t",
         "type": "flash",
-        "location": "a site",
+        "location": "A Site",
         "source": "https://youtu.be/frZpU04ZKYc"
     },
     {
@@ -156,7 +156,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "molotov",
-        "location": "ninja",
+        "location": "Ninja",
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
@@ -164,7 +164,7 @@
         "map": "mirage",
         "side": "t",
         "type": "molotov",
-        "location": "ninja",
+        "location": "Ninja",
         "source": "https://youtu.be/0hqERDZn7kA"
     },
     {
@@ -172,7 +172,7 @@
         "map": "mirage",
         "side": "ct",
         "type": "flash",
-        "location": "aps",
+        "location": "Aps",
         "source": "https://youtu.be/TbJOqULU87E"
     },
     {
@@ -180,7 +180,7 @@
         "map": "mirage",
         "side": "t",
         "type": "molotov",
-        "location": "underwood",
+        "location": "Underwood",
         "source": "https://youtu.be/Q7y8cKXeX4Q"
     },
     {
@@ -188,7 +188,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "ct boost",
+        "location": "CT Boost",
         "source": "https://youtu.be/_u9eNdzP6gs"
     },
     {
@@ -196,7 +196,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "coffins",
+        "location": "Coffins",
         "source": "https://youtu.be/7s36QASohFk"
     },
     {
@@ -204,7 +204,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "a short mid",
+        "location": "A Short Mid",
         "source": "https://youtu.be/tTqC8taNzyc"
     },
     {
@@ -212,7 +212,7 @@
         "map": "inferno",
         "side": "t",
         "type": "flash",
-        "location": "b site",
+        "location": "B Site",
         "source": "https://youtu.be/Oz5JyrgirB0"
     },
     {
@@ -220,7 +220,7 @@
         "map": "inferno",
         "side": "t",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/FCbBBnWyvY4"
     },
     {
@@ -228,7 +228,7 @@
         "map": "inferno",
         "side": "t",
         "type": "flash",
-        "location": "pit",
+        "location": "Pit",
         "source": "https://youtu.be/iLUlfFcIeIU"
     },
     {
@@ -236,7 +236,7 @@
         "map": "inferno",
         "side": "t",
         "type": "flash",
-        "location": "boiler",
+        "location": "Boiler",
         "source": "https://youtu.be/YMQh7wLRzyc"
     },
     {
@@ -244,7 +244,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "back alley",
+        "location": "Back Alley",
         "source": "https://youtu.be/paeOwYW81Tw"
     },
     {
@@ -252,7 +252,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/WZlpML2HMoc"
     },
     {
@@ -260,7 +260,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "mid",
+        "location": "Mid",
         "source": "https://youtu.be/gkw6_pjugUY"
     },
     {
@@ -268,7 +268,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "a long",
+        "location": "A Long",
         "source": "https://youtu.be/-lU5XGRw9Xs"
     },
     {
@@ -276,7 +276,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "library",
+        "location": "Library",
         "source": "https://youtu.be/MLNGKS3zVMo"
     },
     {
@@ -284,7 +284,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "b site",
+        "location": "B Site",
         "source": "https://youtu.be/Nk4ULf-2FGs"
     },
     {
@@ -292,7 +292,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "coffins",
+        "location": "Coffins",
         "source": "https://youtu.be/yHx4_m5Hj5Y"
     },
     {
@@ -300,7 +300,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "banana close B",
+        "location": "Banana close B",
         "source": "https://youtu.be/_D2fAA0t-bQ"
     },
     {
@@ -308,7 +308,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "banana",
+        "location": "Banana",
         "source": "https://youtu.be/PoiR65RsWGI"
     },
     {
@@ -316,7 +316,7 @@
         "map": "inferno",
         "side": "ct",
         "type": "flash",
-        "location": "ct sand bags",
+        "location": "CT Sand bags",
         "source": "https://youtu.be/4zx5Lh-1-vo"
     },
     {
@@ -324,7 +324,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "a long mid",
+        "location": "A Long Mid",
         "source": "https://youtu.be/cjmFxKFyvjI"
     },
     {
@@ -332,7 +332,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "a long mid",
+        "location": "A Long Mid",
         "source": "https://youtu.be/OrWetbr1GwU"
     },
     {
@@ -340,7 +340,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "library",
+        "location": "Library",
         "source": "https://youtu.be/d7ltMGyuVHs"
     },
     {
@@ -348,7 +348,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "a long site",
+        "location": "A Long Site",
         "source": "https://youtu.be/RNkSiyiwzcs"
     },
     {
@@ -356,7 +356,7 @@
         "map": "inferno",
         "side": "t",
         "type": "smoke",
-        "location": "boiler a short",
+        "location": "Boiler A Short",
         "source": "https://youtu.be/T--5nlFsJ4U"
     },
     {
@@ -364,7 +364,7 @@
         "map": "inferno",
         "side": "t",
         "type": "molotov",
-        "location": "quad",
+        "location": "Quad",
         "source": "https://youtu.be/pbr2hjg6SDI"
     },
     {
@@ -372,7 +372,7 @@
         "map": "anubis",
         "side": "t",
         "type": "molotov",
-        "location": "a site rug",
+        "location": "A Site rug",
         "source": "https://youtu.be/_zZoMXoRk6k"
     },
     {
@@ -380,7 +380,7 @@
         "map": "anubis",
         "side": "ct",
         "type": "smoke",
-        "location": "top mid",
+        "location": "Top Mid",
         "source": "https://youtu.be/ppSFxB56ae8"
     },
     {
@@ -388,7 +388,7 @@
         "map": "anubis",
         "side": "ct",
         "type": "smoke",
-        "location": "a upper",
+        "location": "A Upper",
         "source": "https://youtu.be/hCvqJK11bBo"
     },
     {
@@ -396,7 +396,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "b site alley",
+        "location": "B Site Alley",
         "source": "https://youtu.be/-TDnpfSRRWs"
     },
     {
@@ -404,7 +404,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "connector b site",
+        "location": "Connector B Site",
         "source": "https://youtu.be/RK-2n9-p4z0"
     },
     {
@@ -412,7 +412,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "heaven a site",
+        "location": "Heaven A Site",
         "source": "https://youtu.be/hrQSRA5T8oA"
     },
     {
@@ -420,7 +420,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "palace b site",
+        "location": "Palace B Site",
         "source": "https://youtu.be/oo0rElhoKDM"
     },
     {
@@ -428,7 +428,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "palace b site",
+        "location": "Palace B Site",
         "source": "https://youtu.be/il_NREzebqw"
     },
     {
@@ -436,7 +436,7 @@
         "map": "anubis",
         "side": "t",
         "type": "smoke",
-        "location": "walkway a mid",
+        "location": "Walkway A Mid",
         "source": "https://youtu.be/x2DwgaEsDss"
     },
     {
@@ -444,7 +444,7 @@
         "map": "anubis",
         "side": "ct",
         "type": "molotov",
-        "location": "a long entrance",
+        "location": "A Long Entrance",
         "source": "https://youtu.be/SzcTI1Q4JVI"
     },
     {
@@ -452,7 +452,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "green A3",
+        "location": "Green A3",
         "source": "https://youtu.be/lc-FnkfKRng"
     },
     {
@@ -460,7 +460,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "ticket",
+        "location": "Ticket",
         "source": "https://youtu.be/DuRV7erpCnE"
     },
     {
@@ -468,7 +468,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "hell",
+        "location": "Hell",
         "source": "https://youtu.be/vRF9cEpePWE"
     },
     {
@@ -476,7 +476,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "ebox",
+        "location": "Ebox",
         "source": "https://youtu.be/UX_bRWxbvi0"
     },
     {
@@ -484,7 +484,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "bombtrain red",
+        "location": "Bombtrain red",
         "source": "https://youtu.be/XNCCO8k1z44"
     },
     {
@@ -492,7 +492,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "bombtrain red",
+        "location": "Bombtrain red",
         "source": "https://youtu.be/0swjRl_SwaA"
     },
     {
@@ -500,7 +500,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector a bomb site",
+        "location": "Connector A Bomb Site",
         "source": "https://youtu.be/gRjzLxlKrbA"
     },
     {
@@ -508,7 +508,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector sidewalk",
+        "location": "Connector Sidewalk",
         "source": "https://youtu.be/gY-K8kEAUSw"
     },
     {
@@ -516,7 +516,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "connector sidewalk",
+        "location": "Connector Sidewalk",
         "source": "https://youtu.be/DoC3fU89ios"
     },
     {
@@ -524,7 +524,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "sidewalk b",
+        "location": "Sidewalk B",
         "source": "https://youtu.be/AnpKQOaJsSg"
     },
     {
@@ -532,7 +532,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "sidewalk close",
+        "location": "Sidewalk Close",
         "source": "https://youtu.be/QPMH3dH6aXo"
     },
     {
@@ -540,7 +540,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "summit",
+        "location": "Summit",
         "source": "https://youtu.be/Hz_8I5WzGBY"
     },
     {
@@ -548,7 +548,7 @@
         "map": "train",
         "side": "t",
         "type": "smoke",
-        "location": "catwalk",
+        "location": "Catwalk",
         "source": "https://youtu.be/IRlLhj8Zmpg"
     }
 ]

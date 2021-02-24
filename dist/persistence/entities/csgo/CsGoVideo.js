@@ -10,6 +10,9 @@ var CsGoVideo = (function () {
         this.location = data.location;
         this.source = data.source;
     }
+    CsGoVideo.prototype.toString = function () {
+        return this.map + " " + this.type + " " + this.side + " - " + this.location;
+    };
     return CsGoVideo;
 }());
 exports.CsGoVideo = CsGoVideo;
