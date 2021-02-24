@@ -7,9 +7,6 @@
     "start": "npm run serve",
     "serve": "node dist/index.js"
   },
-  "engines": {
-    "node": "12.16.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mth0348/discord-autolink-bot.git"
