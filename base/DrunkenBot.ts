@@ -53,10 +53,7 @@ export class DrunkenBot {
         Logger.clearStack();
 
         try {
-            // TODO REMOVE CHECK.
-            if (message.author.username === "Telerik" && (message.channel as TextChannel).name.toLowerCase() === "dev-playground") {
-                await parser.executeAsync(message);
-            }
+            await parser.executeAsync(message);
         }
         catch (e) {
             message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");

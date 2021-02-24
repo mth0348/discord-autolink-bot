@@ -91,19 +91,17 @@ var DrunkenBot = (function () {
                         Logger_1.Logger.clearStack();
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 4, , 5]);
-                        if (!(message.author.username === "Telerik" && message.channel.name.toLowerCase() === "dev-playground")) return [3, 3];
+                        _a.trys.push([1, 3, , 4]);
                         return [4, parser.executeAsync(message)];
                     case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [3, 5];
-                    case 4:
+                        return [3, 4];
+                    case 3:
                         e_1 = _a.sent();
                         message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
                         DrunkenBot.reportMessage(message, parser.name, e_1);
-                        return [3, 5];
-                    case 5: return [2];
+                        return [3, 4];
+                    case 4: return [2];
                 }
             });
         });
