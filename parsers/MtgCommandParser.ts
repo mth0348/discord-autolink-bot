@@ -83,11 +83,16 @@ export class MtgCommandParser extends BaseCommandParser {
         // setup global card settings.
         const cardType = this.parameterService.tryGetParameterValue("type", parameters) ?? this.getRandomType();
         const cardRarity = this.parameterService.tryGetParameterValue("rarity", parameters) ?? this.getRandomRarity();
-        const cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor(cardType);
+        let cardColor = this.parameterService.tryGetParameterValue("color", parameters) ?? this.getRandomColor(cardType);
         const cardName = this.parameterService.tryGetParameterValue("name", parameters);
 
+        cardColor = this.stripInvalidColorValues(cardColor);
+        if (cardColor.length <= 0) {
+            cardColor = this.getRandomColor(cardType);
+        }
+
         // start card generation.
-        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor), cardName);
+        const card = this.mtgCardService.generateCard(EnumHelper.toMtgCardType(cardType), EnumHelper.toMtgCardRarity(cardRarity), cardColor, cardName);
 
         // render card.
         const mtgCardRenderer = card.type === MtgCardType.Planeswalker ? new MtgPlaneswalkerCardRenderer(card) : new MtgCardRenderer(card);

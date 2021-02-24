@@ -142,17 +142,17 @@ var MtgDataRepository = (function () {
         return StringHelper_1.StringHelper.toCamelCase(adjectives + artifactDescriptor);
     };
     MtgDataRepository.prototype.getPlaneswalkerName = function () {
-        var name = Random_1.Random.nextFromList(database.planeswalkerTexts.names) + ", ";
-        var secondName = Random_1.Random.nextFromList(database.planeswalkerTexts.names) + " ";
+        var name = Random_1.Random.nextFromList(database.planeswalkerTexts.names);
+        var secondName = Random_1.Random.nextFromList(database.planeswalkerTexts.names);
         var adjective = Random_1.Random.nextFromList(database.creatureTexts.adjectives) + " ";
         var noun = Random_1.Random.nextFromList(database.creatureTexts.nouns);
         if (Random_1.Random.chance(0.3)) {
-            return StringHelper_1.StringHelper.toCamelCase(name + "the " + adjective);
+            return StringHelper_1.StringHelper.toCamelCase(name + ", the " + adjective);
         }
         if (Random_1.Random.chance(0.3)) {
-            return StringHelper_1.StringHelper.toCamelCase(name + secondName);
+            return StringHelper_1.StringHelper.toCamelCase(name + " " + secondName);
         }
-        return StringHelper_1.StringHelper.toCamelCase(name + adjective + noun);
+        return StringHelper_1.StringHelper.toCamelCase(name + ", " + adjective + noun);
     };
     MtgDataRepository.prototype.getInstantSorceryName = function () {
         var adjective = Random_1.Random.nextFromList(database.spellTexts.adjectives) + " ";

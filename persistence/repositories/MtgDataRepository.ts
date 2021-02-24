@@ -174,18 +174,18 @@ export class MtgDataRepository {
     }
 
     public getPlaneswalkerName() {
-        const name = Random.nextFromList(database.planeswalkerTexts.names) + ", ";
-        const secondName = Random.nextFromList(database.planeswalkerTexts.names) + " ";
+        const name = Random.nextFromList(database.planeswalkerTexts.names);
+        const secondName = Random.nextFromList(database.planeswalkerTexts.names);
         const adjective = Random.nextFromList(database.creatureTexts.adjectives) + " ";
         const noun = Random.nextFromList(database.creatureTexts.nouns);
 
         if (Random.chance(0.3)) {
-            return StringHelper.toCamelCase(name + "the " + adjective);
+            return StringHelper.toCamelCase(name + ", the " + adjective);
         }
         if (Random.chance(0.3)) {
-            return StringHelper.toCamelCase(name + secondName);
+            return StringHelper.toCamelCase(name + " " + secondName);
         }
-        return StringHelper.toCamelCase(name + adjective + noun);
+        return StringHelper.toCamelCase(name + ", " + adjective + noun);
     }
 
     public getInstantSorceryName() {

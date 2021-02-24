@@ -108,7 +108,11 @@ var MtgCommandParser = (function (_super) {
                         cardRarity = (_b = this.parameterService.tryGetParameterValue("rarity", parameters)) !== null && _b !== void 0 ? _b : this.getRandomRarity();
                         cardColor = (_c = this.parameterService.tryGetParameterValue("color", parameters)) !== null && _c !== void 0 ? _c : this.getRandomColor(cardType);
                         cardName = this.parameterService.tryGetParameterValue("name", parameters);
-                        card = this.mtgCardService.generateCard(EnumHelper_1.EnumHelper.toMtgCardType(cardType), EnumHelper_1.EnumHelper.toMtgCardRarity(cardRarity), this.stripInvalidColorValues(cardColor), cardName);
+                        cardColor = this.stripInvalidColorValues(cardColor);
+                        if (cardColor.length <= 0) {
+                            cardColor = this.getRandomColor(cardType);
+                        }
+                        card = this.mtgCardService.generateCard(EnumHelper_1.EnumHelper.toMtgCardType(cardType), EnumHelper_1.EnumHelper.toMtgCardRarity(cardRarity), cardColor, cardName);
                         mtgCardRenderer = card.type === MtgCardType_1.MtgCardType.Planeswalker ? new MtgPlaneswalkerCardRenderer_1.MtgPlaneswalkerCardRenderer(card) : new MtgCardRenderer_1.MtgCardRenderer(card);
                         return [4, mtgCardRenderer.renderCard()];
                     case 1:

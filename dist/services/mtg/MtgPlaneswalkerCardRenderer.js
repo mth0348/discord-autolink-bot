@@ -177,7 +177,7 @@ var MtgPlaneswalkerCardRenderer = (function () {
                         if (!(i < 3)) return [3, 8];
                         activatedAbility = this.card.oracle.abilities[i];
                         cost = activatedAbility.cost;
-                        isUp = cost.score > 0;
+                        isUp = parseInt(cost.text) > 0;
                         pwSymbolImage = ImageProvider_1.ImageProvider.getImage("assets/img/mtg/symbols/mtg_pw_" + (isUp ? 'up' : 'down') + ".png");
                         this.ctx.drawImage(pwSymbolImage, 25, 570 + (i * (lineHeight + 2)), 75, 52);
                         this.ctx.fillStyle = '#FFFFFF';

@@ -122,7 +122,7 @@ export class MtgPlaneswalkerCardRenderer {
             // draw symbol.
             const activatedAbility = this.card.oracle.abilities[i] as MtgActivatedAbility;
             const cost = activatedAbility.cost;
-            const isUp = cost.score > 0;
+            const isUp = parseInt(cost.text) > 0;
             const pwSymbolImage = ImageProvider.getImage(`assets/img/mtg/symbols/mtg_pw_${isUp ? 'up' : 'down'}.png`)
             this.ctx.drawImage(pwSymbolImage, 25, 570 + (i * (lineHeight + 2)), 75, 52);
             
