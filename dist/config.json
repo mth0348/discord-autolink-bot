@@ -2,7 +2,9 @@
     "prefix": "!",
     "channelPermissions": {
         "general": [
-            "dev-playground"
+            "random",
+            "dev-playground",
+            "bot-updates"
         ],
         "dnd": [
             "random",
@@ -11,10 +13,12 @@
             "dev-playground"
         ],
         "csgo": [
+            "random",
             "cs-go",
             "dev-playground"
         ],
         "mtg": [
+            "random",
             "magic-the-gathering",
             "dev-playground"
         ],
