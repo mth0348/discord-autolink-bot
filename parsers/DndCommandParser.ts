@@ -4,6 +4,7 @@ import { Logger } from '../helpers/Logger';
 import { BaseCommandParser } from '../base/BaseCommandParser';
 import { ParameterService } from '../services/ParameterService';
 import { Random } from '../helpers/Random';
+import { ConfigProvider } from '../helpers/ConfigProvider';
 
 export class DndCommandParser extends BaseCommandParser {
 
@@ -12,7 +13,7 @@ export class DndCommandParser extends BaseCommandParser {
     protected prefixes: string[] = ["d", "w"];
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
-        super(discordService, parameterService, undefined, undefined /* means no permission checks */);
+        super(discordService, parameterService, ConfigProvider.current().channelPermissions.dnd, ConfigProvider.current().rolePermissions.dnd);
 
         console.log("|| - registered DnD parser.    ||");
     }
