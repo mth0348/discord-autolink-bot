@@ -45,6 +45,7 @@ var ImageProvider_1 = require("../persistence/repositories/ImageProvider");
 var Logger_1 = require("../helpers/Logger");
 var BotCommandParser_1 = require("../parsers/BotCommandParser");
 var CsGoCommandParser_1 = require("../parsers/CsGoCommandParser");
+var DndCommandParser_1 = require("../parsers/DndCommandParser");
 var DrunkenBot = (function () {
     function DrunkenBot(token) {
         this.client = new discord_js_1.Client();
@@ -125,6 +126,7 @@ var DrunkenBot = (function () {
         this.registeredParsers.push(new BotCommandParser_1.BotCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new MtgCommandParser_1.MtgCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new CsGoCommandParser_1.CsGoCommandParser(this.discordService, this.parameterService));
+        this.registeredParsers.push(new DndCommandParser_1.DndCommandParser(this.discordService, this.parameterService));
     };
     return DrunkenBot;
 }());
