@@ -68,11 +68,15 @@ export class DndCommandParser extends BaseCommandParser {
 
             const result = `**${diceRoll}** ${emoji}`;
 
+            let guild = message.client.guilds.cache.first();
+            let member = guild.member(message.author);
+            let nickname = member ? member.displayName : null;
+
             // add result to display text.
             if (repeatCount > 1) {
                 resultText += `${(i + 1)}) `;
             }
-            resultText += `${message.author.username} rolls a ${result.trim()}`;
+            resultText += `${nickname} rolls a ${result.trim()}`;
             if (i < repeatCount - 1) {
                 resultText += '\r\n';
             }
