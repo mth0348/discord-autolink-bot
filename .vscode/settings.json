@@ -7,5 +7,8 @@
         "**/dist": true,
         "package-lock.json": true
     },
-    "autoimport.filesToScan": "**/*.{ts,tsx,js}"
+    "autoimport.filesToScan": "**/*.{ts,tsx,js}",
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }

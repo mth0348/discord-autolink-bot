@@ -54,10 +54,11 @@ var discord_js_1 = require("discord.js");
 var Logger_1 = require("../helpers/Logger");
 var BaseCommandParser_1 = require("../base/BaseCommandParser");
 var Random_1 = require("../helpers/Random");
+var ConfigProvider_1 = require("../helpers/ConfigProvider");
 var DndCommandParser = (function (_super) {
     __extends(DndCommandParser, _super);
     function DndCommandParser(discordService, parameterService) {
-        var _this = _super.call(this, discordService, parameterService, undefined, undefined) || this;
+        var _this = _super.call(this, discordService, parameterService, ConfigProvider_1.ConfigProvider.current().channelPermissions.dnd, ConfigProvider_1.ConfigProvider.current().rolePermissions.dnd) || this;
         _this.name = "DnD Parser";
         _this.prefixes = ["d", "w"];
         console.log("|| - registered DnD parser.    ||");
@@ -65,7 +66,7 @@ var DndCommandParser = (function (_super) {
     }
     DndCommandParser.prototype.executeAsync = function (message) {
         return __awaiter(this, void 0, void 0, function () {
-            var parameters, indexOfSpace, repeatCount, diceSize, color, title, resultText, i, diceRoll, critSuccess, critFailure, emoji, result, embed;
+            var parameters, indexOfSpace, repeatCount, diceSize, color, title, resultText, i, diceRoll, critSuccess, critFailure, emoji, result, guild, member, nickname, embed;
             return __generator(this, function (_a) {
                 parameters = this.parameterService.extractParameters(message.content, []);
                 if (this.parameterService.tryGetParameterValue("help", parameters) === "help") {
@@ -98,10 +99,13 @@ var DndCommandParser = (function (_super) {
                     color = critSuccess ? '#FFFF00' : critFailure ? '#FF0000' : '#dddddd';
                     emoji = critSuccess ? '🌟' : critFailure ? '💥' : '';
                     result = "**" + diceRoll + "** " + emoji;
+                    guild = message.client.guilds.cache.first();
+                    member = guild.member(message.author);
+                    nickname = member ? member.displayName : null;
                     if (repeatCount > 1) {
                         resultText += (i + 1) + ") ";
                     }
-                    resultText += message.author.username + " rolls a " + result.trim();
+                    resultText += nickname + " rolls a " + result.trim();
                     if (i < repeatCount - 1) {
                         resultText += '\r\n';
                     }

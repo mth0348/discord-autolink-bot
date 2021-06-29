@@ -49,7 +49,7 @@ var DiscordService = (function () {
     DiscordService.prototype.checkChannelPermissions = function (message, allowedChannels) {
         for (var i = 0; i < allowedChannels.length; i++) {
             var allowedChannel = allowedChannels[i];
-            if (message.channel.type === "dm" || message.channel.name.toLowerCase() === allowedChannel.toLowerCase()) {
+            if (message.channel.type === "dm" || message.channel.name.toLowerCase().endsWith(allowedChannel.toLowerCase())) {
                 return true;
             }
         }
