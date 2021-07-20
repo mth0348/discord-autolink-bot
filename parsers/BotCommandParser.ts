@@ -8,7 +8,7 @@ export class BotCommandParser extends BaseCommandParser {
 
     public name: string = "Bot Parser";
 
-    protected prefixes: string[] = ["help", "bot"];
+    protected prefixes: string[] = ["help", "bot", "status"];
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, undefined, undefined /* means no permission checks */);
@@ -17,6 +17,15 @@ export class BotCommandParser extends BaseCommandParser {
     }
 
     public async executeAsync(message: Message | PartialMessage): Promise<void> {
+
+        // extract parameters.
+        const parameters = this.parameterService.extractParameters(message.content, []);
+
+        // decide if user asked for status.
+        if (this.parameterService.tryGetParameterValue("status", parameters) === "status" || message.content.substr(1).startsWith("status")) {
+            this.discordService.sendMessage(message, "Bot is running... ✔️");
+            return;
+        }
 
         Logger.log(`${message.author.username} requested help: ` + message.content);
 
