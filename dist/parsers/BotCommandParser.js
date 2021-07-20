@@ -58,14 +58,19 @@ var BotCommandParser = (function (_super) {
     function BotCommandParser(discordService, parameterService) {
         var _this = _super.call(this, discordService, parameterService, undefined, undefined) || this;
         _this.name = "Bot Parser";
-        _this.prefixes = ["help", "bot"];
+        _this.prefixes = ["help", "bot", "status"];
         console.log("|| - registered Bot parser.    ||");
         return _this;
     }
     BotCommandParser.prototype.executeAsync = function (message) {
         return __awaiter(this, void 0, void 0, function () {
-            var embed;
+            var parameters, embed;
             return __generator(this, function (_a) {
+                parameters = this.parameterService.extractParameters(message.content, []);
+                if (this.parameterService.tryGetParameterValue("status", parameters) === "status" || message.content.substr(1).startsWith("status")) {
+                    this.discordService.sendMessage(message, "Bot is running! ✅");
+                    return [2];
+                }
                 Logger_1.Logger.log(message.author.username + " requested help: " + message.content);
                 embed = new discord_js_1.MessageEmbed({
                     files: [{

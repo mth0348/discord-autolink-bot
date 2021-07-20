@@ -23,7 +23,7 @@ export class BotCommandParser extends BaseCommandParser {
 
         // decide if user asked for status.
         if (this.parameterService.tryGetParameterValue("status", parameters) === "status" || message.content.substr(1).startsWith("status")) {
-            this.discordService.sendMessage(message, "Bot is running... ✔️");
+            this.discordService.sendMessage(message, "Bot is running! ✅");
             return;
         }
 

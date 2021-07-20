@@ -30,6 +30,9 @@ var ParameterService = (function () {
             else if (paramParts.length === 1 && StringHelper_1.StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "help")) {
                 result.push(new Parameter_1.Parameter("help", "help"));
             }
+            else if (paramParts.length === 1 && StringHelper_1.StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "status")) {
+                result.push(new Parameter_1.Parameter("status", "status"));
+            }
         });
         return result;
     };

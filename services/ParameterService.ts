@@ -32,6 +32,8 @@ export class ParameterService {
                 });
             } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "help")) {
                 result.push(new Parameter("help", "help"))
+            } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "status")) {
+                result.push(new Parameter("status", "status"))
             }
         });
 
