@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
+  "postinstall": "tsc",
+  "watch-node": "nodemon dist/index.js",
+  "watch-ts": "tsc -w",
   "scripts": {
     "start": "npm run serve",
     "serve": "node dist/index.js"

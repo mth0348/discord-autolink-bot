@@ -113,3 +113,5 @@ web_modules/
 .yarn/build-state.yml
 .pnp.*
 /tools/ImageRenamer/ImageRenamer/obj/*
+dist/*
+src/dist/*

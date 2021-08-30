@@ -14,7 +14,7 @@
             "${workspaceFolder}/node_modules/**/*.ts",
             "dist"
         ],
-        "program": "${workspaceFolder}\\index.ts",
+        "program": "${workspaceFolder}\\src\\index.ts",
         "preLaunchTask": "tsc: build",
     }]
 }
