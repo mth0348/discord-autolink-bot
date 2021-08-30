@@ -10,7 +10,7 @@ import { CsGoDataRepository } from '../persistence/repositories/CsGoDataReposito
 import { CsGoVideo } from '../persistence/entities/csgo/CsGoVideo';
 import { CsGoNadeType } from '../dtos/csgo/CsGoNadeType';
 import { StringHelper } from '../helpers/StringHelper';
-import { DrunkenBot } from '../base/drunkenbot';
+import { DrunkenBot } from '../base/DrunkenBot';
 
 export class CsGoCommandParser extends BaseCommandParser {
 
