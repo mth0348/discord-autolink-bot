@@ -3,7 +3,7 @@ import { MtgCommandParser } from "../parsers/MtgCommandParser";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
 import { ParameterService } from '../services/ParameterService';
-import { ImageProvider } from '../persistence/repositories/ImageProvider';
+import { ImageProvider } from '../domain/repositories/ImageProvider';
 import { Logger } from '../helpers/Logger';
 import { BotCommandParser } from '../parsers/BotCommandParser';
 import { CsGoCommandParser } from '../parsers/CsGoCommandParser';

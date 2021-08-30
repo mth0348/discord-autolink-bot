@@ -4,7 +4,7 @@ import { StringHelper } from '../../../helpers/StringHelper';
 import { Random } from '../../../helpers/Random';
 import { Logger } from '../../../helpers/Logger';
 import { LogType } from '../../LogType';
-import { MtgEnchantmentEffect } from '../../../persistence/entities/mtg/MtgEnchantmentEffect';
+import { MtgEnchantmentEffect } from '../../../domain/models/mtg/MtgEnchantmentEffect';
 
 export class MtgAuraAbility implements MtgAbility {
 

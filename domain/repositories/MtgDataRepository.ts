@@ -1,18 +1,18 @@
 import { Random } from '../../helpers/Random';
 import { StringHelper } from '../../helpers/StringHelper';
-import { MtgKeyword } from '../entities/mtg/MtgKeyword';
-import { MtgPermanentCondition } from '../entities/mtg/MtgPermanentCondition';
-import { MtgPermanentEvent } from '../entities/mtg/MtgPermanentEvent';
-import { MtgPermanentStatics } from '../entities/mtg/MtgPermanentStatics';
-import { MtgPermanentActivatedCost } from '../entities/mtg/MtgPermanentActivatedCost';
-import { MtgInstantSorceryEvent } from '../entities/mtg/MtgInstantSorceryEvent';
+import { MtgKeyword } from '../models/mtg/MtgKeyword';
+import { MtgPermanentCondition } from '../models/mtg/MtgPermanentCondition';
+import { MtgPermanentEvent } from '../models/mtg/MtgPermanentEvent';
+import { MtgPermanentStatics } from '../models/mtg/MtgPermanentStatics';
+import { MtgPermanentActivatedCost } from '../models/mtg/MtgPermanentActivatedCost';
+import { MtgInstantSorceryEvent } from '../models/mtg/MtgInstantSorceryEvent';
 import { Logger } from '../../helpers/Logger';
 import { LogType } from '../../dtos/LogType';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
-import { MtgEnchantmentEffect } from '../entities/mtg/MtgEnchantmentEffect';
+import { MtgEnchantmentEffect } from '../models/mtg/MtgEnchantmentEffect';
 
-import database = require('../../assets/data/mtg.json');
+import database = require('../../assets/database/mtg.json');
 
 export class MtgDataRepository {
 

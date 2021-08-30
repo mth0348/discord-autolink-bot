@@ -1,5 +1,5 @@
-import { CsGoDataRepository } from '../../persistence/repositories/CsGoDataRepository';
-import { CsGoVideo } from '../../persistence/entities/csgo/CsGoVideo';
+import { CsGoDataRepository } from '../../domain/repositories/CsGoDataRepository';
+import { CsGoVideo } from '../../domain/models/csgo/CsGoVideo';
 import { Parameter } from '../../dtos/Parameter';
 import { CsGoParamType } from '../../dtos/csgo/CsGoParamType';
 import { EnumHelper } from '../../helpers/EnumHelper';

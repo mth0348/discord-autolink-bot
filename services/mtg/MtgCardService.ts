@@ -1,5 +1,5 @@
 import { MtgCard } from "../../dtos/mtg/MtgCard";
-import { MtgDataRepository } from "../../persistence/repositories/MtgDataRepository";
+import { MtgDataRepository } from "../../domain/repositories/MtgDataRepository";
 import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCreatureGenerator } from './generators/MtgCreatureGenerator';

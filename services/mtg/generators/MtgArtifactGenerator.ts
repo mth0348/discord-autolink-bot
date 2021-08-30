@@ -1,4 +1,4 @@
-import { MtgDataRepository } from '../../../persistence/repositories/MtgDataRepository';
+import { MtgDataRepository } from '../../../domain/repositories/MtgDataRepository';
 import { MtgCard } from '../../../dtos/mtg/MtgCard';
 import { Random } from '../../../helpers/Random';
 import { MtgCardRarity } from '../../../dtos/mtg/MtgCardRarity';
@@ -9,7 +9,7 @@ import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { MtgHelper } from '../../../helpers/mtg/MtgHelper';
 import { MtgBaseGenerator } from './MtgBaseGenerator';
 import { MtgAuraAbility } from '../../../dtos/mtg/abilities/MtgAuraAbility';
-import { MtgKeyword } from '../../../persistence/entities/mtg/MtgKeyword';
+import { MtgKeyword } from '../../../domain/models/mtg/MtgKeyword';
 import { MtgCardType } from '../../../dtos/mtg/MtgCardType';
 
 export class MtgArtifactGenerator extends MtgBaseGenerator {

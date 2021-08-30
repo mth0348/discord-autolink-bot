@@ -1,5 +1,5 @@
 import { MtgCard } from '../../dtos/mtg/MtgCard';
-import { MtgDataRepository } from '../../persistence/repositories/MtgDataRepository';
+import { MtgDataRepository } from '../../domain/repositories/MtgDataRepository';
 import { Random } from '../../helpers/Random';
 import { MtgActivatedAbility } from '../../dtos/mtg/abilities/MtgActivatedAbility';
 import { MtgStaticAbility } from '../../dtos/mtg/abilities/MtgStaticAbility';
@@ -7,10 +7,10 @@ import { MtgTriggeredAbility } from '../../dtos/mtg/abilities/MtgTriggeredAbilit
 import { StringHelper } from '../../helpers/StringHelper';
 import { MtgCardRarity } from '../../dtos/mtg/MtgCardRarity';
 import { Collection } from 'discord.js';
-import { MtgPermanentActivatedCost } from '../../persistence/entities/mtg/MtgPermanentActivatedCost';
+import { MtgPermanentActivatedCost } from '../../domain/models/mtg/MtgPermanentActivatedCost';
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
-import { MtgPermanentStatics } from '../../persistence/entities/mtg/MtgPermanentStatics';
-import { MtgPermanentEvent } from '../../persistence/entities/mtg/MtgPermanentEvent';
+import { MtgPermanentStatics } from '../../domain/models/mtg/MtgPermanentStatics';
+import { MtgPermanentEvent } from '../../domain/models/mtg/MtgPermanentEvent';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { Logger } from '../../helpers/Logger';
@@ -18,8 +18,8 @@ import { LogType } from '../../dtos/LogType';
 import { MtgActivatedPwAbility } from '../../dtos/mtg/abilities/MtgActivatedPwAbility';
 import { MtgSpellAbility } from '../../dtos/mtg/abilities/MtgSpellAbility';
 import { MtgAuraAbility } from '../../dtos/mtg/abilities/MtgAuraAbility';
-import { MtgEnchantmentEffect } from '../../persistence/entities/mtg/MtgEnchantmentEffect';
-import { MtgPermanentCondition } from '../../persistence/entities/mtg/MtgPermanentCondition';
+import { MtgEnchantmentEffect } from '../../domain/models/mtg/MtgEnchantmentEffect';
+import { MtgPermanentCondition } from '../../domain/models/mtg/MtgPermanentCondition';
 
 export class MtgAbilityService {
 

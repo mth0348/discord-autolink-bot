@@ -1,5 +1,5 @@
 import { MtgCard } from '../../dtos/mtg/MtgCard';
-import { MtgDataRepository } from '../../persistence/repositories/MtgDataRepository';
+import { MtgDataRepository } from '../../domain/repositories/MtgDataRepository';
 import { Random } from '../../helpers/Random';
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MtgCommandParser } from '../../parsers/MtgCommandParser';

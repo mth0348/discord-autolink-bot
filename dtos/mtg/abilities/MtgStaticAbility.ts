@@ -1,6 +1,6 @@
 import { MtgAbility } from './MtgAbility';
 import { MtgAbilityType } from '../MtgAbilityType';
-import { MtgPermanentStatics } from '../../../persistence/entities/mtg/MtgPermanentStatics';
+import { MtgPermanentStatics } from '../../../domain/models/mtg/MtgPermanentStatics';
 import { StringHelper } from '../../../helpers/StringHelper';
 import { Random } from '../../../helpers/Random';
 import { Logger } from '../../../helpers/Logger';

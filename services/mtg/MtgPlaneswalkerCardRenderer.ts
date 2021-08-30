@@ -1,7 +1,7 @@
 import { MtgCard } from "../../dtos/mtg/MtgCard";
 import { MtgCardType } from '../../dtos/mtg/MtgCardType';
 import { MessageAttachment } from "discord.js";
-import { ImageProvider } from '../../persistence/repositories/ImageProvider';
+import { ImageProvider } from '../../domain/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
 import { StringHelper } from '../../helpers/StringHelper';
 import { Random } from "../../helpers/Random";

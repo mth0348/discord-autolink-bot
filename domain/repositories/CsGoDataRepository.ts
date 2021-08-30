@@ -1,6 +1,6 @@
-import { CsGoVideo } from '../entities/csgo/CsGoVideo';
+import { CsGoVideo } from '../models/csgo/CsGoVideo';
 
-import database = require('../../assets/data/csgo.json');
+import database = require('../../assets/database/csgo.json');
 
 export class CsGoDataRepository {
 

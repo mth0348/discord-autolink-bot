@@ -1,7 +1,7 @@
 import { MtgAbility } from './MtgAbility';
 import { MtgAbilityType } from '../MtgAbilityType';
-import { MtgPermanentEvent } from '../../../persistence/entities/mtg/MtgPermanentEvent';
-import { MtgPermanentCondition } from '../../../persistence/entities/mtg/MtgPermanentCondition';
+import { MtgPermanentEvent } from '../../../domain/models/mtg/MtgPermanentEvent';
+import { MtgPermanentCondition } from '../../../domain/models/mtg/MtgPermanentCondition';
 import { StringHelper } from '../../../helpers/StringHelper';
 import { Random } from '../../../helpers/Random';
 import { Logger } from '../../../helpers/Logger';
