@@ -159,6 +159,8 @@ export class MusicCommandParser extends BaseCommandParser {
     private async stopPlaying(message: Message | PartialMessage) {
         if (!(await this.ensureVoicePermissions(message))) return;
 
+        message.client.user.setActivity();
+
         this.discordService.sendMessage(message, `Stopped playing and cleared the queue for you.`);
         this.globalQueue.clear();
         this.voiceConnection.dispatcher.end();
