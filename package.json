@@ -8,18 +8,14 @@
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc --resolveJsonModule",
-    "postinstall": "npm run build",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build": "tsc --project ./tsconfig.json --resolveJsonModule"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mth0348/discord-autolink-bot.git"
   },
-  "keywords": [
-    "discord",
-    "bot"
-  ],
+  "keywords": ["discord", "bot"],
   "author": "Matthias Thomann",
   "license": "ISC",
   "bugs": {
@@ -31,27 +27,7 @@
     "discord.js": "^12.5.3",
     "fuse.js": "^6.4.6",
     "tslint": "^6.1.3",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^14.17.12",
-    "jest": "^27.1.0",
-    "nodemon": "^2.0.12",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
-  },
-  "devDependencies": {
-    "canvas": "^2.6.1",
-    "discord.js": "^12.5.3",
-    "fuse.js": "^6.4.6",
-    "tslint": "^6.1.3",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^14.17.12",
-    "jest": "^27.1.0",
-    "nodemon": "^2.0.12",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "@types/node": "^14.17.12"
   }
 }
