@@ -1,4 +1,4 @@
-import { AwaitReactionsOptions, CollectorFilter, Message, MessageAttachment, MessageEmbed, PartialMessage, TextChannel } from 'discord.js';
+import { AwaitReactionsOptions, CollectorFilter, Message, MessageAttachment, MessageEmbed, MessageReaction, PartialMessage, TextChannel } from 'discord.js';
 import { StringHelper } from '../helpers/StringHelper';
 import { DrunkenBot } from '../base/DrunkenBot';
 import { Logger } from '../helpers/Logger';
@@ -40,6 +40,24 @@ export class DiscordService {
                                 let username = reaction.users.cache.find(e => e.username !== reaction.message.author.username).username;
                                 DrunkenBot.reportMessage(message, username, 'User report');
                                 return;
+                        }
+                    }).catch(e => DrunkenBot.reportMessage(message, 'DrunkenBot Workflow', e));
+            });
+    }
+
+    sendMessageWithVotes(message: Message | PartialMessage, text: string, voteIcons: string[], voteCallbacks: ((reaction: MessageReaction) => void)[]) {
+        const self = this;
+
+        message.channel.send(text)
+            .then(function (embed) {
+                voteIcons.forEach(icon => embed.react(icon));
+                embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
+                    .then(collected => {
+                        const reaction = collected.first();
+                        if (reaction === undefined) return;
+                        const reactionIndex = voteIcons.findIndex(icon => icon === reaction.emoji.name);
+                        if (reactionIndex >= 0 && voteCallbacks[reactionIndex]) {
+                            voteCallbacks[reactionIndex](reaction);
                         }
                     }).catch(e => DrunkenBot.reportMessage(message, 'DrunkenBot Workflow', e));
             });

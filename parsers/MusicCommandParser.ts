@@ -1,11 +1,7 @@
-import { Message, MessageEmbed, PartialMessage, VoiceConnection } from 'discord.js';
+import { Message, MessageEmbed, PartialMessage, VoiceConnection, MessageReaction } from 'discord.js';
 import { BaseCommandParser } from '../base/BaseCommandParser';
 import { DiscordService } from '../services/DiscordService';
 import { ConfigProvider } from '../helpers/ConfigProvider';
-import { Random } from '../helpers/Random';
-import { EnumHelper } from '../helpers/EnumHelper';
-import { Resources } from '../helpers/Constants';
-import { StringHelper } from '../helpers/StringHelper';
 import { Logger } from '../helpers/Logger';
 import { ParameterService } from '../services/ParameterService';
 import { Queue } from '../dtos/Queue';
@@ -19,15 +15,17 @@ export class MusicCommandParser extends BaseCommandParser {
 
     public name: string = "Music Parser";
 
-    protected prefixes: string[] = ["music", "play", "skip", "stop", "audio"];
+    protected prefixes: string[] = ["music", "play", "queue", "skip", "stop", "clear", "search", "query", "find", "remove", "delete", "replay", "restart"];
 
-    private globalQueue: Queue<any>;
+    private globalQueue: Queue<MusicTrack>;
     private voiceConnection: VoiceConnection;
+    private icons: string[] = ["1️⃣", "2️⃣", "3️⃣"];
+    private isPaying: boolean;
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.music, ConfigProvider.current().rolePermissions.music);
 
-        this.globalQueue = new Queue<any>();
+        this.globalQueue = new Queue<MusicTrack>();
 
         console.log("|| - registered Music parser.  ||");
     }
@@ -45,76 +43,153 @@ export class MusicCommandParser extends BaseCommandParser {
             return;
         }
 
+        let invalidCommand = false;
         const songName = parameters.map(p => p.name).join(" ");
 
         if (message.content.startsWith(`${ConfigProvider.current().prefix}play`)) {
             await this.queueSong(message, songName);
             return;
+        } else if (message.content.startsWith(`${ConfigProvider.current().prefix}search`)
+            || message.content.startsWith(`${ConfigProvider.current().prefix}find`)
+            || message.content.startsWith(`${ConfigProvider.current().prefix}query`)) {
+            await this.searchSong(message, songName);
+            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}skip`)) {
             await this.skipSong(message);
+            return;
+        } else if (message.content.startsWith(`${ConfigProvider.current().prefix}remove`)
+            || message.content.startsWith(`${ConfigProvider.current().prefix}delete`)) {
+            await this.removeSong(message, parseInt(parameters[0].value));
             return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}stop`)) {
             await this.stopPlaying(message);
             return;
+        } else if (message.content.startsWith(`${ConfigProvider.current().prefix}clear`)) {
+            await this.clearQueue(message);
+            return;
+        } else if (message.content.startsWith(`${ConfigProvider.current().prefix}queue`)) {
+            await this.getQueue(message);
+            return;
+        } else if (message.content.startsWith(`${ConfigProvider.current().prefix}restart`)
+            || message.content.startsWith(`${ConfigProvider.current().prefix}replay`)) {
+            await this.replaySong(message);
+            return;
+        } else {
+            invalidCommand = true;
         }
 
-        this.discordService.sendMessage(message, "hello");
+        if (!invalidCommand) {
+            // delete input message if possible.
+            if (message.channel.type !== "dm") {
+                message.delete({});
+            }
+        }
     }
 
     private async queueSong(message: Message | PartialMessage, songName: string) {
-        if (!this.tryJoinVoiceChannel(message)) return;
+        if (!(await this.ensureVoicePermissions(message))) return;
 
-        try {
-            const songSearchResult = await ytsr(songName, { limits: 1, pages: 1 });
-            const bestMatch = songSearchResult.items[0] as MusicTrack;
+        const songSearchResult = await ytsr(songName, { limit: 1, pages: 1 });
+        const bestMatch = songSearchResult.items[0] as MusicTrack;
+        this.queueMusicTrack(message, bestMatch);
 
-            if (this.globalQueue.isEmpty()) {
-                this.playSong(message, bestMatch);
-                this.discordService.sendMessage(message, `Start playing: **${bestMatch.title}**`);
-            } else {
-                this.globalQueue.add(bestMatch);
-                this.discordService.sendMessage(message, `Added to queue: **${bestMatch.title}**`);
-            }
-
-            Logger.log(`Added '${bestMatch.title}' to music queue.`);
-        }
-        catch (e) {
-            console.log(e);
-        }
+        Logger.log(`Added '${bestMatch.title}' to music queue.`);
+        this.discordService.sendMessage(message, `Added '${bestMatch.title}' to music queue.`);
     }
 
-    private async playSong(message: Message | PartialMessage, song: MusicTrack) {
-        const dispatcher = this.voiceConnection
-            .play(ytdl(song.url))
-            .on("finish", () => {
-                const nextSong = this.globalQueue.next();
-                if (nextSong) {
-                    this.playSong(message, nextSong);
-                }
-            })
-            .on("error", error => Logger.log(error.message, LogType.Warning, error));
+    private async searchSong(message: Message | PartialMessage, songName: string) {
+        if (!(await this.ensureVoicePermissions(message))) return;
 
-        dispatcher.setVolumeLogarithmic(1);
+        const songSearchResult = await ytsr(songName, { limit: 3, pages: 1 });
+        const numberOfSuggestions = Math.min(3, songSearchResult.items.length);
+
+        if (numberOfSuggestions > 0) {
+            const voteCallbacks: ((reaction: MessageReaction) => void)[] = [];
+
+            let msg = `I found several results. Best matches are:`;
+            for (let i = 0; i < numberOfSuggestions; i++) {
+                const song = songSearchResult.items[i] as MusicTrack;
+                msg += `\r\n ${this.icons[i]} ${song.title}`;
+                voteCallbacks.push((raction) => {
+                    this.queueMusicTrack(message, song);
+                    Logger.log(`Added '${song.title}' to music queue.`);
+                    this.discordService.sendMessage(message, `Added '${song.title}' to music queue.`);
+                });
+            }
+            msg += "\r\nWhich one should I play?";
+
+            this.discordService.sendMessageWithVotes(message, msg, this.icons.slice(0, numberOfSuggestions), voteCallbacks);
+
+        } else {
+            this.discordService.sendMessage(message, "I found no songs for your input.");
+        }
+
+        Logger.log(`Searched for '${songName}' with ${numberOfSuggestions} (${songSearchResult.items.length}) results.`);
     }
 
     private async skipSong(message: Message | PartialMessage) {
-        if (!this.tryJoinVoiceChannel(message)) return;
+        if (!(await this.ensureVoicePermissions(message))) return;
 
-        if (this.globalQueue.isEmpty()){
-            this.discordService.sendMessage(message, `There is no song left in the queue.`);
-        } else {
-            this.voiceConnection.dispatcher.end();
+        this.voiceConnection.dispatcher.end();
+    }
+
+    private async removeSong(message: Message | PartialMessage, index: number) {
+        if (!(await this.ensureVoicePermissions(message))) return;
+        if (isNaN(index) || index <= 0) return;
+
+        if (this.globalQueue.getQueue().length >= index) {
+            const removedSong = this.globalQueue.removeAt(index);
+
+            Logger.log(`Removed queue item at index ${index} with name '${removedSong.title}'.`);
+            this.discordService.sendMessage(message, `Removed '${removedSong.title}' at position ${index} for you.`);
         }
-    } 
+    }
+
+    private async replaySong(message: Message | PartialMessage) {
+        if (!(await this.ensureVoicePermissions(message))) return;
+
+        const currentSong = this.globalQueue.peek();
+        this.globalQueue.addSecondFromTop(currentSong);
+
+        this.voiceConnection.dispatcher.end();
+
+        Logger.log(`Restarted the current song with name '${currentSong.title}'.`);
+    }
 
     private async stopPlaying(message: Message | PartialMessage) {
-        if (!this.tryJoinVoiceChannel(message)) return;
+        if (!(await this.ensureVoicePermissions(message))) return;
 
-        this.discordService.sendMessage(message, `I cleared the queue.`);
+        this.discordService.sendMessage(message, `Stopped playing and cleared the queue for you.`);
+        this.globalQueue.clear();
         this.voiceConnection.dispatcher.end();
-    } 
 
-    private async tryJoinVoiceChannel(message: Message | PartialMessage) {
+        Logger.log(`Stopped playing and cleared queue.`);
+    }
+
+    private async clearQueue(message: Message | PartialMessage) {
+        if (!(await this.ensureVoicePermissions(message))) return;
+
+        const top = this.globalQueue.peek();
+        this.globalQueue.clear();
+        this.globalQueue.add(top);
+
+        Logger.log(`Cleared queue.`);
+        this.discordService.sendMessage(message, `Cleared the queue for you.`);
+    }
+
+    private async getQueue(message: Message | PartialMessage) {
+        const queue = this.globalQueue.getQueue();
+
+        const currentlyPlaying = `0 \> **${queue[0].title}**`;
+        const restOfQueue = queue.length > 1 ? queue.slice(1).map((song, index) => `\r\n${index + 1} > ${song.title}`) : "";
+
+        const embed = new MessageEmbed();
+        embed.setTitle("Current queue:")
+            .setDescription(currentlyPlaying + restOfQueue);
+        this.discordService.sendMessageEmbed(message, "", embed);
+    }
+
+    private async ensureVoicePermissions(message: Message | PartialMessage) {
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) {
             this.discordService.sendMessage(message, "You need to be in a voice channel to play music!");
@@ -127,8 +202,61 @@ export class MusicCommandParser extends BaseCommandParser {
             return false;
         }
 
-        this.voiceConnection = await voiceChannel.join();
         return true;
+    }
+
+    private async joinVoiceChannel(message: Message | PartialMessage) {
+        const voiceChannel = message.member.voice.channel;
+        this.voiceConnection = await voiceChannel.join();
+    }
+
+    private async playNextSong(message: Message | PartialMessage) {
+        if (!(await this.ensureVoicePermissions(message))) return;
+        await this.joinVoiceChannel(message);
+
+        const song = this.globalQueue.peek();
+
+        message.client.user.setActivity({ type: "LISTENING", name: song.title });
+
+        const embed = new MessageEmbed()
+            .setTitle(song.title)
+            .setDescription(`Now playing - requested by ${message.guild.member(message.author).displayName}`)
+            .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
+            .setURL(song.url)
+            .setThumbnail(song.bestThumbnail.url)
+            .setTimestamp();
+        this.discordService.sendMessageEmbed(message, "", embed);
+
+        const dispatcher = this.voiceConnection
+            .play(await ytdl(song.url, {
+                type: 'opus',
+                filter: 'audioonly',
+                quality: 'highestaudio'
+            }))
+            .on("finish", () => {
+                this.globalQueue.shift();
+
+                if (!this.globalQueue.isEmpty()) {
+                    this.playNextSong(message);
+                } else {
+                    this.isPaying = false;
+                    message.client.user.setActivity();
+                }
+            })
+            .on("error", error => Logger.log(error.message, LogType.Warning, error));
+
+        dispatcher.setVolumeLogarithmic(0.25);
+
+        this.isPaying = true;
+    }
+
+    private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack) {
+        if (this.globalQueue.isEmpty() && !this.isPaying) {
+            this.globalQueue.add(song);
+            this.playNextSong(message);
+        } else {
+            this.globalQueue.add(song);
+        }
     }
 
     private showHelp(message: Message | PartialMessage) {
@@ -142,13 +270,14 @@ export class MusicCommandParser extends BaseCommandParser {
         });
 
         embed.setTitle("Music Bot Overview")
-            .setDescription("The music bot replaces the Groovy bot.")
-            // .addField(`Rendering System`, "Yes, that's right. The bot generates and renders the cards at runtime to a 2D image canvas. Artworks are chosen randomly amongst those that fit the card's type best.")
-            // .addField(`New Algorithm`, "The way cards are generated has changed. Now, the color is chosen first, the rest comes after. This means better alignment of abilities with colors, plus better balancing of manacosts.")
-            // .addField(`More Content`, "There are over 5000 lines of config file for the generator to draw names, abilities and keywords from. Also, there are over 1000 card artworks to choose from, all hand-picked by Mats.")
-            // .addField(`Card Types`, "The bot can generate almost all types of cards. Supported are *creatures*, *artifacts*, *artifact creatures*, *instants*, *sorceries*, *lands*, *enchantments*, *planeswalkers*, and subtypes like *auras* and *equipments*.")
-            // .addField(`Filters`, "A new parameter system has taken the place of the old one, allowing for more control in generating cards. Use parameters like this:\r\n" +
-            //     "`type:<type>` (short `t`), like 't:creature'\r\n`color:<color>` (short `c`), like 'c:ubr' or 'color:c'\r\n`rarity:<rarity>` (short `r`), like 'r:ymthic'.\r\n`name:<text>` (short `n`) to put a name yourself (use '_' for spaces).\r\n")
+            .setDescription("The music bot replaces the Groovy bot. Use the following commands:")
+            .addField(`!play <song name>`, "Queue a song by best matching title.")
+            .addField(`!search <search query>`, "Search for a bunch of songs and pick one to queue.")
+            .addField(`!queue`, "Get the current queue.")
+            .addField(`!skip`, "Skip the current song\r\n.")
+            .addField(`Others`, "!stop - Stop playing and clear queue.\r\n"
+                + "!restart - Restart the current song.\r\n"
+                + "!clear - Clear the queue but play the current song to end.")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
