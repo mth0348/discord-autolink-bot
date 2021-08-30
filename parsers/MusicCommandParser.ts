@@ -182,7 +182,7 @@ export class MusicCommandParser extends BaseCommandParser {
     private async getQueue(message: Message | PartialMessage) {
         const queue = this.globalQueue.getQueue();
 
-        const currentlyPlaying = `0 \> **${queue[0].title}**`;
+        const currentlyPlaying = `🎵 \> **${queue[0].title}**`;
         const restOfQueue = queue.length > 1 ? queue.slice(1).map((song, index) => `\r\n${index + 1} > ${song.title}`) : "";
 
         const embed = new MessageEmbed();
