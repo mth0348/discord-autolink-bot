@@ -7,7 +7,7 @@ export class ParameterService {
     public extractParameters(text: string, configs: ParameterServiceConfig[]): Parameter[] {
         const params = text.split(" ").slice(1);
 
-        const result: Parameter[] = [];
+        let result: Parameter[] = [];
 
         params.forEach(param => {
             let paramParts = param.trim().split(":");
@@ -34,6 +34,8 @@ export class ParameterService {
                 result.push(new Parameter("help", "help"))
             } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "status")) {
                 result.push(new Parameter("status", "status"))
+            } else {
+                result = result.concat(paramParts.map(p => new Parameter(p, p)));
             }
         });
 
