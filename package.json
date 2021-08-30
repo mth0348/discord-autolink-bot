@@ -8,7 +8,7 @@
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc --resolveJsonModule",
     "postinstall": "npm run build",
     "start": "node dist/index.js"
   },
