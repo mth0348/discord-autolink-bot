@@ -28,7 +28,6 @@
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
     "@types/node": "^14.17.12",
-    "avconv": "^3.1.0",
     "canvas": "^2.6.1",
     "discord.js": "^12.5.3",
     "ffmpeg": "0.0.4",
