@@ -1,12 +1,15 @@
 {
   "name": "discordautolinkbot",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "tsc": "./node_modules/typescript/bin/tsc",
-    "build": "tsc",
+    "tsc": "tsc --project ./tsconfig.json",
+    "build": "npm run tsc",
     "postinstall": "npm run build"
   },
   "repository": {
