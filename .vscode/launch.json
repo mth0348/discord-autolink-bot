@@ -8,13 +8,12 @@
         "request": "launch",
         "name": "Launch Program",
         "skipFiles": [
-            "src",
             "<node_internals>/**",
             "node_modules",
             "${workspaceFolder}/node_modules/**/*.ts",
             "dist"
         ],
-        "program": "${workspaceFolder}\\src\\index.ts",
+        "program": "${workspaceFolder}\\index.ts",
         "preLaunchTask": "tsc: build",
     }]
 }
