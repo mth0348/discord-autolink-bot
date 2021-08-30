@@ -8,6 +8,7 @@ import { Logger } from '../helpers/Logger';
 import { BotCommandParser } from '../parsers/BotCommandParser';
 import { CsGoCommandParser } from '../parsers/CsGoCommandParser';
 import { DndCommandParser } from '../parsers/DndCommandParser';
+import { MusicCommandParser } from '../parsers/MusicCommandParser';
 
 export class DrunkenBot {
 
@@ -88,6 +89,7 @@ export class DrunkenBot {
         this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new CsGoCommandParser(this.discordService, this.parameterService));
         this.registeredParsers.push(new DndCommandParser(this.discordService, this.parameterService));
+        this.registeredParsers.push(new MusicCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser
         // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
         // this.registeredParsers.push(new MtgCommandParser()); // dndParser

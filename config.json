@@ -27,6 +27,11 @@
 			"random",
 			"hunt-showdown",
 			"dev-playground"
+		],
+		"music": [
+			"random",
+			"music",
+			"dev-playground"
 		]
 	},
 	"rolePermissions": {
@@ -51,6 +56,10 @@
 			"Bot-Developer"
 		],
 		"huntShowdown": [
+			"DrunKen",
+			"Bot-Developer"
+		],
+		"music": [
 			"DrunKen",
 			"Bot-Developer"
 		]
