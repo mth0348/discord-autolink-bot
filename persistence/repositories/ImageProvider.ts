@@ -20,8 +20,8 @@ export class ImageProvider {
         });
     }
 
-    public static getImage(url: string): object {
-        if (this.loadedImages.has(url.toLowerCase())) {
+    public static getImage(url: string | undefined): object {
+        if (url && this.loadedImages.has(url.toLowerCase())) {
             return this.loadedImages.get(url.toLowerCase());
         }
         throw "image for " + url + " not found.";

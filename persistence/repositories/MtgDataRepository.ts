@@ -28,9 +28,9 @@ export class MtgDataRepository {
         if (count <= 0) return [];
 
         const list = database.subtypes;
-        let result: string[] = [Random.nextFromList(list)];
+        let result: string[] = [Random.nextFromList(list) as string];
         for (let i = 1; i < count - 1; i++) {
-            const second = Random.nextFromList(list.filter(f => result.every(r => f !== r)));
+            const second = Random.nextFromList(list.filter(f => result.every(r => f !== r))) as string;
             result.push(second);
         }
         return result;
@@ -56,11 +56,11 @@ export class MtgDataRepository {
             return [];
         }
 
-        let result: MtgKeyword[] = [Random.nextFromList(list)];
+        let result: MtgKeyword[] = [Random.nextFromList(list) as MtgKeyword];
         for (let i = 1; i < count - 1; i++) {
             const reducedList = list.filter(f => result.every(r => f !== r));
             if (reducedList.length > 0) {
-                const second = Random.nextFromList(reducedList);
+                const second = Random.nextFromList(reducedList) as MtgKeyword;
                 result.push(second);
             }
         }
@@ -92,9 +92,9 @@ export class MtgDataRepository {
     }
 
     public getCreatureName(isLegendary: boolean): string {
-        const name = Random.nextFromList(database.creatureTexts.names) + ", ";
-        const adjective = Random.nextFromList(database.creatureTexts.adjectives) + " ";
-        const noun = Random.nextFromList(database.creatureTexts.nouns);
+        const name = (Random.nextFromList(database.creatureTexts.names) as string) + ", ";
+        const adjective = (Random.nextFromList(database.creatureTexts.adjectives) as string) + " ";
+        const noun = Random.nextFromList(database.creatureTexts.nouns) as string;
 
         if (isLegendary) {
             if (Random.chance(0.3)) {
@@ -107,10 +107,10 @@ export class MtgDataRepository {
     }
 
     public getLandName(isLegendary: boolean): string {
-        const name = Random.nextFromList(database.landTexts.names) + ", ";
-        const adjective = Random.nextFromList(database.landTexts.adjectives) + " ";
-        const noun = Random.nextFromList(database.landTexts.nouns);
-        const descriptor = Random.nextFromList(database.landTexts.descriptors);
+        const name = (Random.nextFromList(database.landTexts.names) as string) + ", ";
+        const adjective = (Random.nextFromList(database.landTexts.adjectives) as string) + " ";
+        const noun = Random.nextFromList(database.landTexts.nouns) as string;
+        const descriptor = Random.nextFromList(database.landTexts.descriptors) as string;
 
         if (isLegendary) {
             return StringHelper.toCamelCase(name + adjective + descriptor);
@@ -142,11 +142,11 @@ export class MtgDataRepository {
     }
 
     public getArtifactName(isLegendary: boolean, isEquipment: boolean): string {
-        const nouns = Random.nextFromList(database.landTexts.nouns);
-        const adjectives = Random.nextFromList(database.artifactTexts.adjectives) + " ";
+        const nouns = Random.nextFromList(database.landTexts.nouns) as string;
+        const adjectives = (Random.nextFromList(database.artifactTexts.adjectives) as string) + " ";
 
-        const equipmentDescriptor = Random.nextFromList(database.artifactTexts.equipmentDescriptors);
-        const artifactDescriptor = Random.nextFromList(database.artifactTexts.artifactDescriptors);
+        const equipmentDescriptor = Random.nextFromList(database.artifactTexts.equipmentDescriptors) as string;
+        const artifactDescriptor = Random.nextFromList(database.artifactTexts.artifactDescriptors) as string;
 
         if (isEquipment) {
 

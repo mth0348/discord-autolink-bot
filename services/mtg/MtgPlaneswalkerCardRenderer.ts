@@ -62,7 +62,7 @@ export class MtgPlaneswalkerCardRenderer {
         const fileName = `IMAGEURL_BORDER_${colorMapping}_PLANESWALKER`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName));
-        const cardImage = ImageProvider.getImage(cardImageUrl.path);
+        const cardImage = ImageProvider.getImage(cardImageUrl?.path);
 
         this.ctx.drawImage(cardImage, 0, 0, this.canvas.width, this.canvas.height);
     }

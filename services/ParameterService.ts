@@ -41,7 +41,7 @@ export class ParameterService {
     }
 
     public tryGetParameterValue(parameterName: string, parameters: Parameter[]): string {
-        let foundParameter: Parameter;
+        let foundParameter: Parameter = null;
         parameters.forEach(p => {
             if (StringHelper.isEqualIgnoreCase(p.name, parameterName)) {
                 foundParameter = p;

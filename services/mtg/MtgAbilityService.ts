@@ -19,6 +19,7 @@ import { MtgActivatedPwAbility } from '../../dtos/mtg/abilities/MtgActivatedPwAb
 import { MtgSpellAbility } from '../../dtos/mtg/abilities/MtgSpellAbility';
 import { MtgAuraAbility } from '../../dtos/mtg/abilities/MtgAuraAbility';
 import { MtgEnchantmentEffect } from '../../persistence/entities/mtg/MtgEnchantmentEffect';
+import { MtgPermanentCondition } from '../../persistence/entities/mtg/MtgPermanentCondition';
 
 export class MtgAbilityService {
 
@@ -47,7 +48,7 @@ export class MtgAbilityService {
             return;
         }
 
-        const spellEvent = Random.nextFromList(events);
+        const spellEvent = Random.nextFromList(events) as MtgPermanentEvent;
         card.oracle.abilities.push(new MtgSpellAbility(spellEvent));
     }
 
@@ -76,7 +77,7 @@ export class MtgAbilityService {
                 return;
             }
 
-            const chosenCost = Random.nextFromList(costs);
+            const chosenCost = Random.nextFromList(costs) as MtgPermanentActivatedCost;
 
             const etbEvent = new MtgPermanentStatics({
                 colorIdentity: chosenCost.colorIdentity,
@@ -93,7 +94,7 @@ export class MtgAbilityService {
         if (collorsAllowed === 0)
             colorString = "XC";
         else if (card.color.length === 1 || collorsAllowed === 1)
-            colorString = "X" + Random.nextFromList(card.color.split(""));
+            colorString = "X" + Random.nextFromList(card.color.split("")) as string;
         else if (card.color.length === 2)
             colorString = "X" + card.color.split("").join(" or X");
         else if (card.color.length > 2)
@@ -130,7 +131,7 @@ export class MtgAbilityService {
             return true;
         }
 
-        const activatedEvent = Random.nextFromList(events);
+        const activatedEvent = Random.nextFromList(events) as MtgPermanentEvent;
 
         let cost = null;
         // decide whether to use DB activatedCost or craft one out of mana symbols.
@@ -190,7 +191,7 @@ export class MtgAbilityService {
             return true;
         }
 
-        const activatedEvent = Random.nextFromList(events);
+        const activatedEvent = Random.nextFromList(events) as MtgPermanentEvent;
         const score = Math.max(-8, Math.min(8, activatedEvent.score * Random.next(70, 110) / 100));
         let roundedScore = Math.round(score);
         if (roundedScore === 0) roundedScore = 1;
@@ -229,8 +230,8 @@ export class MtgAbilityService {
             return true;
         }
 
-        const condition = Random.nextFromList(conditions);
-        const triggeredEvent = Random.nextFromList(events);
+        const condition = Random.nextFromList(conditions) as MtgPermanentCondition;
+        const triggeredEvent = Random.nextFromList(events) as MtgPermanentEvent;
         card.oracle.abilities.push(new MtgTriggeredAbility(condition, triggeredEvent));
 
         return !triggeredEvent.noFollowUp;
@@ -263,7 +264,7 @@ export class MtgAbilityService {
             return true;
         }
 
-        const effect = Random.nextFromList(effects);
+        const effect = Random.nextFromList(effects) as MtgEnchantmentEffect;
         card.oracle.abilities.push(new MtgAuraAbility(effect));
     }
 
@@ -293,7 +294,7 @@ export class MtgAbilityService {
             return true;
         }
 
-        const effect = Random.nextFromList(effects);
+        const effect = Random.nextFromList(effects) as MtgEnchantmentEffect;
         card.oracle.abilities.push(new MtgAuraAbility(effect));
     }
 
@@ -312,7 +313,7 @@ export class MtgAbilityService {
             return true;
         }
 
-        const staticEvent = Random.nextFromList(statics);
+        const staticEvent = Random.nextFromList(statics) as MtgPermanentStatics;
         card.oracle.abilities.push(new MtgStaticAbility(staticEvent));
 
         return true;
