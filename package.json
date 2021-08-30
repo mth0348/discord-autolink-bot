@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsc",
-    "postinstall": "npm run build"
+    "build": "npm run tsc",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
