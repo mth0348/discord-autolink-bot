@@ -94,9 +94,13 @@ export class MusicCommandParser extends BaseCommandParser {
         const numberOfResults = songSearchResult.items.length;
 
         if (numberOfResults > 0) {
-            const bestMatch = songSearchResult.items[0] as MusicTrack;
+            let bestMatch = songSearchResult.items[0] as MusicTrack;
+            if (bestMatch.type === "playlist") {
+                this.discordService.sendMessage(message, `This is a playlist. I can only queue the first song...`);
+                bestMatch = bestMatch.firstVideo as MusicTrack;
+            }
+
             this.queueMusicTrack(message, bestMatch);
-        
             Logger.log(`Added '${bestMatch.title}' to music queue.`);
             this.discordService.sendMessage(message, `Added '${bestMatch.title}' to music queue.`);
         } else {
