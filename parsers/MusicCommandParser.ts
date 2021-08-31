@@ -245,7 +245,8 @@ export class MusicCommandParser extends BaseCommandParser {
                     this.isPlaying = false;
                     message.client.user.setActivity();
 
-                    this.timeout = setTimeout(this.leaveIfIlde, 2 * 60 * 1000);
+                    Logger.log("Disconnect timer started for idle in voice channel (2min).")
+                    this.timeout = setTimeout(() => this.leaveIfIdle(this.isPlaying, this.voiceConnection), 2 * 60 * 1000);
                 }
             })
             .on("error", error => Logger.log(error.message, LogType.Warning, error));
@@ -254,7 +255,11 @@ export class MusicCommandParser extends BaseCommandParser {
 
         this.isPlaying = true;
 
-        if (this.timeout) clearTimeout(this.timeout);
+        
+        if (this.timeout) {
+            Logger.log("Cleared timeout for voice channel disconnect.")
+            clearTimeout(this.timeout);
+        }
     }
 
     private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack): Promise<void> {
@@ -292,9 +297,9 @@ export class MusicCommandParser extends BaseCommandParser {
         this.discordService.sendMessageEmbed(message, "", embed);
     }
 
-    private leaveIfIlde(): void {
-        if (!this.isPlaying && this.voiceConnection) {
-            this.voiceConnection.channel.leave();
+    private leaveIfIdle(isPlaying: boolean, voiceConnection: VoiceConnection): void {
+        if (!isPlaying && voiceConnection) {
+            voiceConnection.channel.leave();
         }
     }
 }
