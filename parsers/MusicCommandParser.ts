@@ -7,6 +7,7 @@ import { ParameterService } from '../services/ParameterService';
 import { Queue } from '../dtos/Queue';
 import { MusicTrack } from '../dtos/music/MusicTrack';
 import { LogType } from '../dtos/LogType';
+import { MusicThumbnail } from '../dtos/music/MusicThumbnail';
 
 const ytdl = require('ytdl-core');
 const ytsr = require('ytsr');
@@ -229,7 +230,6 @@ export class MusicCommandParser extends BaseCommandParser {
     }
 
     private async playNextSong(message: Message | PartialMessage) {
-        if (!(await this.ensureVoicePermissions(message))) return;
         await this.joinVoiceChannel(message);
 
         const song = this.globalQueue.peek();
@@ -238,7 +238,7 @@ export class MusicCommandParser extends BaseCommandParser {
 
         const embed = new MessageEmbed()
             .setTitle(song.title)
-            .setDescription(`Now playing - requested by ${message.guild.member(message.author).displayName}`)
+            .setDescription(`Now playing - requested by ${song.requestee}`)
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setURL(song.url)
             .setThumbnail(song.bestThumbnail.url)
@@ -279,6 +279,7 @@ export class MusicCommandParser extends BaseCommandParser {
 
     private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack): Promise<void> {
         if (this.globalQueue.isEmpty() && !this.isPlaying) {
+            song.requestee = message.guild.member(message.author).displayName;
             this.globalQueue.add(song);
             this.playNextSong(message);
         } else {

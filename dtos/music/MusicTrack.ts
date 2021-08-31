@@ -33,6 +33,8 @@ export class MusicTrack {
 
     public firstVideo: MusicTrack;
 
+    public requestee: string;
+
     public toString(): string {
         return this.title + " from " + this.author.name;
     }
