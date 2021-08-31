@@ -10,7 +10,7 @@ export class DiscordService {
 
     constructor() {
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
-        this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
+        this.defaultAwaitReactionOptions = { max: 1, time: 60 * 1000 };
     }
 
     sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment = undefined) {

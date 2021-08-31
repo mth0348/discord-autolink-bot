@@ -257,7 +257,7 @@ export class MusicCommandParser extends BaseCommandParser {
                     message.client.user.setActivity();
 
                     Logger.log("Disconnect timer started for idle in voice channel (2min).")
-                    this.timeout = setTimeout(() => this.leaveIfIdle(this.isPlaying, this.voiceConnection), 2 * 60 * 1000);
+                    this.timeout = setTimeout(() => this.leaveIfIdle(this.isPlaying, this.voiceConnection), 5 * 60 * 1000);
                 }
             })
             .on("error", error => Logger.log(error.message, LogType.Warning, error));
