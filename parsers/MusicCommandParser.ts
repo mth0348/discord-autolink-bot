@@ -46,46 +46,33 @@ export class MusicCommandParser extends BaseCommandParser {
         }
 
         let invalidCommand = false;
-        const songName = parameters.map(p => p.name).join(" ");
+        const songName = message.content.indexOf(" ") > 0 ? message.content.substring(message.content.indexOf(" ")) : "";
 
         if (message.content.startsWith(`${ConfigProvider.current().prefix}play`)) {
             await this.queueSong(message, songName);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}search`)
             || message.content.startsWith(`${ConfigProvider.current().prefix}find`)
             || message.content.startsWith(`${ConfigProvider.current().prefix}query`)) {
             await this.searchSong(message, songName);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}skip`)) {
             await this.skipSong(message);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}remove`)
             || message.content.startsWith(`${ConfigProvider.current().prefix}delete`)) {
             await this.removeSong(message, parseInt(parameters[0].value));
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}stop`)) {
             await this.stopPlaying(message);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}clear`)) {
             await this.clearQueue(message);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}queue`)) {
             await this.getQueue(message);
-            return;
         } else if (message.content.startsWith(`${ConfigProvider.current().prefix}restart`)
             || message.content.startsWith(`${ConfigProvider.current().prefix}replay`)) {
             await this.replaySong(message);
-            return;
         } else {
             invalidCommand = true;
         }
 
-        if (!invalidCommand) {
-            // delete input message if possible.
-            if (message.channel.type !== "dm") {
-                message.delete({});
-            }
-        }
+        // invalidcommand is ignored.
     }
 
     private async queueSong(message: Message | PartialMessage, songName: string) {
@@ -99,6 +86,10 @@ export class MusicCommandParser extends BaseCommandParser {
             if (bestMatch.type === "playlist" && bestMatch.firstVideo) {
                 this.discordService.sendMessage(message, `This is a playlist. I can only queue the first song...`);
                 bestMatch = bestMatch.firstVideo as MusicTrack;
+            }
+            if (bestMatch.isLive) {
+                this.discordService.sendMessage(message, `This is a live video. I cannot play this...`);
+                return;
             }
 
             this.queueMusicTrack(message, bestMatch);
