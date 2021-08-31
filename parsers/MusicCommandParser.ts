@@ -20,7 +20,8 @@ export class MusicCommandParser extends BaseCommandParser {
     private globalQueue: Queue<MusicTrack>;
     private voiceConnection: VoiceConnection;
     private icons: string[] = ["1️⃣", "2️⃣", "3️⃣"];
-    private isPaying: boolean;
+    private isPlaying: boolean;
+    private timeout: NodeJS.Timeout;
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.music, ConfigProvider.current().rolePermissions.music);
@@ -241,19 +242,23 @@ export class MusicCommandParser extends BaseCommandParser {
                 if (!this.globalQueue.isEmpty()) {
                     this.playNextSong(message);
                 } else {
-                    this.isPaying = false;
+                    this.isPlaying = false;
                     message.client.user.setActivity();
+
+                    this.timeout = setTimeout(this.leaveIfIlde, 2 * 60 * 1000);
                 }
             })
             .on("error", error => Logger.log(error.message, LogType.Warning, error));
 
         dispatcher.setVolumeLogarithmic(0.25);
 
-        this.isPaying = true;
+        this.isPlaying = true;
+
+        if (this.timeout) clearTimeout(this.timeout);
     }
 
-    private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack) {
-        if (this.globalQueue.isEmpty() && !this.isPaying) {
+    private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack): Promise<void> {
+        if (this.globalQueue.isEmpty() && !this.isPlaying) {
             this.globalQueue.add(song);
             this.playNextSong(message);
         } else {
@@ -261,7 +266,7 @@ export class MusicCommandParser extends BaseCommandParser {
         }
     }
 
-    private showHelp(message: Message | PartialMessage) {
+    private showHelp(message: Message | PartialMessage): void {
         Logger.log(`${message.author.username} requested help: ` + message.content);
 
         const embed = new MessageEmbed({
@@ -286,4 +291,11 @@ export class MusicCommandParser extends BaseCommandParser {
 
         this.discordService.sendMessageEmbed(message, "", embed);
     }
+
+    private leaveIfIlde(): void {
+        if (!this.isPlaying && this.voiceConnection) {
+            this.voiceConnection.channel.leave();
+        }
+    }
 }
+
