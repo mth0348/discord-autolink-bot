@@ -64,6 +64,8 @@ export class DrunkenBot {
     }
 
     public static reportMessage(message: Message | PartialMessage, reporter: string, e: any) {
+        message.client.user.setActivity();
+        
         let msg = "";
 
         msg += `Error reported by "${reporter}":\r\n`;
