@@ -81,7 +81,7 @@ export class DrunkenBot {
         console.warn(msg);
 
         let reportChannel = message.client.channels.cache.map(c => c as TextChannel).find(c => c.name === "bot-reports");
-        reportChannel.send(msg);
+        if (reportChannel) reportChannel.send(msg);
     }
 
     private registerCommandParsers(): void {

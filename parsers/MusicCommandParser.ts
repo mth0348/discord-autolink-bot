@@ -91,11 +91,17 @@ export class MusicCommandParser extends BaseCommandParser {
         if (!(await this.ensureVoicePermissions(message))) return;
 
         const songSearchResult = await ytsr(songName, { limit: 1, pages: 1 });
-        const bestMatch = songSearchResult.items[0] as MusicTrack;
-        this.queueMusicTrack(message, bestMatch);
+        const numberOfResults = songSearchResult.items.length;
 
-        Logger.log(`Added '${bestMatch.title}' to music queue.`);
-        this.discordService.sendMessage(message, `Added '${bestMatch.title}' to music queue.`);
+        if (numberOfResults > 0) {
+            const bestMatch = songSearchResult.items[0] as MusicTrack;
+            this.queueMusicTrack(message, bestMatch);
+        
+            Logger.log(`Added '${bestMatch.title}' to music queue.`);
+            this.discordService.sendMessage(message, `Added '${bestMatch.title}' to music queue.`);
+        } else {
+            this.discordService.sendMessage(message, "I found no songs for your input.");
+        }
     }
 
     private async searchSong(message: Message | PartialMessage, songName: string) {
