@@ -31,7 +31,8 @@
 		"music": [
 			"random",
 			"music",
-			"dev-playground"
+			"dev-playground",
+			"bot-updates"
 		]
 	},
 	"rolePermissions": {
