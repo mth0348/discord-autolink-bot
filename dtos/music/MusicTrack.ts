@@ -29,6 +29,10 @@ export class MusicTrack {
 
     public url: string;
 
+    public type: string;
+
+    public firstVideo: MusicTrack;
+
     public toString(): string {
         return this.title + " from " + this.author.name;
     }
