@@ -95,7 +95,7 @@ export class MusicCommandParser extends BaseCommandParser {
 
         if (numberOfResults > 0) {
             let bestMatch = songSearchResult.items[0] as MusicTrack;
-            if (bestMatch.type === "playlist") {
+            if (bestMatch.type === "playlist" && bestMatch.firstVideo) {
                 this.discordService.sendMessage(message, `This is a playlist. I can only queue the first song...`);
                 bestMatch = bestMatch.firstVideo as MusicTrack;
             }
