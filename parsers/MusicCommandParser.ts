@@ -46,7 +46,7 @@ export class MusicCommandParser extends BaseCommandParser {
         }
 
         let invalidCommand = false;
-        const songName = message.content.indexOf(" ") > 0 ? message.content.substring(message.content.indexOf(" ")) : "";
+        const songName = message.content.indexOf(" ") > 0 ? message.content.substring(message.content.indexOf(" ")).trim() : "";
 
         if (message.content.startsWith(`${ConfigProvider.current().prefix}play`)) {
             await this.queueSong(message, songName);
@@ -78,6 +78,10 @@ export class MusicCommandParser extends BaseCommandParser {
     private async queueSong(message: Message | PartialMessage, songName: string) {
         if (!(await this.ensureVoicePermissions(message))) return;
 
+        if (songName.startsWith("http") && songName.indexOf("&") > 0) {
+            songName = songName.substring(0, songName.indexOf("&"));
+        }
+
         const songSearchResult = await ytsr(songName, { limit: 1, pages: 1 });
         const numberOfResults = songSearchResult.items.length;
 
@@ -96,7 +100,7 @@ export class MusicCommandParser extends BaseCommandParser {
             Logger.log(`Added '${bestMatch.title}' to music queue.`);
             this.discordService.sendMessage(message, `Added '${bestMatch.title}' to music queue.`);
         } else {
-            this.discordService.sendMessage(message, "I found no songs for your input.");
+            this.discordService.sendMessage(message, "I found no results for your input.");
         }
     }
 
