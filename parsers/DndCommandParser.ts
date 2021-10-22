@@ -59,7 +59,7 @@ export class DndCommandParser extends BaseCommandParser {
 
             // handle dice roll.
             const diceRoll = Random.next(1, diceSize);
-            const critSuccess = diceRoll == diceSize || (message.author.username.toLowerCase() === "badral" && diceRoll >= diceSize-1);
+            const critSuccess = diceRoll == diceSize;
             const critFailure = diceRoll == 1;
 
             // handle visuals.
