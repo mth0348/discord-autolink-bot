@@ -96,7 +96,6 @@ export class DrunkenBot {
         this.registeredParsers.push(new MusicCommandParser(this.discordService, this.parameterService));
         // this.registeredParsers.push(new MtgCommandParser()); // generalParser
         // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
-        // this.registeredParsers.push(new MtgCommandParser()); // dndParser
         // this.registeredParsers.push(new MtgCommandParser()); // huntParser
     }
 }

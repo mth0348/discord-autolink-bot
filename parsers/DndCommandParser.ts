@@ -102,7 +102,7 @@ export class DndCommandParser extends BaseCommandParser {
 
         // delete input message if possible.
         if (message.channel.type !== "dm") {
-            message.delete({});
+            await message.delete({});
         }
     }
 
