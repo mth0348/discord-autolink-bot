@@ -221,7 +221,8 @@ export class MusicCommandParser extends BaseCommandParser {
 
     private async joinVoiceChannel(message: Message | PartialMessage) {
         const voiceChannel = message.member.voice.channel;
-        this.voiceConnection = await voiceChannel.join();
+        if (!this.voiceConnection || !this.voiceConnection.dispatcher)
+            this.voiceConnection = await voiceChannel.join();
     }
 
     private async playNextSong(message: Message | PartialMessage) {
