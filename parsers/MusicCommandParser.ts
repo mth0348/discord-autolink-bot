@@ -137,6 +137,8 @@ export class MusicCommandParser extends BaseCommandParser {
     private async skipSong(message: Message | PartialMessage) {
         if (!(await this.ensureVoicePermissions(message))) return;
 
+        await this.joinVoiceChannel(message);
+
         this.voiceConnection.dispatcher.end();
     }
 
@@ -155,6 +157,8 @@ export class MusicCommandParser extends BaseCommandParser {
     private async replaySong(message: Message | PartialMessage) {
         if (!(await this.ensureVoicePermissions(message))) return;
 
+        await this.joinVoiceChannel(message);
+        
         const currentSong = this.globalQueue.peek();
         this.globalQueue.addSecondFromTop(currentSong);
 
@@ -165,6 +169,8 @@ export class MusicCommandParser extends BaseCommandParser {
 
     private async stopPlaying(message: Message | PartialMessage) {
         if (!(await this.ensureVoicePermissions(message))) return;
+
+        await this.joinVoiceChannel(message);
 
         message.client.user.setActivity();
 
@@ -177,6 +183,8 @@ export class MusicCommandParser extends BaseCommandParser {
 
     private async clearQueue(message: Message | PartialMessage) {
         if (!(await this.ensureVoicePermissions(message))) return;
+
+        await this.joinVoiceChannel(message);
 
         const top = this.globalQueue.peek();
         this.globalQueue.clear();
@@ -217,12 +225,6 @@ export class MusicCommandParser extends BaseCommandParser {
         }
 
         return true;
-    }
-
-    private async joinVoiceChannel(message: Message | PartialMessage) {
-        const voiceChannel = message.member.voice.channel;
-        if (!this.voiceConnection || !this.voiceConnection.dispatcher)
-            this.voiceConnection = await voiceChannel.join();
     }
 
     private async playNextSong(message: Message | PartialMessage) {
@@ -266,11 +268,16 @@ export class MusicCommandParser extends BaseCommandParser {
 
         this.isPlaying = true;
 
-        
+
         if (this.timeout) {
             Logger.log("Cleared timeout for voice channel disconnect.")
             clearTimeout(this.timeout);
         }
+    }
+
+    private async joinVoiceChannel(message: Message | PartialMessage) {
+        const voiceChannel = message.guild.me.voice.channel != null ? message.guild.me.voice.channel : message.member.voice.channel;
+        this.voiceConnection = await voiceChannel.join();
     }
 
     private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack): Promise<void> {
