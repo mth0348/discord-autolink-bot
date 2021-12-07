@@ -51,6 +51,13 @@ export class DrunkenBot {
         });
     }
 
+    public keepAlive(): void {
+        var http = require("http");
+        setInterval(function() {
+            http.get("http://drunken-discord-bot.herokuapp.com");
+        }, 5 /*min*/ * 60 /*sec*/ * 1000 /*ms*/);
+    }
+
     private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
         Logger.clearStack();
 
