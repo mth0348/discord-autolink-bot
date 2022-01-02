@@ -1,16 +1,9 @@
-import { AwaitReactionsOptions, CollectorFilter, GuildEmoji, Message, MessageEmbed, PartialMessage } from 'discord.js';
+import { Message, MessageEmbed, PartialMessage } from 'discord.js';
 import { DiscordService } from '../services/DiscordService';
 import { Logger } from '../helpers/Logger';
 import { BaseCommandParser } from '../base/BaseCommandParser';
 import { ParameterService } from '../services/ParameterService';
-import { CsGoMap } from '../dtos/csgo/CsGoMap';
-import { CsGoSide } from '../dtos/csgo/CsGoSide';
-import { CsGoNadesService } from '../services/csgo/CsGoNadesService';
-import { CsGoDataRepository } from '../domain/repositories/CsGoDataRepository';
-import { CsGoVideo } from '../domain/models/csgo/CsGoVideo';
-import { CsGoNadeType } from '../dtos/csgo/CsGoNadeType';
-import { StringHelper } from '../helpers/StringHelper';
-import { DrunkenBot } from '../base/DrunkenBot';
+import { ConfigProvider } from '../helpers/ConfigProvider';
 
 export class LolCommandParser extends BaseCommandParser {
 
@@ -18,14 +11,8 @@ export class LolCommandParser extends BaseCommandParser {
 
     protected prefixes: string[] = ["lol", "league", "leagueoflegends", "roles"];
 
-    private defaultAwaitReactionFilter: CollectorFilter;
-    private defaultAwaitReactionOptions: AwaitReactionsOptions;
-
     constructor(discordService: DiscordService, parameterService: ParameterService) {
-        super(discordService, parameterService, undefined, undefined /* means no permission checks */);
-
-        this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
-        this.defaultAwaitReactionOptions = { max: 1, time: 30000 };
+        super(discordService, parameterService, ConfigProvider.current().channelPermissions.lol, ConfigProvider.current().rolePermissions.lol);
 
         console.log("|| - registered LoL parser.    ||");
     }
@@ -55,12 +42,14 @@ export class LolCommandParser extends BaseCommandParser {
             "🛡️ Support",
         ]
 
-        let members = parameters.length > 0 ? parameters.map(p => p.name) : message.member.voice.channel.members;
+        let members = parameters.length > 0
+            ? parameters.map(p => p.name)
+            : message.member.voice.channel.members.map(m => m.nickname ?? m.displayName);
 
         let assignments = "";
         members.forEach(member => {
             const roleIndex = Math.floor(Math.random() * roles.length);
-            assignments += (member.nickname ?? member.displayName) + ": " + roles[roleIndex] + "\r\n";
+            assignments += member + ": " + roles[roleIndex] + "\r\n";
             roles.splice(roleIndex, 1);
         });
         this.discordService.sendMessage(message, assignments);

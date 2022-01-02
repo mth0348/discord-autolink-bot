@@ -33,6 +33,12 @@
 			"music",
 			"dev-playground",
 			"bot-updates"
+		],
+		"lol": [
+			"random",
+			"league-of-legends",
+			"dev-playground",
+			"bot-updates"
 		]
 	},
 	"rolePermissions": {
@@ -61,6 +67,10 @@
 			"Bot-Developer"
 		],
 		"music": [
+			"DrunKen",
+			"Bot-Developer"
+		],
+		"lol": [
 			"DrunKen",
 			"Bot-Developer"
 		]
