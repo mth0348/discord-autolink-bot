@@ -9,7 +9,7 @@ export class LolCommandParser extends BaseCommandParser {
 
     public name: string = "Leage Of Legends Parser";
 
-    protected prefixes: string[] = ["lol", "league", "leagueoflegends", "roles"];
+    protected prefixes: string[] = ["lol", "league", "leagueoflegends", "role", "roles"];
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.lol, ConfigProvider.current().rolePermissions.lol);
@@ -60,13 +60,14 @@ export class LolCommandParser extends BaseCommandParser {
 
         const embed = new MessageEmbed({
             files: [{
-                attachment: "assets/img/csgo/banner.png",
+                attachment: "assets/img/lol/banner.png",
                 name: "banner.png"
             }]
         });
 
         embed.setTitle("LoL Roles Bot Overview")
             .setDescription("This bot assigns random roles to all players in the voice channel.")
+            .addField(`Commands`, "Just type `!lol` or `!league` to match players with roles based on their preferences. To change your preference, use `!role` or `!roles`.")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
