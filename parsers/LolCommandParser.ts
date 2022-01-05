@@ -6,6 +6,7 @@ import { ParameterService } from '../services/ParameterService';
 import { ConfigProvider } from '../helpers/ConfigProvider';
 import { DatabaseProvider } from '../helpers/DatabaseProvider';
 import { LolRolePreference } from '../domain/models/lol/LolRolePreference';
+import { LeageOfLegendsService } from '../services/lol/LeageOfLegendsService';
 
 export class LolCommandParser extends BaseCommandParser {
 
@@ -13,11 +14,15 @@ export class LolCommandParser extends BaseCommandParser {
 
     protected prefixes: string[] = ["lol", "league", "leagueoflegends", "role", "roles"];
 
-    private LOL_ROLES = ["Top", "Mid", "ADC", "Support", "Jungle"];
-    private LOL_ROLE_ICONS = ["⚔️", "🧙", "🏹", "🛡️", "🌳"];
+    public static LOL_ROLES = ["Top", "Mid", "ADC", "Support", "Jungle"];
+    public static LOL_ROLE_ICONS = ["⚔️", "🧙", "🏹", "🛡️", "🌳"];
+
+    private leageOfLegendsService: LeageOfLegendsService;
 
     constructor(discordService: DiscordService, parameterService: ParameterService) {
         super(discordService, parameterService, ConfigProvider.current().channelPermissions.lol, ConfigProvider.current().rolePermissions.lol);
+
+        this.leageOfLegendsService = new LeageOfLegendsService();
 
         console.log("|| - registered LoL parser.    ||");
     }
@@ -38,7 +43,7 @@ export class LolCommandParser extends BaseCommandParser {
         // print out a player list.
         if (this.parameterService.tryGetParameterValue("players", parameters) === "players"
             || this.parameterService.tryGetParameterValue("roles", parameters) === "roles") {
-            this.showPlayers(message, data);
+            await this.showPlayers(message, data);
             return;
         }
 
@@ -48,28 +53,7 @@ export class LolCommandParser extends BaseCommandParser {
             return;
         }
 
-        // data[0].primaryRole = new Date().toTimeString();
-        // DatabaseProvider.save(DatabaseProvider.LEAGUE_OF_LEGENDS, data);
-
-
-
-        // const voiceChannel = message.member.voice.channel;
-        // if (!voiceChannel) {
-        //     this.discordService.sendMessage(message, "You need to be in a voice channel for that!");
-        //     return;
-        // }
-
-        // let members = parameters.length > 0
-        //     ? parameters.map(p => p.name)
-        //     : message.member.voice.channel.members.map(m => m.nickname ?? m.displayName);
-
-        // let assignments = "";
-        // members.forEach(member => {
-        //     const roleIndex = Math.floor(Math.random() * roles.length);
-        //     assignments += member + ": " + roles[roleIndex] + "\r\n";
-        //     roles.splice(roleIndex, 1);
-        // });
-        // this.discordService.sendMessage(message, assignments);
+        this.leageOfLegendsService.determineRoles(data);
     }
 
     private showHelp(message: Message | PartialMessage) {
@@ -97,24 +81,27 @@ export class LolCommandParser extends BaseCommandParser {
     private showPlayers(message: Message | PartialMessage, data: LolRolePreference[]): void {
         Logger.log(`${message.author.username} requested a list of registered role preferences.`);
 
-        let msg = "";
+        message.guild.members.fetch().then(members => {
+            let msg = "";
 
-        if (data.length === 0) {
-            msg += "There are no player preferences registered yet."
-        } else {
-            data.forEach(rolePreference => {
-                const primaryRoleIndex = this.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.primaryRole.toLowerCase());
-                const secondaryRoleIndex = this.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.secondaryRole.toLowerCase());
-                msg += message.guild.members.cache.get(rolePreference.playerId).displayName + ` prefers ${this.LOL_ROLE_ICONS[primaryRoleIndex]} (1) and ${this.LOL_ROLE_ICONS[secondaryRoleIndex]} (2)`
-            });
-        }
+            if (data.length === 0) {
+                msg += "There are no player preferences registered yet."
+            } else {
+                data.forEach(rolePreference => {
+                    const primaryRoleIndex = LolCommandParser.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.primaryRole.toLowerCase());
+                    const secondaryRoleIndex = LolCommandParser.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.secondaryRole.toLowerCase());
+                    const memberName = members.get(rolePreference.playerId);
+                    msg += `**${memberName?.displayName ?? "<Unknown>"}** prefers ${LolCommandParser.LOL_ROLE_ICONS[primaryRoleIndex]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRoleIndex]} (2)\r\n`
+                });
+            }
 
-        const embed = new MessageEmbed();
-        embed.setTitle("Registered LoL Role Preferences")
-            .setDescription(msg)
-            .addField("Legend", this.getIconLegendString());
+            const embed = new MessageEmbed();
+            embed.setTitle("Registered LoL Role Preferences")
+                .setDescription(msg)
+                .addField("Legend", this.getIconLegendString());
 
-        this.discordService.sendMessageEmbed(message, "", embed);
+            this.discordService.sendMessageEmbed(message, "", embed);
+        }).catch(e => console.log(e));
     }
 
     private showRolePreferenceDialog(message: Message | PartialMessage, data: LolRolePreference[]): void {
@@ -133,12 +120,12 @@ export class LolCommandParser extends BaseCommandParser {
         let secondaryRole = -1;
 
         // send primary role question.
-        this.discordService.sendMessageEmbedWithVotes(message, "", primaryMsg, this.LOL_ROLE_ICONS, this.LOL_ROLE_ICONS.map((icon, index) => {
+        this.discordService.sendMessageEmbedWithVotes(message, "", primaryMsg, LolCommandParser.LOL_ROLE_ICONS, LolCommandParser.LOL_ROLE_ICONS.map((icon, index) => {
             return (reaction: MessageReaction) => {
                 primaryRole = index;
 
                 // send secondary role question.
-                this.discordService.sendMessageEmbedWithVotes(message, "", secondaryMsg, this.LOL_ROLE_ICONS, this.LOL_ROLE_ICONS.map((icon, index) => {
+                this.discordService.sendMessageEmbedWithVotes(message, "", secondaryMsg, LolCommandParser.LOL_ROLE_ICONS, LolCommandParser.LOL_ROLE_ICONS.map((icon, index) => {
                     return (reaction: MessageReaction) => {
                         secondaryRole = index;
 
@@ -150,12 +137,12 @@ export class LolCommandParser extends BaseCommandParser {
                         }
 
                         data[existingIndex].playerId = message.author.id;
-                        data[existingIndex].primaryRole = this.LOL_ROLES[primaryRole];
-                        data[existingIndex].secondaryRole = this.LOL_ROLES[secondaryRole];
+                        data[existingIndex].primaryRole = LolCommandParser.LOL_ROLES[primaryRole];
+                        data[existingIndex].secondaryRole = LolCommandParser.LOL_ROLES[secondaryRole];
 
                         DatabaseProvider.save(DatabaseProvider.LEAGUE_OF_LEGENDS, data);
 
-                        this.discordService.sendMessage(message, `You have successfully registered your role preferences as ${this.LOL_ROLE_ICONS[primaryRole]} (1) and ${this.LOL_ROLE_ICONS[secondaryRole]} (2).`);
+                        this.discordService.sendMessage(message, `You have successfully registered your role preferences as ${LolCommandParser.LOL_ROLE_ICONS[primaryRole]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRole]} (2).`);
                     };
                 }));
             };
@@ -163,6 +150,6 @@ export class LolCommandParser extends BaseCommandParser {
     }
 
     private getIconLegendString(): string {
-        return this.LOL_ROLES.map((role, i) => " " + this.LOL_ROLE_ICONS[i] + " = " + role).join(", ");
+        return LolCommandParser.LOL_ROLES.map((role, i) => " " + LolCommandParser.LOL_ROLE_ICONS[i] + " = " + role).join(", ");
     }
 }

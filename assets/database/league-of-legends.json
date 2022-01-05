@@ -2,6 +2,26 @@
     {
         "playerId": "197063569903190016",
         "primaryRole": "Top",
+        "secondaryRole": "Jungle"
+    },
+    {
+        "playerId": "289881331364659200",
+        "primaryRole": "Support",
+        "secondaryRole": "Jungle"
+    },
+    {
+        "playerId": "330454345869164565",
+        "primaryRole": "Jungle",
         "secondaryRole": "ADC"
+    },
+    {
+        "playerId": "605677093535088648",
+        "primaryRole": "Mid",
+        "secondaryRole": "ADC"
+    },
+    {
+        "playerId": "321272885727592448",
+        "primaryRole": "Jungle",
+        "secondaryRole": "Top"
     }
 ]
