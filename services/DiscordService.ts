@@ -13,18 +13,18 @@ export class DiscordService {
         this.defaultAwaitReactionOptions = { max: 1, time: 60 * 1000 };
     }
 
-    sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment = undefined) {
-        message.channel.send(text, attachment);
+    sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment = undefined): Promise<Message> {
+        return message.channel.send(text, attachment);
     }
 
-    sendMessageEmbed(message: Message | PartialMessage, text: string, embed: MessageEmbed) {
-        message.channel.send(text, embed);
+    sendMessageEmbed(message: Message | PartialMessage, text: string, embed: MessageEmbed): Promise<Message> {
+        return message.channel.send(text, embed);
     }
 
-    sendMessageWithReactions(message: Message | PartialMessage, text: string, attachment: MessageAttachment) {
+    sendMessageWithReactions(message: Message | PartialMessage, text: string, attachment: MessageAttachment): Promise<void> {
         const self = this;
 
-        message.channel.send(text, attachment)
+        return message.channel.send(text, attachment)
             .then(function (embed) {
                 embed.react("👍🏻");
                 embed.react("📢");
@@ -45,10 +45,28 @@ export class DiscordService {
             });
     }
 
-    sendMessageWithVotes(message: Message | PartialMessage, text: string, voteIcons: string[], voteCallbacks: ((reaction: MessageReaction) => void)[]) {
+    sendMessageWithVotes(message: Message | PartialMessage, text: string, voteIcons: string[], voteCallbacks: ((reaction: MessageReaction) => void)[]): Promise<void> {
         const self = this;
 
-        message.channel.send(text)
+        return message.channel.send(text)
+            .then(function (embed) {
+                voteIcons.forEach(icon => embed.react(icon));
+                embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
+                    .then(collected => {
+                        const reaction = collected.first();
+                        if (reaction === undefined) return;
+                        const reactionIndex = voteIcons.findIndex(icon => icon === reaction.emoji.name);
+                        if (reactionIndex >= 0 && voteCallbacks[reactionIndex]) {
+                            voteCallbacks[reactionIndex](reaction);
+                        }
+                    }).catch(e => DrunkenBot.reportMessage(message, 'DrunkenBot Workflow', e));
+            });
+    }
+
+    sendMessageEmbedWithVotes(message: Message | PartialMessage, text: string, embed: MessageEmbed, voteIcons: string[], voteCallbacks: ((reaction: MessageReaction) => void)[]): Promise<void> {
+        const self = this;
+
+        return message.channel.send(text, embed)
             .then(function (embed) {
                 voteIcons.forEach(icon => embed.react(icon));
                 embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
