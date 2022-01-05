@@ -1,0 +1,27 @@
+[
+    {
+        "playerName": "Mats",
+        "primaryRole": "top",
+        "secondaryRole": "jungle"
+    },
+    {
+        "playerName": "Raffi",
+        "primaryRole": "support",
+        "secondaryRole": "jungle"
+    },
+    {
+        "playerName": "Riedo",
+        "primaryRole": "jungle",
+        "secondaryRole": "adc"
+    },
+    {
+        "playerName": "Dömu",
+        "primaryRole": "mid",
+        "secondaryRole": "adc"
+    },
+    {
+        "playerName": "Jan",
+        "primaryRole": "jungle",
+        "secondaryRole": "top"
+    }
+]

@@ -4,6 +4,7 @@ import { Logger } from '../helpers/Logger';
 import { BaseCommandParser } from '../base/BaseCommandParser';
 import { ParameterService } from '../services/ParameterService';
 import { ConfigProvider } from '../helpers/ConfigProvider';
+import { DatabaseProvider } from '../helpers/DatabaseProvider';
 
 export class LolCommandParser extends BaseCommandParser {
 
@@ -28,31 +29,47 @@ export class LolCommandParser extends BaseCommandParser {
             return;
         }
 
-        const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) {
-            this.discordService.sendMessage(message, "You need to be in a voice channel for that!");
+        // print out a player list.
+        if (this.parameterService.tryGetParameterValue("players", parameters) === "players") {
+            this.showHelp(message);
             return;
         }
 
-        let roles = [
-            "🌳 Jungle",
-            "⚔️ Top",
-            "🧙 Mid",
-            "🏹 ADC",
-            "🛡️ Support",
-        ]
+        var data = DatabaseProvider.get(DatabaseProvider.LEAGUE_OF_LEGENDS);
+        
+        message.channel.send("DEBUG: `" + JSON.stringify(data) + "`");
 
-        let members = parameters.length > 0
-            ? parameters.map(p => p.name)
-            : message.member.voice.channel.members.map(m => m.nickname ?? m.displayName);
+        data[0].primaryRole = new Date().toTimeString();
 
-        let assignments = "";
-        members.forEach(member => {
-            const roleIndex = Math.floor(Math.random() * roles.length);
-            assignments += member + ": " + roles[roleIndex] + "\r\n";
-            roles.splice(roleIndex, 1);
-        });
-        this.discordService.sendMessage(message, assignments);
+        DatabaseProvider.save(DatabaseProvider.LEAGUE_OF_LEGENDS, data);
+
+        
+
+        // const voiceChannel = message.member.voice.channel;
+        // if (!voiceChannel) {
+        //     this.discordService.sendMessage(message, "You need to be in a voice channel for that!");
+        //     return;
+        // }
+
+        // let roles = [
+        //     "🌳 Jungle",
+        //     "⚔️ Top",
+        //     "🧙 Mid",
+        //     "🏹 ADC",
+        //     "🛡️ Support",
+        // ]
+
+        // let members = parameters.length > 0
+        //     ? parameters.map(p => p.name)
+        //     : message.member.voice.channel.members.map(m => m.nickname ?? m.displayName);
+
+        // let assignments = "";
+        // members.forEach(member => {
+        //     const roleIndex = Math.floor(Math.random() * roles.length);
+        //     assignments += member + ": " + roles[roleIndex] + "\r\n";
+        //     roles.splice(roleIndex, 1);
+        // });
+        // this.discordService.sendMessage(message, assignments);
     }
 
     private showHelp(message: Message | PartialMessage) {
@@ -67,7 +84,9 @@ export class LolCommandParser extends BaseCommandParser {
 
         embed.setTitle("LoL Roles Bot Overview")
             .setDescription("This bot assigns random roles to all players in the voice channel.")
-            .addField(`Commands`, "Just type `!lol` or `!league` to match players with roles based on their preferences. To change your preference, use `!role` or `!roles`.")
+            .addField(`Commands`, "Just type `!lol` or `!league` to match players with roles based on their preferences." +
+                "\r\nTo change your role preferences, use `!lol roles`, `!role` or `!roles`." +
+                "\r\nTo view who registered roles, use `!lol players`.")
             .setTimestamp()
             .setFooter("DrunKen Discord Bot", 'https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128')
             .setImage("attachment://banner.png");
