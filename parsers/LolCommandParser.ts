@@ -53,7 +53,24 @@ export class LolCommandParser extends BaseCommandParser {
             return;
         }
 
-        this.leageOfLegendsService.determineRoles(data);
+        const roleAssignments = this.leageOfLegendsService.determineRoles(data);
+
+        message.guild.members.fetch().then(members => {
+
+            let msg = "I determined the following role assignments:\r\n";
+            roleAssignments.forEach(assignment => {
+                const roleIndex = LolCommandParser.LOL_ROLES.findIndex(r => r === assignment.role);
+                const roleIcon = LolCommandParser.LOL_ROLE_ICONS[roleIndex];
+                const playerName = members.get(assignment.playerId).displayName;
+                msg += `**${playerName}** plays ${roleIcon}\r\n`;
+            });
+
+            let embed = new MessageEmbed();
+            embed.setTitle("LoL Role Assigments")
+                .setDescription(msg)
+                .addField("Legend", this.getIconLegendString());
+            this.discordService.sendMessageEmbed(message, "", embed);
+        });
     }
 
     private showHelp(message: Message | PartialMessage) {
@@ -91,7 +108,7 @@ export class LolCommandParser extends BaseCommandParser {
                     const primaryRoleIndex = LolCommandParser.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.primaryRole.toLowerCase());
                     const secondaryRoleIndex = LolCommandParser.LOL_ROLES.findIndex(r => r.toLowerCase() === rolePreference.secondaryRole.toLowerCase());
                     const memberName = members.get(rolePreference.playerId);
-                    msg += `**${memberName?.displayName ?? "<Unknown>"}** prefers ${LolCommandParser.LOL_ROLE_ICONS[primaryRoleIndex]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRoleIndex]} (2)\r\n`
+                    msg += `** ${memberName?.displayName ?? "<Unknown>"}** prefers ${LolCommandParser.LOL_ROLE_ICONS[primaryRoleIndex]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRoleIndex]} (2) \r\n`
                 });
             }
 
@@ -105,46 +122,37 @@ export class LolCommandParser extends BaseCommandParser {
     }
 
     private showRolePreferenceDialog(message: Message | PartialMessage, data: LolRolePreference[]): void {
-        Logger.log(`${message.author.username} requested to change his/her role preference.`);
+        Logger.log(`${message.author.username} requested to change his / her role preference.`);
 
-        let primaryMsg = new MessageEmbed();
-        primaryMsg.setTitle("Primary Role")
-            .setDescription("Choose your primary role preference:")
-            .addField("Legend", this.getIconLegendString());
-        let secondaryMsg = new MessageEmbed();
-        secondaryMsg.setTitle("Secondary Role")
-            .setDescription("Choose your secondary role preference:")
+        let messageEmbed = new MessageEmbed();
+        messageEmbed.setTitle("Primary Role")
+            .setDescription("Choose your primary role preference first, then your secondary role preference:")
             .addField("Legend", this.getIconLegendString());
 
         let primaryRole = -1;
         let secondaryRole = -1;
 
         // send primary role question.
-        this.discordService.sendMessageEmbedWithVotes(message, "", primaryMsg, LolCommandParser.LOL_ROLE_ICONS, LolCommandParser.LOL_ROLE_ICONS.map((icon, index) => {
+        this.discordService.sendMessageEmbedWithVotes(message, "", messageEmbed, LolCommandParser.LOL_ROLE_ICONS, LolCommandParser.LOL_ROLE_ICONS.map((icon, index) => {
             return (reaction: MessageReaction) => {
                 primaryRole = index;
+                let secondaryIcon = reaction.message.reactions.cache.find(r => r.count > 1 && r.emoji.name !== LolCommandParser.LOL_ROLE_ICONS[primaryRole]).emoji.name;
+                secondaryRole = LolCommandParser.LOL_ROLE_ICONS.findIndex(f => f === secondaryIcon);
 
-                // send secondary role question.
-                this.discordService.sendMessageEmbedWithVotes(message, "", secondaryMsg, LolCommandParser.LOL_ROLE_ICONS, LolCommandParser.LOL_ROLE_ICONS.map((icon, index) => {
-                    return (reaction: MessageReaction) => {
-                        secondaryRole = index;
+                let existingIndex = data.findIndex(p => p.playerId === message.author.id);
+                if (existingIndex < 0) {
+                    existingIndex = data.length;
+                    const newPreference = new LolRolePreference();
+                    data.push(newPreference);
+                }
 
-                        let existingIndex = data.findIndex(p => p.playerId === message.author.id);
-                        if (existingIndex < 0) {
-                            existingIndex = data.length;
-                            const newPreference = new LolRolePreference();
-                            data.push(newPreference);
-                        }
+                data[existingIndex].playerId = message.author.id;
+                data[existingIndex].primaryRole = LolCommandParser.LOL_ROLES[primaryRole];
+                data[existingIndex].secondaryRole = LolCommandParser.LOL_ROLES[secondaryRole];
 
-                        data[existingIndex].playerId = message.author.id;
-                        data[existingIndex].primaryRole = LolCommandParser.LOL_ROLES[primaryRole];
-                        data[existingIndex].secondaryRole = LolCommandParser.LOL_ROLES[secondaryRole];
+                DatabaseProvider.save(DatabaseProvider.LEAGUE_OF_LEGENDS, data);
 
-                        DatabaseProvider.save(DatabaseProvider.LEAGUE_OF_LEGENDS, data);
-
-                        this.discordService.sendMessage(message, `You have successfully registered your role preferences as ${LolCommandParser.LOL_ROLE_ICONS[primaryRole]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRole]} (2).`);
-                    };
-                }));
+                this.discordService.sendMessage(message, `You have successfully registered your role preferences as ${LolCommandParser.LOL_ROLE_ICONS[primaryRole]} (1) and ${LolCommandParser.LOL_ROLE_ICONS[secondaryRole]} (2).`);
             };
         }));
     }

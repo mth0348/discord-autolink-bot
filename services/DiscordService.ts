@@ -7,10 +7,12 @@ import { LogType } from '../dtos/LogType';
 export class DiscordService {
     private defaultAwaitReactionFilter: CollectorFilter;
     private defaultAwaitReactionOptions: AwaitReactionsOptions;
+    private twoAwaitReactionOptions: AwaitReactionsOptions;
 
     constructor() {
         this.defaultAwaitReactionFilter = (reaction, user) => { return user.id !== reaction.message.author.id; };
         this.defaultAwaitReactionOptions = { max: 1, time: 60 * 1000 };
+        this.twoAwaitReactionOptions = { max: 2, time: 60 * 1000 };
     }
 
     sendMessage(message: Message | PartialMessage, text: string, attachment: MessageAttachment = undefined): Promise<Message> {
@@ -69,7 +71,7 @@ export class DiscordService {
         return message.channel.send(text, embed)
             .then(function (embed) {
                 voteIcons.forEach(icon => embed.react(icon));
-                embed.awaitReactions(self.defaultAwaitReactionFilter, self.defaultAwaitReactionOptions)
+                embed.awaitReactions(self.defaultAwaitReactionFilter, self.twoAwaitReactionOptions)
                     .then(collected => {
                         const reaction = collected.first();
                         if (reaction === undefined) return;
