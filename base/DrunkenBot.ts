@@ -19,6 +19,8 @@ export class DrunkenBot {
 
     private registeredParsers: ICommandParser[];
 
+    private isDebug: boolean = false;
+
     constructor(token: string) {
         this.client = new Client();
         this.client.login(token);
@@ -66,8 +68,12 @@ export class DrunkenBot {
             await parser.executeAsync(message);
         }
         catch (e) {
-            message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
-            DrunkenBot.reportMessage(message, parser.name, e);
+            if (!this.isDebug) {
+                message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
+                DrunkenBot.reportMessage(message, parser.name, e);
+            } else {
+                console.error(e);
+            }
         }
     }
 
@@ -87,7 +93,7 @@ export class DrunkenBot {
         });
 
         msg += `==========================================`;
-
+        
         console.warn(msg);
 
         let reportChannel = message.client.channels.cache.map(c => c as TextChannel).find(c => c.name.endsWith("bot-reports"));
