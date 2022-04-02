@@ -120,7 +120,7 @@ export class DndCommandParser extends BaseCommandParser {
             return 'Middling!';
         }
         if (percentage <= 0.5) {
-            return 'Mediocre!';
+            return 'Average!';
         }
         if (percentage <= 0.6) {
             return 'Not bad!';
