@@ -278,7 +278,7 @@ export class MusicCommandParser extends BaseCommandParser {
 
 
         if (this.timeout) {
-            Logger.log("Cleared timeout for voice channel disconnect.")
+            Logger.log("Cleared timeout for voice channel disconnect.", LogType.Verbose);
             clearTimeout(this.timeout);
         }
     }
@@ -329,7 +329,9 @@ export class MusicCommandParser extends BaseCommandParser {
     }
 
     private leaveIfIdle(isPlaying: boolean, voiceConnection: VoiceConnection): void {
+        Logger.log("Leave if idle is called...", LogType.Verbose);
         if (!isPlaying && voiceConnection) {
+            Logger.log("Decided to leave!", LogType.Verbose);
             voiceConnection.channel.leave();
         }
     }
