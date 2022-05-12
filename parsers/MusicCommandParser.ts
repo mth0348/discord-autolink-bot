@@ -139,6 +139,8 @@ export class MusicCommandParser extends BaseCommandParser {
 
         await this.joinVoiceChannel(message);
 
+        Logger.log("Skipping song..", LogType.Verbose, this.voiceConnection);
+
         this.voiceConnection.dispatcher.end();
     }
 
@@ -230,6 +232,8 @@ export class MusicCommandParser extends BaseCommandParser {
     private async playNextSong(message: Message | PartialMessage) {
         await this.joinVoiceChannel(message);
 
+        Logger.log("Play next song..", LogType.Verbose, this.voiceConnection);
+
         const song = this.globalQueue.peek();
 
         message.client.user.setActivity({ type: "LISTENING", name: song.title });
@@ -250,11 +254,15 @@ export class MusicCommandParser extends BaseCommandParser {
                 quality: 'highestaudio'
             }))
             .on("finish", () => {
+                Logger.log("Finished playing song..", LogType.Verbose, this.voiceConnection);
+
                 this.globalQueue.shift();
 
                 if (!this.globalQueue.isEmpty()) {
+                    Logger.log("Global queue not empty, playing next song..", LogType.Verbose, this.voiceConnection);
                     this.playNextSong(message);
                 } else {
+                    Logger.log("Global queue empty, stopping..", LogType.Verbose, this.voiceConnection);
                     this.isPlaying = false;
                     message.client.user.setActivity();
 
@@ -276,8 +284,12 @@ export class MusicCommandParser extends BaseCommandParser {
     }
 
     private async joinVoiceChannel(message: Message | PartialMessage) {
+        Logger.log("Establishing voice connection...", LogType.Verbose);
+        
         const voiceChannel = message.guild.me.voice.channel != null ? message.guild.me.voice.channel : message.member.voice.channel;
         this.voiceConnection = await voiceChannel.join();
+
+        Logger.log("Established voice connection.", LogType.Verbose, this.voiceConnection);
     }
 
     private async queueMusicTrack(message: Message | PartialMessage, song: MusicTrack): Promise<void> {
