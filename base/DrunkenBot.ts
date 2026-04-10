@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Message, PartialMessage, TextChannel } from "discord.js";
+import { Client, ClientOptions, GatewayIntentBits, Message, PartialMessage, TextChannel } from "discord.js";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
 import { ParameterService } from "../services/ParameterService";
@@ -15,7 +15,7 @@ export class DrunkenBot {
   private isDebug: boolean = false;
 
   constructor(token: string) {
-    this.client = new Client({} as ClientOptions);
+    this.client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] } as ClientOptions);
     this.client.login(token);
 
     this.discordService = new DiscordService();
