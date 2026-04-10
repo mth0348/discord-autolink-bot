@@ -1,5 +1,5 @@
-import { Parameter } from "../dtos/Parameter";
-import { ParameterServiceConfig } from '../dtos/ParameterServiceConfig';
+import { Parameter } from "../enums/Parameter";
+import { ParameterServiceConfig } from '../enums/ParameterServiceConfig';
 import { StringHelper } from '../helpers/StringHelper';
 
 export class ParameterService {

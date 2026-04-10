@@ -1,108 +1,91 @@
-import { Client, Message, PartialMessage, TextChannel } from 'discord.js';
-import { MtgCommandParser } from "../parsers/MtgCommandParser";
+import { Client, ClientOptions, Message, PartialMessage, TextChannel } from "discord.js";
 import { DiscordService } from "../services/DiscordService";
 import { ICommandParser } from "./ICommandParser";
-import { ParameterService } from '../services/ParameterService';
-import { ImageProvider } from '../domain/repositories/ImageProvider';
-import { Logger } from '../helpers/Logger';
-import { BotCommandParser } from '../parsers/BotCommandParser';
-import { CsGoCommandParser } from '../parsers/CsGoCommandParser';
-import { DndCommandParser } from '../parsers/DndCommandParser';
-import { LolCommandParser } from '../parsers/LolCommandParser';
+import { ParameterService } from "../services/ParameterService";
+import { Logger } from "../helpers/Logger";
+import { BotCommandParser } from "../parsers/BotCommandParser";
 
 export class DrunkenBot {
+  private discordService: DiscordService;
+  private parameterService: ParameterService;
+  private client: Client;
 
-    private discordService: DiscordService;
-    private parameterService: ParameterService;
-    private client: Client;
+  private registeredParsers: ICommandParser[];
 
-    private registeredParsers: ICommandParser[];
+  private isDebug: boolean = false;
 
-    private isDebug: boolean = false;
+  constructor(token: string) {
+    this.client = new Client({} as ClientOptions);
+    this.client.login(token);
 
-    constructor(token: string) {
-        this.client = new Client();
-        this.client.login(token);
+    this.discordService = new DiscordService();
+    this.parameterService = new ParameterService();
+    this.registeredParsers = [];
 
-        this.discordService = new DiscordService();
-        this.parameterService = new ParameterService();
-        this.registeredParsers = [];
+    console.log("||=============================||");
+    console.log("||    DRUNKEN DISCORD BOT      ||");
+    console.log("||          by Mats            ||");
+    console.log("||=============================||");
+    console.log("");
+    console.log("||=== Parsers =================||");
+    this.registerCommandParsers();
 
-        console.log("||=============================||");
-        console.log("||    DRUNKEN DISCORD BOT      ||");
-        console.log("||          by Mats            ||");
-        console.log("||=============================||");
-        console.log("");
-        console.log("||=== Parsers =================||");
-        this.registerCommandParsers();
+    console.log("||=============================||");
+    console.log("BOT READY!");
+    console.log("");
+  }
 
-        ImageProvider.loadImageDatabase();
-
-        console.log("||=============================||");
-        console.log("BOT READY!");
-        console.log("");
-    }
-
-    public startListening(): void {
-        this.client.on('message', message => {
-            this.registeredParsers.forEach(async parser => {
-                if (parser.isAllowedCommand(message)) {
-                    await this.startWorkflow(parser, message);
-                }
-            });
-        });
-    }
-
-    private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
-        Logger.clearStack();
-
-        try {
-            await parser.executeAsync(message);
+  public startListening(): void {
+    this.client.on("message", (message) => {
+      this.registeredParsers.forEach(async (parser) => {
+        if (parser.isAllowedCommand(message)) {
+          await this.startWorkflow(parser, message);
         }
-        catch (e) {
-            if (!this.isDebug) {
-                message.channel.send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
-                DrunkenBot.reportMessage(message, parser.name, e);
-            } else {
-                console.error(e);
-            }
-        }
+      });
+    });
+  }
+
+  private async startWorkflow(parser: ICommandParser, message: Message | PartialMessage) {
+    Logger.clearStack();
+
+    try {
+      await parser.executeAsync(message);
+    } catch (e) {
+      if (!this.isDebug) {
+        (message.channel as TextChannel).send("Oops, something went wrong, sorry. The error has been reported automatically. Please try again...");
+        DrunkenBot.reportMessage(message, parser.name, e);
+      } else {
+        console.error(e);
+      }
     }
+  }
 
-    public static reportMessage(message: Message | PartialMessage, reporter: string, e: any) {
-        message.client.user.setActivity();
-        
-        let msg = "";
+  public static reportMessage(message: Message | PartialMessage, reporter: string, e: any) {
+    message.client.user.setActivity();
 
-        msg += `Error reported by "${reporter}":\r\n`;
-        msg += `Exception: ${e}\r\n`;
-        msg += `LogStack:\r\n`;
-        msg += `==========================================\r\n`;
+    let msg = "";
 
-        const logStack = Logger.getStack();
-        logStack.forEach(log => {
-            msg += `${log}\r\n`;
-        });
+    msg += `Error reported by "${reporter}":\r\n`;
+    msg += `Exception: ${e}\r\n`;
+    msg += `LogStack:\r\n`;
+    msg += `==========================================\r\n`;
 
-        msg += `==========================================`;
-        
-        console.warn(msg);
+    const logStack = Logger.getStack();
+    logStack.forEach((log) => {
+      msg += `${log}\r\n`;
+    });
 
-        let reportChannel = message.client.channels.cache.map(c => c as TextChannel).find(c => c.name.endsWith("bot-reports"));
-        if (reportChannel) {
-            reportChannel.send(msg).then(m => m.suppressEmbeds(true));
-        }
+    msg += `==========================================`;
+
+    console.warn(msg);
+
+    let reportChannel = message.client.channels.cache.map((c) => c as TextChannel).find((c) => c.name.endsWith("bot-reports"));
+    if (reportChannel) {
+      reportChannel.send(msg).then((m) => m.suppressEmbeds(true));
     }
+  }
 
-    private registerCommandParsers(): void {
-        this.registeredParsers.push(new BotCommandParser(this.discordService, this.parameterService));
-        this.registeredParsers.push(new MtgCommandParser(this.discordService, this.parameterService));
-        this.registeredParsers.push(new CsGoCommandParser(this.discordService, this.parameterService));
-        this.registeredParsers.push(new DndCommandParser(this.discordService, this.parameterService));
-        this.registeredParsers.push(new LolCommandParser(this.discordService, this.parameterService));
-        // this.registeredParsers.push(new MusicCommandParser(this.discordService, this.parameterService));
-        // this.registeredParsers.push(new MtgCommandParser()); // generalParser
-        // this.registeredParsers.push(new MtgCommandParser()); // minigameParser
-        // this.registeredParsers.push(new MtgCommandParser()); // huntParser
-    }
+  private registerCommandParsers(): void {
+    this.registeredParsers.push(new BotCommandParser(this.discordService, this.parameterService));
+  }
 }

@@ -1,0 +1,22 @@
+export const Constants = {
+  prefix: "!",
+  channelPermissions: {
+    general: ["random", "dev-playground", "bot-channel"],
+    dnd: ["random", "dnd-lads", "dnd-bubus", "hunt-showdown", "bot-channel", "dev-playground"],
+    csgo: ["random", "cs-go", "bot-channel", "dev-playground"],
+    mtg: ["random", "magic-the-gathering", "bot-channel", "dev-playground"],
+    huntShowdown: ["random", "hunt-showdown", "bot-channel", "dev-playground"],
+    music: ["random", "music", "dev-playground", "bot-channel"],
+    lol: ["random", "league-of-legends", "dev-playground", "bot-channel"],
+  },
+  rolePermissions: {
+    general: ["Bot-Developer"],
+    dnd: ["DnD Lads", "DnD Bubus", "Bot-Developer"],
+    csgo: ["DrunKen", "Bot-Developer"],
+    mtg: ["DrunKen", "Bot-Developer"],
+    minigame: ["DrunKen", "Bot-Developer"],
+    huntShowdown: ["DrunKen", "Bot-Developer"],
+    music: ["DrunKen", "Bot-Developer"],
+    lol: ["DrunKen", "Bot-Developer"],
+  },
+};

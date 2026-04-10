@@ -1,4 +1,4 @@
-import { LogType } from "../dtos/LogType";
+import { LogType } from "../enums/LogType";
 
 export class Logger {
 
@@ -17,6 +17,7 @@ export class Logger {
 
         // push to stack anyway.
         this.logStack.push(type + " " + text);
+        
         if (args) this.logStack.push(args);
     }
 
