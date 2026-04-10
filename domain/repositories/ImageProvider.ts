@@ -1,5 +1,5 @@
 import { Collection } from "discord.js";
-import Canvas = require("canvas");
+import Canvas from "canvas";
 
 export class ImageProvider {
 

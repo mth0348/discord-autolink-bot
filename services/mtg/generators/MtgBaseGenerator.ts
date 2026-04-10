@@ -8,7 +8,7 @@ import { MtgOracleTextWrapperService } from '../MtgOracleTextWrapperService';
 import { Logger } from '../../../helpers/Logger';
 import { LogType } from '../../../dtos/LogType';
 
-import fs = require("fs");
+import fs from 'fs';
 
 export class MtgBaseGenerator {
 

@@ -20,7 +20,7 @@ import { StringHelper } from '../helpers/StringHelper';
 import { MtgPlaneswalkerCardRenderer } from '../services/mtg/MtgPlaneswalkerCardRenderer';
 import { Logger } from '../helpers/Logger';
 
-import Canvas = require("canvas");
+import Canvas from "canvas";
 
 export class MtgCommandParser extends BaseCommandParser {
 

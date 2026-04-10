@@ -1,5 +1,5 @@
 import lolDatabase = require('../assets/database/league-of-legends.json');
-import FS = require('fs');
+import fs from 'fs';
 
 export class DatabaseProvider {
     public static LEAGUE_OF_LEGENDS: string = './assets/database/league-of-legends.json';
@@ -15,7 +15,7 @@ export class DatabaseProvider {
     }
 
     public static save(database: string, data: any): void {
-        FS.writeFile(database, JSON.stringify(data, null, 4), function(error) {
+        fs.writeFile(database, JSON.stringify(data, null, 4), function(error) {
             if (error) {
                 throw error;
             }

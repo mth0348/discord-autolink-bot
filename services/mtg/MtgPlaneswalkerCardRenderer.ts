@@ -5,14 +5,12 @@ import { ImageProvider } from '../../domain/repositories/ImageProvider';
 import { Resources } from '../../helpers/Constants';
 import { StringHelper } from '../../helpers/StringHelper';
 import { Random } from "../../helpers/Random";
-import { Logger } from '../../helpers/Logger';
-import { LogType } from "../../dtos/LogType";
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 import { MtgCardRenderer } from "./MtgCardRenderer";
 import { MtgActivatedAbility } from "../../dtos/mtg/abilities/MtgActivatedAbility";
 import { MtgOracleTextWrapPreset } from '../../dtos/mtg/MtgOracleTextWrapPreset';
 
-import Canvas = require("canvas");
+import Canvas from "canvas";
 
 export class MtgPlaneswalkerCardRenderer {
 

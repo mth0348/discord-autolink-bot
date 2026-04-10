@@ -9,7 +9,7 @@ import { Logger } from '../../helpers/Logger';
 import { LogType } from "../../dtos/LogType";
 import { MtgHelper } from '../../helpers/mtg/MtgHelper';
 
-import Canvas = require("canvas");
+import Canvas from "canvas";
 
 export class MtgCardRenderer {
 
