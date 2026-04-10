@@ -2,10 +2,10 @@
     "compilerOptions": {
       /* Basic Options */
       "target": "es6",                       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
-      "module": "commonjs",                     /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+      "module": "node16",                     /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
       "lib": ["es6","dom"],                     /* Specify library files to be included in the compilation. */
       "esModuleInterop": true,
-      "moduleResolution": "bundler",
+      "moduleResolution": "node16",
       "resolveJsonModule": true,
       // "allowJs": true,                       /* Allow javascript files to be compiled. */
       // "checkJs": true,                       /* Report errors in .js files. */
@@ -41,6 +41,7 @@
       // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
       // "typeRoots": [],                       /* List of folders to include type definitions from. */
       // "types": [],                           /* Type declaration files to be included in compilation. */
+      "types": ["node"],
       "allowSyntheticDefaultImports": true,     /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
       // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
   
