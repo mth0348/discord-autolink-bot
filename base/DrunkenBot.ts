@@ -14,9 +14,9 @@ export class DrunkenBot {
 
   private isDebug: boolean = false;
 
-  constructor(token: string) {
+  constructor() {
     this.client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] } as ClientOptions);
-    this.client.login(token);
+    this.client.login(process.env.DISCORD_TOKEN);
 
     this.discordService = new DiscordService();
     this.parameterService = new ParameterService();
