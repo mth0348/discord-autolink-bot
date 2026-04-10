@@ -11,6 +11,7 @@ import { MusicThumbnail } from '../dtos/music/MusicThumbnail';
 
 const ytdl = require('ytdl-core');
 const ytsr = require('ytsr');
+const { joinDiscordVoiceChannel } = require('@discordjs/voice');
 
 export class MusicCommandParser extends BaseCommandParser {
 
@@ -286,8 +287,16 @@ export class MusicCommandParser extends BaseCommandParser {
     private async joinVoiceChannel(message: Message | PartialMessage) {
         Logger.log("Establishing voice connection...", LogType.Verbose);
         
-        const voiceChannel = message.guild.me.voice.channel != null ? message.guild.me.voice.channel : message.member.voice.channel;
-        this.voiceConnection = await voiceChannel.join();
+        // const voiceChannel = message.guild.me.voice.channel != null ? message.guild.me.voice.channel : message.member.voice.channel;
+        // this.voiceConnection = await voiceChannel.join();
+
+        const channel = message.guild.me.voice.channel != null ? message.guild.me.voice.channel : message.member.voice.channel;
+        const connection = joinDiscordVoiceChannel(
+        {
+            channelId: channel.id,
+            guildId: channel.guild.id,
+            adapterCreator: channel.guild.voiceAdapterCreator
+        });
 
         Logger.log("Established voice connection.", LogType.Verbose, this.voiceConnection);
     }

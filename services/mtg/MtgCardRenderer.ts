@@ -56,7 +56,7 @@ export class MtgCardRenderer {
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName));
         Logger.log(`Card image Url for filename ${fileName}: `, LogType.Verbose, cardImageUrl);
-        const cardImage = ImageProvider.getImage(cardImageUrl.path);
+        const cardImage = ImageProvider.getImage(cardImageUrl.path) as Canvas.Image;
 
         this.ctx.drawImage(cardImage, 0, 0, this.canvas.width, this.canvas.height);
     }
@@ -90,7 +90,7 @@ export class MtgCardRenderer {
     }
 
     private drawExpansionSymbol() {
-        const expansionSymbol = ImageProvider.getImage(`assets/img/mtg/expansion/${this.card.rarity.toString()}.png`);
+        const expansionSymbol = ImageProvider.getImage(`assets/img/mtg/expansion/${this.card.rarity.toString()}.png`) as Canvas.Image;
         this.ctx.drawImage(expansionSymbol, 545, 502, 35, 35);
     }
 

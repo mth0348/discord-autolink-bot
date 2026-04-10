@@ -62,7 +62,7 @@ export class MtgPlaneswalkerCardRenderer {
         const fileName = `IMAGEURL_BORDER_${colorMapping}_PLANESWALKER`;
 
         const cardImageUrl = Resources.MtgImageUrls.find(s => StringHelper.isEqualIgnoreCase(s.name, fileName));
-        const cardImage = ImageProvider.getImage(cardImageUrl?.path);
+        const cardImage = ImageProvider.getImage(cardImageUrl?.path) as Canvas.Image;
 
         this.ctx.drawImage(cardImage, 0, 0, this.canvas.width, this.canvas.height);
     }
@@ -94,7 +94,7 @@ export class MtgPlaneswalkerCardRenderer {
     }
 
     private drawExpansionSymbol() {
-        const expansionSymbol = ImageProvider.getImage(`assets/img/mtg/expansion/${this.card.rarity.toString()}.png`);
+        const expansionSymbol = ImageProvider.getImage(`assets/img/mtg/expansion/${this.card.rarity.toString()}.png`) as Canvas.Image;
         this.ctx.drawImage(expansionSymbol, 545, 502, 35, 35);
     }
 
@@ -123,7 +123,7 @@ export class MtgPlaneswalkerCardRenderer {
             const activatedAbility = this.card.oracle.abilities[i] as MtgActivatedAbility;
             const cost = activatedAbility.cost;
             const isUp = parseInt(cost.text) > 0;
-            const pwSymbolImage = ImageProvider.getImage(`assets/img/mtg/symbols/mtg_pw_${isUp ? 'up' : 'down'}.png`)
+            const pwSymbolImage = ImageProvider.getImage(`assets/img/mtg/symbols/mtg_pw_${isUp ? 'up' : 'down'}.png`) as Canvas.Image;
             this.ctx.drawImage(pwSymbolImage, 25, 570 + (i * (lineHeight + 2)), 75, 52);
             
             // draw symbol number.
