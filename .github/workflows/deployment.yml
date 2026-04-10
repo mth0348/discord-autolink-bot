@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@latest
+        uses: actions/checkout@v6
 
       - name: Prepare Frontend build
-        uses: actions/setup-node@latest
+        uses: actions/setup-node@v6
         with:
           node-version: 20.11.0
 
