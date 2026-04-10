@@ -1,10 +1,9 @@
-import { Message, PartialMessage } from 'discord.js';
+import { Message, PartialMessage } from "discord.js";
 
 export interface ICommandParser {
+  name: string;
 
-    name: string;
+  isAllowedCommand(message: Message | PartialMessage): boolean;
 
-    isAllowedCommand(message: Message | PartialMessage) : boolean;
-
-    executeAsync(message: Message | PartialMessage) : Promise<void>;
+  executeAsync(message: Message | PartialMessage): Promise<void>;
 }

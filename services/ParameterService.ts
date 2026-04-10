@@ -1,67 +1,61 @@
-import { Parameter } from "../enums/Parameter";
-import { ParameterServiceConfig } from '../enums/ParameterServiceConfig';
-import { StringHelper } from '../helpers/StringHelper';
+import { Parameter } from "../data/Parameter";
+import { ParameterServiceConfig } from "../data/ParameterServiceConfig";
+import { StringHelper } from "../helpers/StringHelper";
 
 export class ParameterService {
+  public extractParameters(text: string, configs: ParameterServiceConfig[]): Parameter[] {
+    const params = text.split(" ").slice(1);
 
-    public extractParameters(text: string, configs: ParameterServiceConfig[]): Parameter[] {
-        const params = text.split(" ").slice(1);
+    let result: Parameter[] = [];
 
-        let result: Parameter[] = [];
+    params.forEach((param) => {
+      let paramParts = param.trim().split(":");
+      if (paramParts.length <= 1) paramParts = param.trim().split("=");
+      if (paramParts.length === 2) {
+        const paramName = paramParts[0].trim();
+        const paramValue = paramParts[1].trim();
 
-        params.forEach(param => {
-            let paramParts = param.trim().split(":");
-            if (paramParts.length <= 1) paramParts = param.trim().split("=");
-            if (paramParts.length === 2) {
+        // find param with that name.
+        configs.forEach((config) => {
+          const isNameMatch = this.isNameMatch(config, paramName);
+          const isValueAllowed = this.isValueAllowed(config, paramValue);
 
-                const paramName = paramParts[0].trim();
-                const paramValue = paramParts[1].trim();
-
-                // find param with that name.
-                configs.forEach(config => {
-                    const isNameMatch = this.isNameMatch(config, paramName);
-                    const isValueAllowed = this.isValueAllowed(config, paramValue);
-
-                    if (isNameMatch && isValueAllowed) {
-                        // only add first of kind.
-                        if (!result.some(r => r.name === config.parameterName)) {
-                            result.push(new Parameter(config.parameterName, paramValue));
-                        }
-
-                    }
-                });
-            } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "help")) {
-                result.push(new Parameter("help", "help"))
-            } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "status")) {
-                result.push(new Parameter("status", "status"))
-            } else {
-                result = result.concat(paramParts.map(p => new Parameter(p, p)));
+          if (isNameMatch && isValueAllowed) {
+            // only add first of kind.
+            if (!result.some((r) => r.name === config.parameterName)) {
+              result.push(new Parameter(config.parameterName, paramValue));
             }
+          }
         });
+      } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "help")) {
+        result.push(new Parameter("help", "help"));
+      } else if (paramParts.length === 1 && StringHelper.isEqualIgnoreCase(paramParts[0].trim(), "status")) {
+        result.push(new Parameter("status", "status"));
+      } else {
+        result = result.concat(paramParts.map((p) => new Parameter(p, p)));
+      }
+    });
 
-        return result;
-    }
+    return result;
+  }
 
-    public tryGetParameterValue(parameterName: string, parameters: Parameter[]): string {
-        let foundParameter: Parameter = null;
-        parameters.forEach(p => {
-            if (StringHelper.isEqualIgnoreCase(p.name, parameterName)) {
-                foundParameter = p;
-            }
-        })
-        return foundParameter?.value;
-    }
+  public tryGetParameterValue(parameterName: string, parameters: Parameter[]): string {
+    let foundParameter: Parameter = null;
+    parameters.forEach((p) => {
+      if (StringHelper.isEqualIgnoreCase(p.name, parameterName)) {
+        foundParameter = p;
+      }
+    });
+    return foundParameter?.value;
+  }
 
-    private isNameMatch(config: ParameterServiceConfig, paramName: string) {
-        return StringHelper.isEqualIgnoreCase(config.parameterName, paramName)
-            || StringHelper.isEqualIgnoreCase(config.alternativeName, paramName);
-    }
+  private isNameMatch(config: ParameterServiceConfig, paramName: string) {
+    return StringHelper.isEqualIgnoreCase(config.parameterName, paramName) || StringHelper.isEqualIgnoreCase(config.alternativeName, paramName);
+  }
 
-    private isValueAllowed(config: ParameterServiceConfig, paramValue: string) {
-        if (config.validParameterValues === null)
-            return true;
+  private isValueAllowed(config: ParameterServiceConfig, paramValue: string) {
+    if (config.validParameterValues === null) return true;
 
-        return config.validParameterValues.some(c => StringHelper.isEqualIgnoreCase(c, paramValue));
-    }
-
+    return config.validParameterValues.some((c) => StringHelper.isEqualIgnoreCase(c, paramValue));
+  }
 }
