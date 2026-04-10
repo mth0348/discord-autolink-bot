@@ -1,5 +1,5 @@
 export const Constants = {
-  prefix: "!",
+  prefix: "/",
   channelPermissions: {
     general: ["random", "dev-playground", "bot-channel"],
     dnd: ["random", "dnd-lads", "dnd-bubus", "hunt-showdown", "bot-channel", "dev-playground"],

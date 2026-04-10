@@ -8,8 +8,9 @@
   "description": "A discord bot which can output links based on input tags.",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc --project ./tsconfig.json --resolveJsonModule"
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc --project ./tsconfig.json --resolveJsonModule",
+    "serve": "vue-cli-service serve --mode development --port 3000"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "@types/node": "^25.6.0",
     "canvas": "^3.2.3",
     "discord.js": "^14.26.2",
+    "dotenv": "^17.4.1",
     "ffmpeg": "^0.0.4",
     "fuse.js": "^7.3.0",
     "tslint": "^6.1.3",

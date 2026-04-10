@@ -4,6 +4,7 @@ import { ICommandParser } from "./ICommandParser";
 import { ParameterService } from "../services/ParameterService";
 import { Logger } from "../helpers/Logger";
 import { BotCommandParser } from "../parsers/BotCommandParser";
+import * as dotenv from "dotenv";
 
 export class DrunkenBot {
   private discordService: DiscordService;
@@ -15,6 +16,8 @@ export class DrunkenBot {
   private isDebug: boolean = false;
 
   constructor() {
+    dotenv.config();
+
     this.client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] } as ClientOptions);
     this.client.login(process.env.DISCORD_TOKEN);
 
@@ -36,7 +39,7 @@ export class DrunkenBot {
   }
 
   public startListening(): void {
-    this.client.on("message", (message) => {
+    this.client.on("messageCreate", (message) => {
       this.registeredParsers.forEach(async (parser) => {
         if (parser.isAllowedCommand(message)) {
           await this.startWorkflow(parser, message);

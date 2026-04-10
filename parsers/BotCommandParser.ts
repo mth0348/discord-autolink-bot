@@ -28,7 +28,8 @@ export class BotCommandParser extends BaseCommandParser {
     Logger.log(`${message.author.username} requested help: ` + message.content);
 
     const embed = new EmbedBuilder();
-    const file = new AttachmentBuilder("../assets/discordjs.png");
+    const bannerFile = new AttachmentBuilder("assets/img/banner.png");
+    const iconFile = new AttachmentBuilder("assets/img/icon.jpg");
 
     embed
       .setTitle("Bot Overview")
@@ -40,10 +41,10 @@ export class BotCommandParser extends BaseCommandParser {
       .setTimestamp()
       .setFooter({
         text: "DrunKen Discord Bot",
-        iconURL: "https://cdn.discordapp.com/icons/606196123660714004/da16907d73858c8b226486839676e1ac.png?size=128",
+        iconURL: "attachment://icon.jpg",
       } as EmbedFooterOptions)
       .setImage("attachment://banner.png");
 
-    this.discordService.sendMessageEmbed(message, { embeds: [embed], files: [file] });
+    this.discordService.sendMessageEmbed(message, { embeds: [embed], files: [bannerFile, iconFile] });
   }
 }
